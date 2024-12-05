@@ -1,6 +1,6 @@
 CC = $(CROSS_COMPILE)gcc
 CFLAGS = -Wall -I/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/include/SDL -I/usr/include -DSDL_DISABLE_IMMINTRIN_H
-LDFLAGS = -L/usr/include -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/lib -lSDL2
+LDFLAGS = -L/usr/include/SDL2 -L/opt/miyoomini-toolchain/arm-linux-gnueabihf/libc/usr/lib -lSDL2
 
 TARGET = main
 SOURCES = main.c
