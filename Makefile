@@ -8,9 +8,9 @@ SOURCES = main.c
 all: $(TARGET)
 
 $(TARGET): $(SOURCES)
-    $(CC) $(CFLAGS) -o $(TARGET) $(SOURCES) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCES) $(LDFLAGS)
 
 clean:
-    rm -f $(TARGET)
+	rm -f $(TARGET)
 
 .PHONY: all clean
