@@ -1,31 +1,44 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
+int main()
+{
+  printf("Init Demo!\n");
 
-int main(int argc, char* args[]) {
-  SDL_Window* window = NULL;
-  SDL_Surface* screenSurface = NULL;
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
-    return 1;
+  if(SDL_Init(SDL_INIT_VIDEO) != 0){
+    printf("%s, failed to SDL_Init\n", __func__);
+    printf("Could not initialize SDL: %s\n", SDL_GetError());
+    return -1;
   }
-  window = SDL_CreateWindow(
-          "hello_sdl2",
-          SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-          SCREEN_WIDTH, SCREEN_HEIGHT,
-          SDL_WINDOW_SHOWN
-          );
-  if (window == NULL) {
-    fprintf(stderr, "could not create window: %s\n", SDL_GetError());
-    return 1;
+ 
+  SDL_Surface* screen;
+  screen = SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
+  if(screen == NULL){
+    printf("%s, failed to SDL_SetVideMode\n", __func__);
+    return -1;
   }
-  screenSurface = SDL_GetWindowSurface(window);
-  SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-  SDL_UpdateWindowSurface(window);
-  SDL_Delay(2000);
-  SDL_DestroyWindow(window);
-  SDL_Quit();
+  SDL_ShowCursor(0);
+
+  int index=30, cnt=30;
+  while(cnt--){
+    switch(index){
+    case 0:
+      SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xff, 0x00, 0x00));
+      break;
+    case 1:
+      SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0x00, 0xff, 0x00));
+      break;
+    case 2:
+      SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0x00, 0x00, 0xff));
+      break;
+    }
+    index+= 1;
+    if(index >= 3){
+      index = 0;
+    }
+    SDL_Flip(screen);
+    SDL_Delay(100);
+  }
+    SDL_Quit();
   return 0;
 }
