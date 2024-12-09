@@ -6,7 +6,7 @@
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
-#include <string>
+#include <string.h>
 
 // Window Settings
 #define WINDOW_HEIGHT 480                   // window height in pixels
