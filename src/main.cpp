@@ -192,11 +192,11 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
-        SDL_Color* palette = single_char->format->palette->colors;
+/*        SDL_Color* palette = single_char->format->palette->colors;
 
         printf("colr: %u\n",sizeof(*palette) / sizeof(palette[0]));
 
-        return EXIT_SUCCESS;
+        return EXIT_SUCCESS;*/
 
         //printf("screen: %s\n",SDL_GetPixelFormatName());
         //printf("font: %s\n",SDL_GetPixelFormatName(font->format->format));
@@ -208,21 +208,28 @@ int main(int argc, char* argv[])
         src_rect.w = 6;
         src_rect.h = 6;
 
-        SDL_Color colors[2];
+        SDL_Color colors[1];
         colors[0].r = 0;
         colors[0].g = 77;
         colors[0].b = 132;
 
-        colors[1].r = 110;
-        colors[1].g = 247;
-        colors[1].b = 188;
+        
 
 
 
         
         SDL_BlitSurface(font,&src_rect,single_char,NULL);
         
-        int success = SDL_SetPaletteColors(single_char->format->palette,colors,0,2);
+        int success = SDL_SetPaletteColors(single_char->format->palette,colors,0,1);
+        if (success != 0) {
+            printf("could not set all colors: %s\n",SDL_GetError());
+        }
+
+        colors[0].r = 110;
+        colors[0].g = 247;
+        colors[0].b = 188;
+
+        int success = SDL_SetPaletteColors(single_char->format->palette,colors,7,1);
         if (success != 0) {
             printf("could not set all colors: %s\n",SDL_GetError());
         }
