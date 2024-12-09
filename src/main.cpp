@@ -229,7 +229,7 @@ int main(int argc, char* argv[])
         colors[0].g = 247;
         colors[0].b = 188;
 
-        int success = SDL_SetPaletteColors(single_char->format->palette,colors,7,1);
+        success = SDL_SetPaletteColors(single_char->format->palette,colors,7,1);
         if (success != 0) {
             printf("could not set all colors: %s\n",SDL_GetError());
         }
