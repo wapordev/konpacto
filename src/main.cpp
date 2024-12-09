@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_video.h>
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
@@ -204,8 +203,11 @@ int main(int argc, char* argv[])
         colors[1].b = 188;
 
 
-        //SDL_SetPaletteColors(font->format->palette,colors,0,2);
-        SDL_SetPalette(font, SDL_LOGPAL, colors, 0, 2);
+        int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
+        if (success != 0) {
+            printf("could not set all colors: %s\n",SDL_GetError());
+        }
+        
         SDL_BlitScaled(font,&src_rect,screen,&dst_rect);
 
         // Main loop continuation
