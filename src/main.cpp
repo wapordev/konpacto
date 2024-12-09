@@ -183,15 +183,18 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
-        SDL_Rect src_rect;
 
+        printf(screen->format);
+        printf(font->format);
+        //SDL_Surface* render_target = SDL_CreateSurface();
+
+        SDL_Rect src_rect;
         src_rect.x = 0;
         src_rect.y = 0;
         src_rect.w = 6;
         src_rect.h = 6;
 
         SDL_Rect dst_rect;
-
         dst_rect.x = 24;
         dst_rect.y = 24;
         dst_rect.w = 24;
