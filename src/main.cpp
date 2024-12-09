@@ -208,31 +208,26 @@ int main(int argc, char* argv[])
         src_rect.w = 6;
         src_rect.h = 6;
 
-        SDL_Color colors[1];
+        SDL_Color colors[2];
         colors[0].r = 0;
         colors[0].g = 77;
         colors[0].b = 132;
 
-        
+        colors[1].r = 110;
+        colors[1].g = 247;
+        colors[1].b = 188;
 
 
 
         
+        int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
+        if (success != 0) {
+            printf("could not set all colors: %s\n",SDL_GetError());
+        }
+
         SDL_BlitSurface(font,&src_rect,single_char,NULL);
         
-        int success = SDL_SetPaletteColors(single_char->format->palette,colors,0,1);
-        if (success != 0) {
-            printf("could not set all colors: %s\n",SDL_GetError());
-        }
-
-        colors[0].r = 110;
-        colors[0].g = 247;
-        colors[0].b = 188;
-
-        success = SDL_SetPaletteColors(single_char->format->palette,colors,7,1);
-        if (success != 0) {
-            printf("could not set all colors: %s\n",SDL_GetError());
-        }
+        
 
         SDL_BlitSurface(single_char,NULL,intermediate,NULL);
         SDL_Rect dst_rect;
