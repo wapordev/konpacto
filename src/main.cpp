@@ -178,7 +178,13 @@ int main(int argc, char* argv[])
     InitializeSDL(&window, &renderer, &texture, &screen, &font);
 
     SDL_Surface* text_grid = SDL_CreateRGBSurfaceWithFormat(0,120,120,8,SDL_PIXELFORMAT_INDEX8);
+
     SDL_Surface* intermediate = SDL_CreateRGBSurfaceWithFormat(0,120,120,8,SDL_PIXELFORMAT_RGB565);
+    SDL_FillRect(
+        *intermediate,
+        &(*intermediate)->clip_rect,
+        SDL_MapRGB((*intermediate)->format, 0x00, 0x00, 0x00)
+    );
 
     // Main loop
     SDL_Event windowEvent;
@@ -213,14 +219,14 @@ int main(int argc, char* argv[])
         colors[1].b = 188;
 
 
-        int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
-        if (success != 0) {
-            printf("could not set all colors: %s\n",SDL_GetError());
-        }
+        // int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
+        // if (success != 0) {
+        //     printf("could not set all colors: %s\n",SDL_GetError());
+        // }
         
         SDL_BlitSurface(font,&src_rect,text_grid,&dst_rect);
         SDL_BlitSurface(text_grid,NULL,intermediate,NULL);
-        dst_rect.x = 160;
+        dst_rect.x = 80;
         dst_rect.y = 0;
         dst_rect.w = 480;
         dst_rect.h = 480;
