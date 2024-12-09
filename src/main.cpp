@@ -177,6 +177,9 @@ int main(int argc, char* argv[])
     // Initialization code
     InitializeSDL(&window, &renderer, &texture, &screen, &font);
 
+    SDL_Surface* text_grid = SDL_CreateRGBSurfaceWithFormat(0,120,120,8,SDL_PIXELFORMAT_INDEX8);
+    SDL_Surface* intermediate = SDL_CreateRGBSurfaceWithFormat(0,120,120,8,SDL_PIXELFORMAT_RGB565);
+
     // Main loop
     SDL_Event windowEvent;
     bool quit = false;
@@ -195,10 +198,10 @@ int main(int argc, char* argv[])
         src_rect.h = 6;
 
         SDL_Rect dst_rect;
-        dst_rect.x = 24;
-        dst_rect.y = 24;
-        dst_rect.w = 24;
-        dst_rect.h = 24;
+        dst_rect.x = 6;
+        dst_rect.y = 6;
+        dst_rect.w = 6;
+        dst_rect.h = 6;
 
         SDL_Color colors[2];
         colors[0].r = 0;
@@ -215,7 +218,13 @@ int main(int argc, char* argv[])
             printf("could not set all colors: %s\n",SDL_GetError());
         }
         
-        SDL_BlitScaled(font,&src_rect,screen,&dst_rect);
+        SDL_BlitSurface(font,&src_rect,text_grid,&dst_rect);
+        SDL_BlitSurface(text_grid,NULL,intermediate,NULL);
+        dst_rect.x = 160;
+        dst_rect.y = 0;
+        dst_rect.w = 480;
+        dst_rect.h = 480;
+        SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
 
         // Main loop continuation
         // Flip the backbuffer
