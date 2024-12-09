@@ -194,9 +194,7 @@ int main(int argc, char* argv[])
 
         SDL_Color* palette = single_char->format->palette->colors;
 
-        for (int i = 0; i < (sizeof(*palette)/sizeof(palette)); i++){
-            printf("colr: %u\n",(*palette)[i].r);
-        }
+        printf("colr: %u\n",(sizeof(*palette)/sizeof(palette)));
 
         return EXIT_SUCCESS;
 
