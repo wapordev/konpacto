@@ -199,6 +199,23 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
+        SDL_Color color = { 255, 25, 255 }
+        SDL_Surface* text = TTF_RenderText_Solid(&font, "konpacto hiii!", color); 
+        SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+        TTF_SizeText(&font, const char *text, int *w, int *h);
+        SDL_Rect Message_rect; //create a rect
+        Message_rect.x = 0;  //controls the rect's x coordinate 
+        Message_rect.y = 0; // controls the rect's y coordinte
+        Message_rect.w = w; // controls the width of the rect
+        Message_rect.h = h; // controls the height of the rect
+        SDL_RenderCopy(&renderer, message, NULL, &Message_rect);
+
+        // Don't forget to free your surface and texture
+        SDL_FreeSurface(text);
+        SDL_DestroyTexture(message);
+
+
+
         // Main loop continuation
         // Flip the backbuffer
         SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
