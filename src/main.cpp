@@ -184,8 +184,8 @@ int main(int argc, char* argv[])
         HandleInputs(windowEvent, quit);
 
 
-        printf(screen->format);
-        printf(font->format);
+        printf("screen: %s\n",screen->format->format);
+        printf("font: %s\n",font->format->format);
         //SDL_Surface* render_target = SDL_CreateSurface();
 
         SDL_Rect src_rect;
