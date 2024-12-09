@@ -193,7 +193,17 @@ int main(int argc, char* argv[])
         dst_rect.w = 24;
         dst_rect.h = 24;
 
+        SDL_Color colors[2];
+        colors[0].r = 0;
+        colors[0].g = 77;
+        colors[0].b = 132;
 
+        colors[1].r = 110;
+        colors[1].g = 247;
+        colors[1].b = 188;
+
+
+        SDL_SetPaletteColors(font->format->palette,colors,0,2);
         SDL_BlitScaled(font,&src_rect,screen,&dst_rect);
 
         // Main loop continuation
