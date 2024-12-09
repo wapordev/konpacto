@@ -183,9 +183,10 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
-
-        printf("screen: %s\n",screen->format->format);
-        printf("font: %s\n",font->format->format);
+        Uint32 enumm = screen->format->format;
+        printf("screen: %s\n",enumm);
+        enumm = font->format->format;
+        printf("font: %s\n",enumm);
         //SDL_Surface* render_target = SDL_CreateSurface();
 
         SDL_Rect src_rect;
