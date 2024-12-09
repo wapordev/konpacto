@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
         dst_rect.h = 18;
 
 
-        SDL_BlitSurface(font,&src_rect,screen,&dst_rect);
+        SDL_BlitScaled(font,&src_rect,screen,&dst_rect);
 
         // Main loop continuation
         // Flip the backbuffer
