@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL.h>
-#include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
@@ -47,7 +46,7 @@ static SDL_Renderer *renderer = NULL;
 static SDL_Rect rt = {0};
 
 // Function to initialize SDL components
-void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, TTF_Font** font) {
+void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, SDL_Surface** font) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
@@ -84,16 +83,7 @@ void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** t
         0, 0, 0, 0
     );
 
-    if (TTF_Init() == -1) {
-        printf("SDL could not initialize TTF_Init: %s\n", TTF_GetError());
-        exit(EXIT_FAILURE);
-    }
-
-    *font = TTF_OpenFont("assets/FiveBFMmono.ttf", 10);
-    if (*font == NULL) {
-        printf("TTF_OpenFont: %s\n", TTF_GetError());
-        exit(EXIT_FAILURE);
-    }
+    *font = LoadImage(font, "assets/chunkfont.bmp");
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -114,7 +104,6 @@ void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture
     SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 }
@@ -172,23 +161,13 @@ SDL_Surface* LoadImage(SDL_Surface** imgSurafce, string& imagePath) {
     return optimizedSurface;
 }
 
-// Function to render text
-TTF_Font* OpenFont(TTF_Font** font, const string& fontName, int size) {
-    *font = TTF_OpenFont(fontName.c_str(), size);
-    if (font == NULL) {
-        printf("TTF_OpenFont: %s\n", TTF_GetError());
-        exit(EXIT_FAILURE);
-    }
-    return *font;
-}
-
 int main(int argc, char* argv[])
 {
     SDL_Window* window = NULL;
     SDL_Surface* screen = NULL;
     SDL_Texture* texture = NULL;
     SDL_Renderer* renderer = NULL;
-    TTF_Font* font = NULL;
+    SDL_Surface* font = NULL;
 
     // Initialization code
     InitializeSDL(&window, &renderer, &texture, &screen, &font);
@@ -199,22 +178,22 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
-        SDL_Color color = { 255, 25, 255 }
-        SDL_Surface* text = TTF_RenderText_Solid(&font, "konpacto hiii!", color); 
-        SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
-        TTF_SizeText(&font, const char *text, int *w, int *h);
-        SDL_Rect Message_rect; //create a rect
-        Message_rect.x = 0;  //controls the rect's x coordinate 
-        Message_rect.y = 0; // controls the rect's y coordinte
-        Message_rect.w = w; // controls the width of the rect
-        Message_rect.h = h; // controls the height of the rect
-        SDL_RenderCopy(&renderer, message, NULL, &Message_rect);
+        SDL_Rect src_rect;
 
-        // Don't forget to free your surface and texture
-        SDL_FreeSurface(text);
-        SDL_DestroyTexture(message);
+        rect.x = 0;
+        rect.y = 0;
+        rect.w = 6;
+        rect.h = 6;
+
+        SDL_Rect dst_rect;
+
+        rect.x = 18;
+        rect.y = 18;
+        rect.w = 18;
+        rect.h = 18;
 
 
+        SDL_BlitSurface(font,&src_rect,screen,&dst_rect);
 
         // Main loop continuation
         // Flip the backbuffer
