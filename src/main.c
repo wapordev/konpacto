@@ -6,6 +6,33 @@
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
 
+// Window Settings
+#define WINDOW_HEIGHT 480                   // window height in pixels
+#define WINDOW_WIDTH 640                    // window width in pixels
+#define DEPTH 16                            // window depth in pixels
+#define MAX_VISIBLE_ITEMS 5                 // Set the maximum number of visible
+
+// Controller inputs
+#define SW_BTN_UP SDLK_UP
+#define SW_BTN_DOWN SDLK_DOWN
+#define SW_BTN_LEFT SDLK_LEFT
+#define SW_BTN_RIGHT SDLK_RIGHT
+
+#define SW_BTN_A SDLK_SPACE
+#define SW_BTN_B SDLK_LCTRL
+#define SW_BTN_X SDLK_LSHIFT
+#define SW_BTN_Y SDLK_LALT
+
+#define SW_BTN_L1 SDLK_e
+#define SW_BTN_R1 SDLK_t
+#define SW_BTN_L2 SDLK_TAB
+#define SW_BTN_R2 SDLK_BACKSPACE
+
+#define SW_BTN_SELECT SDLK_RCTRL
+#define SW_BTN_START SDLK_RETURN
+#define SW_BTN_MENU SDLK_ESCAPE
+#define SW_BTN_POWER SDLK_FIRST
+
 #define PREFIX "[SDL2 TestApp] " 
 const int w = 320;
 const int h = 240;
@@ -16,124 +43,170 @@ static SDL_Texture *texture = NULL;
 static SDL_Renderer *renderer = NULL;
 static SDL_Rect rt = {0};
 
-static void flip(void)
-{
-    SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
-    SDL_RenderPresent(renderer);
-}
 
-static void fill_color(void)
-{
-    printf(PREFIX"%s\n", __func__);
-    SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xff, 0x00, 0x00));
-
-    rt.x = 50;
-    rt.y = 50;
-    rt.w = 30;
-    rt.h = 30;
-    SDL_FillRect(screen, &rt, SDL_MapRGB(screen->format, 0x00, 0xff, 0x00));
- 
-    rt.x = 100;
-    rt.y = 100;
-    rt.w = 50;
-    rt.h = 100;
-    SDL_FillRect(screen, &rt, SDL_MapRGB(screen->format, 0x00, 0x00, 0xff));
-
-    flip();
-    SDL_Delay(3000);
-}
-
-static void draw_gfx(void)
-{
-    printf(PREFIX"%s\n", __func__);
-    SDL_RenderClear(renderer);
-    boxRGBA(renderer, 50, 100, 100, 150, 0xff, 0x00, 0x00, 0xff);
-    SDL_RenderPresent(renderer);
-    SDL_Delay(3000);
-}
-
-static void load_png(void)
-{
-    printf(PREFIX"%s\n", __func__);
-    SDL_Surface *png = IMG_Load("bg.png");
-    SDL_BlitSurface(png, NULL, screen, NULL);
-    SDL_FreeSurface(png);
-
-    flip();
-    SDL_Delay(3000);
-}
-
-static void run_screentear(void)
-{
-    int cc = 300;
-    uint32_t col[]={0xff0000, 0xff00, 0xff};
-
-    printf(PREFIX"%s\n", __func__);
-    while (cc--) {
-        SDL_FillRect(screen, &screen->clip_rect, col[cc % 3]);
-        flip();
-        SDL_Delay(1000 / 60);
+// Function to initialize SDL components
+void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, TTF_Font** font) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+        std::cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << endl;
+        exit(EXIT_FAILURE);
     }
+
+    *window = SDL_CreateWindow(
+        "Konpacto",
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        SDL_WINDOW_SHOWN
+    );
+
+    *renderer = SDL_CreateRenderer(
+        *window,
+        -1,
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+    );
+
+    *texture = SDL_CreateTexture(
+        *renderer,
+        SDL_PIXELFORMAT_RGB565,
+        SDL_TEXTUREACCESS_STREAMING,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT
+    );
+
+    *screen = SDL_CreateRGBSurface(
+        0,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        DEPTH,
+        0, 0, 0, 0
+    );
+
+    if (TTF_Init() == -1) {
+        std::cout << "SDL could not initialize TTF_Init: " << TTF_GetError() << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    *font = TTF_OpenFont("../assets/FiveBFMmono.ttf", 10);
+    if (*font == NULL) {
+        std::cout << "TTF_OpenFont: " << TTF_GetError() << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
+        printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+        exit(EXIT_FAILURE);
+    }
+
+    SDL_FillRect(
+        *screen,
+        &(*screen)->clip_rect,
+        SDL_MapRGB((*screen)->format, 0x00, 0x00, 0x00)
+    );
 }
 
-static void play_wav(void)
-{
-    printf(PREFIX"%s\n", __func__);
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-    Mix_Music *music = Mix_LoadMUS("nokia.wav");
-    Mix_PlayMusic(music, 1);
-    SDL_Delay(26000);
-    Mix_HaltMusic();
-    Mix_FreeMusic(music);
-    Mix_CloseAudio();
-}
-
-static void draw_text(void)
-{
-    printf(PREFIX"%s\n", __func__);
-    TTF_Init();
-    TTF_Font *font = TTF_OpenFont("font.ttf", 24);
-    SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0x00, 0x00, 0x00));
- 
-    int ww = 0, hh = 0;
-    SDL_Color col = {0, 255, 0};
-    SDL_Rect rt = {0, 100, 0, 0};
-    const char *cc = "SDL2 TestApp by 司徒";
- 
-    TTF_SizeUTF8(font, cc, &ww, &hh);
-    rt.x = (w - ww) / 2;
-    SDL_Surface *msg = TTF_RenderUTF8_Solid(font, cc, col);
-    SDL_BlitSurface(msg, NULL, screen, &rt);
-    SDL_FreeSurface(msg);
-
-    flip();
-    SDL_Delay(3000);
-
-    TTF_CloseFont(font);
-    TTF_Quit();
-}
-
-int main(int argc, char **argv)
-{
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    window = SDL_CreateWindow("main", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    screen = SDL_CreateRGBSurface(0, w, h, bpp, 0, 0, 0, 0);
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STREAMING, w, h);
-
-    fill_color();
-    draw_gfx();
-    load_png();
-    draw_text();
-    play_wav();
-    run_screentear();
- 
+// Function to clean up SDL components
+void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, SDL_Surface* screen) {
     SDL_FreeSurface(screen);
     SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    TTF_Quit();
+    IMG_Quit();
     SDL_Quit();
-    return 0;
+}
+
+void HandleInputs(SDL_Event& windowEvent, bool& quit) {
+    while (SDL_PollEvent(&windowEvent))
+    {
+        if (windowEvent.type == SDL_QUIT) {
+            quit = true;
+        }
+        else if (windowEvent.type == SDL_KEYDOWN) {
+            switch (windowEvent.key.keysym.sym) {
+            case SDLK_RIGHT:
+                break;
+            case SDLK_LEFT:
+                break;
+            case SDLK_UP:
+                break;
+            case SDLK_DOWN:
+                break;
+            case SW_BTN_R1:
+                break;
+            case SW_BTN_L1:
+                break;
+            case SW_BTN_R2:
+                break;
+            case SW_BTN_L2:
+                break;
+            case SDLK_ESCAPE:
+                quit = true;
+                break;
+            default:
+                break;
+            }
+        }
+    }
+}
+
+// Function to load an image
+SDL_Surface* LoadImage(SDL_Surface** imgSurafce, string& imagePath) {
+    std::cout << "starting: LoadImage" << endl;
+    SDL_Surface* optimizedSurface = NULL;
+    *imgSurafce = IMG_Load(imagePath.c_str());
+    if (*imgSurafce == NULL) {
+        std::cout << "Unable to load image! SDL Error: " << IMG_GetError() << endl;
+        exit(EXIT_FAILURE);
+    }
+    optimizedSurface = SDL_ConvertSurfaceFormat(*imgSurafce, SDL_PIXELFORMAT_RGBA32, 0);
+    SDL_FreeSurface(*imgSurafce);
+    if (optimizedSurface == NULL) {
+        std::cout << "Unable to optimize image! SDL Error: " << SDL_GetError() << endl;
+        exit;
+    }
+    std::cout << "ending: LoadImage" << endl;
+    return optimizedSurface;
+}
+
+// Function to render text
+TTF_Font* OpenFont(TTF_Font** font, const string& fontName, int size) {
+    *font = TTF_OpenFont(fontName.c_str(), size);
+    if (font == NULL) {
+        std::cout << "TTF_OpenFont: " << TTF_GetError() << endl;
+        exit(EXIT_FAILURE);
+    }
+    return *font;
+}
+
+int main(int argc, char* argv[])
+{
+    SDL_Window* window = NULL;
+    SDL_Surface* screen = NULL;
+    SDL_Texture* texture = NULL;
+    SDL_Renderer* renderer = NULL;
+    TTF_Font* font = NULL;
+
+    // Initialization code
+    InitializeSDL(&window, &renderer, &texture, &screen, &font);
+
+    // Main loop
+    SDL_Event windowEvent;
+    bool quit = false;
+    while (!quit) {
+        HandleInputs(windowEvent, quit);
+
+        // Main loop continuation
+        // Flip the backbuffer
+        SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
+
+    }
+    // Cleanup code
+    CleanupSDL(window, renderer, texture, screen);
+
+    return EXIT_SUCCESS;
 }
