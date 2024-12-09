@@ -219,13 +219,14 @@ int main(int argc, char* argv[])
 
 
 
-        
-        SDL_BlitSurface(font,&src_rect,intermediate,NULL);
-        
-/*        int success = SDL_SetPaletteColors(single_char->format->palette,colors,0,2);
+        int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
         if (success != 0) {
             printf("could not set all colors: %s\n",SDL_GetError());
-        }*/
+        }
+
+        SDL_BlitSurface(font,&src_rect,intermediate,NULL);
+        
+
 
         //SDL_BlitSurface(single_char,NULL,intermediate,NULL);
         SDL_Rect dst_rect;
