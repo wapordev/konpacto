@@ -188,10 +188,10 @@ int main(int argc, char* argv[])
 
         SDL_Rect dst_rect;
 
-        dst_rect.x = 18;
-        dst_rect.y = 18;
-        dst_rect.w = 18;
-        dst_rect.h = 18;
+        dst_rect.x = 24;
+        dst_rect.y = 24;
+        dst_rect.w = 24;
+        dst_rect.h = 24;
 
 
         SDL_BlitScaled(font,&src_rect,screen,&dst_rect);
