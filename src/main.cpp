@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_video.h>
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
