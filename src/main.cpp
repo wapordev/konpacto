@@ -192,6 +192,18 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
+        SDL_Color[]* palette = single_char->format->palette->colors;
+
+        for (int i = 0; i < size(palette); i++){
+            printf("colr: %u\n",(*palette)[i].r);
+        }
+
+        return EXIT_SUCCESS;
+
+        printf("screen: %s\n",SDL_GetPixelFormatName());
+        printf("font: %s\n",SDL_GetPixelFormatName(font->format->format));
+        //SDL_Surface* render_target = SDL_CreateSurface();
+
         SDL_Rect src_rect;
         src_rect.x = 0;
         src_rect.y = 0;
