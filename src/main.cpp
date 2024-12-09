@@ -7,6 +7,7 @@
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
 #include <string.h>
+using namespace std;
 
 // Window Settings
 #define WINDOW_HEIGHT 480                   // window height in pixels
@@ -44,8 +45,6 @@ static SDL_Surface *screen = NULL;
 static SDL_Texture *texture = NULL;
 static SDL_Renderer *renderer = NULL;
 static SDL_Rect rt = {0};
-
-using namespace std;
 
 // Function to initialize SDL components
 void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, TTF_Font** font) {
