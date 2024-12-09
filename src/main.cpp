@@ -177,9 +177,9 @@ int main(int argc, char* argv[])
     // Initialization code
     InitializeSDL(&window, &renderer, &texture, &screen, &font);
 
-    SDL_Surface* text_grid = SDL_CreateRGBSurfaceWithFormat(0,120,120,8,SDL_PIXELFORMAT_INDEX8);
+    SDL_Surface* single_char = SDL_CreateRGBSurfaceWithFormat(0,6,6,8,SDL_PIXELFORMAT_INDEX8);
 
-    SDL_Surface* intermediate = SDL_CreateRGBSurfaceWithFormat(0,120,120,8,SDL_PIXELFORMAT_RGB565);
+    SDL_Surface* intermediate = SDL_CreateRGBSurfaceWithFormat(0,6,6,8,SDL_PIXELFORMAT_RGB565);
     SDL_FillRect(
         intermediate,
         &intermediate->clip_rect,
@@ -192,22 +192,11 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
-
-        printf("screen: %s\n",SDL_GetPixelFormatName(screen->format->format));
-        printf("font: %s\n",SDL_GetPixelFormatName(font->format->format));
-        //SDL_Surface* render_target = SDL_CreateSurface();
-
         SDL_Rect src_rect;
         src_rect.x = 0;
         src_rect.y = 0;
         src_rect.w = 6;
         src_rect.h = 6;
-
-        SDL_Rect dst_rect;
-        dst_rect.x = 6;
-        dst_rect.y = 6;
-        dst_rect.w = 6;
-        dst_rect.h = 6;
 
         SDL_Color colors[2];
         colors[0].r = 0;
@@ -219,17 +208,21 @@ int main(int argc, char* argv[])
         colors[1].b = 188;
 
 
-        // int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
-        // if (success != 0) {
-        //     printf("could not set all colors: %s\n",SDL_GetError());
-        // }
+
         
-        SDL_BlitSurface(font,&src_rect,text_grid,&dst_rect);
-        SDL_BlitSurface(text_grid,NULL,intermediate,NULL);
+        SDL_BlitSurface(font,&src_rect,single_char,NULL);
+        
+        int success = SDL_SetPaletteColors(single_char->format->palette,colors,0,2);
+        if (success != 0) {
+            printf("could not set all colors: %s\n",SDL_GetError());
+        }
+
+        SDL_BlitSurface(single_char,NULL,intermediate,NULL);
+        SDL_Rect dst_rect;
         dst_rect.x = 80;
         dst_rect.y = 0;
-        dst_rect.w = 480;
-        dst_rect.h = 480;
+        dst_rect.w = 24;
+        dst_rect.h = 24;
         SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
 
         // Main loop continuation
