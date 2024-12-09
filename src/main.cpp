@@ -45,6 +45,7 @@ static SDL_Texture *texture = NULL;
 static SDL_Renderer *renderer = NULL;
 static SDL_Rect rt = {0};
 
+using namespace std;
 
 // Function to initialize SDL components
 void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, TTF_Font** font) {
