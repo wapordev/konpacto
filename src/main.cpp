@@ -181,9 +181,9 @@ int main(int argc, char* argv[])
 
     SDL_Surface* intermediate = SDL_CreateRGBSurfaceWithFormat(0,120,120,8,SDL_PIXELFORMAT_RGB565);
     SDL_FillRect(
-        *intermediate,
-        &(*intermediate)->clip_rect,
-        SDL_MapRGB((*intermediate)->format, 0x00, 0x00, 0x00)
+        intermediate,
+        &intermediate->clip_rect,
+        SDL_MapRGB(intermediate->format, 0x00, 0x00, 0x00)
     );
 
     // Main loop
