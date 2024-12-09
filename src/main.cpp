@@ -177,7 +177,7 @@ int main(int argc, char* argv[])
     // Initialization code
     InitializeSDL(&window, &renderer, &texture, &screen, &font);
 
-    SDL_Surface* single_char = SDL_CreateRGBSurfaceWithFormat(0,6,6,8,SDL_PIXELFORMAT_INDEX8);
+    SDL_Surface* single_char = SDL_CreateRGBSurfaceWithFormat(0,6,6,1,SDL_PIXELFORMAT_INDEX8);
 
     SDL_Surface* intermediate = SDL_CreateRGBSurfaceWithFormat(0,6,6,8,SDL_PIXELFORMAT_RGB565);
     SDL_FillRect(
