@@ -192,7 +192,7 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
-        SDL_Color[]* palette = single_char->format->palette->colors;
+        SDL_Color* palette = single_char->format->palette->colors;
 
         for (int i = 0; i < size(palette); i++){
             printf("colr: %u\n",(*palette)[i].r);
