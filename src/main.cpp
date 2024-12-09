@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
 
         SDL_Color* palette = single_char->format->palette->colors;
 
-        printf("colr: %u\n",(*palette)[1].r);
+        printf("colr: %u\n",(*palette[1]).r);
 
         return EXIT_SUCCESS;
 
