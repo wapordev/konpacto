@@ -177,7 +177,7 @@ int main(int argc, char* argv[])
     // Initialization code
     InitializeSDL(&window, &renderer, &texture, &screen, &font);
 
-    SDL_Surface* single_char = SDL_CreateRGBSurfaceWithFormat(0,6,6,2,SDL_PIXELFORMAT_INDEX8);
+    SDL_Surface* single_char = SDL_CreateRGBSurfaceWithFormat(0,6,6,1,SDL_PIXELFORMAT_INDEX8);
 
     SDL_Surface* intermediate = SDL_CreateRGBSurfaceWithFormat(0,6,6,8,SDL_PIXELFORMAT_RGB565);
     SDL_FillRect(
@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
 
         SDL_Color* palette = single_char->format->palette->colors;
 
-        printf("colr: %u\n",(sizeof(*palette)/sizeof(palette)));
+        printf("colr: %u\n",*palette[1].r);
 
         return EXIT_SUCCESS;
 
