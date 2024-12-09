@@ -89,7 +89,7 @@ void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** t
         exit(EXIT_FAILURE);
     }
 
-    *font = TTF_OpenFont("../assets/FiveBFMmono.ttf", 10);
+    *font = TTF_OpenFont("assets/FiveBFMmono.ttf", 10);
     if (*font == NULL) {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
         exit(EXIT_FAILURE);
