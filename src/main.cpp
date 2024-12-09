@@ -180,17 +180,17 @@ int main(int argc, char* argv[])
 
         SDL_Rect src_rect;
 
-        rect.x = 0;
-        rect.y = 0;
-        rect.w = 6;
-        rect.h = 6;
+        src_rect.x = 0;
+        src_rect.y = 0;
+        src_rect.w = 6;
+        src_rect.h = 6;
 
         SDL_Rect dst_rect;
 
-        rect.x = 18;
-        rect.y = 18;
-        rect.w = 18;
-        rect.h = 18;
+        dst_rect.x = 18;
+        dst_rect.y = 18;
+        dst_rect.w = 18;
+        dst_rect.h = 18;
 
 
         SDL_BlitSurface(font,&src_rect,screen,&dst_rect);
