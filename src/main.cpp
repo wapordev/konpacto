@@ -198,8 +198,8 @@ int main(int argc, char* argv[])
 
         return EXIT_SUCCESS;
 
-        printf("screen: %s\n",SDL_GetPixelFormatName());
-        printf("font: %s\n",SDL_GetPixelFormatName(font->format->format));
+        //printf("screen: %s\n",SDL_GetPixelFormatName());
+        //printf("font: %s\n",SDL_GetPixelFormatName(font->format->format));
         //SDL_Surface* render_target = SDL_CreateSurface();
 
         SDL_Rect src_rect;
