@@ -5,6 +5,7 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
+#include <stdbool.h>
 
 // Window Settings
 #define WINDOW_HEIGHT 480                   // window height in pixels
@@ -47,7 +48,7 @@ static SDL_Rect rt = {0};
 // Function to initialize SDL components
 void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, TTF_Font** font) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
-        std::cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << endl;
+        printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
     }
 
@@ -83,13 +84,13 @@ void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** t
     );
 
     if (TTF_Init() == -1) {
-        std::cout << "SDL could not initialize TTF_Init: " << TTF_GetError() << endl;
+        printf("SDL could not initialize TTF_Init: %s\n", TTF_GetError());
         exit(EXIT_FAILURE);
     }
 
     *font = TTF_OpenFont("../assets/FiveBFMmono.ttf", 10);
     if (*font == NULL) {
-        std::cout << "TTF_OpenFont: " << TTF_GetError() << endl;
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
         exit(EXIT_FAILURE);
     }
 
@@ -153,20 +154,20 @@ void HandleInputs(SDL_Event& windowEvent, bool& quit) {
 
 // Function to load an image
 SDL_Surface* LoadImage(SDL_Surface** imgSurafce, string& imagePath) {
-    std::cout << "starting: LoadImage" << endl;
+    printf("starting: LoadImage\n");
     SDL_Surface* optimizedSurface = NULL;
     *imgSurafce = IMG_Load(imagePath.c_str());
     if (*imgSurafce == NULL) {
-        std::cout << "Unable to load image! SDL Error: " << IMG_GetError() << endl;
+        printf("Unable to load image! SDL Error: %s\n", IMG_GetError());
         exit(EXIT_FAILURE);
     }
     optimizedSurface = SDL_ConvertSurfaceFormat(*imgSurafce, SDL_PIXELFORMAT_RGBA32, 0);
     SDL_FreeSurface(*imgSurafce);
     if (optimizedSurface == NULL) {
-        std::cout << "Unable to optimize image! SDL Error: " << SDL_GetError() << endl;
+        printf("Unable to optimize image! SDL Error: %s\n", SDL_GetError());
         exit;
     }
-    std::cout << "ending: LoadImage" << endl;
+    printf("ending: LoadImage\n");
     return optimizedSurface;
 }
 
@@ -174,7 +175,7 @@ SDL_Surface* LoadImage(SDL_Surface** imgSurafce, string& imagePath) {
 TTF_Font* OpenFont(TTF_Font** font, const string& fontName, int size) {
     *font = TTF_OpenFont(fontName.c_str(), size);
     if (font == NULL) {
-        std::cout << "TTF_OpenFont: " << TTF_GetError() << endl;
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
         exit(EXIT_FAILURE);
     }
     return *font;
