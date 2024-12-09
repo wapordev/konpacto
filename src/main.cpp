@@ -103,7 +103,11 @@ void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** t
     );
 
     string font_path = "assets/chunkfont.bmp";
-    *font = LoadImage(font, font_path);
+    *font = SDL_LoadBMP(font_path.c_str());//LoadImage(font, font_path);
+    if (font == NULL) {
+        printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
