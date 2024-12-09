@@ -104,7 +104,7 @@ void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** t
 
     string font_path = "assets/chunkfont.bmp";
     *font = SDL_LoadBMP(font_path.c_str());//LoadImage(font, font_path);
-    if (font == NULL) {
+    if (*font == NULL) {
         printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
     }
@@ -183,10 +183,9 @@ int main(int argc, char* argv[])
     while (!quit) {
         HandleInputs(windowEvent, quit);
 
-        Uint32 enumm = screen->format->format;
-        printf("screen: %s\n",enumm);
-        enumm = font->format->format;
-        printf("font: %s\n",enumm);
+
+        printf("screen: %u\n",screen->format->format);
+        printf("font: %u\n",font->format->format);
         //SDL_Surface* render_target = SDL_CreateSurface();
 
         SDL_Rect src_rect;
