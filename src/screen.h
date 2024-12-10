@@ -16,6 +16,6 @@ typedef struct TextmodeCell {
   int character;
   int bg_color;
   int fg_color;
-};
+}TextmodeCell;
 
 #endif
