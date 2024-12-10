@@ -12,7 +12,7 @@ void CleanupSDL();
 
 void RenderScreen();
 
-struct TextmodeCell {
+typedef struct TextmodeCell {
   int character;
   int bg_color;
   int fg_color;
