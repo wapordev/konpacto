@@ -20,7 +20,7 @@ SDL_Color Palette[4] = {
     {255, 119, 168, 255},
     {255, 204, 170, 255},
     {255, 241, 232, 255}
-} 
+};
 
 SDL_Surface* intermediate = NULL;
 
@@ -127,8 +127,8 @@ void RenderScreen() {
         src_rect.x = (character%13)*6;
         src_rect.y = (character/13)*6;
 
-        colors[0] = TextmodeGrid[i].bg_color;
-        colors[1] = TextmodeGrid[i].fg_color;
+        colors[0] = palette[TextmodeGrid[i].bg_color];
+        colors[1] = palette[TextmodeGrid[i].fg_color];
 
         int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
         if (success != 0) {
