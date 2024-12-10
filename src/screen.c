@@ -98,6 +98,11 @@ void InitializeSDL() {
         textmodeGrid[i].bg_color = 0;
         textmodeGrid[i].fg_color = 3;
     }
+
+    textmodeGrid[89].character = 8;
+    textmodeGrid[89].bg_color = 1;
+    textmodeGrid[90].character = 9;
+    textmodeGrid[90].bg_color = 2;
 }
 
 // Function to clean up SDL components
