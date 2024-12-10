@@ -6,42 +6,17 @@
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
 
+#include "input.h"
+
 // Window Settings
 #define WINDOW_HEIGHT 480                   // window height in pixels
 #define WINDOW_WIDTH 640                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
-#define MAX_VISIBLE_ITEMS 5                 // Set the maximum number of visible
 
-// Controller inputs
-#define SW_BTN_UP SDLK_UP
-#define SW_BTN_DOWN SDLK_DOWN
-#define SW_BTN_LEFT SDLK_LEFT
-#define SW_BTN_RIGHT SDLK_RIGHT
-
-#define SW_BTN_A SDLK_SPACE
-#define SW_BTN_B SDLK_LCTRL
-#define SW_BTN_X SDLK_LSHIFT
-#define SW_BTN_Y SDLK_LALT
-
-#define SW_BTN_L1 SDLK_e
-#define SW_BTN_R1 SDLK_t
-#define SW_BTN_L2 SDLK_TAB
-#define SW_BTN_R2 SDLK_BACKSPACE
-
-#define SW_BTN_SELECT SDLK_RCTRL
-#define SW_BTN_START SDLK_RETURN
-#define SW_BTN_MENU SDLK_ESCAPE
-#define SW_BTN_POWER SDLK_FIRST
-
-#define PREFIX "[SDL2 TestApp] " 
-const int w = 320;
-const int h = 240;
-const int bpp = 32;
 static SDL_Window *window = NULL;
 static SDL_Surface *screen = NULL;
 static SDL_Texture *texture = NULL;
 static SDL_Renderer *renderer = NULL;
-static SDL_Rect rt = {0};
 
 // Function to initialize SDL components
 void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, SDL_Surface** font) {
@@ -110,41 +85,7 @@ void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture
     SDL_Quit();
 }
 
-bool HandleInputs() {
-    SDL_Event windowEvent;
-    while (SDL_PollEvent(&windowEvent))
-    {
-        if (windowEvent.type == SDL_QUIT) {
-            return true;
-        }
-        else if (windowEvent.type == SDL_KEYDOWN) {
-            switch (windowEvent.key.keysym.sym) {
-            case SDLK_RIGHT:
-                break;
-            case SDLK_LEFT:
-                break;
-            case SDLK_UP:
-                break;
-            case SDLK_DOWN:
-                break;
-            case SW_BTN_R1:
-                break;
-            case SW_BTN_L1:
-                break;
-            case SW_BTN_R2:
-                break;
-            case SW_BTN_L2:
-                break;
-            case SDLK_ESCAPE:
-                return true;
-                break;
-            default:
-                break;
-            }
-        }
-    }
-    return false;
-}
+
 
 int main(int argc, char* argv[])
 {
@@ -169,7 +110,7 @@ int main(int argc, char* argv[])
     // Main loop
     bool quit = false;
     while (!quit) {
-        quit = HandleInputs();
+        quit = input.HandleInputs();
 
 /*        SDL_Color* palette = single_char->format->palette->colors;
 
