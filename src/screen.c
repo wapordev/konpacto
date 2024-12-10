@@ -15,6 +15,13 @@
 
 TextmodeCell TextmodeGrid[400];
 
+SDL_Color Palette[4] = {
+    {131, 118, 156, 255},
+    {255, 119, 168, 255},
+    {255, 204, 170, 255},
+    {255, 241, 232, 255}
+} 
+
 SDL_Surface* intermediate;
 
 SDL_Window* window = NULL;
@@ -89,7 +96,7 @@ void InitializeSDL() {
     for (int i = 0; i<400; i++) {
         TextmodeGrid[i].character = 0;
         TextmodeGrid[i].bg_color = 0;
-        TextmodeGrid[i].fg_color = 0;
+        TextmodeGrid[i].fg_color = 3;
     }
 }
 
@@ -104,37 +111,38 @@ void CleanupSDL() {
 }
 
 void RenderScreen() {
+
     SDL_Rect src_rect;
-    src_rect.x = 0;
-    src_rect.y = 0;
     src_rect.w = 6;
     src_rect.h = 6;
-
     SDL_Color colors[2];
-    colors[0].r = 0;
-    colors[0].g = 77;
-    colors[0].b = 132;
 
-    colors[1].r = 110;
-    colors[1].g = 247;
-    colors[1].b = 188;
-
-
-
-    int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
-    if (success != 0) {
-        printf("could not set all colors: %s\n",SDL_GetError());
-    }
-
-    SDL_BlitSurface(font,&src_rect,intermediate,NULL);
-    
     SDL_Rect dst_rect;
-    dst_rect.x = 80;
-    dst_rect.y = 0;
     dst_rect.w = 24;
     dst_rect.h = 24;
-    SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
 
+    for (int i = 0; i<400; i++){
+        
+        int character = TextmodeGrid[i].character;
+        src_rect.x = (character%13)*6;
+        src_rect.y = (character/13)*6;
+
+        colors[0] = TextmodeGrid[i].bg_color;
+        colors[1] = TextmodeGrid[i].fg_color;
+
+        int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
+        if (success != 0) {
+            printf("could not set all colors: %s\n",SDL_GetError());
+        }
+
+        SDL_BlitSurface(font,&src_rect,intermediate,NULL);
+
+        dst_rect.x = 80+((i%20)*24);
+        dst_rect.y = (i/20)*24;
+        SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
+    }
+
+    
     // Main loop continuation
     // Flip the backbuffer
     SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
