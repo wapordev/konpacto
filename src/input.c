@@ -6,6 +6,8 @@
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
 
+#include "input.h"
+
 // Controller inputs
 #define SW_BTN_UP SDLK_UP
 #define SW_BTN_DOWN SDLK_DOWN

@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
     // Main loop
     bool quit = false;
     while (!quit) {
-        quit = input.HandleInputs();
+        quit = HandleInputs();
 
 /*        SDL_Color* palette = single_char->format->palette->colors;
 
