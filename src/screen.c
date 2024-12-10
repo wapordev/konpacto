@@ -115,7 +115,7 @@ void PrintHex(int input, int bg_color, int fg_color, int xPos, int yPos){
     cell->fg_color = fg_color;
     cell->character = input/16;
 
-    TextmodeCell* cell = &textmodeGrid[(xPos+1)+yPos*20];
+    cell = &textmodeGrid[(xPos+1)+yPos*20];
     cell->bg_color = bg_color;
     cell->fg_color = fg_color;
     cell->character = (input%16)+16;
