@@ -92,9 +92,9 @@ void PrintText(char string[], int xPos, int yPos) {
 
         if (print){
             TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
-            cell.bg_color = bg_color;
-            cell.fg_color = fg_color;
-            cell.character = out;
+            cell->bg_color = bg_color;
+            cell->fg_color = fg_color;
+            cell->character = out;
             if(++xPos>=20){
                 xPos = leftMargin;
                 if(++yPos>=20){
