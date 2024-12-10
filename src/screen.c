@@ -61,7 +61,7 @@ void InitializeSDL() {
     );
 
     font = SDL_LoadBMP("assets/chunkfont.bmp");//LoadImage(font, font_path);
-    if (*font == NULL) {
+    if (font == NULL) {
         printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
     }
@@ -74,7 +74,7 @@ void InitializeSDL() {
 
     SDL_FillRect(
         screen,
-        screen->clip_rect,
+        &screen->clip_rect,
         SDL_MapRGB(screen->format, 0x00, 0x00, 0x00)
     );
 

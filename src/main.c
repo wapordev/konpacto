@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 
     }
     // Cleanup code
-    CleanupSDL(window, renderer, texture, screen);
+    CleanupSDL();
 
     return EXIT_SUCCESS;
 }
