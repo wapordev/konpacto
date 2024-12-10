@@ -111,7 +111,7 @@ void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture
 }
 
 void HandleInputs(SDL_Event windowEvent, bool quit) {
-    while (SDL_PollEvent(windowEvent))
+    while (SDL_PollEvent(&windowEvent))
     {
         if (windowEvent.type == SDL_QUIT) {
             quit = true;
