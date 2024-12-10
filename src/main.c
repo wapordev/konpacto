@@ -9,16 +9,6 @@
 #include "input.h"
 #include "screen.h"
 
-// Window Settings
-#define WINDOW_HEIGHT 480                   // window height in pixels
-#define WINDOW_WIDTH 640                    // window width in pixels
-#define DEPTH 16                            // window depth in pixels
-
-static SDL_Window *window = NULL;
-static SDL_Surface *screen = NULL;
-static SDL_Texture *texture = NULL;
-static SDL_Renderer *renderer = NULL;
-
 int main(int argc, char* argv[])
 {
     SDL_Window* window = NULL;

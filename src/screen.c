@@ -8,6 +8,11 @@
 
 #include "screen.h"
 
+// Window Settings
+#define WINDOW_HEIGHT 480                   // window height in pixels
+#define WINDOW_WIDTH 640                    // window width in pixels
+#define DEPTH 16                            // window depth in pixels
+
 // Function to initialize SDL components
 void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, SDL_Surface** font) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
