@@ -87,7 +87,7 @@ void InitializeSDL() {
     );
 
     for (int i = 0; i<400; i++) {
-        TextmodeGrid[i] = TextmodeGrid{0,0,4};
+        TextmodeGrid[i] = (TextmodeGrid){0,0,4};
     }
 }
 
