@@ -5,7 +5,6 @@
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
-using namespace std;
 
 // Window Settings
 #define WINDOW_HEIGHT 480                   // window height in pixels
@@ -111,7 +110,7 @@ void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture
     SDL_Quit();
 }
 
-void HandleInputs(SDL_Event& windowEvent, bool& quit) {
+void HandleInputs(SDL_Event* windowEvent, bool* quit) {
     while (SDL_PollEvent(&windowEvent))
     {
         if (windowEvent.type == SDL_QUIT) {
