@@ -228,7 +228,7 @@ void RenderScreen() {
 
     PrintText("hi! @\nlol,0die",0,0);
 
-    clearGrid();
+    clearGrid(2);
 
     // Main loop continuation
     // Flip the backbuffer
