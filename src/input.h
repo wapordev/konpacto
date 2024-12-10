@@ -4,6 +4,6 @@
 
 /* Prototypes for the functions */
 /* Sums two ints */
-extern bool HandleInputs();
+bool HandleInputs();
 
 #endif
