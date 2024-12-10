@@ -13,12 +13,6 @@
 #define WINDOW_WIDTH 640                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
 
-struct TextmodeCell {
-  int character;
-  int bg_color;
-  int fg_color;
-};
-
 TextmodeCell[400] TextmodeGrid;
 
 SDL_Surface* intermediate;
