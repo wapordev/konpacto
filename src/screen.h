@@ -12,7 +12,7 @@ void CleanupSDL();
 
 void RenderScreen();
 
-void PrintHex(int input, int xPos, int yPos);
+void PrintHex(int input, int bg_color, int fg_color, int xPos, int yPos);
 
 void PrintText(char string[], int xPos, int yPos);
 
