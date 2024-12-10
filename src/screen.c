@@ -22,7 +22,7 @@ SDL_Color Palette[4] = {
     {255, 241, 232, 255}
 } 
 
-SDL_Surface* intermediate;
+SDL_Surface* intermediate = NULL;
 
 SDL_Window* window = NULL;
 SDL_Surface* screen = NULL;
