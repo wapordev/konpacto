@@ -58,6 +58,8 @@ void PrintText(char string[], int xPos, int yPos) {
             print=false;
             xPos = leftMargin;
             yPos += 1;
+        }else if (op == '='){
+            print=false;
         }else if (op == '~'){
             out=1;
         }else if (op == '!'){
@@ -205,7 +207,7 @@ void RenderScreen() {
     dst_rect.w = 24;
     dst_rect.h = 24;
 
-    PrintText("hi! @\nlol,0die",0,0);
+    PrintText(",0hello my\n,1darlings,0 @",0,0);
 
     for (int i = 0; i<400; i++){
         
