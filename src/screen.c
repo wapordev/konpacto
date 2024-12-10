@@ -33,8 +33,8 @@ SDL_Surface* font = NULL;
 
 
 void PrintText(char string[], int xPos, int yPos) {
-    int bg_color = 3;
-    int fg_color = 4;
+    int bg_color = 2;
+    int fg_color = 3;
     int leftMargin = xPos;
     int i = 0;
     while (string[i] != '\0')
@@ -49,11 +49,11 @@ void PrintText(char string[], int xPos, int yPos) {
         }else if (op == ';'){
             print=false;
             i++;
-            bg_color = (int)string[i] - '0';
+            bg_color = string[i] - '0';
         }else if (op == ','){
             print=false;
             i++;
-            fg_color = (int)string[i] - '0';
+            fg_color = string[i] - '0';
         }else if (op == '\n'){
             print=false;
             xPos = leftMargin;
