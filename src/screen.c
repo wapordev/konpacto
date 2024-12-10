@@ -43,7 +43,7 @@ void PrintText(char string[], int xPos, int yPos) {
         char op = string[i];
         int out = 0;
         if(op >= 'a' && op <= 'z'){
-            out = (int)(op-'0') + 26;
+            out = (int)(op-'a') + 26;
         }else if (op >= '0' && op <= '9'){
             out = (int)(op-'0') + 16;
         }else if (op == ';'){
