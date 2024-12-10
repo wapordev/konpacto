@@ -5,7 +5,6 @@
 #include <SDL_mixer.h>
 #include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
-#include <string>
 using namespace std;
 
 // Window Settings
@@ -45,25 +44,6 @@ static SDL_Texture *texture = NULL;
 static SDL_Renderer *renderer = NULL;
 static SDL_Rect rt = {0};
 
-// Function to load an image
-SDL_Surface* LoadImage(SDL_Surface** imgSurafce, string& imagePath) {
-    printf("starting: LoadImage\n");
-    SDL_Surface* optimizedSurface = NULL;
-    *imgSurafce = IMG_Load(imagePath.c_str());
-    if (*imgSurafce == NULL) {
-        printf("Unable to load image! SDL Error: %s\n", IMG_GetError());
-        exit(EXIT_FAILURE);
-    }
-    optimizedSurface = SDL_ConvertSurfaceFormat(*imgSurafce, SDL_PIXELFORMAT_RGBA32, 0);
-    SDL_FreeSurface(*imgSurafce);
-    if (optimizedSurface == NULL) {
-        printf("Unable to optimize image! SDL Error: %s\n", SDL_GetError());
-        exit;
-    }
-    printf("ending: LoadImage\n");
-    return optimizedSurface;
-}
-
 // Function to initialize SDL components
 void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, SDL_Surface** font) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
@@ -102,8 +82,7 @@ void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** t
         0, 0, 0, 0
     );
 
-    string font_path = "assets/chunkfont.bmp";
-    *font = SDL_LoadBMP(font_path.c_str());//LoadImage(font, font_path);
+    *font = SDL_LoadBMP("assets/chunkfont.bmp");//LoadImage(font, font_path);
     if (*font == NULL) {
         printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
