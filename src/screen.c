@@ -219,9 +219,9 @@ void RenderScreen() {
     dst_rect.w = 24;
     dst_rect.h = 24;
 
-    PrintText("hello,1hello,0hello\n,3world!,1world!,0world!",0,0);
+    PrintText("hello,1hello,0hello\n,3world,1world,0world",0,0);
 
-    PrintHex(254,2,3,0,2);
+    PrintHex(254,2,3,0,3);
 
     for (int i = 0; i<400; i++){
         
