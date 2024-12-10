@@ -205,6 +205,8 @@ void RenderScreen() {
     dst_rect.w = 24;
     dst_rect.h = 24;
 
+    PrintText("hi! @\nlol,0die",0,0);
+
     for (int i = 0; i<400; i++){
         
         int character = textmodeGrid[i].character;
@@ -226,7 +228,7 @@ void RenderScreen() {
         SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
     }
 
-    PrintText("hi! @\nlol,0die",0,0);
+    
 
     clearGrid(2);
 
