@@ -110,8 +110,8 @@ void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture
     SDL_Quit();
 }
 
-void HandleInputs(SDL_Event windowEvent, bool quit) {
-    while (SDL_PollEvent(&windowEvent))
+void HandleInputs(SDL_Event* windowEvent, bool quit) {
+    while (SDL_PollEvent(windowEvent))
     {
         if (windowEvent.type == SDL_QUIT) {
             quit = true;
@@ -168,7 +168,7 @@ int main(int argc, char* argv[])
     SDL_Event windowEvent;
     bool quit = false;
     while (!quit) {
-        HandleInputs(windowEvent, quit);
+        HandleInputs(&windowEvent, quit);
 
 /*        SDL_Color* palette = single_char->format->palette->colors;
 
