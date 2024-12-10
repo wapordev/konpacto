@@ -110,11 +110,12 @@ void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture
     SDL_Quit();
 }
 
-void HandleInputs(SDL_Event windowEvent, bool quit) {
+void HandleInputs() {
+    SDL_Event windowEvent;
     while (SDL_PollEvent(&windowEvent))
     {
         if (windowEvent.type == SDL_QUIT) {
-            quit = true;
+            return true;
         }
         else if (windowEvent.type == SDL_KEYDOWN) {
             switch (windowEvent.key.keysym.sym) {
@@ -135,7 +136,7 @@ void HandleInputs(SDL_Event windowEvent, bool quit) {
             case SW_BTN_L2:
                 break;
             case SDLK_ESCAPE:
-                quit = true;
+                return true;
                 break;
             default:
                 break;
@@ -165,10 +166,9 @@ int main(int argc, char* argv[])
     );
 
     // Main loop
-    SDL_Event windowEvent;
     bool quit = false;
     while (!quit) {
-        HandleInputs(windowEvent, quit);
+        quit = HandleInputs();
 
 /*        SDL_Color* palette = single_char->format->palette->colors;
 
