@@ -13,7 +13,7 @@
 #define WINDOW_WIDTH 640                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
 
-TextmodeCell[400] TextmodeGrid;
+TextmodeCell TextmodeGrid[400];
 
 SDL_Surface* intermediate;
 
