@@ -110,7 +110,7 @@ void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture
     SDL_Quit();
 }
 
-void HandleInputs() {
+bool HandleInputs() {
     SDL_Event windowEvent;
     while (SDL_PollEvent(&windowEvent))
     {
@@ -143,6 +143,7 @@ void HandleInputs() {
             }
         }
     }
+    return false;
 }
 
 int main(int argc, char* argv[])
