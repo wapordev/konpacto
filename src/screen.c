@@ -13,7 +13,14 @@
 #define WINDOW_WIDTH 640                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
 
-SDL_Surface* single_char;
+struct TextmodeCell {
+  int character;
+  int bg_color;
+  int fg_color;
+};
+
+TextmodeCell[400] TextmodeGrid;
+
 SDL_Surface* intermediate;
 
 SDL_Window* window = NULL;
@@ -78,14 +85,16 @@ void InitializeSDL() {
         SDL_MapRGB(screen->format, 0x00, 0x00, 0x00)
     );
 
-    single_char = SDL_CreateRGBSurfaceWithFormat(0,6,6,1,SDL_PIXELFORMAT_INDEX8);
-
     intermediate = SDL_CreateRGBSurfaceWithFormat(0,6,6,8,SDL_PIXELFORMAT_RGB565);
     SDL_FillRect(
         intermediate,
         &intermediate->clip_rect,
         SDL_MapRGB(intermediate->format, 0x00, 0x00, 0x00)
     );
+
+    for (int i = 0; i<400; i++) {
+        TextmodeGrid[i] = {0,0,4};
+    }
 }
 
 // Function to clean up SDL components
@@ -123,9 +132,6 @@ void RenderScreen() {
 
     SDL_BlitSurface(font,&src_rect,intermediate,NULL);
     
-
-
-    //SDL_BlitSurface(single_char,NULL,intermediate,NULL);
     SDL_Rect dst_rect;
     dst_rect.x = 80;
     dst_rect.y = 0;

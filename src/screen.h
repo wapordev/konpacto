@@ -12,4 +12,10 @@ void CleanupSDL();
 
 void RenderScreen();
 
+struct TextmodeCell {
+  int character;
+  int bg_color;
+  int fg_color;
+};
+
 #endif
