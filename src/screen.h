@@ -6,8 +6,10 @@
 /* Sums two ints */
 bool HandleInputs();
 
-void InitializeSDL(SDL_Window** window, SDL_Renderer** renderer, SDL_Texture** texture, SDL_Surface** screen, SDL_Surface** font);
+void InitializeSDL();
 
-void CleanupSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture, SDL_Surface* screen);
+void CleanupSDL();
+
+void RenderScreen();
 
 #endif
