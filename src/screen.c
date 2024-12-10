@@ -13,9 +13,9 @@
 #define WINDOW_WIDTH 640                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
 
-TextmodeCell TextmodeGrid[400];
+TextmodeCell textmodeGrid[400];
 
-SDL_Color Palette[4] = {
+SDL_Color palette[4] = {
     {131, 118, 156, 255},
     {255, 119, 168, 255},
     {255, 204, 170, 255},
@@ -94,9 +94,9 @@ void InitializeSDL() {
     );
 
     for (int i = 0; i<400; i++) {
-        TextmodeGrid[i].character = 0;
-        TextmodeGrid[i].bg_color = 0;
-        TextmodeGrid[i].fg_color = 3;
+        textmodeGrid[i].character = 0;
+        textmodeGrid[i].bg_color = 0;
+        textmodeGrid[i].fg_color = 3;
     }
 }
 
@@ -123,12 +123,12 @@ void RenderScreen() {
 
     for (int i = 0; i<400; i++){
         
-        int character = TextmodeGrid[i].character;
+        int character = textmodeGrid[i].character;
         src_rect.x = (character%13)*6;
         src_rect.y = (character/13)*6;
 
-        colors[0] = palette[TextmodeGrid[i].bg_color];
-        colors[1] = palette[TextmodeGrid[i].fg_color];
+        colors[0] = palette[textmodeGrid[i].bg_color];
+        colors[1] = palette[textmodeGrid[i].fg_color];
 
         int success = SDL_SetPaletteColors(font->format->palette,colors,0,2);
         if (success != 0) {
