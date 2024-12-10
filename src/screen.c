@@ -113,7 +113,7 @@ void PrintHex(int input, int bg_color, int fg_color, int xPos, int yPos){
     TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
     cell->bg_color = bg_color;
     cell->fg_color = fg_color;
-    cell->character = input/16;
+    cell->character = (input/16)+16;
 
     cell = &textmodeGrid[(xPos+1)+yPos*20];
     cell->bg_color = bg_color;
@@ -219,7 +219,7 @@ void RenderScreen() {
     dst_rect.w = 24;
     dst_rect.h = 24;
 
-    PrintText(",0hello my\n,1darlings,0 @",0,0);
+    PrintText("hello,1hello,0hello\n,3world!,1world!,0world!",0,0);
 
     PrintHex(254,3,4,0,2);
 
