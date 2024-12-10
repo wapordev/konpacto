@@ -221,7 +221,7 @@ void RenderScreen() {
 
     PrintText("hello,1hello,0hello\n,3world!,1world!,0world!",0,0);
 
-    PrintHex(254,3,4,0,2);
+    PrintHex(254,2,3,0,2);
 
     for (int i = 0; i<400; i++){
         
