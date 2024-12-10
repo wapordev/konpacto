@@ -95,15 +95,12 @@ void InitializeSDL() {
 
     for (int i = 0; i<400; i++) {
         textmodeGrid[i].character = 0;
-        textmodeGrid[i].bg_color = 0;
+        textmodeGrid[i].bg_color = 2;
         textmodeGrid[i].fg_color = 3;
     }
 
-    textmodeGrid[89].character = 7;
-    textmodeGrid[89].bg_color = 1;
-    textmodeGrid[90].character = 8;
-    textmodeGrid[90].bg_color = 2;
-    textmodeGrid[90].fg_color = 0;
+    textmodeGrid[89].character = 33;
+    textmodeGrid[90].character = 34;
 }
 
 // Function to clean up SDL components
@@ -130,8 +127,8 @@ void RenderScreen() {
     for (int i = 0; i<400; i++){
         
         int character = textmodeGrid[i].character;
-        src_rect.x = (character%13)*6;
-        src_rect.y = (character/13)*6;
+        src_rect.x = (character%16)*6;
+        src_rect.y = (character/16)*6;
 
         colors[0] = palette[textmodeGrid[i].bg_color];
         colors[1] = palette[textmodeGrid[i].fg_color];
