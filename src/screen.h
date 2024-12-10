@@ -12,6 +12,10 @@ void CleanupSDL();
 
 void RenderScreen();
 
+void PrintHex(int input, int xPos, int yPos);
+
+void PrintText(char string[], int xPos, int yPos);
+
 typedef struct TextmodeCell {
   int character;
   int bg_color;

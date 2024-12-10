@@ -30,6 +30,94 @@ SDL_Texture* texture = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface* font = NULL;
 
+
+
+void PrintText(char string[], int xPos, int yPos) {
+    int bg_color = 3;
+    int fg_color = 4;
+    int leftMargin = xPos;
+    int i = 0;
+    while (string[i] != '\0')
+    {
+        bool print = true;
+        char op = string[i];
+        int out = 0;
+        if(op >= 'a' && op <= 'z'){
+            out = (int)(op-'0') + 26;
+        }else if (op >= '0' && op <= '9'){
+            out = (int)(op-'0') + 16;
+        }else if (op == ';'){
+            print=false;
+            i++;
+            bg_color = (int)string[i] - '0';
+        }else if (op == ','){
+            print=false;
+            i++;
+            fg_color = (int)string[i] - '0';
+        }else if (op == '\n'){
+            print=false;
+            xPos = leftMargin;
+            yPos += 1;
+        }else if (op == '~'){
+            out=1;
+        }else if (op == '!'){
+            out=2;
+        }else if (op == '#'){
+            out=3;
+        }else if (op == '-'){
+            out=4;
+        }else if (op == '+'){
+            out=5;
+        }else if (op == ':'){
+            out=6;
+        }else if (op == '\''){
+            out=7;
+        }else if (op == '('){
+            out=8;
+        }else if (op == ')'){
+            out=9;
+        }else if (op == '<'){
+            out=10;
+        }else if (op == '>'){
+            out=11;
+        }else if (op == '@'){
+            out=12;
+        }else if (op == '$'){
+            out=13;
+        }else if (op == '{'){
+            out=14;
+        }else if (op == '}'){
+            out=15;
+        }
+
+        if (print){
+            TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
+            cell.bg_color = bg_color;
+            cell.fg_color = fg_color;
+            cell.character = out;
+            if(++xPos>=20){
+                xPos = leftMargin;
+                if(++yPos>=20){
+                    return;
+                }
+            }
+        }
+
+        i++;
+    }
+}
+
+void clearGrid(int col) {
+    for (int i = 0; i<400; i++) {
+        textmodeGrid[i].character = 0;
+        textmodeGrid[i].bg_color = col;
+        textmodeGrid[i].fg_color = 3;
+    }
+
+    textmodeGrid[89].character = 33;
+    textmodeGrid[90].character = 34;
+}
+
 // Function to initialize SDL components
 void InitializeSDL() {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
@@ -93,14 +181,7 @@ void InitializeSDL() {
         SDL_MapRGB(intermediate->format, 0x00, 0x00, 0x00)
     );
 
-    for (int i = 0; i<400; i++) {
-        textmodeGrid[i].character = 0;
-        textmodeGrid[i].bg_color = 2;
-        textmodeGrid[i].fg_color = 3;
-    }
-
-    textmodeGrid[89].character = 33;
-    textmodeGrid[90].character = 34;
+    clearGrid(2);
 }
 
 // Function to clean up SDL components
@@ -145,7 +226,10 @@ void RenderScreen() {
         SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
     }
 
-    
+    PrintText("hi! @\nlol,0die",0,0);
+
+    clearGrid();
+
     // Main loop continuation
     // Flip the backbuffer
     SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
