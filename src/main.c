@@ -5,10 +5,15 @@
 #include "input.h"
 #include "screen.h"
 
+#include "ui.h"
+
+
+int num = 0;
+
 int main(int argc, char* argv[])
 {
     // Initialization code
-    InitializeSDL();
+    InitializeScreen();
 
     // Main loop
     while (true) {
@@ -16,11 +21,13 @@ int main(int argc, char* argv[])
             break;
         }
 
+        RenderUI();
+
         RenderScreen();
 
     }
     // Cleanup code
-    CleanupSDL();
+    CleanupScreen();
 
     return EXIT_SUCCESS;
 }

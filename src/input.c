@@ -3,10 +3,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-#include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
 
 #include "input.h"
+
+#include "screen.h"
 
 // Controller inputs
 #define SW_BTN_UP SDLK_UP
@@ -29,38 +30,71 @@
 #define SW_BTN_MENU SDLK_ESCAPE
 #define SW_BTN_POWER SDLK_FIRST
 
+Uint64 currentPC = 0;
+Uint64 previousPC = 0;
+double deltaTime = 0;
+
+int initialRepeatDelay = 350;
+int repeatDelays[6] = {150, 50, 50, 50, 50, 15};
+
+KeyDef keys[8] = {
+    {80,true,false,0,0}, //Left
+    {79,true,false,0,0}, //Right
+    {81,true,false,0,0}, //Down
+    {82,true,false,0,0}, //Up
+    {29,false,false,0,0}, //B, del
+    {27,false,false,0,0}, //A, input
+    {225,false,false,0,0}, //page turn
+    {40,false,false,0,0} //Enter, play
+};
+
 bool HandleInputs() {
+    previousPC = currentPC;
+    currentPC = SDL_GetPerformanceCounter();
+
+    deltaTime = (double)((currentPC - previousPC)*1000 / (double)SDL_GetPerformanceFrequency() );
+
+    for (int i = 0; i < 8; i++) {
+        keys[i].pressed = false;
+    }
+
     SDL_Event windowEvent;
     while (SDL_PollEvent(&windowEvent))
     {
-        if (windowEvent.type == SDL_QUIT) {
-            return true;
-        }
+        if (windowEvent.type == SDL_QUIT) {return true;}
         else if (windowEvent.type == SDL_KEYDOWN) {
-            switch (windowEvent.key.keysym.sym) {
-            case SDLK_RIGHT:
-                break;
-            case SDLK_LEFT:
-                break;
-            case SDLK_UP:
-                break;
-            case SDLK_DOWN:
-                break;
-            case SW_BTN_R1:
-                break;
-            case SW_BTN_L1:
-                break;
-            case SW_BTN_R2:
-                break;
-            case SW_BTN_L2:
-                break;
-            case SDLK_ESCAPE:
-                return true;
-                break;
-            default:
-                break;
+            if(windowEvent.key.keysym.scancode == 41){return true;}
+            if(windowEvent.key.repeat){continue;}
+            for (int i = 0; i < 8; i++) {
+                KeyDef* key = &keys[i];
+                if (windowEvent.key.keysym.scancode != key->scancode) {continue;}
+                key->pressed = true;
+                key->repeatCount = 0;
+                key->repeatTimer = initialRepeatDelay;
             }
         }
     }
+
+    for (int i = 0; i < 8; i++) {
+        KeyDef* key = &keys[i];
+        if(!key->repeatable || key->pressed){break;}
+        if(IsPressed(i)){
+            key->repeatTimer -= deltaTime;
+            if(key->repeatTimer <= 0){
+                if(key->repeatCount<80){key->repeatCount+=1;}
+                key->repeatTimer = repeatDelays[key->repeatCount/16];
+                key->pressed = true;
+            }
+        }
+    }
+
     return false;
+}
+
+bool IsPressed(int key) {
+    return (bool)SDL_GetKeyboardState(NULL)[keys[key].scancode];
+}
+
+bool IsJustPressed(int key) {
+    return keys[key].pressed;
 }

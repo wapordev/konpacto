@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-#include <SDL2_gfxPrimitives.h>
 #include <stdbool.h>
 
 #include "screen.h"
@@ -30,16 +29,57 @@ SDL_Texture* texture = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface* font = NULL;
 
+void PokeScreen(int pos, int chr, int bg, int fg) {
+    textmodeGrid[pos].character = chr;
+    textmodeGrid[pos].bg_color = bg;
+    textmodeGrid[pos].fg_color = fg;
+}
 
+//46
+void DrawFox(int xPos, int yPos, int col0, int col1, int col2, int col3) {
+    int pos=xPos+yPos*20;
 
-void PrintText(char string[], int xPos, int yPos) {
-    int bg_color = 2;
-    int fg_color = 3;
+    PokeScreen(pos,0x46,col2,col3);
+    PokeScreen(pos+1,0x5A,col3,col2);
+    PokeScreen(pos+2,0x39,col2,col1);
+    PokeScreen(pos+3,0x39,col2,col1);
+    PokeScreen(pos+4,0x5D,col3,col2);
+    PokeScreen(pos+5,0x49,col2,col3);
+    PokeScreen(pos+20,0x7E,col2,col3);
+    PokeScreen(pos+21,0x56,col1,col3);
+    PokeScreen(pos+22,0x00,col1,col3);
+    PokeScreen(pos+23,0x00,col1,col3);
+    PokeScreen(pos+24,0x59,col1,col3);
+    PokeScreen(pos+25,0x7F,col2,col3);
+    PokeScreen(pos+40,0x6F,col1,col2);
+    PokeScreen(pos+41,0x66,col1,col0);
+    PokeScreen(pos+42,0x67,col1,col0);
+    PokeScreen(pos+43,0x68,col1,col0);
+    PokeScreen(pos+44,0x69,col1,col0);
+    PokeScreen(pos+45,0x6E,col1,col2);
+    PokeScreen(pos+60,0x4E,col2,col1);
+    PokeScreen(pos+61,0x76,col1,col0);
+    PokeScreen(pos+62,0x57,col1,col3);
+    PokeScreen(pos+63,0x58,col1,col3);
+    PokeScreen(pos+64,0x79,col1,col0);
+    PokeScreen(pos+65,0x4F,col2,col1);
+    PokeScreen(pos+80,0x48,col2,col1);
+    PokeScreen(pos+81,0x4D,col3,col2);
+    PokeScreen(pos+82,0x77,col3,col0);
+    PokeScreen(pos+83,0x78,col3,col0);
+    PokeScreen(pos+84,0x4A,col3,col2);
+    PokeScreen(pos+85,0x47,col2,col1);
+    PokeScreen(pos+102,0x74,col2,col3);
+    PokeScreen(pos+103,0x75,col2,col3);
+}
+
+void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color) {
     int leftMargin = xPos;
     int i = 0;
     while (string[i] != '\0')
     {
         bool print = true;
+        bool colorOnly = false;
         char op = string[i];
         int out = 0;
         if(op >= 'a' && op <= 'z'){
@@ -58,6 +98,8 @@ void PrintText(char string[], int xPos, int yPos) {
             print=false;
             xPos = leftMargin;
             yPos += 1;
+        }else if (op == 'X'){
+            colorOnly=true;
         }else if (op == '='){
             print=false;
         }else if (op == '~'){
@@ -96,7 +138,7 @@ void PrintText(char string[], int xPos, int yPos) {
             TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
             cell->bg_color = bg_color;
             cell->fg_color = fg_color;
-            cell->character = out;
+            if(!colorOnly){cell->character = out;}
             if(++xPos>=20){
                 xPos = leftMargin;
                 if(++yPos>=20){
@@ -107,6 +149,20 @@ void PrintText(char string[], int xPos, int yPos) {
 
         i++;
     }
+}
+
+void PrintText(char string[], int xPos, int yPos){
+    PrintColor(string, xPos, yPos, 2, 3);
+}
+
+void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3){
+    int bg_color = col0;
+    int fg_color = col1;
+    if(selected){
+        bg_color = col2;
+        fg_color = col3;
+    }
+    PrintColor(string, xPos, yPos, bg_color, fg_color);
 }
 
 void PrintHex(int input, int bg_color, int fg_color, int xPos, int yPos){
@@ -127,13 +183,10 @@ void clearGrid(int col) {
         textmodeGrid[i].bg_color = col;
         textmodeGrid[i].fg_color = 3;
     }
-
-    textmodeGrid[89].character = 33;
-    textmodeGrid[90].character = 34;
 }
 
 // Function to initialize SDL components
-void InitializeSDL() {
+void InitializeScreen() {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
@@ -170,7 +223,7 @@ void InitializeSDL() {
         0, 0, 0, 0
     );
 
-    font = SDL_LoadBMP("assets/chunkfont.bmp");//LoadImage(font, font_path);
+    font = SDL_LoadBMP("assets/squarefont.bmp");//LoadImage(font, font_path);
     if (font == NULL) {
         printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
@@ -199,7 +252,7 @@ void InitializeSDL() {
 }
 
 // Function to clean up SDL components
-void CleanupSDL() {
+void CleanupScreen() {
     SDL_FreeSurface(screen);
     SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);
@@ -219,9 +272,7 @@ void RenderScreen() {
     dst_rect.w = 24;
     dst_rect.h = 24;
 
-    PrintText("hello,1hello,0hello\n,3world,1world,0world",2,0);
-
-    PrintHex(254,2,3,0,3);
+    
 
     for (int i = 0; i<400; i++){
         
@@ -243,10 +294,6 @@ void RenderScreen() {
         dst_rect.y = (i/20)*24;
         SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
     }
-
-    
-
-    clearGrid(2);
 
     // Main loop continuation
     // Flip the backbuffer

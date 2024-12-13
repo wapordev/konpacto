@@ -6,4 +6,16 @@
 /* Sums two ints */
 bool HandleInputs();
 
+bool IsPressed(int key);
+
+bool IsJustPressed(int key);
+
+typedef struct KeyDef {
+	int scancode;
+	bool repeatable;
+	bool pressed;
+	int repeatTimer;
+	int repeatCount;
+}KeyDef;
+
 #endif
