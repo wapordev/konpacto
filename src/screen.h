@@ -22,7 +22,9 @@ void DrawFox(int xPos, int yPos, int col1, int col2, int col3, int col4);
 
 void PokeScreen(int pos, int chr, int bg, int fg);
 
-void PrintHex(int input, int bg_color, int fg_color, int xPos, int yPos);
+void PrintHex(int input, int xPos, int yPos, int bg_color, int fg_color);
+
+void HexSelected(int input, int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3);
 
 void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3);
 

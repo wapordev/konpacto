@@ -12,6 +12,10 @@
 #define WINDOW_WIDTH 640                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
 
+int charWidth = 12;
+int charHeight = 12;
+
+
 TextmodeCell textmodeGrid[400];
 
 SDL_Color palette[4] = {
@@ -20,8 +24,6 @@ SDL_Color palette[4] = {
     {255, 204, 170, 255},
     {255, 241, 232, 255}
 };
-
-SDL_Surface* intermediate = NULL;
 
 SDL_Window* window = NULL;
 SDL_Surface* screen = NULL;
@@ -102,36 +104,8 @@ void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color) {
             colorOnly=true;
         }else if (op == '='){
             print=false;
-        }else if (op == '~'){
-            out=1;
-        }else if (op == '!'){
-            out=2;
-        }else if (op == '#'){
-            out=3;
-        }else if (op == '-'){
-            out=4;
-        }else if (op == '+'){
-            out=5;
-        }else if (op == ':'){
-            out=6;
-        }else if (op == '\''){
-            out=7;
-        }else if (op == '('){
-            out=8;
-        }else if (op == ')'){
-            out=9;
-        }else if (op == '<'){
-            out=10;
-        }else if (op == '>'){
-            out=11;
-        }else if (op == '@'){
-            out=12;
-        }else if (op == '$'){
-            out=13;
-        }else if (op == '{'){
-            out=14;
-        }else if (op == '}'){
-            out=15;
+        }else if (op >= 'A' && op <= 'O'){
+            out=(op-'A')+1;
         }
 
         if (print){
@@ -165,7 +139,7 @@ void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, i
     PrintColor(string, xPos, yPos, bg_color, fg_color);
 }
 
-void PrintHex(int input, int bg_color, int fg_color, int xPos, int yPos){
+void PrintHex(int input, int xPos, int yPos, int bg_color, int fg_color){
     TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
     cell->bg_color = bg_color;
     cell->fg_color = fg_color;
@@ -177,12 +151,47 @@ void PrintHex(int input, int bg_color, int fg_color, int xPos, int yPos){
     cell->character = (input%16)+16;
 };
 
+void HexSelected(int input, int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3){
+    int bg_color = col0;
+    int fg_color = col1;
+    if(selected){
+        bg_color = col2;
+        fg_color = col3;
+    }
+    PrintHex(input,xPos,yPos,bg_color,fg_color);
+}
+
 void clearGrid(int col) {
     for (int i = 0; i<400; i++) {
         textmodeGrid[i].character = 0;
         textmodeGrid[i].bg_color = col;
         textmodeGrid[i].fg_color = 3;
     }
+}
+
+void ScreenResize(int fontW, int fontH) {
+    if(screen != NULL){SDL_FreeSurface(screen);}
+    if(texture != NULL){SDL_DestroyTexture(texture);}
+    SDL_RenderSetLogicalSize(renderer, fontW, fontH);
+    screen = SDL_CreateRGBSurface(
+        0,
+        fontW,
+        fontH,
+        DEPTH,
+        0, 0, 0, 0
+    );
+    texture = SDL_CreateTexture(
+        renderer,
+        SDL_PIXELFORMAT_RGB565,
+        SDL_TEXTUREACCESS_STREAMING,
+        fontW,
+        fontH
+    );
+    SDL_FillRect(
+        screen,
+        &screen->clip_rect,
+        SDL_MapRGB(screen->format, 0x00, 0x00, 0x00)
+    );
 }
 
 // Function to initialize SDL components
@@ -201,29 +210,17 @@ void InitializeScreen() {
         SDL_WINDOW_SHOWN
     );
 
+    SDL_SetWindowResizable(window,true);
+
     renderer = SDL_CreateRenderer(
         window,
         -1,
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 
-    texture = SDL_CreateTexture(
-        renderer,
-        SDL_PIXELFORMAT_RGB565,
-        SDL_TEXTUREACCESS_STREAMING,
-        WINDOW_WIDTH,
-        WINDOW_HEIGHT
-    );
-
-    screen = SDL_CreateRGBSurface(
-        0,
-        WINDOW_WIDTH,
-        WINDOW_HEIGHT,
-        DEPTH,
-        0, 0, 0, 0
-    );
-
-    font = SDL_LoadBMP("assets/squarefont.bmp");//LoadImage(font, font_path);
+    SDL_RenderSetIntegerScale(renderer, true);
+    ScreenResize(charWidth*20,charHeight*20);
+    font = SDL_LoadBMP("assets/newbigfont.bmp");//LoadImage(font, font_path);
     if (font == NULL) {
         printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
@@ -234,19 +231,6 @@ void InitializeScreen() {
         printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
         exit(EXIT_FAILURE);
     }
-
-    SDL_FillRect(
-        screen,
-        &screen->clip_rect,
-        SDL_MapRGB(screen->format, 0x00, 0x00, 0x00)
-    );
-
-    intermediate = SDL_CreateRGBSurfaceWithFormat(0,6,6,8,SDL_PIXELFORMAT_RGB565);
-    SDL_FillRect(
-        intermediate,
-        &intermediate->clip_rect,
-        SDL_MapRGB(intermediate->format, 0x00, 0x00, 0x00)
-    );
 
     clearGrid(2);
 }
@@ -264,21 +248,19 @@ void CleanupScreen() {
 void RenderScreen() {
 
     SDL_Rect src_rect;
-    src_rect.w = 6;
-    src_rect.h = 6;
+    src_rect.w = charWidth;
+    src_rect.h = charHeight;
     SDL_Color colors[2];
 
     SDL_Rect dst_rect;
-    dst_rect.w = 24;
-    dst_rect.h = 24;
-
-    
+    dst_rect.w = charWidth;
+    dst_rect.h = charHeight;
 
     for (int i = 0; i<400; i++){
         
         int character = textmodeGrid[i].character;
-        src_rect.x = (character%16)*6;
-        src_rect.y = (character/16)*6;
+        src_rect.x = (character%16)*charWidth;
+        src_rect.y = (character/16)*charHeight;
 
         colors[0] = palette[textmodeGrid[i].bg_color];
         colors[1] = palette[textmodeGrid[i].fg_color];
@@ -288,11 +270,10 @@ void RenderScreen() {
             printf("could not set all colors: %s\n",SDL_GetError());
         }
 
-        SDL_BlitSurface(font,&src_rect,intermediate,NULL);
 
-        dst_rect.x = 80+((i%20)*24);
-        dst_rect.y = (i/20)*24;
-        SDL_BlitScaled(intermediate,NULL,screen,&dst_rect);
+        dst_rect.x = ((i%20)*charWidth);
+        dst_rect.y = (i/20)*charHeight;
+        SDL_BlitSurface(font,&src_rect,screen,&dst_rect);
     }
 
     // Main loop continuation
