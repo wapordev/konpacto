@@ -7,7 +7,7 @@
 #include "pages.h"
 #include "screen.h"
 
-#define CreateGrid(width, height, setPtr, drawPtr)  (UIGrid){width, height, 0, 0, width>1, setPtr, drawPtr}
+#define CreateGrid(width, height, setPtr, drawPtr)  {width, height, 0, 0, width>1, setPtr, drawPtr}
 
 double clamp(int d, int min, int max) {
   const int t = d < min ? min : d;
