@@ -233,6 +233,7 @@ void InitializeScreen() {
     }
 
     clearGrid(2);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"nearest");
 }
 
 // Function to clean up SDL components
