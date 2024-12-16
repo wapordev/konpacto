@@ -28,10 +28,17 @@ void PageProcess(UIPage page) {
 	if(change){page.grids[0].setPtr(0,0,change);}
 }
 
+char fontNames[32][256];
+
 void ProjectDraw() {
 	PrintColor("theme\nfont",0,1,2,1);
 
-	PrintText(CharToBMP(GetPath(),true),0,5);
+	GetPath("assets",fontNames);
+	PrintText(CharToBMP(fontNames[0],true),0,5);
+	PrintText(CharToBMP(fontNames[1],true),0,6);
+	PrintText(CharToBMP(fontNames[2],true),0,7);
+	PrintText(CharToBMP(fontNames[3],true),0,8);
+	PrintText(CharToBMP(fontNames[4],true),0,9);
 
 	//Fox
 	DrawFox(7,9,0,1,2,3);

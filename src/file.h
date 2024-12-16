@@ -9,6 +9,6 @@ char* IntToChar(int BMPstring[], char* out, int length);
 
 char* CharToBMP(char* string, bool filter);
 
-char* GetPath();
+void GetPath();
 
 #endif
