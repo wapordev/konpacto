@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <SDL.h>
 #include <stdbool.h>
-#include <dirent.h>
 
 #include "input.h"
 
 #include "screen.h"
+
+#include "tinydir.h"
 
 int EndsWith(const char *str, const char *suffix)
 {
@@ -16,27 +17,24 @@ int EndsWith(const char *str, const char *suffix)
     size_t lensuffix = strlen(suffix);
     if (lensuffix >  lenstr)
         return 0;
-    return strncmp(str + lenstr - lensuffix, suffix, lensuffix) == 0;
+    return strcasecmp(str + lenstr - lensuffix, suffix) == 0;
 }
 
-void GetPath(const char *path, char list[32][256]){
-	
+void ListPath(){
 
-	struct dirent *entry;
-    DIR *dir = opendir(path);
-    if (dir == NULL) {
-        return;
-    }
-
-    int i=0;
-    while ((entry = readdir(dir)) != NULL) {
-        if(EndsWith(entry->d_name,".bmp")){
-        	strcpy(list[i],entry->d_name);
-        	i++;
-        }
-    }
-
-    closedir(dir);
+	//PrintText(CharToBMP(fontNames[0],true),0,5);
+	tinydir_dir dir;
+  	tinydir_open_sorted(&dir, "assets");
+  	int y=0;
+  	for(int i=0;i<dir.n_files;i++){
+  		tinydir_file file;
+		tinydir_readfile_n(&dir, &file, i);
+		if(EndsWith(file.name,".BMP")){
+			PrintText(file.name,0,5+y);
+			y++;
+		}
+	}
+	tinydir_close(&dir);
 }
 
 char* IntToChar(int BMPstring[], char* out, int length){
@@ -52,37 +50,4 @@ char* IntToChar(int BMPstring[], char* out, int length){
 		}
 	}
 	return out;
-}
-
-char* CharToBMP(char* string, bool filter){
-
-	char filterEnd = filter ? 'Z' : 'O';
-
-	for(int i=0;i<128;i++){
-		char current = string[i];
-		if(current=='\0'){break;}
-		if(current >= 'a' && current <= 'z'){continue;}
-		if(current >= 'A' && current <= filterEnd){
-			if(filter){string[i]=current-'A'+'a';}  
-			continue;
-		}
-		if(current=='~'){string[i] = 'A'; continue;}
-		if(current=='!'){string[i] = 'B'; continue;}
-		if(current=='/'){string[i] = 'C'; continue;}
-		if(current=='\\'){string[i] = 'C'; continue;}
-		if(current=='-'){string[i] = 'D'; continue;}
-		if(current=='.'){string[i] = 'E'; continue;}
-		if(current==':'){string[i] = 'F'; continue;}
-		if(current=='\''){string[i] = 'G'; continue;}
-		if(current=='('){string[i] = 'H'; continue;}
-		if(current==')'){string[i] = 'I'; continue;}
-		if(current=='<'){string[i] = 'J'; continue;}
-		if(current=='>'){string[i] = 'K'; continue;}
-		//if(current==''){ continue;}
-		//if(current==''){ continue;}
-		//if(current==''){ continue;}
-		//if(current==''){ continue;}
-		string[i] = ' ';
-	}
-	return string;
 }

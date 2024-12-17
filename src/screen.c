@@ -106,7 +106,45 @@ void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color) {
             print=false;
         }else if (op >= 'A' && op <= 'O'){
             out=(op-'A')+1;
+        }else if (op == '~'){
+            out=0x01;
+        }else if (op == '!'){
+            out=0x02;
+        }else if (op == '/'){
+            out=0x03;
+        }else if (op == '\\'){
+            out=0x03;
+        }else if (op == '-'){
+            out=0x04;
+        }else if (op == '.'){
+            out=0x05;
+        }else if (op == ':'){
+            out=0x06;
+        }else if (op == '\''){
+            out=0x07;
+        }else if (op == '('){
+            out=0x08;
+        }else if (op == ')'){
+            out=0x09;
+        }else if (op == '<'){
+            out=0x0A;
+        }else if (op == '>'){
+            out=0x0B;
         }
+
+
+        // if(current=='~'){string[i] = 'A'; continue;}
+        // if(current=='!'){string[i] = 'B'; continue;}
+        // if(current=='/'){string[i] = 'C'; continue;}
+        // if(current=='\\'){string[i] = 'C'; continue;}
+        // if(current=='-'){string[i] = 'D'; continue;}
+        // if(current=='.'){string[i] = 'E'; continue;}
+        // if(current==':'){string[i] = 'F'; continue;}
+        // if(current=='\''){string[i] = 'G'; continue;}
+        // if(current=='('){string[i] = 'H'; continue;}
+        // if(current==')'){string[i] = 'I'; continue;}
+        // if(current=='<'){string[i] = 'J'; continue;}
+        // if(current=='>'){string[i] = 'K'; continue;}
 
         if (print){
             TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
@@ -233,7 +271,7 @@ void InitializeScreen() {
     }
 
     clearGrid(2);
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"nearest");
+    SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY,"nearest",SDL_HINT_OVERRIDE);
 }
 
 // Function to clean up SDL components
