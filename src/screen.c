@@ -213,7 +213,7 @@ void ScreenResize(int fontW, int fontH) {
         fontH
     );
     SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
-    #ifdef MMIYOO_DRIVER_NAME
+    #ifdef WINDOW_HEIGHT
     #warning "System is Miyoo"
     MMIYOO_SetTextureScaleMode(renderer,texture,SDL_ScaleModeNearest);
     #endif
