@@ -8,6 +8,8 @@ bool HandleInputs();
 
 void InitializeScreen();
 
+void ChangeFont(char* fontName);
+
 void CleanupScreen();
 
 void RenderScreen();

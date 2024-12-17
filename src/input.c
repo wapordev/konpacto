@@ -37,15 +37,30 @@ double deltaTime = 0;
 int initialRepeatDelay = 350;
 int repeatDelays[6] = {150, 50, 50, 50, 50, 15};
 
+//to replace with config file
+#if defined(_WIN32) || defined(_WIN64) || \
+    defined(__WIN32__) || defined(__TOS_WIN__) || \
+    defined(__WINDOWS__)
+#define KPTA 27
+#define KPTB 29
+#define KPTS 225
+#define KPTE 40
+#else
+#define KPTA 44
+#define KPTB 224
+#define KPTS 23
+#define KPTE 40
+#endif
+
 KeyDef keys[8] = {
     {80,true,false,0,0}, //Left
     {79,true,false,0,0}, //Right
     {81,true,false,0,0}, //Down
     {82,true,false,0,0}, //Up
-    {29,false,false,0,0}, //B, del
-    {27,false,false,0,0}, //A, input
-    {225,false,false,0,0}, //page turn
-    {40,false,false,0,0} //Enter, play
+    {KPTB,false,false,0,0}, //B, del
+    {KPTA,false,false,0,0}, //A, input
+    {KPTS,false,false,0,0}, //page turn
+    {KPTE,false,false,0,0} //Enter, play
 };
 
 bool HandleInputs() {
