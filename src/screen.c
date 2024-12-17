@@ -197,7 +197,7 @@ void clearGrid(int col) {
 void ScreenResize(int fontW, int fontH) {
     if(screen != NULL){SDL_FreeSurface(screen);}
     if(texture != NULL){SDL_DestroyTexture(texture);}
-    SDL_RenderSetLogicalSize(renderer, fontW, fontH);
+    SDL_RenderSetLogicalSize(renderer, 1, 1);
     screen = SDL_CreateRGBSurface(
         0,
         fontW,
