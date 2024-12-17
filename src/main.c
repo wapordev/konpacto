@@ -4,8 +4,8 @@
 
 #include "input.h"
 #include "screen.h"
-
 #include "ui.h"
+#include "pages.h"
 
 
 int num = 0;
@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
 {
     // Initialization code
     InitializeScreen();
+    InitializePages();
 
     // Main loop
     while (true) {

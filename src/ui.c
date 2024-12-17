@@ -15,30 +15,37 @@ char pageNames[5][14] = {"project","arrange","compose","track edit","operators"}
 
 char helpString[20];
 
-void PageProcess(UIPage page) {
-
-	int horizontal = IsJustPressed(0) ? -1 : (IsJustPressed(1) ? 1 : 0);
-	int vertical = IsJustPressed(2) ? -1 : (IsJustPressed(3) ? 1 : 0);
-	int change = horizontal + vertical*16;
-
-	for(int i = 0; i < page.length; i++) {
-		UIGrid grid = page.grids[i];
-		grid.drawPtr(grid.xPos, grid.yPos, i==page.pointer);
-	}
-	if(change){page.grids[0].setPtr(0,0,change);}
+int clamp(int d, int min, int max) {
+  const int t = d < min ? min : d;
+  return t > max ? max : t;
 }
 
-void ProjectDraw() {
-	PrintColor("theme\nfont",0,1,2,1);
+inline int positive_modulo(int i, int n) {
+    return (i % n + n) % n;
+}
 
+void PageProcess(UIPage* page, UIEvent* event) {
+	
+	if(event->type == UIMove){
+		page->index=clamp(page->index-event->vertical,0,page->length-1);
+	}
 
-	ListPath();
-	// GetPath("assets",fontNames);
-	// PrintText(CharToBMP(fontNames[0],true),0,5);
-	// PrintText(CharToBMP(fontNames[1],true),0,6);
-	// PrintText(CharToBMP(fontNames[2],true),0,7);
-	// PrintText(CharToBMP(fontNames[3],true),0,8);
-	// PrintText(CharToBMP(fontNames[4],true),0,9);
+	UIGrid curGrid = page->grids[page->index];
+
+	if(event->type == UIChange){
+		curGrid.setPtr(curGrid.xPos, curGrid.yPos,event->change);
+	}
+
+	for(int i = 0; i < page->length; i++) {
+		if(i==page->index){continue;}
+		UIGrid g = page->grids[i];
+		g.drawPtr(g.xPos, g.yPos, false);
+	}
+	curGrid.drawPtr(curGrid.xPos, curGrid.yPos, true);
+}
+
+void ProjectDraw(UIEvent* event) {
+	PrintColor("theme\nfont",0,1,2,1,false);
 
 	//Fox
 	DrawFox(7,9,0,1,2,3);
@@ -46,31 +53,27 @@ void ProjectDraw() {
 	PokeScreen(329,0x74,2,0);
     PokeScreen(330,0x75,2,0);
 
-    PageProcess(projectPage);
+    PageProcess(&projectPage, event);
 }
 
-void ArrangeDraw() {
-
-}
-
-void ComposeDraw() {
+void ArrangeDraw(UIEvent* event) {
 
 }
 
-void TrackDraw() {
+void ComposeDraw(UIEvent* event) {
 
 }
 
-void OperatorsDraw() {
+void TrackDraw(UIEvent* event) {
+
+}
+
+void OperatorsDraw(UIEvent* event) {
 
 }
 
 void RenderUI() {
 	clearGrid(2);
-
-	if(IsJustPressed(0)){page--;}
-	if(IsJustPressed(1)){page++;}
-	
 
 	strcpy(helpString,"gay people rock");
 
@@ -79,12 +82,40 @@ void RenderUI() {
 	PrintText(pageNames[page],0,19);
 	PrintText(";3,2XXXXXXXXXXXXXXX;0,3pacto",0,19);
 
+	
+
+	int horizontal = IsJustPressed(0) ? -1 : (IsJustPressed(1) ? 1 : 0);
+	int vertical = IsJustPressed(2) ? -1 : (IsJustPressed(3) ? 1 : 0);
+	int change = horizontal + vertical*16;
+
+	UIEvent event = {UINothing,horizontal,vertical,change};
+
+	bool sPress = IsPressed(6);
+	bool zPress = IsPressed(4);
+	bool xPress = IsPressed(5);
+	bool xJPress = IsJustPressed(5);
+	
+	if(change!=0){
+		event.type = UIMove;
+		if (sPress){
+			event.type = UIPageChange;
+			if(IsJustPressed(0)){page--;}
+			if(IsJustPressed(1)){page++;}
+		}else if(zPress){
+
+		}else if(xPress){
+			event.type = UIChange;
+		}
+	}else if(xJPress){
+		event.type = UIPlace;
+	}
+
 	switch(page){
-	case 0: ProjectDraw(); break;
-	case 1: ArrangeDraw(); break;
-	case 2: ComposeDraw(); break;
-	case 3: TrackDraw(); break;
-	case 4: OperatorsDraw(); break;
+	case 0: ProjectDraw(&event); break;
+	case 1: ArrangeDraw(&event); break;
+	case 2: ComposeDraw(&event); break;
+	case 3: TrackDraw(&event); break;
+	case 4: OperatorsDraw(&event); break;
 	}
 	
 	PrintText(";1,0X",15+page,19);

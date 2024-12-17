@@ -9,7 +9,7 @@ char* IntToChar(int BMPstring[], char* out, int length);
 
 char* CharToBMP(char* string, bool filter);
 
-void ListPath();
+char** ListPath(char* path, char* filter, int* outLength);
 
 void FreePath();
 

@@ -28,7 +28,7 @@ void HexSelected(int input, int xPos, int yPos, bool selected, int col0, int col
 
 void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3);
 
-void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color);
+void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color, bool wrap);
 
 void PrintText(char string[], int xPos, int yPos);
 

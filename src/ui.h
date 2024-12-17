@@ -6,6 +6,28 @@
 /* Sums two ints */
 void RenderUI();
 
+void InitializePages();
+
+int clamp(int d, int min, int max);
+
+int positive_modulo(int i, int n);
+
+typedef enum {
+    UINothing,
+    UIPlace,
+    UIDelete,
+    UIChange,
+    UIPageChange,
+    UIMove
+} UIEventType;
+
+typedef struct UIEvent {
+	UIEventType type;
+	int horizontal;
+	int vertical;
+	int change;
+}UIEvent;
+
 typedef struct UIGrid {
 	int width;
 	int height;
@@ -17,7 +39,7 @@ typedef struct UIGrid {
 }UIGrid;
 
 typedef struct UIPage {
-	int pointer;
+	int index;
 	int length;
 	UIGrid* grids;
 }UIPage;

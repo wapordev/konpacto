@@ -75,7 +75,7 @@ void DrawFox(int xPos, int yPos, int col0, int col1, int col2, int col3) {
     PokeScreen(pos+103,0x75,col2,col3);
 }
 
-void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color) {
+void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color, bool wrap) {
     int leftMargin = xPos;
     int i = 0;
     while (string[i] != '\0')
@@ -132,26 +132,13 @@ void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color) {
             out=0x0B;
         }
 
-
-        // if(current=='~'){string[i] = 'A'; continue;}
-        // if(current=='!'){string[i] = 'B'; continue;}
-        // if(current=='/'){string[i] = 'C'; continue;}
-        // if(current=='\\'){string[i] = 'C'; continue;}
-        // if(current=='-'){string[i] = 'D'; continue;}
-        // if(current=='.'){string[i] = 'E'; continue;}
-        // if(current==':'){string[i] = 'F'; continue;}
-        // if(current=='\''){string[i] = 'G'; continue;}
-        // if(current=='('){string[i] = 'H'; continue;}
-        // if(current==')'){string[i] = 'I'; continue;}
-        // if(current=='<'){string[i] = 'J'; continue;}
-        // if(current=='>'){string[i] = 'K'; continue;}
-
         if (print){
             TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
             cell->bg_color = bg_color;
             cell->fg_color = fg_color;
             if(!colorOnly){cell->character = out;}
             if(++xPos>=20){
+                if(!wrap){return;}
                 xPos = leftMargin;
                 if(++yPos>=20){
                     return;
@@ -164,7 +151,7 @@ void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color) {
 }
 
 void PrintText(char string[], int xPos, int yPos){
-    PrintColor(string, xPos, yPos, 2, 3);
+    PrintColor(string, xPos, yPos, 2, 3, true);
 }
 
 void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3){
@@ -174,7 +161,7 @@ void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, i
         bg_color = col2;
         fg_color = col3;
     }
-    PrintColor(string, xPos, yPos, bg_color, fg_color);
+    PrintColor(string, xPos, yPos, bg_color, fg_color, selected);
 }
 
 void PrintHex(int input, int xPos, int yPos, int bg_color, int fg_color){
@@ -232,6 +219,29 @@ void ScreenResize(int fontW, int fontH) {
     );
 }
 
+void ChangeFont(char* fontName) {
+    char* path;
+
+    char* pathPrefix = "assets/";
+
+    path = malloc(strlen(pathPrefix)+strlen(fontName)+1);
+    path[0] = '\0';
+    strcat(path,pathPrefix);
+    strcat(path,fontName);
+
+    font = SDL_LoadBMP(path);
+    free(path);
+
+    if (font == NULL) {
+        printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+    charWidth = font->w/16;
+    charHeight = font->h/8;
+
+    ScreenResize(charWidth*20,charHeight*20);
+}
+
 // Function to initialize SDL components
 void InitializeScreen() {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
@@ -257,12 +267,6 @@ void InitializeScreen() {
     );
 
     SDL_RenderSetIntegerScale(renderer, true);
-    ScreenResize(charWidth*20,charHeight*20);
-    font = SDL_LoadBMP("assets/newbigfont.bmp");//LoadImage(font, font_path);
-    if (font == NULL) {
-        printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
-        exit(EXIT_FAILURE);
-    }
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
