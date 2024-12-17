@@ -213,10 +213,6 @@ void ScreenResize(int fontW, int fontH) {
         fontH
     );
     SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
-    #ifdef WINDOW_HEIGHT
-    #warning "System is Miyoo"
-    MMIYOO_SetTextureScaleMode(renderer,texture,SDL_ScaleModeNearest);
-    #endif
     SDL_FillRect(
         screen,
         &screen->clip_rect,
@@ -281,6 +277,7 @@ void InitializeScreen() {
 
     clearGrid(2);
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY,"nearest",SDL_HINT_OVERRIDE);
+    SDL_SetHintWithPriority(SDL_HINT_RENDER_OPENGL_SHADERS,"nearest",SDL_HINT_OVERRIDE);
 }
 
 // Function to clean up SDL components
