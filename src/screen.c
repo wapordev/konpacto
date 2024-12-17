@@ -214,6 +214,7 @@ void ScreenResize(int fontW, int fontH) {
     );
     SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
     #ifdef MMIYOO_DRIVER_NAME
+    #warning "System is Miyoo"
     MMIYOO_SetTextureScaleMode(renderer,texture,SDL_ScaleModeNearest);
     #endif
     SDL_FillRect(
