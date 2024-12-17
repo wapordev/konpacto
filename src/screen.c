@@ -197,7 +197,7 @@ void clearGrid(int col) {
 void ScreenResize(int fontW, int fontH) {
     if(screen != NULL){SDL_FreeSurface(screen);}
     if(texture != NULL){SDL_DestroyTexture(texture);}
-    SDL_RenderSetLogicalSize(renderer, 1, 1);
+    SDL_RenderSetLogicalSize(renderer, fontW, fontH);
     screen = SDL_CreateRGBSurface(
         0,
         fontW,
@@ -325,6 +325,10 @@ void RenderScreen() {
     // Flip the backbuffer
     SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    dst_rect.x = 0;
+    dst_rect.y = 0;
+    dst_rect.w = charWidth*20;
+    dst_rect.h = charHeight*20;
+    SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
     SDL_RenderPresent(renderer);
 }
