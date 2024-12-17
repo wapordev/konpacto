@@ -212,6 +212,7 @@ void ScreenResize(int fontW, int fontH) {
         fontW,
         fontH
     );
+    SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
     SDL_FillRect(
         screen,
         &screen->clip_rect,
