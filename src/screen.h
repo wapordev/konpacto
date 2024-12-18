@@ -10,6 +10,8 @@ void InitializeScreen();
 
 void ChangeFont(char* fontName);
 
+void ChangeTheme(char* fontName);
+
 void CleanupScreen();
 
 void RenderScreen();

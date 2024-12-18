@@ -197,7 +197,7 @@ void clearGrid(int col) {
 void ScreenResize(int fontW, int fontH) {
     if(screen != NULL){SDL_FreeSurface(screen);}
     if(texture != NULL){SDL_DestroyTexture(texture);}
-    //SDL_RenderSetLogicalSize(renderer, fontW, fontH);
+    SDL_RenderSetLogicalSize(renderer, fontW, fontH);
     screen = SDL_CreateRGBSurface(
         0,
         fontW,
@@ -223,7 +223,7 @@ void ScreenResize(int fontW, int fontH) {
 void ChangeFont(char* fontName) {
     char* path;
 
-    char* pathPrefix = "assets/";
+    char* pathPrefix = "assets/fonts/";
 
     path = malloc(strlen(pathPrefix)+strlen(fontName)+1);
     path[0] = '\0';
@@ -241,6 +241,43 @@ void ChangeFont(char* fontName) {
     charHeight = font->h/8;
 
     ScreenResize(charWidth*20,charHeight*20);
+}
+
+void ChangeTheme(char* themeName) {
+    char* path;
+
+    char* pathPrefix = "assets/palettes/";
+
+    path = malloc(strlen(pathPrefix)+strlen(themeName)+1);
+    path[0] = '\0';
+    strcat(path,pathPrefix);
+    strcat(path,themeName);
+
+    SDL_Surface* theme;
+    theme = IMG_Load(path);
+    free(path);
+
+    if (theme == NULL) {
+        printf("Theme could not initialize! SDL_image Error: %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+    for(int i=0;i<4;i++){
+
+                int bpp = theme->format->BytesPerPixel;
+                Uint8 *pixel = (Uint8*)theme->pixels + i * bpp;
+
+                #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+                    palette[i].r = pixel[2]; 
+                    palette[i].g = pixel[1]; 
+                    palette[i].b = pixel[0];
+                #else
+                    palette[i].r = pixel[0]; 
+                    palette[i].g = pixel[1]; 
+                    palette[i].b = pixel[2];
+                #endif
+
+    }
+    SDL_FreeSurface(theme);
 }
 
 // Function to initialize SDL components
@@ -267,7 +304,7 @@ void InitializeScreen() {
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 
-    //SDL_RenderSetIntegerScale(renderer, true);
+    SDL_RenderSetIntegerScale(renderer, true);
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -277,7 +314,6 @@ void InitializeScreen() {
 
     clearGrid(2);
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY,"nearest",SDL_HINT_OVERRIDE);
-    SDL_SetHintWithPriority(SDL_HINT_RENDER_OPENGL_SHADERS,"nearest",SDL_HINT_OVERRIDE);
 }
 
 // Function to clean up SDL components
@@ -325,10 +361,6 @@ void RenderScreen() {
     // Flip the backbuffer
     SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
     SDL_RenderClear(renderer);
-    dst_rect.x=80;
-    dst_rect.y=0;
-    dst_rect.w=480;
-    dst_rect.h=480;
-    SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
 }
