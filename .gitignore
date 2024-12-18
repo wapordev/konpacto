@@ -1,7 +1,7 @@
 # Build
 build/
 
-#fonts that aren't mine
+#palettes that aren't mine
 src/assets/palettes/*1x.png
 
 # Prerequisites

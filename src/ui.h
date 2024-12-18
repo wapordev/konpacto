@@ -18,7 +18,8 @@ typedef enum {
     UIDelete,
     UIChange,
     UIPageChange,
-    UIMove
+    UIMove,
+    UIMoveRepeat
 } UIEventType;
 
 typedef struct UIEvent {
@@ -34,7 +35,7 @@ typedef struct UIGrid {
 	int xPos;
 	int yPos;
 	bool horizontalLink;
-	void (*setPtr)(int, int, int);
+	void (*setPtr)(int, int, UIEvent);
 	void (*drawPtr)(int, int, bool);
 }UIGrid;
 

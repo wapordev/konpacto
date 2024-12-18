@@ -8,7 +8,7 @@
 #include "pages.h"
 #include "screen.h"
 
-#define CreateGrid(width, height, setPtr, drawPtr)  {width, height, 0, 0, width>1, setPtr, drawPtr}
+#define CreateGrid(width, height, setPtr, drawPtr)  {width, height, 0, 0, width>1 && height>1, setPtr, drawPtr}
 
 
 int themeCount=0;
@@ -19,7 +19,8 @@ int fontCount=0;
 int fontIndex=0;
 char** fontList;
 
-void SetTheme(int xPos, int yPos, int change) {
+void SetTheme(int xPos, int yPos, UIEvent event) {
+	int change = event.change;
 	for(int i=0; i<themeCount; i++){
 		free(themeList[i]);
 	}
@@ -59,7 +60,8 @@ void DrawTheme(int xPos, int yPos, bool selected) {
 	}
 }
 
-void SetFont(int xPos, int yPos, int change) {
+void SetFont(int xPos, int yPos, UIEvent event) {
+	int change = event.change;
 	for(int i=0; i<fontCount; i++){
 		free(fontList[i]);
 	}
@@ -81,15 +83,48 @@ void InitializePages(){
 	ChangeFont(fontList[0]);
 }
 
-int fileName[15] = {1};
+int noFile[15]={0x2E,0x27,0x27,0x1A,0x26,0x1E,0x1D,0,0x1F,0x22,0x25,0x1E,0x5};
+int fileName[15];
+int lastChar = 0x1A;
 
+void SetFile(int xPos, int yPos, UIEvent event){
+	if(event.type == UIDelete){
+		for(int i=xPos; i<15; i++){
+			fileName[i]=0;
+		}
+	}else {
+		if(event.type == UIPlace){
+			if(fileName[xPos] == 0){
+				if(fileName[0]==0){
+					lastChar=0x1A;
+				}
+				fileName[xPos] = lastChar;
+				for(int i=0; i<xPos; i++){
+					if(fileName[i]==0){
+						fileName[i]=4;
+					}
+				}
+			}else{
+				lastChar = fileName[xPos];
+			}
+		}
 
-void SetFile(int xPos, int yPos, int change){
-
+		if(event.type == UIChange){
+			fileName[xPos] += event.change;
+			if(fileName[xPos]!=0){
+				lastChar = fileName[xPos];
+			}
+		}
+		fileName[xPos] = positive_modulo(fileName[xPos]-1,0x33)+1;
+	}
 }
 
 void DrawFile(int xPos, int yPos, bool selected){
-	PokeSelected(65+xPos,fileName[xPos],selected,2,3,1,0);
+	int* chr = &fileName[0];
+	if(fileName[0]==0){
+		chr = &noFile[0];
+	}
+	PokeSelected(65+xPos,chr[xPos],selected,2,3,1,0);
 }
 
 UIPage projectPage = {0,3,(UIGrid[3]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(15,1,&SetFile,&DrawFile)} };

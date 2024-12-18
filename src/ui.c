@@ -26,16 +26,35 @@ inline int positive_modulo(int i, int n) {
 
 void PageProcess(UIPage* page, UIEvent* event) {
 	
-	if(event->type == UIMove){
-		
+	if(event->type == UIMove || event->type == UIMoveRepeat){
+		UIGrid *g = &page->grids[page->index];
 
-		page->index=clamp(page->index-event->vertical,0,page->length-1);
+		g->xPos += event->horizontal;
+		g->yPos += event->vertical;
+
+		
+		if(g->yPos < 0 || g->yPos >= g->height){
+			page->index=clamp(page->index-event->vertical,0,page->length-1);
+		}
+		//this shouldnt happen on key repeat. ill have to make another case for this
+		if(event->type != UIMoveRepeat && g->horizontalLink && (g->xPos < 0 || g->xPos >= g->width)){
+			page->index=0;
+		}
+		g->xPos = clamp(g->xPos,0,g->width-1);
+		g->yPos = clamp(g->yPos,0,g->height-1);
+
+		
 	}
 
 	UIGrid curGrid = page->grids[page->index];
 
-	if(event->type == UIChange){
-		curGrid.setPtr(curGrid.xPos, curGrid.yPos,event->change);
+	switch(event->type){
+	case UIChange:
+	case UIPlace:
+	case UIDelete:
+		curGrid.setPtr(curGrid.xPos, curGrid.yPos,*event);
+		break;
+	default: break;
 	}
 
 	for(int i = 0; i < page->length; i++) {
@@ -119,6 +138,9 @@ void RenderUI() {
 		}
 	}else if(xJPress){
 		event.type = UIPlace;
+		if(zPress){
+			event.type = UIDelete;
+		}
 	}
 
 	switch(page){
