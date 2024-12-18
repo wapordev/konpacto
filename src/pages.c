@@ -81,6 +81,17 @@ void InitializePages(){
 	ChangeFont(fontList[0]);
 }
 
-UIPage projectPage = {0,2,(UIGrid[2]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont)} };
+int fileName[15] = {1};
+
+
+void SetFile(int xPos, int yPos, int change){
+
+}
+
+void DrawFile(int xPos, int yPos, bool selected){
+	PokeSelected(65+xPos,fileName[xPos],selected,2,3,1,0);
+}
+
+UIPage projectPage = {0,3,(UIGrid[3]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(15,1,&SetFile,&DrawFile)} };
 
 

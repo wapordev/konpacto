@@ -37,6 +37,16 @@ void PokeScreen(int pos, int chr, int bg, int fg) {
     textmodeGrid[pos].fg_color = fg;
 }
 
+void PokeSelected(int pos, int chr, bool selected, int col0, int col1, int col2, int col3) {
+    int bg_color = col0;
+    int fg_color = col1;
+    if(selected){
+        bg_color = col2;
+        fg_color = col3;
+    }
+    PokeScreen(pos,chr,bg_color,fg_color);
+}
+
 //46
 void DrawFox(int xPos, int yPos, int col0, int col1, int col2, int col3) {
     int pos=xPos+yPos*20;

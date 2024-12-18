@@ -27,6 +27,8 @@ inline int positive_modulo(int i, int n) {
 void PageProcess(UIPage* page, UIEvent* event) {
 	
 	if(event->type == UIMove){
+		
+
 		page->index=clamp(page->index-event->vertical,0,page->length-1);
 	}
 
@@ -39,13 +41,22 @@ void PageProcess(UIPage* page, UIEvent* event) {
 	for(int i = 0; i < page->length; i++) {
 		if(i==page->index){continue;}
 		UIGrid g = page->grids[i];
-		g.drawPtr(g.xPos, g.yPos, false);
+		for(int x=0;x<g.width;x++){
+			for(int y=0;y<g.height;y++){
+				g.drawPtr(x, y, false);
+			}
+		}
 	}
-	curGrid.drawPtr(curGrid.xPos, curGrid.yPos, true);
+	for(int x=0;x<curGrid.width;x++){
+		for(int y=0;y<curGrid.height;y++){
+			curGrid.drawPtr(x, y, (x==curGrid.xPos && y==curGrid.yPos));
+		}
+	}
+	
 }
 
 void ProjectDraw(UIEvent* event) {
-	PrintColor("theme\nfont",0,1,2,1,false);
+	PrintColor("theme\nfont\nfile",0,1,2,1,false);
 
 	//Fox
 	DrawFox(7,9,0,1,2,3);
