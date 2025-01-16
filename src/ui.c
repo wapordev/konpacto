@@ -13,7 +13,7 @@ int page=0;
 
 char pageNames[5][14] = {"project","arrange","compose","track edit","operators"};
 
-char helpString[20];
+char helpString[21];
 
 int clamp(int d, int min, int max) {
   const int t = d < min ? min : d;
@@ -26,36 +26,37 @@ inline int positive_modulo(int i, int n) {
 
 void PageProcess(UIPage* page, UIEvent* event) {
 	
-	if(event->type == UIMove || event->type == UIMoveRepeat){
+	if(event->type == UIMove || event->type == UIMoveRepeat || (event->type==UIPageChange && event->horizontal==0)){
+
 		UIGrid *g = &page->grids[page->index];
 
 		g->xPos += event->horizontal;
-		g->yPos += event->vertical;
 
+		if(event->type==UIPageChange){
+			g->yPos -= event->vertical*16;
+		}else {
+			g->yPos -= event->vertical;
+
+
+
+			if((g->height<2 || event->type==UIMove) && (g->yPos < 0 || g->yPos >= g->height)){
+				page->index=clamp(page->index-event->vertical,0,page->length-1);
+			}
+			//this shouldnt happen on key repeat. ill have to make another case for this
+			if(event->type == UIMove && g->horizontalLink && (g->xPos < 0 || g->xPos >= g->width)){
+				page->index=0;
+			}
+		}
 		
-		if(g->yPos < 0 || g->yPos >= g->height){
-			page->index=clamp(page->index-event->vertical,0,page->length-1);
-		}
-		//this shouldnt happen on key repeat. ill have to make another case for this
-		if(event->type != UIMoveRepeat && g->horizontalLink && (g->xPos < 0 || g->xPos >= g->width)){
-			page->index=0;
-		}
 		g->xPos = clamp(g->xPos,0,g->width-1);
 		g->yPos = clamp(g->yPos,0,g->height-1);
 
 		
 	}
 
-	UIGrid curGrid = page->grids[page->index];
+	UIGrid* curGrid = &page->grids[page->index];
 
-	switch(event->type){
-	case UIChange:
-	case UIPlace:
-	case UIDelete:
-		curGrid.setPtr(curGrid.xPos, curGrid.yPos,*event);
-		break;
-	default: break;
-	}
+	curGrid->setPtr(curGrid->xPos, curGrid->yPos,*event);
 
 	for(int i = 0; i < page->length; i++) {
 		if(i==page->index){continue;}
@@ -66,9 +67,10 @@ void PageProcess(UIPage* page, UIEvent* event) {
 			}
 		}
 	}
-	for(int x=0;x<curGrid.width;x++){
-		for(int y=0;y<curGrid.height;y++){
-			curGrid.drawPtr(x, y, (x==curGrid.xPos && y==curGrid.yPos));
+	//arrangePage.grids[0].yPos = 7;
+	for(int x=0;x<curGrid->width;x++){
+		for(int y=0;y<curGrid->height;y++){
+			curGrid->drawPtr(x, y, (x==curGrid->xPos && y==curGrid->yPos));
 		}
 	}
 	
@@ -86,16 +88,30 @@ void ProjectDraw(UIEvent* event) {
     PageProcess(&projectPage, event);
 }
 
+int arrangeScroll = 0;
 void ArrangeDraw(UIEvent* event) {
+	PrintText("> ,11 2 3 4 5 6 7 8 jm",0,1);
 
+	for(int i=0;i<16;i++){
+		int idx = i+arrangeScroll;
+		PrintHex(idx,0,3+i,(idx/4+1)%2,(idx/4)%2);
+	}
+
+	PageProcess(&arrangePage, event);
 }
 
 void ComposeDraw(UIEvent* event) {
-
 }
 
+int trackScroll = 0;
 void TrackDraw(UIEvent* event) {
+	PrintText(",1trk    spd    len",0,1);
+	for(int i=0;i<16;i++){
+		int idx = i+trackScroll;
+		PrintHex(idx,0,3+i,(idx/4+1)%2,(idx/4)%2);
+	}
 
+	PageProcess(&trackPage, event);
 }
 
 void OperatorsDraw(UIEvent* event) {
@@ -105,17 +121,13 @@ void OperatorsDraw(UIEvent* event) {
 void RenderUI() {
 	clearGrid(2);
 
-	strcpy(helpString,"gay people rock");
-
-	PrintText(helpString,0,0);
-	PrintText(";3,2XXXXXXXXXXXXXXXXXXXX",0,0);
 	PrintText(pageNames[page],0,19);
 	PrintText(";3,2XXXXXXXXXXXXXXX;0,3pacto",0,19);
 
 	
 
-	int horizontal = IsJustPressed(0) ? -1 : (IsJustPressed(1) ? 1 : 0);
-	int vertical = IsJustPressed(2) ? -1 : (IsJustPressed(3) ? 1 : 0);
+	int horizontal = IsJustPressed(0,0) ? -1 : (IsJustPressed(1,0) ? 1 : 0);
+	int vertical = IsJustPressed(2,0) ? -1 : (IsJustPressed(3,0) ? 1 : 0);
 	int change = horizontal + vertical*16;
 
 	UIEvent event = {UINothing,horizontal,vertical,change};
@@ -123,14 +135,16 @@ void RenderUI() {
 	bool sPress = IsPressed(6);
 	bool zPress = IsPressed(4);
 	bool xPress = IsPressed(5);
-	bool xJPress = IsJustPressed(5);
+	bool xJPress = IsJustPressed(5,0);
 	
 	if(change!=0){
 		event.type = UIMove;
+		if(IsJustPressed(0,2) || IsJustPressed(1,2) || IsJustPressed(2,2) || IsJustPressed(3,2)){
+			event.type = UIMoveRepeat;
+		}
 		if (sPress){
 			event.type = UIPageChange;
-			if(IsJustPressed(0)){page--;}
-			if(IsJustPressed(1)){page++;}
+			page=clamp(page+horizontal,0,4);
 		}else if(zPress){
 
 		}else if(xPress){
@@ -150,6 +164,9 @@ void RenderUI() {
 	case 3: TrackDraw(&event); break;
 	case 4: OperatorsDraw(&event); break;
 	}
+
+	PrintText(helpString,0,0);
+	PrintText(";3,2XXXXXXXXXXXXXXXXXXXX",0,0);
 	
 	PrintText(";1,0X",15+page,19);
 }

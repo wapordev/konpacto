@@ -35,7 +35,7 @@ Uint64 previousPC = 0;
 double deltaTime = 0;
 
 int initialRepeatDelay = 350;
-int repeatDelays[6] = {150, 50, 50, 50, 50, 15};
+int repeatDelays[6] = {100, 50, 50, 50, 50, 15};
 
 //to replace with config file
 #if defined(_WIN32) || defined(_WIN64) || \
@@ -70,7 +70,7 @@ bool HandleInputs() {
     deltaTime = (double)((currentPC - previousPC)*1000 / (double)SDL_GetPerformanceFrequency() );
 
     for (int i = 0; i < 8; i++) {
-        keys[i].pressed = false;
+        keys[i].pressed = 0;
     }
 
     SDL_Event windowEvent;
@@ -83,7 +83,7 @@ bool HandleInputs() {
             for (int i = 0; i < 8; i++) {
                 KeyDef* key = &keys[i];
                 if (windowEvent.key.keysym.scancode != key->scancode) {continue;}
-                key->pressed = true;
+                key->pressed = 1;
                 key->repeatCount = 0;
                 key->repeatTimer = initialRepeatDelay;
             }
@@ -98,7 +98,7 @@ bool HandleInputs() {
             if(key->repeatTimer <= 0){
                 if(key->repeatCount<80){key->repeatCount+=1;}
                 key->repeatTimer = repeatDelays[key->repeatCount/16];
-                key->pressed = true;
+                key->pressed = 2;
             }
         }
     }
@@ -110,6 +110,11 @@ bool IsPressed(int key) {
     return (bool)SDL_GetKeyboardState(NULL)[keys[key].scancode];
 }
 
-bool IsJustPressed(int key) {
-    return keys[key].pressed;
+bool IsJustPressed(int key, int repeats) {
+    switch(repeats){
+    case 0:
+        return keys[key].pressed>0;
+    default:
+        return keys[key].pressed==repeats;
+    }
 }

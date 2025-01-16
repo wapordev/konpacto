@@ -7,4 +7,8 @@
 
 extern UIPage projectPage;
 
+extern UIPage arrangePage;
+
+extern UIPage trackPage;
+
 #endif

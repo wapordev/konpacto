@@ -4,6 +4,11 @@
 
 /* Prototypes for the functions */
 /* Sums two ints */
+extern char helpString[21];
+
+extern int arrangeScroll;
+extern int trackScroll;
+
 void RenderUI();
 
 void InitializePages();

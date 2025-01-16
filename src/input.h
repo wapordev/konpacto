@@ -8,12 +8,12 @@ bool HandleInputs();
 
 bool IsPressed(int key);
 
-bool IsJustPressed(int key);
+bool IsJustPressed(int key, int repeats);
 
 typedef struct KeyDef {
 	int scancode;
 	bool repeatable;
-	bool pressed;
+	int pressed;
 	int repeatTimer;
 	int repeatCount;
 }KeyDef;
