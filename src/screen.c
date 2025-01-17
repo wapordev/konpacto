@@ -308,7 +308,7 @@ void InitializeScreen() {
         SDL_WINDOW_SHOWN
     );
 
-    SDL_SetWindowResizable(window,true);
+    SDL_SetWindowResizable(window,false);
 
     renderer = SDL_CreateRenderer(
         window,
