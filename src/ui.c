@@ -82,6 +82,7 @@ void ProjectDraw(UIEvent* event) {
 	//Fox
 	DrawFox(7,9,0,1,2,3);
 	PrintText("kon,1pacto\n\n,0portable",6,15);
+	PrintText(",1v0.0.10",0,18);
 	PokeScreen(329,0x74,2,0);
     PokeScreen(330,0x75,2,0);
 
