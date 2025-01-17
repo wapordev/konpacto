@@ -326,6 +326,7 @@ void InitializeScreen() {
 
     clearGrid(2);
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY,"nearest",SDL_HINT_OVERRIDE);
+    SDL_SetHintWithPriority(SDL_HINT_RENDER_LOGICAL_SIZE_MODE,"overscan",SDL_HINT_OVERRIDE);
 }
 
 // Function to clean up SDL components
