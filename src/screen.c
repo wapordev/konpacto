@@ -205,13 +205,15 @@ void clearGrid(int col) {
 }
 
 void ScreenResize(int fontW, int fontH) {
+    int screenW = fontW*20;
+    int screenH = fontH*20;
     if(screen != NULL){SDL_FreeSurface(screen);}
     if(texture != NULL){SDL_DestroyTexture(texture);}
-    //SDL_RenderSetLogicalSize(renderer, fontW, fontH);
+    //SDL_RenderSetLogicalSize(renderer, screenW, screenH);
     screen = SDL_CreateRGBSurface(
         0,
-        fontW,
-        fontH,
+        screenW,
+        screenH,
         DEPTH,
         0, 0, 0, 0
     );
@@ -219,8 +221,8 @@ void ScreenResize(int fontW, int fontH) {
         renderer,
         SDL_PIXELFORMAT_RGB565,
         SDL_TEXTUREACCESS_STREAMING,
-        fontW,
-        fontH
+        screenW,
+        screenH
     );
     SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
     SDL_FillRect(
@@ -250,7 +252,7 @@ void ChangeFont(char* fontName) {
     charWidth = font->w/16;
     charHeight = font->h/8;
 
-    ScreenResize(charWidth*20,charHeight*20);
+    ScreenResize(charWidth,charHeight);
 }
 
 void ChangeTheme(char* themeName) {
@@ -314,7 +316,7 @@ void InitializeScreen() {
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 
-    //SDL_RenderSetIntegerScale(renderer, true);
+    SDL_RenderSetIntegerScale(renderer, false);
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
