@@ -8,8 +8,8 @@
 #include "screen.h"
 
 // Window Settings
-#define WINDOW_HEIGHT 480                   // window height in pixels
-#define WINDOW_WIDTH 640                    // window width in pixels
+#define WINDOW_HEIGHT 120                   // window height in pixels
+#define WINDOW_WIDTH 160                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
 
 int charWidth = 12;
@@ -224,7 +224,7 @@ void ScreenResize(int fontW, int fontH) {
         screenW,
         screenH
     );
-    MMIYOO_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
+    SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
     SDL_FillRect(
         screen,
         &screen->clip_rect,
