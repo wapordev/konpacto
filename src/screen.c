@@ -314,7 +314,7 @@ void InitializeScreen() {
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 
-    SDL_RenderSetIntegerScale(renderer, true);
+    //SDL_RenderSetIntegerScale(renderer, true);
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -375,6 +375,6 @@ void RenderScreen() {
     dst_rect.h *= 20;
     dst_rect.x = 0;
     dst_rect.y = 0;
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
     SDL_RenderPresent(renderer);
 }
