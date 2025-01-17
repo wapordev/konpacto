@@ -8,8 +8,8 @@
 #include "screen.h"
 
 // Window Settings
-#define WINDOW_HEIGHT 120                   // window height in pixels
-#define WINDOW_WIDTH 160                    // window width in pixels
+#define WINDOW_HEIGHT 480                   // window height in pixels
+#define WINDOW_WIDTH 640                    // window width in pixels
 #define DEPTH 16                            // window depth in pixels
 
 int charWidth = 12;
@@ -27,6 +27,10 @@ SDL_Color palette[4] = {
 
 SDL_Window* window = NULL;
 SDL_Surface* screen = NULL;
+//software scaling, since the external libraries bilinear filter by default
+#ifdef MIYOO
+SDL_Surface* intermediate = NULL;
+#endif 
 SDL_Texture* texture = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface* font = NULL;
@@ -207,16 +211,12 @@ void clearGrid(int col) {
 void ScreenResize(int fontW, int fontH) {
     int screenW = fontW*20;
     int screenH = fontH*20;
+
     if(screen != NULL){SDL_FreeSurface(screen);}
     if(texture != NULL){SDL_DestroyTexture(texture);}
-    //SDL_RenderSetLogicalSize(renderer, screenW, screenH);
-    screen = SDL_CreateRGBSurface(
-        0,
-        screenW,
-        screenH,
-        DEPTH,
-        0, 0, 0, 0
-    );
+
+    #ifndef MIYOO
+    SDL_RenderSetLogicalSize(renderer, screenW, screenH);
     texture = SDL_CreateTexture(
         renderer,
         SDL_PIXELFORMAT_RGB565,
@@ -224,6 +224,24 @@ void ScreenResize(int fontW, int fontH) {
         screenW,
         screenH
     );
+    #else
+    texture = SDL_CreateTexture(
+        renderer,
+        SDL_PIXELFORMAT_RGB565,
+        SDL_TEXTUREACCESS_STREAMING,
+        480,
+        480
+    );
+
+    #endif
+    screen = SDL_CreateRGBSurface(
+        0,
+        screenW,
+        screenH,
+        DEPTH,
+        0, 0, 0, 0
+    );
+    
     SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
     SDL_FillRect(
         screen,
@@ -308,7 +326,17 @@ void InitializeScreen() {
         SDL_WINDOW_SHOWN
     );
 
-    SDL_SetWindowResizable(window,false);
+    #ifdef MIYOO
+    intermediate = SDL_CreateRGBSurface(
+        0,
+        480,
+        480,
+        DEPTH,
+        0, 0, 0, 0
+    );
+    #endif
+
+    SDL_SetWindowResizable(window,true);
 
     renderer = SDL_CreateRenderer(
         window,
@@ -372,12 +400,13 @@ void RenderScreen() {
 
     // Main loop continuation
     // Flip the backbuffer
+    #ifdef MIYOO
+    SDL_BlitScaled(screen, NULL, intermediate, NULL);
+    SDL_UpdateTexture(texture, NULL, intermediate->pixels, intermediate->pitch);
+    #else
     SDL_UpdateTexture(texture, NULL, screen->pixels, screen->pitch);
+    #endif
     SDL_RenderClear(renderer);
-    dst_rect.w *= 20;
-    dst_rect.h *= 20;
-    dst_rect.x = 0;
-    dst_rect.y = 0;
-    SDL_RenderCopy(renderer, texture, &dst_rect, &dst_rect);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
 }

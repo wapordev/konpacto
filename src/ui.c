@@ -82,9 +82,6 @@ void ProjectDraw(UIEvent* event) {
 	//Fox
 	DrawFox(7,9,0,1,2,3);
 	PrintText("kon,1pacto\n\n,0portable",6,15);
-	#ifdef SDL_VIDEO_DRIVER_MMIYOO
-	PrintText(",1miyoo!",0,18);
-	#endif
 	PokeScreen(329,0x74,2,0);
     PokeScreen(330,0x75,2,0);
 
