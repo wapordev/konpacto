@@ -224,7 +224,7 @@ void ScreenResize(int fontW, int fontH) {
         screenW,
         screenH
     );
-    SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
+    MMIYOO_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
     SDL_FillRect(
         screen,
         &screen->clip_rect,
@@ -378,6 +378,6 @@ void RenderScreen() {
     dst_rect.h *= 20;
     dst_rect.x = 0;
     dst_rect.y = 0;
-    SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
+    SDL_RenderCopy(renderer, texture, &dst_rect, &dst_rect);
     SDL_RenderPresent(renderer);
 }
