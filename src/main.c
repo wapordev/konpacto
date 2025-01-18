@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 {
     // Initialization code
     InitializeScreen();
-    //InitializeSound();
+    InitializeSound();
     InitializePages();
 
     // Main loop
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     }
     // Cleanup code
     CleanupScreen();
-    //CleanupSound();
+    CleanupSound();
 
     return EXIT_SUCCESS;
 }

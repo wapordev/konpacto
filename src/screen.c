@@ -215,7 +215,15 @@ void ScreenResize(int fontW, int fontH) {
     if(screen != NULL){SDL_FreeSurface(screen);}
     if(texture != NULL){SDL_DestroyTexture(texture);}
 
-    #ifndef MIYOO
+    #ifdef MIYOO
+    texture = SDL_CreateTexture(
+        renderer,
+        SDL_PIXELFORMAT_RGB565,
+        SDL_TEXTUREACCESS_STREAMING,
+        480,
+        480
+    );
+    #else
     SDL_RenderSetLogicalSize(renderer, screenW, screenH);
     texture = SDL_CreateTexture(
         renderer,
@@ -224,15 +232,6 @@ void ScreenResize(int fontW, int fontH) {
         screenW,
         screenH
     );
-    #else
-    texture = SDL_CreateTexture(
-        renderer,
-        SDL_PIXELFORMAT_RGB565,
-        SDL_TEXTUREACCESS_STREAMING,
-        480,
-        480
-    );
-
     #endif
     screen = SDL_CreateRGBSurface(
         0,
@@ -354,7 +353,6 @@ void InitializeScreen() {
 
     clearGrid(2);
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY,"nearest",SDL_HINT_OVERRIDE);
-    SDL_SetHintWithPriority(SDL_HINT_RENDER_LOGICAL_SIZE_MODE,"overscan",SDL_HINT_OVERRIDE);
 }
 
 // Function to clean up SDL components
