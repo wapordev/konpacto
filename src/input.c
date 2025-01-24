@@ -63,6 +63,23 @@ KeyDef keys[8] = {
     {KPTE,false,false,0,0} //Enter, play
 };
 
+bool IsScancodePressed(int key) {
+    return (bool)SDL_GetKeyboardState(NULL)[key];
+}
+
+bool IsPressed(int key) {
+    return IsScancodePressed(keys[key].scancode);
+}
+
+bool IsJustPressed(int key, int repeats) {
+    switch(repeats){
+    case 0:
+        return keys[key].pressed>0;
+    default:
+        return keys[key].pressed==repeats;
+    }
+}
+
 bool HandleInputs() {
     previousPC = currentPC;
     currentPC = SDL_GetPerformanceCounter();
@@ -78,6 +95,10 @@ bool HandleInputs() {
     {
         if (windowEvent.type == SDL_QUIT) {return true;}
         else if (windowEvent.type == SDL_KEYDOWN) {
+            if(windowEvent.key.keysym.scancode == 40 && IsScancodePressed(226))
+            {
+                ToggleFullscreen();
+            }
             if(windowEvent.key.keysym.scancode == 41){return true;}
             if(windowEvent.key.repeat){continue;}
             for (int i = 0; i < 8; i++) {
@@ -106,15 +127,3 @@ bool HandleInputs() {
     return false;
 }
 
-bool IsPressed(int key) {
-    return (bool)SDL_GetKeyboardState(NULL)[keys[key].scancode];
-}
-
-bool IsJustPressed(int key, int repeats) {
-    switch(repeats){
-    case 0:
-        return keys[key].pressed>0;
-    default:
-        return keys[key].pressed==repeats;
-    }
-}

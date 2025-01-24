@@ -35,6 +35,14 @@ SDL_Texture* texture = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Surface* font = NULL;
 
+void ToggleFullscreen() {
+    Uint32 FullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP;
+    bool IsFullscreen = SDL_GetWindowFlags(window) & FullscreenFlag;
+    SDL_SetWindowFullscreen(window, IsFullscreen ? 0 : FullscreenFlag);
+    SDL_ShowCursor(IsFullscreen);
+}
+
+
 void PokeScreen(int pos, int chr, int bg, int fg) {
     textmodeGrid[pos].character = chr;
     textmodeGrid[pos].bg_color = bg;
@@ -224,7 +232,7 @@ void ScreenResize(int fontW, int fontH) {
         480
     );
     #else
-    SDL_RenderSetLogicalSize(renderer, screenW, screenH);
+    //SDL_RenderSetLogicalSize(renderer, screenW, screenH);
     texture = SDL_CreateTexture(
         renderer,
         SDL_PIXELFORMAT_RGB565,
@@ -343,7 +351,7 @@ void InitializeScreen() {
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 
-    SDL_RenderSetIntegerScale(renderer, false);
+    //SDL_RenderSetIntegerScale(renderer, true);
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -366,6 +374,24 @@ void CleanupScreen() {
 }
 
 void RenderScreen() {
+
+    int windowW;
+    int windowH;
+
+    SDL_GetWindowSize(window, &windowW, &windowH);
+
+    bool charsTooBig = (charWidth*20 > windowW || charHeight*20 > windowH);
+
+    //perhaps overly intensive, but.
+    if(charsTooBig){
+        SDL_RenderSetLogicalSize(renderer, windowH*((float)charWidth/(float)charHeight), windowH);
+        SDL_RenderSetIntegerScale(renderer, false);
+    }else{
+        SDL_RenderSetLogicalSize(renderer, charWidth*20, charHeight*20);
+        SDL_RenderSetIntegerScale(renderer, true);
+    }
+
+    
 
     SDL_Rect src_rect;
     src_rect.w = charWidth;

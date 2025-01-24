@@ -8,6 +8,8 @@ bool HandleInputs();
 
 void InitializeScreen();
 
+void ToggleFullscreen();
+
 void ChangeFont(char* fontName);
 
 void ChangeTheme(char* fontName);

@@ -68,7 +68,7 @@ void InitializeSound(){
 	    &data ); /*This is a pointer that will be passed to your callback*/
     if( err != paNoError ) goto error;
 
-    err = Pa_StartStream( stream );
+    //err = Pa_StartStream( stream );
 	if( err != paNoError ) goto error;
 
 	return;
