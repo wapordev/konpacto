@@ -2,6 +2,7 @@ Fonts! Maybe if this program gets used, ill make a place to store community font
 
 If not stated, font is made by the author of this program
 Precise-M by Mrmo Tarius, used with permission. License available in this folder as Precise-M_License.txt
+Monogram by Vinícius Menézio. License available in this folder as Monogram_License.txt
 mini-わくわく from miniyama. License available in this folder as mini-わくわく_License.txt
 
 Font files must be:

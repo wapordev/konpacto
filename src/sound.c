@@ -47,33 +47,56 @@ static int patestCallback( const void *inputBuffer, void *outputBuffer,
     return 0;
 }
 
+
+void CheckStuff(){
+	PaError err;
+	int numDevices;
+	numDevices = Pa_GetDeviceCount();
+	if( numDevices < 0 )
+	{
+	    printf( "ERROR: Pa_CountDevices returned 0x%x\n", numDevices );
+	    err = numDevices;
+	    goto error;
+	}
+	const   PaDeviceInfo *deviceInfo;
+	for( int i=0; i<numDevices; i++ )
+	{
+	    deviceInfo = Pa_GetDeviceInfo( i );
+	    printf(deviceInfo->name);
+	}
+	error:
+	 	printf(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+}
+
 void InitializeSound(){
 	PaError err = Pa_Initialize();
-	if( err != paNoError ) goto error;
+	CheckStuff();
+	
+	// if( err != paNoError ) goto error;
 
-    /* Open an audio I/O stream. */
-    err = Pa_OpenDefaultStream( &stream,
-	    0,          /* no input channels */
-	    2,          /* stereo output */
-	    paFloat32,  /* 32 bit floating point output */
-	    SAMPLE_RATE,
-	    256,        /* frames per buffer, i.e. the number
-	                       of sample frames that PortAudio will
-	                       request from the callback. Many apps
-	                       may want to use
-	                       paFramesPerBufferUnspecified, which
-	                       tells PortAudio to pick the best,
-	                       possibly changing, buffer size.*/
-	    patestCallback, /* this is your callback function */
-	    &data ); /*This is a pointer that will be passed to your callback*/
-    if( err != paNoError ) goto error;
+    // /* Open an audio I/O stream. */
+    // err = Pa_OpenDefaultStream( &stream,
+	//     0,          /* no input channels */
+	//     2,          /* stereo output */
+	//     paFloat32,  /* 32 bit floating point output */
+	//     SAMPLE_RATE,
+	//     256,        /* frames per buffer, i.e. the number
+	//                        of sample frames that PortAudio will
+	//                        request from the callback. Many apps
+	//                        may want to use
+	//                        paFramesPerBufferUnspecified, which
+	//                        tells PortAudio to pick the best,
+	//                        possibly changing, buffer size.*/
+	//     patestCallback, /* this is your callback function */
+	//     &data ); /*This is a pointer that will be passed to your callback*/
+    // if( err != paNoError ) goto error;
 
-    //err = Pa_StartStream( stream );
-	if( err != paNoError ) goto error;
+    // //err = Pa_StartStream( stream );
+	// if( err != paNoError ) goto error;
 
-	return;
-	error:
-		printf(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+	// return;
+	// error:
+	// 	printf(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
 }
 
 void ChangeSampleRate(){

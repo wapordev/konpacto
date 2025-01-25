@@ -36,7 +36,7 @@ void SetTheme(int xPos, int yPos, UIEvent event) {
 void DrawTheme(int xPos, int yPos, bool selected) {
 	PrintSelected(themeList[themeIndex],6,1,selected,2,3,1,0);
 
-	if(strcmp(themeList[themeIndex],"leahpacto.png")==0){
+	if(strcmp(themeList[themeIndex],"Kleahpacto.png")==0){
 		PokeScreen(187,0x46,2,1);
 		PokeScreen(188,0x5A,1,2);
 

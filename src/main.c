@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     }
     // Cleanup code
     CleanupScreen();
-    CleanupSound();
+    //CleanupSound();
 
     return EXIT_SUCCESS;
 }
