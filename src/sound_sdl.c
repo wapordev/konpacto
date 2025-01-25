@@ -29,7 +29,7 @@ void callback(void *userdata, Uint8 * stream, int len){
 			x+=.125;
 		}
 		
-		float sample = sin(x)/M_PI;
+		float sample = sin(x)/(M_PI*100);
 		pointer[i]=sample;
 		pointer[i+1]=sample;
 	}
