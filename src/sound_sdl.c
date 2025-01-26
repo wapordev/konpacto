@@ -58,7 +58,7 @@ void _InitializeSound(){
 	printf("Font could not initialize! SDL_image Error: %i\n", deviceId);
 	printf("freq: %i\n", returnedSpec.freq);
 	printf("ch: %i\n", returnedSpec.channels);
-	printf("pref form: %i\n", AUDIO_S32);
+	printf("pref form: %i\n", MIX_DEFAULT_FORMAT);
 	printf("form: %i\n", returnedSpec.format);
 	printf("samp: %i\n", returnedSpec.size);
 
