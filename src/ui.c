@@ -3,6 +3,11 @@
 #include <stdbool.h>
 #include <string.h>
 
+//TEMP!!
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+
 #include "input.h"
 #include "ui.h"
 #include "screen.h"
@@ -81,6 +86,8 @@ void ProjectDraw(UIEvent* event) {
 
 	//Fox
 	DrawFox(7,9,0,1,2,3);
+	PrintHex(MIX_DEFAULT_FORMAT>>8,0,14,0,1);
+	PrintHex(MIX_DEFAULT_FORMAT%256,2,14,0,1);
 	PrintText("kon,1pacto\n\n,0portable",6,15);
 	PokeScreen(329,0x74,2,0);
     PokeScreen(330,0x75,2,0);
