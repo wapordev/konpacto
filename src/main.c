@@ -1,12 +1,19 @@
+#define SDL_MAIN_HANDLED
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
+#include <SDL.h>
 
 #include "input.h"
 #include "sound.h"
 #include "screen.h"
 #include "ui.h"
 #include "pages.h"
+
+const float SCREEN_FPS = 30;
+const float SCREEN_TICKS = 1000 / SCREEN_FPS;
 
 
 int num = 0;
@@ -20,6 +27,8 @@ int main(int argc, char* argv[])
 
     // Main loop
     while (true) {
+        Uint64 start = SDL_GetPerformanceCounter();
+
         if(HandleInputs()){
             break;
         }
@@ -28,6 +37,12 @@ int main(int argc, char* argv[])
 
         RenderScreen();
 
+        Uint64 end = SDL_GetPerformanceCounter();
+
+        float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+        // Cap fps
+        SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
     }
     // Cleanup code
     CleanupScreen();
