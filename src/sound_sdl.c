@@ -8,32 +8,38 @@
 #include <stdint.h>
 
 #include "input.h"
+#include "sound_sdl.h"
+#include "synth.h"
 
 SDL_AudioDeviceID deviceId;
-
-
-int32_t x = 0;
 
 void callback(void *userdata, Uint8 * stream, int len){
 	if ( len == 0 )
     return;
+	
+	// Uint64 start = SDL_GetPerformanceCounter();
 
-
-	//printf("whell %i",len);
-	//exit(0);
+	AudioState* data = (AudioState*)userdata; 
 	int32_t* pointer = (int32_t*)stream;
 
 	for(int i=0; i<len/4; i+=2){
-		if(IsPressed(4)){
-			x+=20967296;
-		}else{
-			x+=10967296;
+		for(int j=0; j<200; j++){
+			data->dummy+=sin(data->phase);
 		}
-		
-		int32_t sample = x*.0625;
+		data->phase+=10967296;
+		int32_t sample = data->phase*.0625;
 		pointer[i]=sample;
 		pointer[i+1]=sample;
 	}
+
+	// Uint64 end = SDL_GetPerformanceCounter();
+
+	// float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+
+	// printf("well, it took %f",elapsedMS);
+	// exit(0);
+
 }
 
 void _InitializeSound(){
@@ -47,7 +53,7 @@ void _InitializeSound(){
 		0,
 		0,
 		callback,
-		NULL,
+		audioState,
 
 	};
 

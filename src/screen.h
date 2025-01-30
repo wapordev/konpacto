@@ -41,9 +41,9 @@ void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color, b
 void PrintText(char string[], int xPos, int yPos);
 
 typedef struct TextmodeCell {
-  int character;
-  int bg_color;
-  int fg_color;
+	int character;
+	int bg_color;
+	int fg_color;
 }TextmodeCell;
 
 #endif

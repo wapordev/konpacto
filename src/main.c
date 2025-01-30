@@ -20,33 +20,33 @@ int num = 0;
 
 int main(int argc, char* argv[])
 {
-    // Initialization code
-    InitializeScreen();
-    InitializeSound();
-    InitializePages();
+	// Initialization code
+	InitializeScreen();
+	InitializeSound();
+	InitializePages();
 
-    // Main loop
-    while (true) {
-        Uint64 start = SDL_GetPerformanceCounter();
+	// Main loop
+	while (true) {
+		Uint64 start = SDL_GetPerformanceCounter();
 
-        if(HandleInputs()){
-            break;
-        }
+		if(HandleInputs()){
+			break;
+		}
 
-        RenderUI();
+		RenderUI();
 
-        RenderScreen();
+		RenderScreen();
 
-        Uint64 end = SDL_GetPerformanceCounter();
+		Uint64 end = SDL_GetPerformanceCounter();
 
-        float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+		float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
 
-        // Cap fps
-        SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
-    }
-    // Cleanup code
-    CleanupScreen();
-    //CleanupSound();
+		// Cap fps
+		SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
+	}
+	// Cleanup code
+	CleanupScreen();
+	//CleanupSound();
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
