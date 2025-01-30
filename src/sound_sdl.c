@@ -22,14 +22,14 @@ void callback(void *userdata, Uint8 * stream, int len){
 	AudioState* data = (AudioState*)userdata; 
 	int32_t* pointer = (int32_t*)stream;
 
-	for(int i=0; i<len/4; i+=2){
+	for(int i=0; i<len/4; i+=1){
 		// for(int j=0; j<200; j++){
 		// 	data->dummy+=sin(data->phase);
 		// }
 		data->phase+=10967296;
 		int32_t sample = data->phase*.0625;
 		pointer[i]=sample;
-		pointer[i+1]=sample;
+		//pointer[i+1]=sample;
 	}
 
 	// Uint64 end = SDL_GetPerformanceCounter();
@@ -47,7 +47,7 @@ void _InitializeSound(){
 	{
 		44100,  				//44.1khz
 		AUDIO_S32,   		//32 S float
-		2,
+		1,
 		0,
 		2048, 					//buffer size
 		0,
