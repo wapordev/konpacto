@@ -14,6 +14,12 @@
 SDL_AudioDeviceID deviceId;
 SDL_AudioSpec returnedSpec;
 
+#ifdef MIYOO
+const int AUDIOFLAGS = AUDIO_S16;
+#else
+const int AUDIOFLAGS = AUDIO_S32;
+#endif
+
 void callback(void *userdata, Uint8 * stream, int len){
 	if ( len == 0 )
     return;
@@ -21,14 +27,17 @@ void callback(void *userdata, Uint8 * stream, int len){
 	// Uint64 start = SDL_GetPerformanceCounter();
 
 	AudioState* data = (AudioState*)userdata; 
-	int16_t* pointer = (int16_t*)stream;
+	int32_t* pointer = (int32_t*)stream;
 
-	for(int i=0; i<len/2; i+=2){
+	for(int i=0; i<len/4; i+=2){
 		// for(int j=0; j<200; j++){
 		// 	data->dummy+=sin(data->phase);
 		// }
-		data->phase+=10967296>>12;
-		int16_t sample = data->phase*.0625;
+		data->phase+=10967296;
+		int32_t sample = data->phase*.0625;
+		#ifdef MIYOO
+		int32_t sample>>= 16;
+		#endif
 		pointer[i]=sample;
 		pointer[i+1]=sample;
 	}
@@ -47,7 +56,7 @@ void _InitializeSound(){
 	SDL_AudioSpec idealSpec =
 	{
 		44100,  				//44.1khz
-		AUDIO_S16,   			//32 S int
+		AUDIO_S32,   			//32 S int
 		2,
 		0,
 		2048, 					//buffer size
@@ -60,7 +69,7 @@ void _InitializeSound(){
 
 	//SDL_AudioSpec returnedSpec;
 
-	deviceId = SDL_OpenAudioDevice(NULL, 0, &idealSpec, &returnedSpec, 0);
+	deviceId = SDL_OpenAudioDevice(NULL, 0, &idealSpec, NULL, 0);
 
 	printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
 	printf("Font could not initialize! SDL_image Error: %i\n", deviceId);
