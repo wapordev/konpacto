@@ -12,6 +12,7 @@
 #include "synth.h"
 
 SDL_AudioDeviceID deviceId;
+SDL_AudioSpec returnedSpec;
 
 void callback(void *userdata, Uint8 * stream, int len){
 	if ( len == 0 )
@@ -57,9 +58,10 @@ void _InitializeSound(){
 
 	};
 
-	SDL_AudioSpec returnedSpec;
+	//SDL_AudioSpec returnedSpec;
 
-	deviceId = SDL_OpenAudioDevice(NULL, 0, &idealSpec, NULL, 0);
+	deviceId = SDL_OpenAudioDevice(NULL, 0, &idealSpec, &returnedSpec, 0);
+
 	printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
 	printf("Font could not initialize! SDL_image Error: %i\n", deviceId);
 	printf("freq: %i\n", returnedSpec.freq);

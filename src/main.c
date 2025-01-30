@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 		float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
 
 		// Cap fps
-		SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
+		//SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
 	}
 	// Cleanup code
 	CleanupScreen();

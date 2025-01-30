@@ -14,6 +14,8 @@
 #include "pages.h"
 #include "file.h"
 
+#include "sound_sdl.h"
+
 int page=0;
 
 char pageNames[5][15] = {"project 0.0.13","arrange","compose","track edit","operators"};
@@ -86,8 +88,21 @@ void ProjectDraw(UIEvent* event) {
 
 	//Fox
 	DrawFox(7,9,0,1,2,3);
-	PrintHex(MIX_DEFAULT_FORMAT>>8,0,14,0,1);
-	PrintHex(MIX_DEFAULT_FORMAT%256,2,14,0,1);
+
+	char debug[21];
+
+	sprintf(debug, "%d", returnedSpec.freq);
+	PrintText(debug,0,12);
+	sprintf(debug, "%d", returnedSpec.channels);
+	PrintText(debug,0,13);
+	sprintf(debug, "%d", returnedSpec.format);
+	PrintText(debug,0,14);
+	sprintf(debug, "%d", returnedSpec.padding);
+	PrintText(debug,0,15);
+	sprintf(debug, "%d", returnedSpec.samples);
+	PrintText(debug,0,16);
+
+
 	PrintText("kon,1pacto\n\n,0portable",6,15);
 	PokeScreen(329,0x74,2,0);
     PokeScreen(330,0x75,2,0);
