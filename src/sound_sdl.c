@@ -36,7 +36,7 @@ void callback(void *userdata, Uint8 * stream, int len){
 		data->phase+=10967296;
 		int32_t sample = data->phase*.0625;
 		#ifdef MIYOO
-		int32_t sample = sample>>16;
+		sample = sample>>16;
 		#endif
 		pointer[i]=sample;
 		pointer[i+1]=sample;
