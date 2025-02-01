@@ -28,7 +28,7 @@ SDL_Color palette[4] = {
 SDL_Window* window = NULL;
 SDL_Surface* screen = NULL;
 //software scaling, since the external libraries bilinear filter by default
-#ifdef MIYOO
+#ifdef MMIYOO
 SDL_Surface* intermediate = NULL;
 #endif 
 SDL_Texture* texture = NULL;
@@ -223,7 +223,7 @@ void ScreenResize(int fontW, int fontH) {
     if(screen != NULL){SDL_FreeSurface(screen);}
     if(texture != NULL){SDL_DestroyTexture(texture);}
 
-    #ifdef MIYOO
+    #ifdef MMIYOO
     texture = SDL_CreateTexture(
         renderer,
         SDL_PIXELFORMAT_RGB565,
@@ -333,7 +333,7 @@ void InitializeScreen() {
         SDL_WINDOW_SHOWN
     );
 
-    #ifdef MIYOO
+    #ifdef MMIYOO
     intermediate = SDL_CreateRGBSurface(
         0,
         480,
@@ -424,7 +424,7 @@ void RenderScreen() {
 
     // Main loop continuation
     // Flip the backbuffer
-    #ifdef MIYOO
+    #ifdef MMIYOO
     SDL_BlitScaled(screen, NULL, intermediate, NULL);
     SDL_UpdateTexture(texture, NULL, intermediate->pixels, intermediate->pitch);
     #else
