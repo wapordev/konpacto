@@ -14,40 +14,43 @@
 SDL_AudioDeviceID deviceId;
 SDL_AudioSpec returnedSpec;
 
+#ifdef MMIYOO
+
+#define AUDIO_TYPE int16_t
+const int AUDIO_FORMAT = AUDIO_S16;
+
+
+#else
+
+#define AUDIO_TYPE int32_t
+const int AUDIO_FORMAT = AUDIO_S32;
+
+#endif
+
 void callback(void *userdata, Uint8 * stream, int len){
 	if ( len == 0 )
     return;
 	
-	// Uint64 start = SDL_GetPerformanceCounter();
-
 	AudioState* data = (AudioState*)userdata; 
-	int32_t* pointer = (int32_t*)stream;
+	AUDIO_TYPE* pointer = (AUDIO_TYPE*)stream;
 
-	for(int i=0; i<len/4; i+=2){
+	for(int i=0; i<len/sizeof(AUDIO_TYPE); i+=2){
 		data->phase+=10967296;
-		int32_t sample = (data->phase < 0 ? INT32_MIN : INT32_MAX)*.0625;
+		AUDIO_TYPE sample = (data->phase>>(sizeof(int32_t)-sizeof(AUDIO_TYPE)))*.0625;
 		pointer[i]=sample;
 		pointer[i+1]=sample;
 	}
-
-	// Uint64 end = SDL_GetPerformanceCounter();
-
-	// float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
-
-
-	// printf("well, it took %f",elapsedMS);
-	// exit(0);
-
 }
+
 
 void _InitializeSound(){
 	SDL_AudioSpec idealSpec =
 	{
 		44100,  				//44.1khz
-		AUDIO_S32,   			//32 S int
+		AUDIO_FORMAT,   			//32 S int
 		2,
 		0,
-		256, 					//buffer size
+		2048, 					//buffer size
 		0,
 		0,
 		callback,
