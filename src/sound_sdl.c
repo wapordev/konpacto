@@ -27,6 +27,8 @@ const int AUDIO_FORMAT = AUDIO_S32;
 
 #endif
 
+const int AUDIO_SHIFT = (sizeof(int32_t)-sizeof(AUDIO_TYPE))*8;
+
 void callback(void *userdata, Uint8 * stream, int len){
 	if ( len == 0 )
     return;
@@ -36,7 +38,7 @@ void callback(void *userdata, Uint8 * stream, int len){
 
 	for(int i=0; i<len/sizeof(AUDIO_TYPE); i+=2){
 		data->phase+=10967296;
-		AUDIO_TYPE sample = (data->phase>>(sizeof(int32_t)-sizeof(AUDIO_TYPE)))*.0625;
+		AUDIO_TYPE sample = (data->phase>>AUDIO_SHIFT)*.0625;
 		pointer[i]=sample;
 		pointer[i+1]=sample;
 	}
