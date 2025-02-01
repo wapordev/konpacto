@@ -25,7 +25,7 @@ void callback(void *userdata, Uint8 * stream, int len){
 
 	for(int i=0; i<len/4; i+=2){
 		data->phase+=10967296;
-		int32_t sample = data->phase*.0625;
+		int32_t sample = (data->phase < 0 ? INT32_MIN : INT32_MAX)*.0625;
 		pointer[i]=sample;
 		pointer[i+1]=sample;
 	}
