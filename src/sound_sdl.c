@@ -47,7 +47,7 @@ void _InitializeSound(){
 		AUDIO_S32,   			//32 S int
 		2,
 		0,
-		2048, 					//buffer size
+		256, 					//buffer size
 		0,
 		0,
 		callback,
