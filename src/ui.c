@@ -14,7 +14,8 @@
 #include "pages.h"
 #include "file.h"
 
-#include "sound_sdl.h"
+#include "sound.h"
+#include "synth.h"
 
 int page=0;
 
@@ -91,9 +92,9 @@ void ProjectDraw(UIEvent* event) {
 
 	char debug[21];
 
-	sprintf(debug, "%d", returnedSpec.freq);
+	sprintf(debug, "%llu", konAudio.tickrate);
 	PrintText(debug,0,12);
-	sprintf(debug, "%d", returnedSpec.channels);
+	sprintf(debug, "%llu", konAudio.frameAcumulator);
 	PrintText(debug,0,13);
 	sprintf(debug, "%d", returnedSpec.format);
 	PrintText(debug,0,14);
@@ -127,7 +128,7 @@ void ComposeDraw(UIEvent* event) {
 
 int trackScroll = 0;
 void TrackDraw(UIEvent* event) {
-	PrintText(",1trk    spd    len",0,1);
+	PrintText(",1trk    len    grv",0,1);
 	for(int i=0;i<16;i++){
 		int idx = i+trackScroll;
 		PrintHex(idx,0,3+i,(idx/4+1)%2,(idx/4)%2);

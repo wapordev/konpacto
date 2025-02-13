@@ -38,17 +38,15 @@ int initialRepeatDelay = 350;
 int repeatDelays[6] = {100, 50, 50, 50, 50, 15};
 
 //to replace with config file
-#if defined(_WIN32) || defined(_WIN64) || \
-    defined(__WIN32__) || defined(__TOS_WIN__) || \
-    defined(__WINDOWS__)
-#define KPTA 27
-#define KPTB 29
-#define KPTS 225
-#define KPTE 40
-#else
+#if MMIYOO
 #define KPTA 44
 #define KPTB 224
 #define KPTS 23
+#define KPTE 40
+#else
+#define KPTA 27
+#define KPTB 29
+#define KPTS 225
 #define KPTE 40
 #endif
 

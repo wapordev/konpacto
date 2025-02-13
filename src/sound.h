@@ -5,4 +5,6 @@ void InitializeSound();
 
 void CleanupSound();
 
+extern SDL_AudioSpec returnedSpec;
+
 #endif
