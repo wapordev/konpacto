@@ -244,7 +244,7 @@ void DrawTrackInfo(int xPos, int yPos, bool selected){
 	HexSelected(num,xPos*7+4,1,selected,2,3,1,0);
 }
 
-uint8_t lastNote=60;
+uint8_t lastNote=70;
 uint8_t lastInstrument=1;
 uint8_t lastVolume=40;
 uint8_t lastCommand=1;

@@ -5,22 +5,11 @@
 
 #include <stdint.h>
 
-uint32_t (*SynthPointer)(KonStep,void*,KonInstrument);
-
 typedef struct KonAudioFormat {
 	uint32_t frequency;
 	uint32_t packetSize;		//signed int format size in bytes
 	uint8_t channelCount;		//1 mono, 2 stereo (output channels, regardless of mix)
 }KonAudioFormat;
-
-
-
-typedef struct KonSynth {
-	SynthPointer synthPointer;
-	void* synthStruct;
-	int32_t out;				//output!
-	int32_t on;					//0 == off, 1 == held, 3 == just pressed
-}KonSynth;
 
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
 
@@ -35,6 +24,20 @@ typedef struct KonStep {
 	uint8_t param2;
 	uint8_t param3;
 }KonStep;
+
+typedef uint32_t (*GeneratorPointer)(KonStep,void*,KonInstrument);
+
+// typedef struct KonGenerator {
+// 	GeneratorPointer generatorPointer;
+// 	uint8_t numOf
+// }KonGenerator;
+
+typedef struct KonSynth {
+	GeneratorPointer generatorPointer;
+	void* generatorStruct;
+	int32_t out;				//output!
+	int32_t on;					//0 == off, 1 == held, 3 == just pressed
+}KonSynth;
 
 typedef struct KonChannel {
 	uint8_t stepIndex;
@@ -62,6 +65,7 @@ typedef struct KonArrangements {
 
 typedef struct KonAudio {
 	KonAudioFormat format;
+	double frequencies[254];
 	KonGroove grooves[255];
 	KonTrack tracks[255];				//	
 	KonArrangements arrangements[256];	//

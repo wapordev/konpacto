@@ -11,6 +11,8 @@
 #include "sound.h"
 #include "synth.h"
 
+#include "file.h"
+
 #define SAMPLE_RATE (44100)
 
 SDL_AudioDeviceID deviceId;
@@ -73,6 +75,8 @@ void InitializeSound(){
 	printf("samp: %i\n", returnedSpec.size);
 
 	konInit(&konAudio,44100,sizeof(AUDIO_TYPE),2);
+
+	SetScale(&konAudio,"assets/scales/12tet.scl");
 	SDL_PauseAudioDevice(deviceId,0);
 }
 
