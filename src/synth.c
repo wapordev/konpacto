@@ -256,6 +256,8 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 				synth->out+=rate;
 
 				synth->on=synth->on&1;
+			}else{
+				synth->out=0;
 			}
 
 			mix+=synth->out/CHANNELCOUNT;
