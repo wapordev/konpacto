@@ -4,6 +4,8 @@
 #include <string.h>
 #include "synth.h"
 
+#include "sound.h"
+
 KonAudio konAudio;
 
 const uint64_t ERRORSTEP = (uint64_t)1<<40;
@@ -40,9 +42,181 @@ void konInit(KonAudio* konAudio, int frequency, int packetSize, int channelCount
 	konAudio->format.frequency = frequency;
 	konAudio->format.packetSize = packetSize;
 	konAudio->format.channelCount = channelCount;
-	konSetBPM(konAudio,120,4,1);
+	konSetBPM(konAudio,120,4,6);
 }
 
+//0, 1 if track ended
+static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8_t trackIndex, uint8_t channelIndex){
+	if(trackIndex==0){return channelIndex==0;}
+
+	KonTrack currentTrack = konAudio->tracks[trackIndex-1];
+		
+	if(currentTrack.steps==NULL){
+		channel->synth.on=0;
+		return channelIndex==0;
+	}
+
+	if(channel->stepAccumulator == channel->stepLength){
+
+
+
+		//first track continues, others loop
+		if(channel->stepIndex>currentTrack.length){
+			if(channelIndex==0){
+				return 1;
+			}else{
+				channel->stepIndex=0;
+			}
+		}
+
+		KonStep currentStep = currentTrack.steps[channel->stepIndex];
+
+		//STEP PROCESSING
+
+		if(currentStep.command){
+			channel->synthData.command = currentStep.command;
+			channel->synthData.param1 = currentStep.param1;
+			channel->synthData.param2 = currentStep.param2;
+			channel->synthData.param3 = currentStep.param3;
+		}
+
+		if(currentStep.instrument){
+			channel->synthData.instrument = currentStep.instrument;
+
+			//TO DO, SYNTH INIT
+		}
+
+		if(currentStep.velocity){
+			channel->synthData.velocity = currentStep.velocity;
+		}
+
+		if(currentStep.note!=0){
+			if(currentStep.note == 255){
+				channel->synth.on =  0;
+			}else{
+				channel->synth.on =  3;
+				channel->synthData.note = currentStep.note;
+			}
+		}
+
+		channel->stepIndex++;
+		channel->stepAccumulator=1;
+		channel->stepLength=6; //replace with groove later
+
+	}else{
+		channel->stepAccumulator++;
+	}
+
+	return 0;
+}
+
+void konStopInternal(KonAudio* konAudio){
+	konAudio->playing=0;
+	for(int i=0;i<CHANNELCOUNT;i++){
+		KonChannel* channel = &konAudio->channels[i];
+
+		channel->synth.on=0;
+	}
+}
+
+void konStop(KonAudio* konAudio){
+	lockAudio();
+	konStopInternal(konAudio);
+	unlockAudio();
+}
+
+void konResetChannels(KonAudio* konAudio){
+	for(int i=0;i<CHANNELCOUNT;i++){
+		KonChannel* channel = &konAudio->channels[i];
+
+		channel->stepIndex=0;
+		channel->stepAccumulator=0;
+		channel->stepLength=0;
+	}
+}
+
+void konStart(KonAudio* konAudio, uint8_t arrangeIndex){
+	lockAudio();	//ensure no conflicts. future proofing
+
+	konAudio->arrangeIndex=arrangeIndex;
+
+	konResetChannels(konAudio);
+
+	konAudio->frameAcumulator=0;
+	konAudio->playing=1;
+
+	unlockAudio();
+}
+
+uint8_t konArrangementIsEmpty(KonArrangements* arrangement){
+	uint8_t isEmpty = 1;
+	for(int i=0;i<CHANNELCOUNT;i++){
+
+		uint8_t trackIndex = arrangement->trackIndexes[i];
+		if(trackIndex){
+			isEmpty=0;
+			break;
+		}
+
+	}
+
+	return isEmpty;
+}
+
+
+static inline void sequenceProcess(KonAudio* konAudio){
+	konAudio->frameAcumulator += ERRORSTEP;
+	if(konAudio->frameAcumulator<=konAudio->tickrate){return;}
+
+	konAudio->frameAcumulator -= konAudio->tickrate;
+
+	KonArrangements arrangement = konAudio->arrangements[konAudio->arrangeIndex];
+
+	uint8_t arrangementEnded = 0;
+
+	for(int i=0;i<CHANNELCOUNT;i++){
+		uint8_t trackIndex = arrangement.trackIndexes[i];
+		KonChannel* channel = &konAudio->channels[i];
+
+		uint8_t result = channelTick(konAudio, channel, trackIndex, i);
+
+		arrangementEnded=arrangementEnded||result;
+	}
+
+	if(arrangementEnded){
+
+		uint8_t jump = arrangement.jumpIndex;
+
+		uint8_t stopping = 0;
+
+		if(jump){
+			konAudio->arrangeIndex=jump-1;
+			arrangement = konAudio->arrangements[konAudio->arrangeIndex];
+			if( konArrangementIsEmpty(&arrangement) ){
+				stopping=1;
+			}
+		}else{
+			if(konAudio->arrangeIndex==255){
+				stopping=1;
+			}else{
+				konAudio->arrangeIndex+=1;
+			}
+		}
+
+		if(stopping){
+			konStopInternal(konAudio);
+		}else{
+			konResetChannels(konAudio);
+			arrangement = konAudio->arrangements[konAudio->arrangeIndex];
+			for(int i=0;i<CHANNELCOUNT;i++){
+				uint8_t trackIndex = arrangement.trackIndexes[i];
+				KonChannel* channel = &konAudio->channels[i];
+
+				channelTick(konAudio, channel, trackIndex, i);
+			}
+		}
+	}
+}
 
 void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	if ( len == 0 )
@@ -57,21 +231,31 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	
 
 	for(int i=0; i<len/packetSize; i+=channelCount){
-		KonSynth* synth = &konAudio->channels[0].synth;
 
-		konAudio->frameAcumulator += ERRORSTEP;
-		if(konAudio->frameAcumulator>konAudio->tickrate){
-			konAudio->frameAcumulator -= konAudio->tickrate;
-
-			synth->on = !synth->on;
-			
+		if(konAudio->playing){
+			sequenceProcess(konAudio);
 		}
 
 
+		int32_t mix = 0;
 
-		synth->phase+=10967296;
+		for(int i=0;i<CHANNELCOUNT;i++){
+			KonChannel* channel = &konAudio->channels[i];
+			KonSynth* synth = &channel->synth;
+			
+			//SYNTH HANDLING
+			if(synth->on){
+				synth->out+=10967296;
 
-		int32_t sample = synth->on ? synth->phase : 0;
+				channel->synth.on=channel->synth.on&1;
+			}
+
+			mix+=synth->out/CHANNELCOUNT;
+		}
+
+		
+
+		int32_t sample = mix;
 		
 		int32_t sampleLeft = sample*.0625;
 		int32_t sampleRight = sampleLeft;

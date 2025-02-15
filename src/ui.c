@@ -96,13 +96,8 @@ void ProjectDraw(UIEvent* event) {
 	PrintText(debug,0,12);
 	sprintf(debug, "%llu", konAudio.frameAcumulator);
 	PrintText(debug,0,13);
-	sprintf(debug, "%d", returnedSpec.format);
+	sprintf(debug, "%u", konAudio.arrangeIndex);
 	PrintText(debug,0,14);
-	sprintf(debug, "%d", returnedSpec.padding);
-	PrintText(debug,0,15);
-	sprintf(debug, "%d", returnedSpec.samples);
-	PrintText(debug,0,16);
-
 
 	PrintText("kon,1pacto\n\n,0portable",6,15);
 	PokeScreen(329,0x74,2,0);
@@ -155,6 +150,7 @@ void RenderUI() {
 
 	UIEvent event = {UINothing,horizontal,vertical,change};
 
+	bool eJPress = IsJustPressed(7,0);
 	bool sPress = IsPressed(6);
 	bool zPress = IsPressed(4);
 	bool xPress = IsPressed(5);
@@ -186,6 +182,14 @@ void RenderUI() {
 	case 2: ComposeDraw(&event); break;
 	case 3: TrackDraw(&event); break;
 	case 4: OperatorsDraw(&event); break;
+	}
+
+	if (eJPress){
+		if(konAudio.playing){
+			konStop(&konAudio);
+		}else{
+			konStart(&konAudio,arrangeScroll+arrangePage.grids[0].yPos);
+		}
 	}
 
 	PrintText(helpString,0,0);

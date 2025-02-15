@@ -28,6 +28,14 @@ const int AUDIO_FORMAT = AUDIO_S32;
 
 #endif
 
+void lockAudio(){
+	SDL_LockAudioDevice(deviceId);
+}
+
+void unlockAudio(){
+	SDL_UnlockAudioDevice(deviceId);
+}
+
 void callback(void *userdata, Uint8 * stream, int len){
 	if ( len == 0 )
     return;
