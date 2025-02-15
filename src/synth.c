@@ -245,13 +245,16 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			
 			//SYNTH HANDLING
 			if(synth->on){
+
+				if(synth->on==3)synth->out=0;
+
 				double freq = konAudio->frequencies[channel->synthData.note-1];
 
 				uint32_t rate = freq*((double)UINT32_MAX/(double)konAudio->format.frequency);
 
 				synth->out+=rate;
 
-				channel->synth.on=channel->synth.on&1;
+				synth->on=synth->on&1;
 			}
 
 			mix+=synth->out/CHANNELCOUNT;
