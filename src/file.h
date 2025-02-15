@@ -3,6 +3,10 @@
 
 #include "synth.h"
 
+#include <stdbool.h>
+
+int clamp(int d, int min, int max);
+
 char* IntToChar(int BMPstring[], char* out, int length);
 
 char* CharToBMP(char* string, bool filter);

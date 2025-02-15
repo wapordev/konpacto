@@ -5,6 +5,7 @@
 #include "synth.h"
 
 #include "sound.h"
+#include "file.h"
 
 KonAudio konAudio;
 
@@ -248,7 +249,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 				if(synth->on==3)synth->out=0;
 
-				double freq = konAudio->frequencies[channel->synthData.note-1];
+				double freq = konAudio->frequencies[clamp(channel->synthData.note-1,0,253)];
 
 				uint32_t rate = freq*((double)UINT32_MAX/(double)konAudio->format.frequency);
 

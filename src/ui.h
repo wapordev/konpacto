@@ -13,8 +13,6 @@ void RenderUI();
 
 void InitializePages();
 
-int clamp(int d, int min, int max);
-
 int positive_modulo(int i, int n);
 
 typedef enum {

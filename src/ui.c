@@ -23,11 +23,6 @@ char pageNames[5][15] = {"project 0.0.13","arrange","compose","track edit","oper
 
 char helpString[21];
 
-int clamp(int d, int min, int max) {
-  const int t = d < min ? min : d;
-  return t > max ? max : t;
-}
-
 inline int positive_modulo(int i, int n) {
     return (i % n + n) % n;
 }
