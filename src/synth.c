@@ -5,7 +5,6 @@
 #include "synth.h"
 
 #include "sound.h"
-#include "file.h"
 
 KonAudio konAudio;
 
@@ -179,9 +178,8 @@ static inline void sequenceProcess(KonAudio* konAudio){
 		uint8_t trackIndex = arrangement.trackIndexes[i];
 		KonChannel* channel = &konAudio->channels[i];
 
-		uint8_t result = channelTick(konAudio, channel, trackIndex, i);
-
-		arrangementEnded=arrangementEnded||result;
+		uint8_t arrangementEnded = channelTick(konAudio, channel, trackIndex, i);
+		if(arrangementEnded){break;}
 	}
 
 	if(arrangementEnded){
@@ -249,7 +247,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 				if(synth->on==3)synth->out=0;
 
-				double freq = konAudio->frequencies[clamp(channel->synthData.note-1,0,253)];
+				double freq = konAudio->frequencies[channel->synthData.note-1];
 
 				uint32_t rate = freq*((double)UINT32_MAX/(double)konAudio->format.frequency);
 

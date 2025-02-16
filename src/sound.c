@@ -16,7 +16,6 @@
 #define SAMPLE_RATE (44100)
 
 SDL_AudioDeviceID deviceId;
-SDL_AudioSpec returnedSpec;
 
 #ifdef MMIYOO
 
@@ -60,19 +59,21 @@ void InitializeSound(){
 
 	};
 
-	//SDL_AudioSpec returnedSpec;
+	SDL_AudioSpec returnedSpec;
 
 	deviceId = SDL_OpenAudioDevice(NULL, 0, &idealSpec, NULL, 0);
 
-	returnedSpec = idealSpec;
+	char* error = SDL_GetError();
+	if(error[0]!='\0'){
+		printf("Audio device error: %s\n",error);
+	}
+	
 
-	printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
-	printf("Font could not initialize! SDL_image Error: %i\n", deviceId);
-	printf("freq: %i\n", returnedSpec.freq);
-	printf("ch: %i\n", returnedSpec.channels);
-	printf("pref form: %i\n", MIX_DEFAULT_FORMAT);
-	printf("form: %i\n", returnedSpec.format);
-	printf("samp: %i\n", returnedSpec.size);
+	returnedSpec = idealSpec;
+	
+	printf("Frequency: %i\n", returnedSpec.freq);
+	printf("Number of channels: %i\n", returnedSpec.channels);
+	printf("Audio format: %i\n", returnedSpec.format);
 
 	konInit(&konAudio,44100,sizeof(AUDIO_TYPE),2);
 

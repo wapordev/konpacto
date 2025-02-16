@@ -174,7 +174,6 @@ char** ListPath(char* path, char* filter, int* outLength){
 	{
 		goto bail;
 	}
-
 	
 	char** nameListPtr;
   	nameListPtr = (char**) malloc(dir.n_files * sizeof(int*));
@@ -204,10 +203,11 @@ char** ListPath(char* path, char* filter, int* outLength){
 	}
 	tinydir_close(&dir);
 	*outLength = y;
+	printf("Listing %s for %s, found %i entries\n",path,filter,y);
 	return nameListPtr;
 
 	bail:
-	PrintText("failed to load!",0,5);
+	printf("failed to load: %s\nEnsure that the path < 260 characters, and includes only ASCII.\n",path);
 	return NULL;
 }
 

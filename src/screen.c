@@ -274,6 +274,7 @@ void ChangeFont(char* fontName) {
         printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
     }
+
     charWidth = font->w/16;
     charHeight = font->h/8;
 
