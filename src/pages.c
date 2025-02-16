@@ -13,6 +13,8 @@
 
 #define CreateGrid(width, height, setPtr, drawPtr)  {width, height, 0, 0, width>1 && height>1, setPtr, drawPtr}
 
+uint8_t noteSymbols[12]={28,53,29,54,30,31,55,32,56,26,52,27};
+uint8_t noteNames[254][2];
 
 int themeCount=0;
 int themeIndex=0;
@@ -88,6 +90,19 @@ void InitializePages(){
 	ChangeTheme(themeList[themeIndex]);
 	fontList = ListPath("assets/fonts",".BMP",&fontCount);
 	ChangeFont(fontList[0]);
+
+	uint8_t octaveNumber = 0;
+	uint8_t notesThisOctave=0;
+	for(int i=0;i<254;i++){
+		char* noteName = noteNames[i];
+
+		noteName[0]=noteSymbols[notesThisOctave];
+		noteName[1]=15+octaveNumber;
+
+		notesThisOctave++;
+		octaveNumber+=notesThisOctave/12;
+		notesThisOctave%=12;
+	}
 }
 
 int noFile[15]={0x2E,0x27,0x27,0x1A,0x26,0x1E,0x1D,0,0x1F,0x22,0x25,0x1E,0x5};
@@ -246,7 +261,7 @@ void DrawTrackInfo(int xPos, int yPos, bool selected){
 
 uint8_t lastNote=70;
 uint8_t lastInstrument=1;
-uint8_t lastVolume=40;
+uint8_t lastVolume=255;
 uint8_t lastCommand=1;
 uint8_t lastParam=0;
 void SetTrackData(int xPos, int yPos, UIEvent event){
@@ -261,13 +276,22 @@ void SetTrackData(int xPos, int yPos, UIEvent event){
 	if(event.type == UIChange && event.change){
 		int new = step[xPos];
 		if(xPos==0){
+
 			if(step[xPos]==0 && event.change<0){
 				new = 255;
 			}else if(step[xPos]==255){
-				if(event.change>0){new = 0;}
+				if(event.change>0){
+					new = 0+event.change;
+				}else if(event.change<0){
+					new = 255+event.change;
+				}
 			}else{
-				new+=event.change;
+				new=clamp(new+event.horizontal+event.vertical*12,1,254);
 			}
+			//printf("freq: %f\n",konAudio.frequencies[new-1]);
+		}else if (xPos==2){
+			new=clamp(new+event.horizontal,(new/16)*16,(new/16+1)*16);
+			new+=event.vertical*16;
 		}else{
 			new+=event.change;
 		}
@@ -371,13 +395,20 @@ void DrawTrackData(int xPos, int yPos, bool selected){
 		if(num==255){
 			num=0;
 			strcpy(out,"--");
+		}else if(num){
+			num--;
+			uint8_t color1 = selected ? 1 : 2;
+			uint8_t color2 = selected ? 0 : 3;
+			PokeScreen(trackDataWidths[xPos]+2+(yPos+3)*20,noteNames[num][0],color1,color2);
+			PokeScreen(trackDataWidths[xPos]+3+(yPos+3)*20,noteNames[num][1],color1,color2);
+			return;
 		}
 	}
 
 	if(num==0 && !(commandSet && xPos>3)){
 		PrintSelected(out,trackDataWidths[xPos]+2,yPos+3,selected,2,3,1,0);
 	}else{
-		if(xPos==1 || xPos==2){num--;}
+		if(xPos==1){num--;}
 		HexSelected(num,trackDataWidths[xPos]+2,yPos+3,selected,2,3,1,0);
 	}
 	

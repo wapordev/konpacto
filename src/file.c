@@ -36,7 +36,10 @@ int referenceNote = 69;
 
 void SetScale(KonAudio* konAudio, const char* scalePath){
 	SDL_RWops* rwops = SDL_RWFromFile(scalePath, "r");
-	if(!rwops){return;}
+	if(!rwops){
+		printf("failed to open %s",scalePath);
+		return;
+	}
 
 	const int64_t dataSize = SDL_RWsize(rwops);
 
@@ -46,9 +49,14 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 	data[dataSize+2] = '\n';
 	data[dataSize+2] = '\0';
 
-	SDL_RWread(rwops, data, dataSize, 1);
-
+	int64_t readAmount = SDL_RWread(rwops, data, dataSize, 1);
 	SDL_RWclose(rwops);
+
+	if(readAmount==0){
+		printf("failed to read %s",scalePath);
+		free(data);
+		return;
+	}
 
 	bool ignoreLine=false;
 	bool ignoredDescription=false;
@@ -62,6 +70,11 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 
 	//ouch
 	for(int i=0; i<dataSize; i++){
+
+		if(scaleSize && scaleNotes[scaleSize-1]){
+			break;
+		}
+
 		char currentChar = data[i];
 		if(currentChar>127){continue;}
 		if(currentChar=='\n'){
@@ -84,7 +97,7 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 
 		if(!scaleSize){
 			scaleSize = strtol(&data[i],NULL,10);
-			scaleNotes=malloc(sizeof(double)*scaleSize);
+			scaleNotes=calloc(scaleSize,sizeof(double));
 			ignoreLine=true;
 		}else {
 
@@ -113,15 +126,14 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 
 	lockAudio(); //messing with audio internals
 
-	for(int i=0; i<scaleSize; i++){
-		printf("%f\n",scaleNotes[i]);
+	if(scaleNotes[scaleSize-1]==0){
+		printf("not enough notes in %s!\n",scalePath);
+		goto bail;
 	}
-
 
 	konAudio->frequencies[referenceNote]=referenceFrequency;
 	scaleIndex=0;
 
-	printf("frequencies!!: \n\n");
 	int lastReference = referenceNote;
 	for(int i=referenceNote+1; i<254; i++){
 		konAudio->frequencies[i]=konAudio->frequencies[lastReference]*scaleNotes[scaleIndex];
@@ -147,20 +159,21 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 
 		if(scaleIndex<0){
 			lastReference=i;
-			scaleIndex=scaleSize-2;
+			scaleIndex=scaleSize-1;
 		}
 		scaleIndex--;
 	}
 
-
-	for(int i=0; i<254; i++){
-		printf("%f\n",konAudio->frequencies[i]);
-	}
+	printf("Reference frequency: %f\n",referenceFrequency);
+	printf("Reference note: %i\n",referenceNote);
+	printf("Loaded scale %s, %i notes read\n",scalePath,scaleSize);
+	
+	bail:
 
 	free(scaleNotes);
-	
 
 	unlockAudio();
+	
 }
 
 //

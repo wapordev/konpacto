@@ -63,7 +63,7 @@ void InitializeSound(){
 
 	deviceId = SDL_OpenAudioDevice(NULL, 0, &idealSpec, NULL, 0);
 
-	char* error = SDL_GetError();
+	const char* error = SDL_GetError();
 	if(error[0]!='\0'){
 		printf("Audio device error: %s\n",error);
 	}

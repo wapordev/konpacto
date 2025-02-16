@@ -178,7 +178,7 @@ static inline void sequenceProcess(KonAudio* konAudio){
 		uint8_t trackIndex = arrangement.trackIndexes[i];
 		KonChannel* channel = &konAudio->channels[i];
 
-		uint8_t arrangementEnded = channelTick(konAudio, channel, trackIndex, i);
+		arrangementEnded = channelTick(konAudio, channel, trackIndex, i);
 		if(arrangementEnded){break;}
 	}
 
@@ -236,7 +236,8 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 		}
 
 
-		int32_t mix = 0;
+		int32_t mixLeft = 0;
+		int32_t mixRight = 0;
 
 		for(int i=0;i<CHANNELCOUNT;i++){
 			KonChannel* channel = &konAudio->channels[i];
@@ -258,15 +259,16 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 				synth->out=0;
 			}
 
-			mix+=synth->out/CHANNELCOUNT;
+
+			double volumeLeft=(channel->synthData.velocity/16)/15.0;
+			double volumeRight=(channel->synthData.velocity%16)/15.0;
+
+			mixLeft+=synth->out/CHANNELCOUNT*volumeLeft;
+			mixRight+=synth->out/CHANNELCOUNT*volumeRight;
 		}
-
 		
-
-		int32_t sample = mix;
-		
-		int32_t sampleLeft = sample*.0625;
-		int32_t sampleRight = sampleLeft;
+		int32_t sampleLeft = mixLeft*.0625;
+		int32_t sampleRight = mixRight*.0625;
 
 		if(packetSize==4){
 			pointer32[i]=sampleLeft;

@@ -88,11 +88,11 @@ void ProjectDraw(UIEvent* event) {
 	char debug[21];
 
 	sprintf(debug, "%llu", konAudio.tickrate);
-	PrintText(debug,0,12);
+	PrintText(debug,0,15);
 	sprintf(debug, "%llu", konAudio.frameAcumulator);
-	PrintText(debug,0,13);
+	PrintText(debug,0,16);
 	sprintf(debug, "%u", konAudio.arrangeIndex);
-	PrintText(debug,0,14);
+	PrintText(debug,0,17);
 
 	PrintText("kon,1pacto\n\n,0portable",6,15);
 	PokeScreen(329,0x74,2,0);
