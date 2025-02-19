@@ -284,10 +284,4 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			pointer16[i+1]=sampleRight;
 		}
 	}
-
-	uint64_t end = SDL_GetPerformanceCounter();
-
-	float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
-
-	printf("elapsed time: %f\n",elapsedMS);
 }

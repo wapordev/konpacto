@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <math.h>
 #include <SDL.h>
 
@@ -27,7 +28,7 @@ int main(int argc, char* argv[])
 
 	// Main loop
 	while (true) {
-		//Uint64 start = SDL_GetPerformanceCounter();
+		uint64_t start = SDL_GetPerformanceCounter();
 
 		if(HandleInputs()){
 			break;
@@ -43,6 +44,12 @@ int main(int argc, char* argv[])
 
 		// Cap fps
 		//SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
+
+		uint64_t end = SDL_GetPerformanceCounter();
+
+		float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+		printf("elapsed time: %f\n",elapsedMS);
 
 	}
 	// Cleanup code
