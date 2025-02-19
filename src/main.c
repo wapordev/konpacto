@@ -13,7 +13,7 @@
 #include "ui.h"
 #include "pages.h"
 
-const float SCREEN_FPS = 30;
+const float SCREEN_FPS = 5;
 const float SCREEN_TICKS = 1000 / SCREEN_FPS;
 
 
@@ -38,18 +38,12 @@ int main(int argc, char* argv[])
 
 		RenderScreen();
 
-		//Uint64 end = SDL_GetPerformanceCounter();
-
-		//float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
-
-		// Cap fps
-		//SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
-
 		uint64_t end = SDL_GetPerformanceCounter();
 
 		float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
 
-		printf("elapsed time: %f\n",elapsedMS);
+		// Cap fps
+		SDL_Delay(floor(SCREEN_TICKS - elapsedMS));
 
 	}
 	// Cleanup code
