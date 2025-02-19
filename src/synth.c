@@ -227,7 +227,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	int32_t* pointer32 = (int32_t*)stream;
 	int16_t* pointer16 = (int16_t*)stream;
 
-	
+	double freqMultiplier = ((double)UINT32_MAX/(double)konAudio->format.frequency);	
 
 	for(int i=0; i<len/packetSize; i+=channelCount){
 
@@ -250,7 +250,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 				double freq = konAudio->frequencies[channel->synthData.note-1];
 
-				uint32_t rate = freq*((double)UINT32_MAX/(double)konAudio->format.frequency);
+				uint32_t rate = freq*freqMultiplier;
 
 				synth->out+=rate;
 
