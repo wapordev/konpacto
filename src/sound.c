@@ -51,7 +51,7 @@ void InitializeSound(){
 		AUDIO_FORMAT,   			//32 S int
 		2,
 		0,
-		8192, 					//buffer size
+		1024, 					//buffer size
 		0,
 		0,
 		callback,
