@@ -210,7 +210,8 @@ void DrawArrange(int xPos, int yPos, bool selected){
 
 	if (num) {
 		num--;
-		HexSelected(num,xPos*2+2,yPos+3,selected,2,3,1,0);
+		int oddColumn = xPos%2;
+		HexSelected(num,xPos*2+2,yPos+3,selected,2+oddColumn,3-oddColumn,1,0);
 	} else {
 		PrintSelected(". ",xPos*2+2,yPos+3,selected,2,3,1,0);
 	}
@@ -409,7 +410,15 @@ void DrawTrackData(int xPos, int yPos, bool selected){
 		PrintSelected(out,trackDataWidths[xPos]+2,yPos+3,selected,2,3,1,0);
 	}else{
 		if(xPos==1){num--;}
-		HexSelected(num,trackDataWidths[xPos]+2,yPos+3,selected,2,3,1,0);
+
+		int oddColumn = 1;
+
+		if(xPos>3){
+			oddColumn = xPos%2;
+		}
+
+
+		HexSelected(num,trackDataWidths[xPos]+2,yPos+3,selected,3-oddColumn,2+oddColumn,1,0);
 	}
 	
 }

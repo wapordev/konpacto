@@ -42,4 +42,4 @@ Extra symbols for  8x8  can be found in preciseDm.bmp
 Extra symbols for 12x12 can be found in squircle.bmp
 Extra symbols for 24x24 can be found in precisem3x.bmp
 
-The amazing conversion tool https://stmn.itch.io/font2bitmap by stmn can be used to 
+A conversion tool https://stmn.github.io/font2bitmap/ by stmn can be used to 
