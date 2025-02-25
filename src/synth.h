@@ -12,7 +12,7 @@ typedef struct KonAudioFormat {
 }KonAudioFormat;
 
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
-
+	char selectedSynth[64];
 }KonInstrument;
 
 typedef struct KonStep {
@@ -25,26 +25,17 @@ typedef struct KonStep {
 	uint8_t param3;
 }KonStep;
 
-typedef uint32_t (*GeneratorPointer)(KonStep,void*,KonInstrument);
-
 // typedef struct KonGenerator {
 // 	GeneratorPointer generatorPointer;
 // 	uint8_t numOf
 // }KonGenerator;
 
-typedef struct KonSynth {
-	GeneratorPointer generatorPointer;
-	void* generatorStruct;
-	int32_t out;				//output!
-	int32_t on;					//0 == off, 1 == held, 3 == just pressed
-}KonSynth;
-
 typedef struct KonChannel {
 	uint8_t stepIndex;
 	uint8_t stepAccumulator;		//if accum == length, play next step
 	uint8_t stepLength;				//set by groove after current step played
-	KonStep synthData;				
-	KonSynth synth;					//synth instance created from instrument index
+	int32_t on;
+	KonStep synthData;							//synth instance created from instrument index
 }KonChannel;
 
 typedef struct KonGroove {			//list of ticks per step.
@@ -68,6 +59,7 @@ typedef struct KonAudio {
 	double frequencies[254];
 	KonGroove grooves[255];
 	KonTrack tracks[255];				//	
+	KonInstrument instruments[255];
 	KonArrangements arrangements[256];	//
 	KonChannel channels[CHANNELCOUNT];	//channel data
 	uint64_t tickrate;					//Unsigned Fixed24_40 calculated by some method, number of frames (including decimal) per tick

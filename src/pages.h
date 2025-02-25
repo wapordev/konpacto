@@ -11,4 +11,6 @@ extern UIPage arrangePage;
 
 extern UIPage trackPage;
 
+extern UIPage operatorPage;
+
 #endif

@@ -12,6 +12,7 @@
 #include "screen.h"
 #include "ui.h"
 #include "pages.h"
+#include "lua.h"
 
 const float SCREEN_FPS = 30;
 const float SCREEN_TICKS = 1000 / SCREEN_FPS;
@@ -22,9 +23,11 @@ int num = 0;
 int main(int argc, char* argv[])
 {
 	// Initialization code
+	InitializeLua();
 	InitializeScreen();
 	InitializeSound();
 	InitializePages();
+	
 
 	// Main loop
 	while (true) {
@@ -54,6 +57,7 @@ int main(int argc, char* argv[])
 	}
 	// Cleanup code
 	CleanupScreen();
+	StopLua();
 	//CleanupSound();
 
 	return EXIT_SUCCESS;

@@ -8,7 +8,7 @@ SOURCES = main.c
 HEADLESS = -Wl,--subsystem,windows
 
 
-KONPACTO_FILES = src/screen.c src/input.c src/pages.c src/file.c src/ui.c src/main.c src/sound.c src/synth.c src/sequence.c
+KONPACTO_FILES = src/lua.c src/screen.c src/input.c src/pages.c src/file.c src/ui.c src/main.c src/sound.c src/synth.c src/sequence.c
 
 KONPACTO_INCLUDES = -I../lua/5.1.5/include -I../tinydir-1.2.6 -I../SDL2-2.30.9/x86_64-w64-mingw32/include/SDL2 -I../SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2 -I../SDL2_mixer-2.8.0/x86_64-w64-mingw32/include/SDL2 -I../portaudio
 

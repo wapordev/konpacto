@@ -128,7 +128,25 @@ void TrackDraw(UIEvent* event) {
 }
 
 void OperatorsDraw(UIEvent* event) {
+	PrintText(",1inst    name\nsynth",0,1);
 
+	PrintText(",1len    spd",1,6);
+
+	for(int i=0;i<20;i++){
+		PlaceScreen(i,5,0x3c,0,2);
+	}
+	PlaceScreen(0,5,0x4a,0,2);
+	PlaceScreen(19,5,0x4d,0,2);
+
+	for(int x=1;x<19;x++){
+		for(int y=8;y<17;y++){
+			PlaceScreen(x,y,0,0,3);
+		}
+	}
+	PlaceScreen(1,8,0x6a,2,0); 
+	PlaceScreen(18,8,0x6b,2,0); 
+
+	PageProcess(&operatorPage, event);
 }
 
 void RenderUI() {

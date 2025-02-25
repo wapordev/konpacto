@@ -11,6 +11,8 @@
 
 #include "synth.h"
 
+#include "lua.h"
+
 #define CreateGrid(width, height, setPtr, drawPtr)  {width, height, 0, 0, width>1 && height>1, setPtr, drawPtr}
 
 uint8_t noteSymbols[12]={28,53,29,54,30,31,55,32,56,26,52,27};
@@ -23,6 +25,9 @@ char** themeList;
 int fontCount=0;
 int fontIndex=0;
 char** fontList;
+
+int synthCount=0;
+char** synthList;
 
 void SetTheme(int xPos, int yPos, UIEvent event) {
 	strcpy(helpString,"4x1png assets/themes");
@@ -90,6 +95,7 @@ void InitializePages(){
 	ChangeTheme(themeList[themeIndex]);
 	fontList = ListPath("assets/fonts",".BMP",&fontCount);
 	ChangeFont(fontList[0]);
+	synthList = ListPath("assets/synths",".LUA",&synthCount);
 
 	uint8_t octaveNumber = 0;
 	uint8_t notesThisOctave=0;
@@ -423,8 +429,90 @@ void DrawTrackData(int xPos, int yPos, bool selected){
 	
 }
 
+
+uint8_t instrumentIndex = 0;
+
+
+void SetOpSynth(int xPos, int yPos, UIEvent event){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	if(event.type == UIChange || event.type == UIPlace){
+		if(event.change){
+			free(synthList);
+			synthList = ListPath("assets/synths",".LUA",&synthCount);
+		}
+
+		char* name = instrument->selectedSynth;
+		int empty = name[0] == '\0';
+
+		unsigned int synthIndex=0;
+		if(!empty){
+			synthIndex = FindStringInList(synthList,synthCount,name);
+		}
+
+		synthIndex=positive_modulo(synthIndex-event.change,synthCount);
+
+		strcpy(instrument->selectedSynth,synthList[synthIndex]);
+
+		char path[64]="assets/synths/";
+
+		strcat(path,synthList[synthIndex]);
+
+		LoadLuaFile(path);
+
+
+	}else if(event.type == UIDelete){
+		strcpy(instrument->selectedSynth,"");
+	}
+}
+
+void DrawOpSynth(int xPos, int yPos, bool selected){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+
+	int empty = instrument->selectedSynth[0] == '\0';
+
+	if(empty){
+		PrintSelected("none",6,2,selected,2,3,1,0);
+	}else{
+		PrintSelected(instrument->selectedSynth,6,2,selected,2,3,1,0);
+	}
+}
+
+void SetOpName(int xPos, int yPos, UIEvent event){
+	if(event.type == UIChange){
+		if(xPos==0){
+			instrumentIndex=clamp(instrumentIndex+event.change,0,254);
+		}
+	}
+}
+
+void DrawOpName(int xPos, int yPos, bool selected){
+	if(xPos==0){
+		HexSelected(instrumentIndex,5,1,selected,2,3,1,0);
+	}
+}
+
+void SetOpMacro(int xPos, int yPos, UIEvent event){
+}
+
+void DrawOpMacro(int xPos, int yPos, bool selected){
+}
+
+void SetOpFlags(int xPos, int yPos, UIEvent event){
+}
+
+void DrawOpFlags(int xPos, int yPos, bool selected){
+}
+
+void SetOpData(int xPos, int yPos, UIEvent event){
+}
+
+void DrawOpData(int xPos, int yPos, bool selected){
+}
+
 UIPage projectPage = {0,3,(UIGrid[3]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(15,1,&SetFile,&DrawFile)} };
 
 UIPage arrangePage = {0,1,(UIGrid[1]){CreateGrid(9,16,&SetArrange,&DrawArrange)}};
 
 UIPage trackPage = {0,2,(UIGrid[2]){CreateGrid(3,1,&SetTrackInfo,&DrawTrackInfo),CreateGrid(7,16,&SetTrackData,&DrawTrackData)}};
+
+UIPage operatorPage = {0,5,(UIGrid[5]){CreateGrid(2,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(2,1,&SetOpFlags,&DrawOpFlags),CreateGrid(1,1,&SetOpData,&DrawOpData)}};

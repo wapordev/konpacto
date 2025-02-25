@@ -19,6 +19,11 @@ int clamp(int d, int min, int max) {
   return t > max ? max : t;
 }
 
+double fclamp(double d, double min, double max) {
+  const double t = d < min ? min : d;
+  return t > max ? max : t;
+}
+
 int EndsWith(const char *str, const char *suffix)
 {
     if (!str || !suffix)
@@ -174,6 +179,13 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 
 	unlockAudio();
 	
+}
+
+int FindStringInList(char** list, int count, char* string){
+	for(int i=0;i<count;i++){
+		if(strcmp(list[i],string)==0){return i;}
+	}
+	return 0;
 }
 
 //

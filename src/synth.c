@@ -4,9 +4,12 @@
 #include <string.h>
 #include "synth.h"
 
+#include <math.h>
 #include <SDL.h>
 
 #include "sound.h"
+#include "lua.h"
+#include "file.h"
 
 KonAudio konAudio;
 
@@ -54,7 +57,7 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 	KonTrack currentTrack = konAudio->tracks[trackIndex-1];
 		
 	if(currentTrack.steps==NULL){
-		channel->synth.on=0;
+		channel->on=0;
 		return channelIndex==0;
 	}
 
@@ -94,9 +97,9 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 
 		if(currentStep.note!=0){
 			if(currentStep.note == 255){
-				channel->synth.on =  0;
+				channel->on =  0;
 			}else{
-				channel->synth.on =  3;
+				channel->on =  3;
 				channel->synthData.note = currentStep.note;
 			}
 		}
@@ -117,7 +120,7 @@ void konStopInternal(KonAudio* konAudio){
 	for(int i=0;i<CHANNELCOUNT;i++){
 		KonChannel* channel = &konAudio->channels[i];
 
-		channel->synth.on=0;
+		channel->on=0;
 	}
 }
 
@@ -240,39 +243,34 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 		}
 
 
-		int32_t mixLeft = 0;
-		int32_t mixRight = 0;
+		double mixLeft = 0;
+		double mixRight = 0;
 
 		for(int i=0;i<CHANNELCOUNT;i++){
 			KonChannel* channel = &konAudio->channels[i];
-			KonSynth* synth = &channel->synth;
 			
 			//SYNTH HANDLING
-			if(synth->on){
 
-				if(synth->on==3)synth->out=0;
+			double outLeft=0;
+			double outRight=0;
 
-				double freq = konAudio->frequencies[channel->synthData.note-1];
-
-				uint32_t rate = freq*freqMultiplier;
-
-				synth->out+=rate;
-
-				synth->on=synth->on&1;
-			}else{
-				synth->out=0;
-			}
-
+			TickLuaChannel(&outLeft,&outRight,konAudio->channels[i]);
 
 			double volumeLeft=(channel->synthData.velocity/16)/15.0;
 			double volumeRight=(channel->synthData.velocity%16)/15.0;
 
-			mixLeft+=synth->out/CHANNELCOUNT*volumeLeft;
-			mixRight+=synth->out/CHANNELCOUNT*volumeRight;
+			if(isfinite(outLeft) && isfinite(outRight)){
+				mixLeft+=fclamp(outLeft*volumeLeft,-1.,1.);
+				mixRight+=fclamp(outRight*volumeRight,-1.,1.);
+			}
 		}
+
+
 		
-		int32_t sampleLeft = mixLeft*.0625;
-		int32_t sampleRight = mixRight*.0625;
+		int32_t sampleLeft = (int32_t)fclamp((mixLeft*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;
+		int32_t sampleRight = (int32_t)fclamp((mixRight*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;
+
+		//printf("%i\n",sampleLeft);
 
 		if(packetSize==4){
 			pointer32[i]=sampleLeft;
