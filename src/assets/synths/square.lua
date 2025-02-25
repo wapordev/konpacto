@@ -1,15 +1,19 @@
-print(-.9)
-
 _defaultParams = {{"silly",2}}
 
-phase = 0
+function _init()
+	return{0}
+end
 
-function _audioFrame(data)
+function _audioFrame(stepData,synthData)
+	local synthData = synthData
+	local phase = synthData[1]
 
-	if data[1]==0 then return 0,0 end
+	if stepData[1]==0 then return 0,0 end
 
-	phase=phase+data[2]/data[3]
+	phase=phase+stepData[2]/stepData[3]
 	phase=phase%1
+
+	synthData[1] = phase
 
 	local out=phase*2-1
 

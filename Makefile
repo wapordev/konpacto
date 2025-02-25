@@ -20,7 +20,7 @@ KONPACTO_LIBRARIES = -lluajit-5.1 -lSDL2 -lSDL2_mixer -lSDL2_image -lportaudio
 all: run
 
 konpacto:
-	$(CC) -O3 $(KONPACTO_FILES) $(KONPACTO_INCLUDES) $(KONPACTO_LINKS) $(KONPACTO_LIBRARIES) -o build/main
+	$(CC) -Ofast $(KONPACTO_FILES) $(KONPACTO_INCLUDES) $(KONPACTO_LINKS) $(KONPACTO_LIBRARIES) -o build/main
 
 luatest: lua
 	cd build && test.exe

@@ -8,6 +8,8 @@ void StopLua();
 
 void LoadLuaFile(char* filePath);
 
-void TickLuaChannel(double* leftOut, double* rightOut, KonChannel channel);
+void SetLuaInstrument(char* path, int index);
+
+void TickLuaChannel(double* leftOut, double* rightOut, KonChannel channel, int index);
 
 #endif

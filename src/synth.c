@@ -89,6 +89,8 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 			channel->synthData.instrument = currentStep.instrument;
 
 			//TO DO, SYNTH INIT
+
+			SetLuaInstrument(konAudio->instruments[currentStep.instrument-1].selectedSynth,channelIndex);
 		}
 
 		if(currentStep.velocity){
@@ -254,7 +256,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			double outLeft=0;
 			double outRight=0;
 
-			TickLuaChannel(&outLeft,&outRight,konAudio->channels[i]);
+			TickLuaChannel(&outLeft,&outRight,konAudio->channels[i],i);
 
 			double volumeLeft=(channel->synthData.velocity/16)/15.0;
 			double volumeRight=(channel->synthData.velocity%16)/15.0;
@@ -282,4 +284,10 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			pointer16[i+1]=sampleRight;
 		}
 	}
+
+	uint64_t end = SDL_GetPerformanceCounter();
+
+	float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+	printf("elapsed time: %f\n",elapsedMS);
 }
