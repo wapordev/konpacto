@@ -20,9 +20,9 @@ void InitializeLua(){
 	print('hello world') \
 -- Load a synth from filepath \n\
 	function _kLoad(filePath) \
-		--[[if(loadedSynths[filePath]) then \
+		if(loadedSynths[filePath]) then \
 			return \
-		end ]] \
+		end \
 		print('trying to load: '..filePath..' ...') \
 		local untrusted, message = loadfile(filePath,'t') \
 		if (not untrusted) then \
