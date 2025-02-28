@@ -5,6 +5,12 @@
 #include <lua.h>
 #include <lualib.h>
 
+#if defined _WIN32 || defined __CYGWIN__
+   #define DLL_PUBLIC __declspec(dllexport) // Note: actually gcc seems to also supports this syntax.
+#else
+   #define DLL_PUBLIC __attribute__ ((visibility ("default")))
+#endif
+
 typedef struct KonStep {
    uint8_t note;              //
    uint8_t instrument;           //literal index into loaded instruments
@@ -15,7 +21,7 @@ typedef struct KonStep {
    uint8_t param3;
 }KonStep;
 
-__declspec(dllexport) KonStep testFunc(int a){
+DLL_PUBLIC KonStep testFunc(int a){
    KonStep new = {
       a,
       a,
