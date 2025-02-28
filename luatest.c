@@ -6,9 +6,9 @@
 #include <lualib.h>
 
 #if defined _WIN32 || defined __CYGWIN__
-   #define DLL_PUBLIC __declspec(dllexport) // Note: actually gcc seems to also supports this syntax.
+   #define DLL_PUBLIC __declspec(dllexport)
 #else
-   #define DLL_PUBLIC __attribute__ ((visibility ("default")))
+   #define DLL_PUBLIC
 #endif
 
 typedef struct KonStep {
@@ -34,7 +34,7 @@ DLL_PUBLIC KonStep testFunc(int a){
    return new;
 }
 
-__declspec(dllexport) void testFunc2(){
+DLL_PUBLIC void testFunc2(){
    printf("heyhey");
 }
 

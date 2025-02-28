@@ -1,5 +1,11 @@
 #define SDL_MAIN_HANDLED
 
+#if defined _WIN32 || defined __CYGWIN__
+   #define DLL_PUBLIC __declspec(dllexport)
+#else
+   #define DLL_PUBLIC
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

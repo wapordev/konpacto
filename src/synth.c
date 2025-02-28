@@ -13,6 +13,10 @@
 
 KonAudio konAudio;
 
+float rollingMS[64];
+int rollingIndex = 0;
+
+
 const uint64_t ERRORSTEP = (uint64_t)1<<40;
 
 void VerifyTrack(KonTrack* track){
@@ -289,5 +293,16 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 	float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
 
-	printf("elapsed time: %f\n",elapsedMS);
+	rollingMS[rollingIndex]=elapsedMS;
+	rollingIndex=(rollingIndex+1)%64;
+
+	float result = 0;
+
+	for(int i=0; i<64; i++){
+		result += rollingMS[i];
+	}
+
+	result/=64;
+
+	printf("elapsed time average: %f, true %f\n",result, elapsedMS);
 }
