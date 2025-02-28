@@ -1,9 +1,36 @@
 #include <stdio.h>
+#include <stdint.h>
 
 #include <lauxlib.h>
 #include <lua.h>
 #include <lualib.h>
 
+typedef struct KonStep {
+   uint8_t note;              //
+   uint8_t instrument;           //literal index into loaded instruments
+   uint8_t velocity;             
+   uint8_t command;
+   uint8_t param1;
+   uint8_t param2;
+   uint8_t param3;
+}KonStep;
+
+__declspec(dllexport) KonStep testFunc(int a){
+   KonStep new = {
+      a,
+      a,
+      a,
+      a,
+      a,
+      a,
+      a,
+   };
+   return new;
+}
+
+__declspec(dllexport) void testFunc2(){
+   printf("heyhey");
+}
 
 int main() {
    // setup lua
