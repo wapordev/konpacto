@@ -7,6 +7,8 @@
 #include "synth.h"
 #include "sound.h"
 
+#include "luajit.h"
+
 lua_State* lua;
 
 void InitializeLua(){
@@ -17,6 +19,8 @@ void InitializeLua(){
 	"\
 	local channelData = {} \
 	local loadedSynths = {} \
+	local synthHash = {} \
+	local channelSynths = {0,0,0,0,0,0,0,0} \
 	print('hello world') \
 -- Load a synth from filepath \n\
 	function _kLoad(filePath) \
@@ -61,21 +65,30 @@ void InitializeLua(){
 		if(not env._audioFrame or type(env._audioFrame)~='function') then \
 			print('failed to load! missing _audioFrame.') return \
 		end \
-		loadedSynths[filePath]=env \
+		local index = synthHash[filePath] or #loadedSynths+1 \
+		synthHash[filePath] = index \
+		loadedSynths[index]=env \
+		for i=1,8 do \
+			if(channelSynths[i]==index)then \
+				channelData[i]=env._init() \
+			end \
+		end \
 	end \
 -- Tick Channel \n\
-	function _kTick(path,data,index) \
-		path='assets/synths/'..path \
-		if (loadedSynths[path]) then \
-			return loadedSynths[path]._audioFrame(data,channelData[index]) \
-		end \
+	function _kTick(index,on,note) \
+		local synth = loadedSynths[channelSynths[index]] \
+		if(not synth)then return 0,0 end \
+		return synth._audioFrame(on,note,channelData[index]) \
 	end \
 -- Initialize Synth \n\
 	function _kInit(path,index) \
 		path='assets/synths/'..path \
-		if (loadedSynths[path]) then \
-			channelData[index] = loadedSynths[path]._init() \
-		end \
+		local synthIndex = synthHash[path] \
+		if(not synthIndex)then return end \
+		local synth = loadedSynths[synthIndex] \
+		if(not synth)then return end \
+		channelSynths[index] = synthIndex \
+		channelData[index] = synth._init() \
 	end \
 	"
 	);
@@ -94,7 +107,7 @@ void SetLuaInstrument(char* path, int index){
 
 	lua_pushstring(lua,path);
 
-	lua_pushnumber(lua,index);
+	lua_pushnumber(lua,index+1);
 
 
 	int result = lua_pcall(lua,2,0,0);
@@ -132,29 +145,17 @@ void TickLuaChannel(double* leftOut, double* rightOut, KonChannel channel, int i
 		return;
 	}
 
-	lua_getglobal(lua,"_kTick");	
+	lua_getglobal(lua,"_kTick");
 
-	lua_pushstring(lua,synthPath);
+	lua_pushnumber(lua,index+1);
 
-	lua_createtable(lua,3,0);
-
-	lua_pushnumber(lua,1);
 	lua_pushnumber(lua,channel.on);
-	lua_settable(lua,-3);
 
-	lua_pushnumber(lua,2);
-
-	double note = konAudio.frequencies[channel.synthData.note-1];
-
+	double note = 0;
+	if(channel.on){
+		note = konAudio.frequencies[channel.synthData.note-1];
+	}
 	lua_pushnumber(lua,note);
-
-	lua_settable(lua,-3);
-
-	lua_pushnumber(lua,3);
-	lua_pushnumber(lua,konAudio.format.frequency);
-	lua_settable(lua,-3);
-
-	lua_pushnumber(lua,index);
 
 	int result = lua_pcall(lua,3,2,0);
 
@@ -189,6 +190,8 @@ void LoadLuaFile(char* filePath){
 	lua_getglobal(lua,"_kLoad");
 	lua_pushstring(lua,filePath);
 	lua_call(lua,1,0);
+
+	luaJIT_setmode(lua, 0, LUAJIT_MODE_ENGINE|LUAJIT_MODE_FLUSH);
 
 	unlockAudio();
 }

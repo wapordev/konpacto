@@ -4,13 +4,13 @@ function _init()
 	return{0}
 end
 
-function _audioFrame(stepData,synthData)
+function _audioFrame(on,note,synthData)
 	local synthData = synthData
 	local phase = synthData[1]
 
-	if stepData[1]==0 then return 0,0 end
+	if on==0 then return 0,0 end
 
-	phase=phase+stepData[2]/stepData[3]
+	phase=phase+note/44100
 	phase=phase%1
 
 	synthData[1] = phase
