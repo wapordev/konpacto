@@ -82,7 +82,7 @@ void InitializeLua(){
 	function _kTick(index) \
 		local synth = loadedSynths[channelSynths[index]] \
 		if(not synth)then return 0,0 end \
-		return synth._audioFrame(channelData[index]) \
+		synth._audioFrame(channelData[index]) \
 	end \
 -- Initialize Synth \n\
 	function _kInit(path,index) \
