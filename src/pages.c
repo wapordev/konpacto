@@ -477,6 +477,14 @@ void DrawOpSynth(int xPos, int yPos, bool selected){
 	}
 }
 
+void SetOpEffect(int xPos, int yPos, UIEvent event){
+	
+}
+
+void DrawOpEffect(int xPos, int yPos, bool selected){
+	PrintSelected("none",3,3,selected,2,3,1,0);
+}
+
 void SetOpName(int xPos, int yPos, UIEvent event){
 	if(event.type == UIChange){
 		if(xPos==0){
@@ -495,18 +503,41 @@ void SetOpMacro(int xPos, int yPos, UIEvent event){
 }
 
 void DrawOpMacro(int xPos, int yPos, bool selected){
+	PrintSelected("velocity",3,5,selected,2,3,1,0);
+	PrintSelected("<",1,5,selected,0,3,0,1);
+	PrintSelected(">",12,5,selected,0,3,0,1);
+	PlaceSelected(0x4e,2,5,selected,0,2,0,1);
+	PlaceSelected(0x7f,11,5,selected,0,2,0,1);
 }
 
 void SetOpFlags(int xPos, int yPos, UIEvent event){
 }
 
 void DrawOpFlags(int xPos, int yPos, bool selected){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	if(xPos==0){
+		PrintText(",1s    n    x    m",1,7);
+	}
+
+	HexSelected(0,3+xPos*5,7,selected,2,3,1,0);
 }
 
 void SetOpData(int xPos, int yPos, UIEvent event){
 }
 
 void DrawOpData(int xPos, int yPos, bool selected){
+
+	BarSelected(xPos+1,16,xPos+1,selected,0,3,0,1);
+
+	if( operatorPage.grids[5].xPos==xPos ){
+		if(xPos!=0){
+			PrintSelected("<",clamp(xPos,0,16),17,selected,2,3,2,1);
+		}
+		if(xPos!=17){
+			PrintSelected(">",xPos+3,17,selected,2,3,2,1);
+		}
+		HexSelected(0,clamp(xPos,0,16)+1,17,selected,3,0,1,0);
+	}
 }
 
 UIPage projectPage = {0,3,(UIGrid[3]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(15,1,&SetFile,&DrawFile)} };
@@ -515,4 +546,4 @@ UIPage arrangePage = {0,1,(UIGrid[1]){CreateGrid(9,16,&SetArrange,&DrawArrange)}
 
 UIPage trackPage = {0,2,(UIGrid[2]){CreateGrid(3,1,&SetTrackInfo,&DrawTrackInfo),CreateGrid(7,16,&SetTrackData,&DrawTrackData)}};
 
-UIPage operatorPage = {0,5,(UIGrid[5]){CreateGrid(2,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(2,1,&SetOpFlags,&DrawOpFlags),CreateGrid(1,1,&SetOpData,&DrawOpData)}};
+UIPage operatorPage = {0,6,(UIGrid[6]){CreateGrid(2,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpEffect,&DrawOpEffect),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(4,1,&SetOpFlags,&DrawOpFlags),CreateGrid(18,1,&SetOpData,&DrawOpData)}};

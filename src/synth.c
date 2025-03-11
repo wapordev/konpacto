@@ -11,6 +11,13 @@
 #include "lua.h"
 #include "file.h"
 
+#if defined _WIN32 || defined __CYGWIN__
+   #define DLL_PUBLIC __declspec(dllexport)
+#else
+   #define DLL_PUBLIC
+#endif
+
+
 KonAudio konAudio;
 
 float rollingMS[64];
@@ -18,6 +25,25 @@ int rollingIndex = 0;
 
 
 const uint64_t ERRORSTEP = (uint64_t)1<<40;
+
+
+//sooooooooo
+//till now I've been structuring this file with the idea that the KonAudio instance is not a singleton
+//not that I need it that way nor is it implemented that way, but just for flexibility later.
+//The only way I can think to have this work here is by having a lua light userdata
+//which requires more typing for the end user, or a lua wrapper which is an unnecesary function call
+//and possibly having the danger of accessing bad memory through lua?
+DLL_PUBLIC double konGetLuaData(int index){
+	if(index<0 || index > 255){
+		return 0;
+	}
+	return konAudio.luaData[index];
+}
+
+DLL_PUBLIC void konSetOut(double left, double right){
+	konAudio.luaData[256] = left;
+	konAudio.luaData[257] = right;
+}
 
 void VerifyTrack(KonTrack* track){
 	if (track->steps == NULL) {

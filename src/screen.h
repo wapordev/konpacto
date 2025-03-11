@@ -30,6 +30,12 @@ void PokeScreen(int pos, int chr, int bg, int fg);
 
 void PlaceScreen(int xPos, int yPos, int chr, int bg, int fg);
 
+void PlaceSelected(int chr, int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3);
+
+void DrawBar(int xPos, int yPos, int height, int bg, int fg);
+
+void BarSelected(int xPos, int yPos, int height, bool selected, int col0, int col1, int col2, int col3);
+
 void PokeSelected(int pos, int chr, bool selected, int col0, int col1, int col2, int col3);
 
 void PrintHex(int input, int xPos, int yPos, int bg_color, int fg_color);

@@ -4,7 +4,7 @@ function _init()
 	return{0}
 end
 
-function _audioFrame(on,note,synthData)
+function _audioFrame(synthData,on,note)
 	local synthData = synthData
 	local phase = synthData[1]
 

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <math.h>
+#include <time.h>
 
 #include <lauxlib.h>
 #include <lua.h>
@@ -11,45 +13,149 @@
    #define DLL_PUBLIC
 #endif
 
-typedef struct KonStep {
-   uint8_t note;              //
-   uint8_t instrument;           //literal index into loaded instruments
-   uint8_t velocity;             
-   uint8_t command;
-   uint8_t param1;
-   uint8_t param2;
-   uint8_t param3;
-}KonStep;
+#define paramSize 16
 
-DLL_PUBLIC KonStep testFunc(int a){
-   KonStep new = {
-      a,
-      a,
-      a,
-      a,
-      a,
-      a,
-      a,
-   };
-   return new;
+double params[paramSize];
+clock_t startTime;
+
+
+DLL_PUBLIC double get(int index){
+   index--;
+   if(index<0 || index>=paramSize){
+      return 0;
+   }
+   return params[index];
 }
 
-DLL_PUBLIC void testFunc2(){
-   printf("heyhey");
+static int cget(lua_State *L){
+   lua_Integer index = lua_tointeger(L, 1);  /* get argument */
+   
+   index--;
+
+   double output=0;
+
+   if(index>=0 && index<paramSize){
+      output=params[index];
+   }
+
+   lua_pushnumber(L, output);  /* push result */
+
+   return 1;  /* number of results */
 }
+
+
 
 int main() {
-   // setup lua
-   lua_State *L = luaL_newstate();
-   luaL_openlibs(L);
+   for(int i=0;i<paramSize;i++){
+      params[i]=i;
+   }
 
-   // Run a lua string
-   // luaL_dostring(L, "print(\"hello from lua\")");
+   lua_State *lua = luaL_newstate();
+   luaL_openlibs(lua);
 
-   luaL_dofile(L, "test.lua");
+   lua_pushcfunction(lua, cget);
+   lua_setglobal(lua, "cget");
+
+
+   luaL_dofile(lua, "test.lua");
+   
+   startTime = clock();
+
+   for (int tloop=0;tloop<10000000;tloop++){
+      
+      lua_getglobal(lua,"funcFFI");
+
+      int result = lua_pcall(lua,0,0,0);
+
+      if (result == LUA_ERRRUN) {
+          // get the error object (message)
+          const char *err = lua_tostring(lua,-1); // "Nil argument"
+          printf("lua error in %s\n",err);
+          // pop the error object
+          lua_pop(lua,1);
+          return 1;
+      }
+      else if (result == LUA_ERRMEM) {
+          printf("lua out of memory!!!\n");
+          lua_pop(lua,1);
+          return 1;
+      }else if (result != 0){
+         printf("catastrophic lua error!\n");
+         lua_pop(lua,1);
+         return 1;
+      }
+   }
+
+   printf("FFI call: %f\n",(float)(clock() - startTime) / CLOCKS_PER_SEC);
+
+   startTime = clock();
+
+   for (int tloop=0;tloop<10000000;tloop++){
+      
+      //full userdata
+      
+      lua_getglobal(lua,"funcC");
+
+      int result = lua_pcall(lua,0,0,0);
+
+      if (result == LUA_ERRRUN) {
+          // get the error object (message)
+          const char *err = lua_tostring(lua,-1); // "Nil argument"
+          printf("lua error in %s\n",err);
+          // pop the error object
+          lua_pop(lua,1);
+          return 1;
+      }
+      else if (result == LUA_ERRMEM) {
+          printf("lua out of memory!!!\n");
+          lua_pop(lua,1);
+          return 1;
+      }else if (result != 0){
+         printf("catastrophic lua error!\n");
+         lua_pop(lua,1);
+         return 1;
+      }
+   }
+
+   printf("C func wrapper seconds: %f\n",(float)(clock() - startTime) / CLOCKS_PER_SEC);
+
+   startTime = clock();
+
+   for (int tloop=0;tloop<10000000;tloop++){
+      
+      //full userdata
+      
+      lua_getglobal(lua,"funcLua");
+
+      for(int i=0;i<paramSize;i++){
+         lua_pushnumber(lua,params[i]);
+      }
+
+      int result = lua_pcall(lua,paramSize,0,0);
+
+      if (result == LUA_ERRRUN) {
+          // get the error object (message)
+          const char *err = lua_tostring(lua,-1); // "Nil argument"
+          printf("lua error in %s\n",err);
+          // pop the error object
+          lua_pop(lua,1);
+          return 1;
+      }
+      else if (result == LUA_ERRMEM) {
+          printf("lua out of memory!!!\n");
+          lua_pop(lua,1);
+          return 1;
+      }else if (result != 0){
+         printf("catastrophic lua error!\n");
+         lua_pop(lua,1);
+         return 1;
+      }
+   }
+
+   printf("Passing %i parameters straight: %f\n",paramSize, (float)(clock() - startTime) / CLOCKS_PER_SEC);
    
 
-   lua_close(L);
+   lua_close(lua);
 
    return 0;
 }

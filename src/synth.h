@@ -11,8 +11,21 @@ typedef struct KonAudioFormat {
 	uint8_t channelCount;		//1 mono, 2 stereo (output channels, regardless of mix)
 }KonAudioFormat;
 
+typedef struct KonMacro {		//parameter/modulation data
+	char name[21];
+	int8_t speed;				//0 to 127 tick speed+1, -1 to -128, ms? maybe?
+	uint8_t min;				
+	uint8_t max;				//data output range.
+	uint8_t flags;				//bit 0 = loops, bit 1,2 = interpolation mode 
+	uint8_t loopStart;
+	uint8_t loopEnd;
+	uint8_t length;
+	uint8_t* data;
+}KonMacro;
+
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
 	char selectedSynth[64];
+	KonMacro* macros[256];
 }KonInstrument;
 
 typedef struct KonStep {
@@ -62,6 +75,7 @@ typedef struct KonAudio {
 	KonInstrument instruments[255];
 	KonArrangements arrangements[256];	//
 	KonChannel channels[CHANNELCOUNT];	//channel data
+	double luaData[258];
 	uint64_t tickrate;					//Unsigned Fixed24_40 calculated by some method, number of frames (including decimal) per tick
 	uint64_t frameAcumulator; 			//Unsigned Fixed24_40 rolling error from tickrate
 	uint8_t forceMono;					//0 off, 1 both left, 2 both right, 3 mix
@@ -71,6 +85,10 @@ typedef struct KonAudio {
 }KonAudio;
 
 extern KonAudio konAudio;
+
+double konGetLuaData(int index);
+
+void konSetOut(double left, double right);
 
 void konStart(KonAudio* konAudio, uint8_t arrangeIndex);
 

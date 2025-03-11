@@ -75,10 +75,10 @@ void InitializeLua(){
 		end \
 	end \
 -- Tick Channel \n\
-	function _kTick(index,on,note) \
+	function _kTick(index,on,note,...) \
 		local synth = loadedSynths[channelSynths[index]] \
 		if(not synth)then return 0,0 end \
-		return synth._audioFrame(on,note,channelData[index]) \
+		return synth._audioFrame(channelData[index],on,note,...) \
 	end \
 -- Initialize Synth \n\
 	function _kInit(path,index) \
@@ -157,7 +157,11 @@ void TickLuaChannel(double* leftOut, double* rightOut, KonChannel channel, int i
 	}
 	lua_pushnumber(lua,note);
 
-	int result = lua_pcall(lua,3,2,0);
+	for(int i=0; i<16; i++){
+		lua_pushnumber(lua,channel.on);
+	}
+
+	int result = lua_pcall(lua,3+16,2,0);
 
 	if (result == LUA_ERRRUN) {
 	    // get the error object (message)

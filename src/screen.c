@@ -53,6 +53,10 @@ void PlaceScreen(int xPos, int yPos, int chr, int bg, int fg) {
     PokeScreen(xPos+yPos*20,chr,bg,fg);
 }
 
+void PlaceSelected(int chr, int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3) {
+    PokeSelected(xPos+yPos*20,chr,selected,col0,col1,col2,col3);
+}
+
 void PokeSelected(int pos, int chr, bool selected, int col0, int col1, int col2, int col3) {
     int bg_color = col0;
     int fg_color = col1;
@@ -61,6 +65,26 @@ void PokeSelected(int pos, int chr, bool selected, int col0, int col1, int col2,
         fg_color = col3;
     }
     PokeScreen(pos,chr,bg_color,fg_color);
+}
+
+void DrawBar(int xPos, int yPos, int height, int bg, int fg){
+    for(int i=yPos;i>yPos-(height/6);i--){
+        PlaceScreen(xPos,i,0x3f,bg,fg);
+    }
+    int remainder=height%6;
+    if(remainder){
+        PlaceScreen(xPos,yPos-height/6,0x39+remainder,bg,fg);
+    }
+}
+
+void BarSelected(int xPos, int yPos, int height, bool selected, int col0, int col1, int col2, int col3){
+    int bg_color = col0;
+    int fg_color = col1;
+    if(selected){
+        bg_color = col2;
+        fg_color = col3;
+    }
+    DrawBar(xPos,yPos,height,bg_color,fg_color);
 }
 
 //46
