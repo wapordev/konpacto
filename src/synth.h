@@ -86,9 +86,9 @@ typedef struct KonAudio {
 
 extern KonAudio konAudio;
 
-double konGetLuaData(int index);
+double konGet(int index);
 
-void konSetOut(double left, double right);
+void konOut(double left, double right);
 
 void konStart(KonAudio* konAudio, uint8_t arrangeIndex);
 

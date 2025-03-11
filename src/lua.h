@@ -10,6 +10,6 @@ void LoadLuaFile(char* filePath);
 
 void SetLuaInstrument(char* path, int index);
 
-void TickLuaChannel(double* leftOut, double* rightOut, KonChannel channel, int index);
+void TickLuaChannel(int index);
 
 #endif

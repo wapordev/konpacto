@@ -33,14 +33,14 @@ const uint64_t ERRORSTEP = (uint64_t)1<<40;
 //The only way I can think to have this work here is by having a lua light userdata
 //which requires more typing for the end user, or a lua wrapper which is an unnecesary function call
 //and possibly having the danger of accessing bad memory through lua?
-DLL_PUBLIC double konGetLuaData(int index){
+DLL_PUBLIC double konGet(int index){
 	if(index<0 || index > 255){
 		return 0;
 	}
 	return konAudio.luaData[index];
 }
 
-DLL_PUBLIC void konSetOut(double left, double right){
+DLL_PUBLIC void konOut(double left, double right){
 	konAudio.luaData[256] = left;
 	konAudio.luaData[257] = right;
 }
@@ -278,15 +278,26 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 		double mixLeft = 0;
 		double mixRight = 0;
 
+		double* luaData = konAudio->luaData;
 		for(int i=0;i<CHANNELCOUNT;i++){
 			KonChannel* channel = &konAudio->channels[i];
 			
+
+			for(int i=0;i<258;i++){
+				luaData[i]=0;
+			}
+
+			int note = channel->synthData.note;
+
+			if(note){
+				luaData[0]=konAudio->frequencies[note-1]/konAudio->format.frequency;
+			}
+
 			//SYNTH HANDLING
+			TickLuaChannel(i);
 
-			double outLeft=0;
-			double outRight=0;
-
-			TickLuaChannel(&outLeft,&outRight,konAudio->channels[i],i);
+			double outLeft=luaData[256];
+			double outRight=luaData[257];
 
 			double volumeLeft=(channel->synthData.velocity/16)/15.0;
 			double volumeRight=(channel->synthData.velocity%16)/15.0;

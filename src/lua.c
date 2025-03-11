@@ -17,6 +17,9 @@ void InitializeLua(){
 
 	luaL_dostring(lua,
 	"\
+	local ffi = require('ffi') \
+	ffi.cdef'double konGet(int index);' \
+	ffi.cdef'void konOut(double left, double right);' \
 	local channelData = {} \
 	local loadedSynths = {} \
 	local synthHash = {} \
@@ -38,7 +41,8 @@ void InitializeLua(){
 			print = print, \
 			clamp = math.clamp, \
 			sin = math.sin, \
-			pi = math.pi \
+			pi = math.pi, \
+			C = ffi.C \
 		} \
 		setfenv(untrusted,env) \
 		local result, message = pcall(untrusted) \
@@ -75,10 +79,10 @@ void InitializeLua(){
 		end \
 	end \
 -- Tick Channel \n\
-	function _kTick(index,on,note,...) \
+	function _kTick(index) \
 		local synth = loadedSynths[channelSynths[index]] \
 		if(not synth)then return 0,0 end \
-		return synth._audioFrame(channelData[index],on,note,...) \
+		return synth._audioFrame(channelData[index]) \
 	end \
 -- Initialize Synth \n\
 	function _kInit(path,index) \
@@ -131,41 +135,18 @@ void SetLuaInstrument(char* path, int index){
 	}
 }
 
-void TickLuaChannel(double* leftOut, double* rightOut, KonChannel channel, int index){
-	if(!channel.synthData.note){
-		return;
-	}
-	if(!channel.synthData.instrument){
-		return;
-	}
-
-	char* synthPath = konAudio.instruments[channel.synthData.instrument-1].selectedSynth;
-
-	if(synthPath==NULL || synthPath[0]=='\0'){
-		return;
-	}
-
+void TickLuaChannel(int index){
 	lua_getglobal(lua,"_kTick");
 
 	lua_pushnumber(lua,index+1);
 
-	lua_pushnumber(lua,channel.on);
-
-	double note = 0;
-	if(channel.on){
-		note = konAudio.frequencies[channel.synthData.note-1];
-	}
-	lua_pushnumber(lua,note);
-
-	for(int i=0; i<16; i++){
-		lua_pushnumber(lua,channel.on);
-	}
-
-	int result = lua_pcall(lua,3+16,2,0);
+	int result = lua_pcall(lua,1,0,0);
 
 	if (result == LUA_ERRRUN) {
 	    // get the error object (message)
 	    const char *err = lua_tostring(lua,-1); // "Nil argument"
+	    KonChannel channel = konAudio.channels[index];
+	    char* synthPath = konAudio.instruments[channel.synthData.instrument-1].selectedSynth;
 	    printf("lua error in %s: %s\n",synthPath,err);
 	    // pop the error object
 	    lua_pop(lua,1);
@@ -180,11 +161,6 @@ void TickLuaChannel(double* leftOut, double* rightOut, KonChannel channel, int i
 		lua_pop(lua,1);
 		return;
 	}
-
-	*rightOut = lua_tonumber(lua,-1);
-	lua_pop(lua,1);
-	*leftOut = lua_tonumber(lua,-1);
-	lua_pop(lua,1);
 }
 
 void LoadLuaFile(char* filePath){
