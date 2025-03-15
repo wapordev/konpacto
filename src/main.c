@@ -20,8 +20,6 @@
 #include "pages.h"
 #include "lua.h"
 
-#include "TracyC.h"
-
 const float SCREEN_FPS = 30;
 const float SCREEN_TICKS = 1000 / SCREEN_FPS;
 
@@ -39,7 +37,6 @@ int main(int argc, char* argv[])
 
 	// Main loop
 	while (true) {
-		TracyCFrameMarkStart("frame")
 		// uint64_t start = SDL_GetPerformanceCounter();
 
 		if(HandleInputs()){
@@ -62,7 +59,7 @@ int main(int argc, char* argv[])
 		// float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
 
 		// printf("elapsed time: %f\n",elapsedMS);
-		TracyCFrameMarkEnd("frame")
+
 	}
 	// Cleanup code
 	CleanupScreen();
