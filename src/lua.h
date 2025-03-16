@@ -12,4 +12,8 @@ void SetLuaInstrument(char* path, int index);
 
 void TickLuaChannel(int index);
 
+int CountLuaParam(char* filePath);
+
+int GetLuaParam(char* filePath, int paramIndex, char* dest);
+
 #endif

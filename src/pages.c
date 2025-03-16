@@ -459,6 +459,19 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 
 		LoadLuaFile(path);
 
+		int params = CountLuaParam(path);
+
+		params=clamp(params,0,256);
+
+		instrument->macroCount=params;
+
+		for(int i=0;i<params;i++){
+			int defaultValue = GetLuaParam(path,i,instrument->macros[i].name);
+			if(defaultValue>=0){
+				instrument->macros[i].defaultValue = defaultValue;
+			}
+		}
+
 
 	}else if(event.type == UIDelete){
 		strcpy(instrument->selectedSynth,"");
@@ -499,15 +512,31 @@ void DrawOpName(int xPos, int yPos, bool selected){
 	}
 }
 
+
 void SetOpMacro(int xPos, int yPos, UIEvent event){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	if(event.type == UIMove || event.type == UIMoveRepeat){
+		instrument->selectedMacro=clamp(instrument->selectedMacro+event.horizontal,0,instrument->macroCount-1);
+	}
 }
 
 void DrawOpMacro(int xPos, int yPos, bool selected){
-	PrintSelected("velocity",3,5,selected,2,3,1,0);
-	PrintSelected("<",1,5,selected,0,3,0,1);
-	PrintSelected(">",12,5,selected,0,3,0,1);
-	PlaceSelected(0x4e,2,5,selected,0,2,0,1);
-	PlaceSelected(0x7f,11,5,selected,0,2,0,1);
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+
+	int max = instrument->macroCount-1;
+	int len = strlen(macro->name);
+	int x = clamp(instrument->selectedMacro,0,(instrument->selectedMacro==max ? 16 : 15)-len);
+	PrintSelected(macro->name,2+x,5,selected,2,3,1,0);
+	//HexSelected(macro->defaultValue,3,5,selected,2,3,1,0);
+	if(x)
+		PrintSelected("<",x,5,selected,0,3,0,1);
+	if(instrument->selectedMacro!=max)
+		PrintSelected(">",3+x+len,5,selected,0,3,0,1);
+	PlaceSelected(0x4e,1+x,5,selected,0,2,0,1);
+	PlaceSelected(0x7f,2+x+len,5,selected,0,2,0,1);
+
+	
 }
 
 void SetOpFlags(int xPos, int yPos, UIEvent event){

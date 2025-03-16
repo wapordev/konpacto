@@ -267,6 +267,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	int16_t* pointer16 = (int16_t*)stream;
 
 	double freqMultiplier = ((double)UINT32_MAX/(double)konAudio->format.frequency);	
+	double* luaData = konAudio->luaData;
 
 	for(int i=0; i<len/packetSize; i+=channelCount){
 
@@ -278,23 +279,22 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 		double mixLeft = 0;
 		double mixRight = 0;
 
-		double* luaData = konAudio->luaData;
-		for(int i=0;i<CHANNELCOUNT;i++){
-			KonChannel* channel = &konAudio->channels[i];
+		
+		for(int j=0;j<CHANNELCOUNT;j++){
+			KonChannel* channel = &konAudio->channels[j];
 			
 
-			for(int i=0;i<258;i++){
-				luaData[i]=0;
+			for(int k=0;k<66;k++){
+				luaData[k]=i*j*k;
 			}
 
 			int note = channel->synthData.note;
 
 			if(note){
 				luaData[0]=konAudio->frequencies[note-1]/konAudio->format.frequency;
+				//SYNTH HANDLING
+				TickLuaChannel(j);
 			}
-
-			//SYNTH HANDLING
-			TickLuaChannel(i);
 
 			double outLeft=luaData[256];
 			double outRight=luaData[257];

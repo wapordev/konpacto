@@ -12,7 +12,8 @@ typedef struct KonAudioFormat {
 }KonAudioFormat;
 
 typedef struct KonMacro {		//parameter/modulation data
-	char name[21];
+	char name[16];
+	uint8_t defaultValue;
 	int8_t speed;				//0 to 127 tick speed+1, -1 to -128, ms? maybe?
 	uint8_t min;				
 	uint8_t max;				//data output range.
@@ -25,7 +26,9 @@ typedef struct KonMacro {		//parameter/modulation data
 
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
 	char selectedSynth[64];
-	KonMacro* macros[256];
+	uint8_t macroCount;
+	KonMacro macros[256];
+	uint8_t selectedMacro;			//editor value
 }KonInstrument;
 
 typedef struct KonStep {

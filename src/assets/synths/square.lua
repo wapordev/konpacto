@@ -1,4 +1,4 @@
-_defaultParams = {{"silly",2}}
+_defaultParams = {{"tilly",2}}
 
 function _init()
 	return{0}

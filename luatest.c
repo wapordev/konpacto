@@ -61,33 +61,28 @@ int main() {
    
    startTime = clock();
 
-   for (int tloop=0;tloop<10000000;tloop++){
+   int x[258];
+
+   
+   
+   for (int tloop=0;tloop<5120000;tloop++){
       
-      lua_getglobal(lua,"funcFFI");
+      for (int j=0;j<8;j++){
 
-      int result = lua_pcall(lua,0,0,0);
 
-      if (result == LUA_ERRRUN) {
-          // get the error object (message)
-          const char *err = lua_tostring(lua,-1); // "Nil argument"
-          printf("lua error in %s\n",err);
-          // pop the error object
-          lua_pop(lua,1);
-          return 1;
+         for(int i=0;i<258;i++){
+            //int* y = x;
+            x[i]=i*startTime*(x[i]+1);
+         }
+
       }
-      else if (result == LUA_ERRMEM) {
-          printf("lua out of memory!!!\n");
-          lua_pop(lua,1);
-          return 1;
-      }else if (result != 0){
-         printf("catastrophic lua error!\n");
-         lua_pop(lua,1);
-         return 1;
-      }
+      
    }
 
-   printf("FFI call: %f\n",(float)(clock() - startTime) / CLOCKS_PER_SEC);
+   
 
+   printf("FFI call: %f\n",(float)(clock() - startTime) / CLOCKS_PER_SEC);
+   printf("%i\n",x[240]);
    startTime = clock();
 
    for (int tloop=0;tloop<10000000;tloop++){
