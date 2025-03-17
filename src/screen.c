@@ -68,13 +68,12 @@ void PokeSelected(int pos, int chr, bool selected, int col0, int col1, int col2,
 }
 
 void DrawBar(int xPos, int yPos, int height, int bg, int fg){
+    height-=1;
     for(int i=yPos;i>yPos-(height/6);i--){
-        PlaceScreen(xPos,i,0x3f,bg,fg);
+        PlaceScreen(xPos,i,0x0,fg,bg);
     }
     int remainder=height%6;
-    if(remainder){
-        PlaceScreen(xPos,yPos-height/6,0x39+remainder,bg,fg);
-    }
+    PlaceScreen(xPos,yPos-height/6,0x3A+remainder,bg,fg);
 }
 
 void BarSelected(int xPos, int yPos, int height, bool selected, int col0, int col1, int col2, int col3){

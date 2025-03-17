@@ -21,13 +21,15 @@ typedef struct KonMacro {		//parameter/modulation data
 	uint8_t loopStart;
 	uint8_t loopEnd;
 	uint8_t length;
+	uint8_t selectedStep;		//editor value
 	uint8_t* data;
 }KonMacro;
 
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
 	char selectedSynth[64];
 	uint8_t macroCount;
-	KonMacro macros[256];
+	uint8_t effectCount;
+	KonMacro macros[64];
 	uint8_t selectedMacro;			//editor value
 }KonInstrument;
 
@@ -78,7 +80,7 @@ typedef struct KonAudio {
 	KonInstrument instruments[255];
 	KonArrangements arrangements[256];	//
 	KonChannel channels[CHANNELCOUNT];	//channel data
-	double luaData[258];
+	double luaData[66];
 	uint64_t tickrate;					//Unsigned Fixed24_40 calculated by some method, number of frames (including decimal) per tick
 	uint64_t frameAcumulator; 			//Unsigned Fixed24_40 rolling error from tickrate
 	uint8_t forceMono;					//0 off, 1 both left, 2 both right, 3 mix

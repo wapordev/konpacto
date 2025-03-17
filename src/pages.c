@@ -471,10 +471,12 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 				instrument->macros[i].defaultValue = defaultValue;
 			}
 		}
-
+		instrument->selectedMacro=0;
 
 	}else if(event.type == UIDelete){
 		strcpy(instrument->selectedSynth,"");
+		instrument->macroCount=0;
+		//delete macros...?
 	}
 }
 
@@ -524,17 +526,24 @@ void DrawOpMacro(int xPos, int yPos, bool selected){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
 	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
 
-	int max = instrument->macroCount-1;
-	int len = strlen(macro->name);
-	int x = clamp(instrument->selectedMacro,0,(instrument->selectedMacro==max ? 16 : 15)-len);
-	PrintSelected(macro->name,2+x,5,selected,2,3,1,0);
-	//HexSelected(macro->defaultValue,3,5,selected,2,3,1,0);
-	if(x)
-		PrintSelected("<",x,5,selected,0,3,0,1);
-	if(instrument->selectedMacro!=max)
-		PrintSelected(">",3+x+len,5,selected,0,3,0,1);
-	PlaceSelected(0x4e,1+x,5,selected,0,2,0,1);
-	PlaceSelected(0x7f,2+x+len,5,selected,0,2,0,1);
+	if(instrument->macroCount){
+		int max = instrument->macroCount-1;
+		int len = strlen(macro->name);
+		int x = clamp(instrument->selectedMacro,0,(instrument->selectedMacro==max ? 16 : 15)-len);
+		PrintSelected(macro->name,2+x,5,selected,2,3,1,0);
+		//HexSelected(macro->defaultValue,3,5,selected,2,3,1,0);
+		if(x)
+			PrintSelected("<",x,5,selected,0,3,0,1);
+		if(instrument->selectedMacro!=max)
+			PrintSelected(">",3+x+len,5,selected,0,3,0,1);
+		PlaceSelected(0x4e,1+x,5,selected,0,2,0,1);
+		PlaceSelected(0x7f,2+x+len,5,selected,0,2,0,1);
+	}else{
+		PrintSelected("no synth selected!",1,5,selected,2,3,1,0);
+		PlaceSelected(0x4e,0,5,selected,0,2,0,1);
+		PlaceSelected(0x7f,19,5,selected,0,2,0,1);
+	}
+	
 
 	
 }
@@ -544,19 +553,99 @@ void SetOpFlags(int xPos, int yPos, UIEvent event){
 
 void DrawOpFlags(int xPos, int yPos, bool selected){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+
+	if(!instrument->macroCount)
+		return;
+
 	if(xPos==0){
 		PrintText(",1s    n    x    m",1,7);
 	}
 
 	HexSelected(0,3+xPos*5,7,selected,2,3,1,0);
+
 }
 
 void SetOpData(int xPos, int yPos, UIEvent event){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+
+	if(!instrument->macroCount)
+		return;
+
+	int realPosition = xPos;
+
+	if(event.type == UIPlace){
+		if(macro->data==NULL){
+			macro->data = calloc(realPosition+1,sizeof(uint8_t));
+			macro->data[0] = macro->defaultValue;
+			macro->length=realPosition+1;
+		}else if(realPosition>=macro->length){
+			macro->data = realloc(macro->data,sizeof(uint8_t)*(realPosition+1));
+			for(int i=macro->length;i<realPosition+1;i++){
+				macro->data[i]=0;
+			}
+			macro->length=realPosition+1;
+		}
+		
+	}
+
+	if(event.type == UIDelete){
+		if(macro->data==NULL)
+			return;
+		if(realPosition<macro->length){
+			if(realPosition==0){
+				free(macro->data);
+				macro->data=NULL;
+				macro->length=0;
+				return;
+			}
+			macro->data = realloc(macro->data, sizeof(uint8_t)*(realPosition));
+			macro->length=realPosition;
+		}
+	}
+
+	if(event.type == UIChange){
+		if(macro->data==NULL)
+			return;
+		if(realPosition>=macro->length)
+			return;
+		macro->data[realPosition]=clamp(macro->data[realPosition]+event.change,0,255);
+	}
 }
 
 void DrawOpData(int xPos, int yPos, bool selected){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
 
-	BarSelected(xPos+1,16,xPos+1,selected,0,3,0,1);
+	if(!instrument->macroCount)
+		return;
+
+	int len=1;
+
+	int dataRaw=0;
+	int data=0;
+
+	if(macro->data!=NULL){
+		len=macro->length;
+	}
+
+	if(xPos<len){
+		if(macro->data==NULL){
+			dataRaw=macro->defaultValue;
+		}else{
+			dataRaw=macro->data[xPos];
+		}
+		data=(dataRaw*3)/16;
+		data+=1;
+	}
+
+	if(data){
+		BarSelected(xPos+1,16,data,selected,0,3,0,1);
+	}else{
+		PrintSelected(".",xPos+1,16,selected,0,3,0,1);
+	}
+	
 
 	if( operatorPage.grids[5].xPos==xPos ){
 		if(xPos!=0){
@@ -565,7 +654,12 @@ void DrawOpData(int xPos, int yPos, bool selected){
 		if(xPos!=17){
 			PrintSelected(">",xPos+3,17,selected,2,3,2,1);
 		}
-		HexSelected(0,clamp(xPos,0,16)+1,17,selected,3,0,1,0);
+		if(data){
+			HexSelected(dataRaw,clamp(xPos,0,16)+1,17,selected,3,0,1,0);
+		}else{
+			PrintSelected("nl",clamp(xPos,0,16)+1,17,selected,3,0,1,0);
+		}
+		
 	}
 }
 

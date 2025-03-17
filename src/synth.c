@@ -34,15 +34,15 @@ const uint64_t ERRORSTEP = (uint64_t)1<<40;
 //which requires more typing for the end user, or a lua wrapper which is an unnecesary function call
 //and possibly having the danger of accessing bad memory through lua?
 DLL_PUBLIC double konGet(int index){
-	if(index<0 || index > 255){
+	if(index<0 || index > 63){
 		return 0;
 	}
 	return konAudio.luaData[index];
 }
 
 DLL_PUBLIC void konOut(double left, double right){
-	konAudio.luaData[256] = left;
-	konAudio.luaData[257] = right;
+	konAudio.luaData[64] = left;
+	konAudio.luaData[65] = right;
 }
 
 void VerifyTrack(KonTrack* track){
@@ -296,8 +296,8 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 				TickLuaChannel(j);
 			}
 
-			double outLeft=luaData[256];
-			double outRight=luaData[257];
+			double outLeft=luaData[64];
+			double outRight=luaData[65];
 
 			double volumeLeft=(channel->synthData.velocity/16)/15.0;
 			double volumeRight=(channel->synthData.velocity%16)/15.0;

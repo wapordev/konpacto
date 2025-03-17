@@ -135,7 +135,7 @@ void OperatorsDraw(UIEvent* event) {
 	}
 
 	for(int i=1;i<20;i++){
-		PlaceScreen(i,6,0x3c,0,2);
+		PlaceScreen(i,6,0x45,0,2);
 	}
 	PlaceScreen(0,6,0x4a,0,2);
 	PlaceScreen(19,6,0x4d,0,2);
