@@ -1,27 +1,29 @@
-_defaultParams = {{"tilly",2}}
+_defaultParams = {
+	{"pulse width",48},
+}
 
 function _init()
 	return{0}
 end
 
-function _audioFrame(synthData,on,note)
+function _audioFrame(synthData)
 	local synthData = synthData
 	local phase = synthData[1]
 
-	if on==0 then return 0,0 end
+	local note = C.konGet(0)/44100
 
-	phase=phase+note/44100
+	phase=phase+note
 	phase=phase%1
 
 	synthData[1] = phase
 
-	local out=phase*2-1
+	local out=phase
 
-	if out>0 then
+	if(out > C.konGet(3)/255)then
 		out=1
 	else
 		out=-1
 	end
 
-	return out,out
+	C.konOut(out,out)
 end

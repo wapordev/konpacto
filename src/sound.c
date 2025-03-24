@@ -51,7 +51,7 @@ void InitializeSound(){
 		AUDIO_FORMAT,   			//32 S int
 		2,
 		0,
-		512, 					//buffer size
+		512, 					//buffer size 512 for miyoo!
 		0,
 		0,
 		callback,

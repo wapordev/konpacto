@@ -102,7 +102,7 @@ void InitializeLua(){
 		if(not synthIndex)then return 0 end \
 		local synth = loadedSynths[synthIndex] \
 		if(not synth)then return 0 end \
-		return math.min(#synth._defaultParams,32) \
+		return #synth._defaultParams \
 	end \
 -- Get Param Details \n\
 	function _kParamGet(path,paramIndex) \

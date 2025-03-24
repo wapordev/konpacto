@@ -91,6 +91,8 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 		return channelIndex==0;
 	}
 
+	channel->tickCounter+=1;
+
 	if(channel->stepAccumulator == channel->stepLength){
 
 
@@ -118,6 +120,8 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 		if(currentStep.instrument){
 			channel->synthData.instrument = currentStep.instrument;
 
+			channel->tickCounter=0;
+
 			//TO DO, SYNTH INIT
 
 			SetLuaInstrument(konAudio->instruments[currentStep.instrument-1].selectedSynth,channelIndex);
@@ -129,11 +133,13 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 
 		if(currentStep.note!=0){
 			if(currentStep.note == 255){
-				channel->on =  0;
+				//macro loop off
+				//channel->on =  0;
 			}else{
 				channel->on =  3;
 				channel->synthData.note = currentStep.note;
 			}
+			channel->tickCounter=0;
 		}
 
 		channel->stepIndex++;
@@ -169,6 +175,7 @@ void konResetChannels(KonAudio* konAudio){
 		channel->stepIndex=0;
 		channel->stepAccumulator=0;
 		channel->stepLength=0;
+		channel->tickCounter=0;
 	}
 }
 
@@ -200,6 +207,47 @@ uint8_t konArrangementIsEmpty(KonArrangements* arrangement){
 	return isEmpty;
 }
 
+static inline double macroDataGet(KonMacro* macro, int step){
+
+	if(macro->loopEnd>=macro->loopStart){
+
+	}
+
+	return (double)macro->data[clamp(step,0,macro->length-1)];
+}
+
+static inline double macroProcess(KonAudio* konAudio, KonChannel* channel, KonInstrument* instrument, KonMacro* macro){
+	double out=0;
+
+	if(macro->length){
+		if(macro->length==1){
+			out=macro->data[0];
+		}else{
+			int speed = macro->speed;
+			if(!speed)
+				speed=1;
+
+			int rawPosition = channel->tickCounter;
+
+			out=macroDataGet(macro,rawPosition/speed);
+
+			if(macro->flags&1){
+				double positionOffset =  ((double)konAudio->frameAcumulator/konAudio->tickrate + (double)(rawPosition%speed)) /speed;
+
+				if(positionOffset>0){
+					double nextStep = macroDataGet(macro,rawPosition/speed+1);
+
+					out=lerp(out,nextStep,positionOffset);
+				}
+			}
+
+		}
+	}else{
+		out=macro->defaultValue;
+	}
+
+	return out;
+}
 
 static inline void sequenceProcess(KonAudio* konAudio){
 	konAudio->frameAcumulator += ERRORSTEP;
@@ -283,24 +331,61 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 		for(int j=0;j<CHANNELCOUNT;j++){
 			KonChannel* channel = &konAudio->channels[j];
 			
+			if(!channel->on || !channel->synthData.instrument || !channel->synthData.note)
+				continue;
 
-			for(int k=0;k<66;k++){
-				luaData[k]=i*j*k;
+			KonInstrument* instrument = &konAudio->instruments[channel->synthData.instrument-1];
+
+			for(int k=0;k<instrument->macroCount;k++){
+				if(k==2 && !instrument->macros[k].length){
+					luaData[k]=luaData[1];
+					continue;
+				}
+				luaData[k]=macroProcess(konAudio,channel,instrument,&instrument->macros[k]);
 			}
 
-			int note = channel->synthData.note;
+			//note processing!
 
-			if(note){
-				luaData[0]=konAudio->frequencies[note-1]/konAudio->format.frequency;
-				//SYNTH HANDLING
-				TickLuaChannel(j);
+			double trueNote=luaData[0];
+			if(trueNote>=128){
+				trueNote-=128;
+			}else{
+				trueNote=-64+trueNote;
+				trueNote+=channel->synthData.note-1;
 			}
+			
+			luaData[0]=konAudio->frequencies[clamp((int)trueNote,0,254)];
+
+			double noteFloor=floorf(trueNote);
+
+			if((int)trueNote<254 && noteFloor!=trueNote){
+				
+
+				double freqA=luaData[0];
+
+				double freqB=konAudio->frequencies[(int)trueNote+1];
+
+				double interp=trueNote-noteFloor;
+
+				//pow is slow :3
+				//powf(freqA,1-interp)*powf(freqB,interp);
+				luaData[0]=lerp(freqA,freqB,interp);
+
+				//note lerp
+			}
+			
+			
+			
+			TickLuaChannel(j);
 
 			double outLeft=luaData[64];
 			double outRight=luaData[65];
 
 			double volumeLeft=(channel->synthData.velocity/16)/15.0;
 			double volumeRight=(channel->synthData.velocity%16)/15.0;
+
+			volumeLeft*=luaData[1]/255;
+			volumeRight*=luaData[2]/255;
 
 			if(isfinite(outLeft) && isfinite(outRight)){
 				mixLeft+=fclamp(outLeft*volumeLeft,-1.,1.);

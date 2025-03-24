@@ -19,6 +19,11 @@ int clamp(int d, int min, int max) {
   return t > max ? max : t;
 }
 
+double lerp(double a, double b, double f) 
+{
+    return (a * (1.0 - f)) + (b * f);
+}
+
 double fclamp(double d, double min, double max) {
   const double t = d < min ? min : d;
   return t > max ? max : t;
@@ -172,6 +177,8 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 	printf("Reference frequency: %f\n",referenceFrequency);
 	printf("Reference note: %i\n",referenceNote);
 	printf("Loaded scale %s, %i notes read\n",scalePath,scaleSize);
+
+	konAudio->notesInScale=scaleSize;
 	
 	bail:
 

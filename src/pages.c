@@ -293,7 +293,7 @@ void SetTrackData(int xPos, int yPos, UIEvent event){
 					new = 255+event.change;
 				}
 			}else{
-				new=clamp(new+event.horizontal+event.vertical*12,1,254);
+				new=clamp(new+event.horizontal+event.vertical*konAudio.notesInScale,1,254);
 			}
 			//printf("freq: %f\n",konAudio.frequencies[new-1]);
 		}else if (xPos==2){
@@ -434,8 +434,10 @@ uint8_t instrumentIndex = 0;
 
 
 void SetOpSynth(int xPos, int yPos, UIEvent event){
+	strcpy(helpString,"synth generator");
+
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-	if(event.type == UIChange || event.type == UIPlace){
+	if(event.type == UIChange || event.type == UIPlace ){
 		if(event.change){
 			free(synthList);
 			synthList = ListPath("assets/synths",".LUA",&synthCount);
@@ -459,24 +461,52 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 
 		LoadLuaFile(path);
 
-		int params = CountLuaParam(path);
+		int params = clamp(CountLuaParam(path),0,29);
 
-		params=clamp(params,0,256);
+		params=clamp(params,0,256)+3;
+
+		if(params<instrument->macroCount){
+			for(int i=params;i<instrument->macroCount;i++){
+				if(instrument->macros[i].length){
+					free(instrument->macros[i].data);
+					instrument->macros[i].length=0;
+				}
+			}
+		}
 
 		instrument->macroCount=params;
 
-		for(int i=0;i<params;i++){
-			int defaultValue = GetLuaParam(path,i,instrument->macros[i].name);
+		strcpy(instrument->macros[0].name,"pitch");
+		strcpy(instrument->macros[1].name,"volume l");
+		strcpy(instrument->macros[2].name,"volume r");
+		instrument->macros[0].defaultValue=64;
+		instrument->macros[1].defaultValue=255;
+		instrument->macros[2].defaultValue=255;
+
+		instrument->macros[0].loopStart=1;
+		instrument->macros[1].loopStart=1;
+		instrument->macros[2].loopStart=1;
+
+		for(int i=3;i<params;i++){
+			int defaultValue = GetLuaParam(path,i-3,instrument->macros[i].name);
 			if(defaultValue>=0){
 				instrument->macros[i].defaultValue = defaultValue;
+				if(instrument->macros[i].length==0){
+					instrument->macros[i].loopStart=1;
+				}
 			}
 		}
 		instrument->selectedMacro=0;
 
 	}else if(event.type == UIDelete){
 		strcpy(instrument->selectedSynth,"");
+		for(int i=3;i<instrument->macroCount;i++){
+			if(instrument->macros[i].length){
+				free(instrument->macros[i].data);
+				instrument->macros[i].length=0;
+			}
+		}
 		instrument->macroCount=0;
-		//delete macros...?
 	}
 }
 
@@ -493,7 +523,8 @@ void DrawOpSynth(int xPos, int yPos, bool selected){
 }
 
 void SetOpEffect(int xPos, int yPos, UIEvent event){
-	
+	strcpy(helpString,"synth effect");
+
 }
 
 void DrawOpEffect(int xPos, int yPos, bool selected){
@@ -501,6 +532,14 @@ void DrawOpEffect(int xPos, int yPos, bool selected){
 }
 
 void SetOpName(int xPos, int yPos, UIEvent event){
+	switch(xPos){
+	case 0:
+		strcpy(helpString,"instrument index");
+		break;
+	case 1:
+		strcpy(helpString,"instrument name");
+		break;
+	}
 	if(event.type == UIChange){
 		if(xPos==0){
 			instrumentIndex=clamp(instrumentIndex+event.change,0,254);
@@ -516,6 +555,8 @@ void DrawOpName(int xPos, int yPos, bool selected){
 
 
 void SetOpMacro(int xPos, int yPos, UIEvent event){
+	strcpy(helpString,"param modulation");
+	
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
 	if(event.type == UIMove || event.type == UIMoveRepeat){
 		instrument->selectedMacro=clamp(instrument->selectedMacro+event.horizontal,0,instrument->macroCount-1);
@@ -549,6 +590,43 @@ void DrawOpMacro(int xPos, int yPos, bool selected){
 }
 
 void SetOpFlags(int xPos, int yPos, UIEvent event){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+
+	if(!instrument->macroCount)
+		return;
+
+	switch(xPos){
+	case 0:
+		strcpy(helpString,"speed (in ticks)");
+		break;
+	case 1:
+		strcpy(helpString,"loop start");
+		break;
+	case 2:
+		strcpy(helpString,"loop end");
+		break;
+	case 3:
+		if(macro->flags){
+			strcpy(helpString,"linear interpolation");
+		}else{
+			strcpy(helpString,"nearest neighbor");
+		}
+		
+		break;
+	}
+
+	if(event.type==UIChange){
+		if(xPos==0){
+			macro->speed=clamp(event.change+macro->speed,0,255);
+		}else if(xPos==1){
+			macro->loopStart=clamp(event.change+macro->loopStart,0,macro->length);
+		}else if(xPos==2){
+			macro->loopEnd=clamp(event.change+macro->loopEnd,0,macro->length);
+		}else{
+			macro->flags=clamp(event.change+macro->flags,0,1);
+		}
+	}
 }
 
 void DrawOpFlags(int xPos, int yPos, bool selected){
@@ -562,7 +640,26 @@ void DrawOpFlags(int xPos, int yPos, bool selected){
 		PrintText(",1s    n    x    m",1,7);
 	}
 
-	HexSelected(0,3+xPos*5,7,selected,2,3,1,0);
+	int num=0;
+
+	if(xPos==0){
+		num=macro->speed;
+	}else if(xPos==1){
+		num=macro->loopStart;
+	}else{
+		num=macro->loopEnd;
+	}
+
+	if(xPos<3){
+		HexSelected(num,3+xPos*5,7,selected,2,3,1,0);
+	}else{
+		char* str = "n";
+		if(macro->flags){
+			str = "l";
+		}
+		PrintSelected(str,3+xPos*5,7,selected,2,3,1,0);
+	}
+	
 
 }
 
@@ -573,30 +670,37 @@ void SetOpData(int xPos, int yPos, UIEvent event){
 	if(!instrument->macroCount)
 		return;
 
-	int realPosition = xPos;
+	strcpy(helpString,"macro data");
+
+
+	if(event.type==UIMove || event.type==UIMoveRepeat){
+		macro->selectedStep=clamp(macro->selectedStep+event.horizontal,0,255);
+	}
+
+	int realPosition = macro->selectedStep;
 
 	if(event.type == UIPlace){
-		if(macro->data==NULL){
+		if(macro->length==0){
 			macro->data = calloc(realPosition+1,sizeof(uint8_t));
-			macro->data[0] = macro->defaultValue;
+			for(int i=0;i<realPosition+1;i++){
+				macro->data[i] = macro->defaultValue;
+			}
 			macro->length=realPosition+1;
 		}else if(realPosition>=macro->length){
 			macro->data = realloc(macro->data,sizeof(uint8_t)*(realPosition+1));
 			for(int i=macro->length;i<realPosition+1;i++){
-				macro->data[i]=0;
+				macro->data[i]=macro->data[macro->length-1];
 			}
 			macro->length=realPosition+1;
 		}
-		
 	}
 
 	if(event.type == UIDelete){
-		if(macro->data==NULL)
+		if(macro->length==0)
 			return;
 		if(realPosition<macro->length){
 			if(realPosition==0){
 				free(macro->data);
-				macro->data=NULL;
 				macro->length=0;
 				return;
 			}
@@ -606,11 +710,15 @@ void SetOpData(int xPos, int yPos, UIEvent event){
 	}
 
 	if(event.type == UIChange){
-		if(macro->data==NULL)
+		if(macro->length==0)
 			return;
 		if(realPosition>=macro->length)
 			return;
-		macro->data[realPosition]=clamp(macro->data[realPosition]+event.change,0,255);
+		int change = event.change;
+		if(instrument->selectedMacro==0){
+			change=event.horizontal+event.vertical*konAudio.notesInScale;
+		}
+		macro->data[realPosition]=clamp(macro->data[realPosition]+change,0,255);
 	}
 }
 
@@ -621,20 +729,21 @@ void DrawOpData(int xPos, int yPos, bool selected){
 	if(!instrument->macroCount)
 		return;
 
-	int len=1;
+	int opDataScroll=clamp(macro->selectedStep-8,0,238);
+	int selectedStep = opDataScroll+xPos;
+	selected=selectedStep==macro->selectedStep;
+
+	int len=macro->length;
 
 	int dataRaw=0;
 	int data=0;
 
-	if(macro->data!=NULL){
-		len=macro->length;
-	}
 
-	if(xPos<len){
-		if(macro->data==NULL){
-			dataRaw=macro->defaultValue;
+	if(selectedStep<len || selectedStep==0){
+		if(len){
+			dataRaw=macro->data[selectedStep];
 		}else{
-			dataRaw=macro->data[xPos];
+			dataRaw=macro->defaultValue;
 		}
 		data=(dataRaw*3)/16;
 		data+=1;
@@ -646,18 +755,32 @@ void DrawOpData(int xPos, int yPos, bool selected){
 		PrintSelected(".",xPos+1,16,selected,0,3,0,1);
 	}
 	
+	if(macro->loopEnd>=macro->loopStart){
+		if(selectedStep==macro->loopStart){
+			if(selectedStep==macro->loopEnd){
+				PrintSelected("B",xPos+1,8,0,2,3,2,1);
+			}else{
+				PrintSelected("(",xPos+1,8,0,2,3,2,1);
+			}
+		}else if(selectedStep==macro->loopEnd){
+			PrintSelected(")",xPos+1,8,0,2,3,2,1);
+		}
+	}
 
-	if( operatorPage.grids[5].xPos==xPos ){
-		if(xPos!=0){
-			PrintSelected("<",clamp(xPos,0,16),17,selected,2,3,2,1);
-		}
-		if(xPos!=17){
-			PrintSelected(">",xPos+3,17,selected,2,3,2,1);
-		}
+	if(opDataScroll){
+		PrintSelected("<",0,16,0,2,3,2,1);
+	}
+	if(opDataScroll<macro->length-18){
+		PrintSelected(">",19,16,0,2,3,2,1);
+	}
+
+	if( selected ){
+		int x=macro->selectedStep-opDataScroll;
+
 		if(data){
-			HexSelected(dataRaw,clamp(xPos,0,16)+1,17,selected,3,0,1,0);
+			HexSelected(dataRaw,clamp(x,0,16)+1,17,selected,3,0,1,0);
 		}else{
-			PrintSelected("nl",clamp(xPos,0,16)+1,17,selected,3,0,1,0);
+			PrintSelected("nl",clamp(x,0,16)+1,17,selected,3,0,1,0);
 		}
 		
 	}

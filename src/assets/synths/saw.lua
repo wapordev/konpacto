@@ -1,20 +1,5 @@
 _defaultParams = {
-	{"a",48},
-	{"bee",14},
-	{"c",255},
-	{"d",2},
-	{"e",2},
-	{"readfromlua",2},
-	{"g",2},
-	{"h",2},
-	{"i",2},
-	{"j",2},
-	{"k",2},
-	{"l",2},
-	{"m",2},
-	{"n",2},
-	{"o",2},
-	{"hihi",2},
+	{"volume",48},
 }
 
 function _init()
@@ -25,7 +10,7 @@ function _audioFrame(synthData)
 	local synthData = synthData
 	local phase = synthData[1]
 
-	local note = C.konGet(0)
+	local note = C.konGet(0)/44100
 
 	phase=phase+note
 	phase=phase%1
