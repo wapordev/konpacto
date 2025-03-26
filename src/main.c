@@ -18,6 +18,7 @@
 #include "screen.h"
 #include "ui.h"
 #include "pages.h"
+#include "file.h"
 #include "lua.h"
 
 const float SCREEN_FPS = 30;
@@ -29,6 +30,7 @@ int num = 0;
 int main(int argc, char* argv[])
 {
 	// Initialization code
+	LoadConfig();
 	InitializeLua();
 	InitializeScreen();
 	InitializeSound();

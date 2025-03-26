@@ -29,18 +29,43 @@ char** fontList;
 int synthCount=0;
 char** synthList;
 
+void GetThemes(){
+	if(themeList!=NULL){
+		for(int i=0; i<themeCount; i++){
+			free(themeList[i]);
+		}
+		free(themeList);
+	}
+	themeList = ListPath("assets/palettes",".PNG",&themeCount);
+}
+
+void MatchTheme(char* themeName){
+	GetThemes();
+	for(int i=0;i<themeCount;i++){
+		if(strcmp(themeList[i],themeName)==0){
+			themeIndex=i;
+			return;
+		}
+	}
+}
+
 void SetTheme(int xPos, int yPos, UIEvent event) {
 	strcpy(helpString,"4x1png assets/themes");
 	if(event.type!=UIChange){return;}
 	int change = event.change;
-	for(int i=0; i<themeCount; i++){
-		free(themeList[i]);
-	}
-	free(themeList);
-	themeList = ListPath("assets/palettes",".PNG",&themeCount);
+
+	MatchTheme(configTheme);
 
 	themeIndex=positive_modulo(themeIndex+change,themeCount);
 	ChangeTheme(themeList[themeIndex]);
+
+	free(configTheme);
+	int length=strlen(themeList[themeIndex]);
+	configTheme = malloc(length+1);
+	strcpy(configTheme,themeList[themeIndex]);
+	configTheme[length]='\0';
+
+	SaveConfig();
 }
 
 void DrawTheme(int xPos, int yPos, bool selected) {
@@ -72,18 +97,43 @@ void DrawTheme(int xPos, int yPos, bool selected) {
 	}
 }
 
+void GetFonts(){
+	if(fontList!=NULL){
+		for(int i=0; i<fontCount; i++){
+			free(fontList[i]);
+		}
+		free(fontList);
+	}
+	fontList = ListPath("assets/fonts",".BMP",&fontCount);
+}
+
+void MatchFont(char* fontName){
+	GetFonts();
+	for(int i=0;i<fontCount;i++){
+		if(strcmp(fontList[i],fontName)==0){
+			fontIndex=i;
+			return;
+		}
+	}
+}
+
 void SetFont(int xPos, int yPos, UIEvent event) {
 	strcpy(helpString,"16x8chr assets/fonts");
 	if(event.type!=UIChange){return;}
 	int change = event.change;
-	for(int i=0; i<fontCount; i++){
-		free(fontList[i]);
-	}
-	free(fontList);
-	fontList = ListPath("assets/fonts",".BMP",&fontCount);
+
+	MatchFont(configFont);
 
 	fontIndex=positive_modulo(fontIndex+change,fontCount);
 	ChangeFont(fontList[fontIndex]);
+
+	free(configFont);
+	int length=strlen(fontList[fontIndex]);
+	configFont = malloc(length+1);
+	strcpy(configFont,fontList[fontIndex]);
+	configFont[length]='\0';
+
+	SaveConfig();
 }
 
 void DrawFont(int xPos, int yPos, bool selected) {
@@ -91,10 +141,13 @@ void DrawFont(int xPos, int yPos, bool selected) {
 }
 
 void InitializePages(){
-	themeList = ListPath("assets/palettes",".PNG",&themeCount);
+	//themeList = ListPath("assets/palettes",".PNG",&themeCount);
+	MatchTheme(configTheme);
 	ChangeTheme(themeList[themeIndex]);
-	fontList = ListPath("assets/fonts",".BMP",&fontCount);
-	ChangeFont(fontList[0]);
+	//fontList = ListPath("assets/fonts",".BMP",&fontCount);
+	MatchFont(configFont);
+	ChangeFont(fontList[fontIndex]);
+	
 	synthList = ListPath("assets/synths",".LUA",&synthCount);
 
 	uint8_t octaveNumber = 0;

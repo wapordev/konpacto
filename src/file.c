@@ -44,6 +44,111 @@ int EndsWith(const char *str, const char *suffix)
 double referenceFrequency = 440.0;
 int referenceNote = 69;
 
+
+int configSampleRate = 44100;
+int configBufferSize = 512;
+char* configTheme = NULL;
+char* configFont = NULL;
+
+const char* format = "%i -SAMPLE RATE\n%i -BUFFER SIZE\n%s -THEME\n%s -FONT\n";
+
+void SaveConfig(){
+
+	int size = snprintf(NULL,0,format,configSampleRate,configBufferSize,configTheme,configFont);
+	char* buffer = malloc(sizeof(char)*(size+1));
+
+	if(buffer){
+
+		sprintf(buffer,format,configSampleRate,configBufferSize,configTheme,configFont);
+
+		SDL_RWops* rwops = SDL_RWFromFile("config.txt", "w+");
+
+		if(!rwops){
+			free(buffer);
+			printf("failed to open config to write");
+			return;
+		}
+
+
+		SDL_RWwrite(rwops,buffer,sizeof(char),size);
+
+		free(buffer);
+
+		SDL_RWclose(rwops);
+
+	}else{
+		printf("failed to save config!");
+		return;
+	}
+
+	
+}
+
+void LoadConfig(){
+	printf("** CONFIG LOAD\n\n");
+	SDL_RWops* rwops = SDL_RWFromFile("config.txt", "r");
+	if(!rwops){
+		printf("failed to open config");
+		return;
+	}
+
+	const int64_t dataSize = SDL_RWsize(rwops);
+
+	char* data = malloc(dataSize);
+	if(!data){return;}
+
+	int64_t readAmount = SDL_RWread(rwops, data, dataSize, 1);
+	SDL_RWclose(rwops);
+
+	if(readAmount==0){
+		printf("failed to read config");
+		free(data);
+		return;
+	}
+
+	char* currentChar = &data[0];
+
+	configSampleRate = strtol(currentChar,NULL,10);
+	printf("sample rate: %i\n",configSampleRate);
+
+	currentChar = strchr(currentChar,'\n')+1;
+
+	configBufferSize = strtol(currentChar,NULL,10);
+	printf("buffer size: %i\n",configBufferSize);
+
+	for(int i=0;i<2;i++){
+		currentChar = strchr(currentChar,'\n')+1;
+
+		char* firstSpace = strchr(currentChar,' ');
+		char* firstBreak = strchr(currentChar,'\n');
+		if(firstSpace<firstBreak || firstBreak==NULL)
+			firstBreak=firstSpace;
+		firstBreak-=1;
+
+		int length = firstBreak-currentChar;
+		length+=1;
+		if(length){
+			char* dest = malloc(sizeof(char)*(length+1));
+			strncpy(dest,currentChar,length);
+			dest[length]='\0';
+
+			if(configTheme==NULL){
+				configTheme=dest;
+			}else{
+				configFont=dest;
+			}
+
+			printf("found: %s\n",dest);
+		}else{
+			printf("failed to find default theme and font\n");
+		}
+	}
+	printf("\n");
+
+	free(data);
+}
+
+
 void SetScale(KonAudio* konAudio, const char* scalePath){
 	SDL_RWops* rwops = SDL_RWFromFile(scalePath, "r");
 	if(!rwops){

@@ -19,6 +19,7 @@ void InitializeLua(){
 
 	luaL_dostring(lua,
 	"\
+	sampleRate = 44100 \
 	local ffi = require('ffi') \
 	ffi.cdef'double konGet(int index);' \
 	ffi.cdef'void konOut(double left, double right);' \
@@ -44,7 +45,8 @@ void InitializeLua(){
 			clamp = math.clamp, \
 			sin = math.sin, \
 			pi = math.pi, \
-			C = ffi.C \
+			C = ffi.C, \
+			sampleRate = sampleRate \
 		} \
 		setfenv(untrusted,env) \
 		local result, message = pcall(untrusted) \
@@ -115,6 +117,11 @@ void InitializeLua(){
 	end \
 	"
 	);
+
+
+	lua_pushinteger(lua,configSampleRate);
+
+	lua_setglobal(lua,"sampleRate");
 }
 
 int CheckLuaError(int result, int index, char* synthPath){

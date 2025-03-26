@@ -13,8 +13,6 @@
 
 #include "file.h"
 
-#define SAMPLE_RATE (44100)
-
 SDL_AudioDeviceID deviceId;
 
 #ifdef MMIYOO
@@ -47,11 +45,11 @@ void callback(void *userdata, Uint8 * stream, int len){
 void InitializeSound(){
 	SDL_AudioSpec idealSpec =
 	{
-		44100,  				//44.1khz
+		configSampleRate,  				//44.1khz
 		AUDIO_FORMAT,   			//32 S int
 		2,
 		0,
-		512, 					//buffer size 512 for miyoo!
+		configBufferSize, 					//buffer size 512 for miyoo!
 		0,
 		0,
 		callback,
@@ -75,7 +73,7 @@ void InitializeSound(){
 	printf("Number of channels: %i\n", returnedSpec.channels);
 	printf("Audio format: %i\n", returnedSpec.format);
 
-	konInit(&konAudio,44100,sizeof(AUDIO_TYPE),2);
+	konInit(&konAudio,configSampleRate,sizeof(AUDIO_TYPE),2);
 
 	SetScale(&konAudio,"assets/scales/12tet.scl");
 	SDL_PauseAudioDevice(deviceId,0);

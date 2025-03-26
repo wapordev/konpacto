@@ -284,7 +284,7 @@ void ScreenResize(int fontW, int fontH) {
     );
 }
 
-void ChangeFont(char* fontName) {
+int ChangeFont(char* fontName) {
     char* path;
 
     char* pathPrefix = "assets/fonts/";
@@ -299,16 +299,18 @@ void ChangeFont(char* fontName) {
 
     if (font == NULL) {
         printf("Font could not initialize! SDL_image Error: %s\n", SDL_GetError());
-        exit(EXIT_FAILURE);
+        return 0;
     }
 
     charWidth = font->w/16;
     charHeight = font->h/8;
 
     ScreenResize(charWidth,charHeight);
+
+    return 1;
 }
 
-void ChangeTheme(char* themeName) {
+int ChangeTheme(char* themeName) {
     char* path;
 
     char* pathPrefix = "assets/palettes/";
@@ -324,7 +326,7 @@ void ChangeTheme(char* themeName) {
 
     if (theme == NULL) {
         printf("Theme could not initialize! SDL_image Error: %s\n", SDL_GetError());
-        exit(EXIT_FAILURE);
+        return 0;
     }
     for(int i=0;i<4;i++){
 
@@ -343,6 +345,8 @@ void ChangeTheme(char* themeName) {
 
     }
     SDL_FreeSurface(theme);
+
+    return 1;
 }
 
 // Function to initialize SDL components

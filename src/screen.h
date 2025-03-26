@@ -10,9 +10,9 @@ void InitializeScreen();
 
 void ToggleFullscreen();
 
-void ChangeFont(char* fontName);
+int ChangeFont(char* fontName);
 
-void ChangeTheme(char* fontName);
+int ChangeTheme(char* fontName);
 
 void CleanupScreen();
 

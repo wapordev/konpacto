@@ -5,6 +5,10 @@
 
 #include <stdbool.h>
 
+void LoadConfig();
+
+void SaveConfig();
+
 int clamp(int d, int min, int max);
 
 double lerp(double a, double b, double f);
@@ -22,5 +26,10 @@ int FindStringInList(char** list, int count, char* string);
 void SetScale(KonAudio* konAudio, const char* scalePath);
 
 void FreePath();
+
+extern int configSampleRate;
+extern int configBufferSize;
+extern char* configTheme;
+extern char* configFont;
 
 #endif
