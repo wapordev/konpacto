@@ -71,7 +71,7 @@ void put32(uint32_t val, FILE *fp)
     putc((val >> 24) & 0xff, fp);
 }
 
-const int segmentCount = 4;
+const int segmentCount = 5;
 
 void LoadSong(char* path){
 
@@ -103,9 +103,10 @@ void LoadSong(char* path){
 		grooveStartOffset = get32(f);
 	if (fileSegments > 3)
 		instrumentStartOffset = get32(f);
+	if (fileSegments > 4)
+		segmentEnd = get32(f);
 
 	if (fileSegments > segmentCount){
-		segmentEnd = get32(f);
 		fseek(f,4*(fileSegments-segmentCount-1),SEEK_CUR);
 	}
 
@@ -127,10 +128,10 @@ void LoadSong(char* path){
 		KonTrack* track = &konAudio.tracks[i];
 		track->length = getc(f);
 		track->grooveIndex = getc(f);
-		track->steps = malloc(track->length*sizeof(KonStep));
+		track->steps = malloc((track->length+1)*sizeof(KonStep));
 		track->temporaryLength = track->length;
 
-		for(int j=0;j<track->length;j++){
+		for(int j=0;j<track->length+1;j++){
 			KonStep* step = &track->steps[j];
 			step->note=getc(f);
 			step->instrument=getc(f);
@@ -141,6 +142,65 @@ void LoadSong(char* path){
 			step->param3=getc(f);
 		}
 	}
+
+	//groove
+	while(ftell(f)<instrumentStartOffset){
+
+	}
+
+	while(ftell(f)<segmentEnd){
+		int i = getc(f);
+		KonInstrument* instrument = &konAudio.instruments[i];
+
+		for(int j=0;j<sizeof(instrument->name);j++){
+			instrument->name[j]=getc(f);
+		}
+		for(int j=0;j<sizeof(instrument->selectedSynth);j++){
+			instrument->selectedSynth[j]=getc(f);
+		}
+		for(int j=0;j<sizeof(instrument->synthEffect);j++){
+			instrument->synthEffect[j]=getc(f);
+		}
+
+		int macroCount = getc(f);
+		int effectCount = getc(f);
+
+
+		setInstrument(i,instrument->selectedSynth);
+		setEffect(i,instrument->synthEffect);
+
+		for(int j=0;j<macroCount;j++){
+			KonMacro* macro = &instrument->macros[j];
+
+			macro->defaultValue = getc(f);
+			macro->speed = getc(f);
+			macro->min = getc(f);
+			macro->max = getc(f);
+			macro->flags = getc(f);
+			macro->loopStart = getc(f);
+			macro->loopEnd = getc(f);
+			macro->length = getc(f);
+
+			macro->data = malloc(sizeof(uint8_t)*macro->length);
+
+			for(int k=0;k<macro->length;k++){
+				macro->data[k] = getc(f);
+			}
+
+		}
+
+		//effect macros
+		// for(int j=32;j<(effectCount+32);j++){
+		// 	KonMacro* macro = &instrument->macros[j];
+			
+		// }
+
+		
+
+
+	}
+
+
 
 
 
@@ -169,6 +229,7 @@ void SaveSong(char* path){
 	uint32_t trackStartOffset = 0;
 	uint32_t grooveStartOffset = 0;
 	uint32_t instrumentStartOffset = 0;
+	uint32_t segmentEnd = 0;
 
 
 	//number of segments
@@ -201,7 +262,7 @@ void SaveSong(char* path){
 		putc(track->length,f);
 		putc(track->grooveIndex,f);
 
-		for(int j=0;j<track->length;j++){
+		for(int j=0;j<track->length+1;j++){
 			KonStep* step = &track->steps[j];
 			putc(step->note,f);
 			putc(step->instrument,f);
@@ -235,9 +296,9 @@ void SaveSong(char* path){
 		for (int j=0;j<instrument->macroCount;j++){
 			KonMacro* macro = &instrument->macros[j];
 
-			for(int k=0;k<sizeof(macro->name);k++){
-				putc(macro->name[k],f);
-			}
+			// for(int k=0;k<sizeof(macro->name);k++){
+			// 	putc(macro->name[k],f);
+			// }
 			putc(macro->defaultValue,f);
 			putc(macro->speed,f);
 			putc(macro->min,f);		
@@ -256,6 +317,8 @@ void SaveSong(char* path){
 
 	}
 
+	segmentEnd = ftell(f);
+
 	//write offsets
 	fseek(f,1,SEEK_SET);
 
@@ -263,6 +326,7 @@ void SaveSong(char* path){
 	put32(trackStartOffset,f);
 	put32(grooveStartOffset,f);
 	put32(instrumentStartOffset,f);
+	put32(segmentEnd,f);
 
 	fclose(f);
 
