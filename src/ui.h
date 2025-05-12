@@ -9,6 +9,18 @@ extern char helpString[21];
 extern int arrangeScroll;
 extern int trackScroll;
 
+typedef enum {
+    ContextSaveSong,
+    ContextLoadSong,
+    ContextSample,
+} FileContext;
+
+extern FileContext fileContext;
+
+void SetContextPage(FileContext newContext);
+
+void QuitContext();
+
 void RenderUI();
 
 void InitializePages();
@@ -24,6 +36,8 @@ typedef enum {
     UIMove,
     UIMoveRepeat
 } UIEventType;
+
+
 
 typedef struct UIEvent {
 	UIEventType type;

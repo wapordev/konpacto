@@ -5,6 +5,10 @@
 
 #include <stdbool.h>
 
+void SaveSong(char* path);
+
+void LoadSong(char* path);
+
 void LoadConfig();
 
 void SaveConfig();

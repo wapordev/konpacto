@@ -52,6 +52,223 @@ char* configFont = NULL;
 
 const char* format = "%i -SAMPLE RATE\n%i -BUFFER SIZE\n%s -THEME\n%s -FONT\n";
 
+int32_t get32(FILE *fp)
+{
+    int32_t ret = 0;
+    ret |= getc(fp);
+    ret |= getc(fp) << 8;
+    ret |= (uint32_t)getc(fp) << 16;
+    ret |= (uint32_t)getc(fp) << 24;
+    return ret;
+}
+
+/* write a 4-byte little-endian integer */
+void put32(uint32_t val, FILE *fp)
+{
+    putc( val        & 0xff, fp);
+    putc((val >>  8) & 0xff, fp);
+    putc((val >> 16) & 0xff, fp);
+    putc((val >> 24) & 0xff, fp);
+}
+
+const int segmentCount = 4;
+
+void LoadSong(char* path){
+
+	FILE *f = fopen(path, "rb");
+	
+	if (f == NULL)
+	{
+	    printf("Error opening file when loading song!\n");
+	    return;
+	}
+	lockAudio();
+
+	clearSong(&konAudio);
+
+	uint8_t fileSegments = getc(f);
+
+	uint32_t arrangeStartOffset = 0;
+	uint32_t trackStartOffset = 0;
+	uint32_t grooveStartOffset = 0;
+	uint32_t instrumentStartOffset = 0;
+
+	uint32_t segmentEnd = 0;
+
+	if (fileSegments > 0)
+		arrangeStartOffset = get32(f);
+	if (fileSegments > 1)
+		trackStartOffset = get32(f);
+	if (fileSegments > 2)
+		grooveStartOffset = get32(f);
+	if (fileSegments > 3)
+		instrumentStartOffset = get32(f);
+
+	if (fileSegments > segmentCount){
+		segmentEnd = get32(f);
+		fseek(f,4*(fileSegments-segmentCount-1),SEEK_CUR);
+	}
+
+	//read project info
+
+
+	//arrangements
+	fseek(f,arrangeStartOffset,SEEK_SET);
+	for(int i=0;i<256;i++){
+		KonArrangements* arrangement = &konAudio.arrangements[i];
+		for (int j=0;j<8;j++){
+			arrangement->trackIndexes[j] = getc(f);
+		}
+		arrangement->jumpIndex = getc(f);
+	}
+
+	while(ftell(f)<grooveStartOffset){
+		int i = getc(f);
+		KonTrack* track = &konAudio.tracks[i];
+		track->length = getc(f);
+		track->grooveIndex = getc(f);
+		track->steps = malloc(track->length*sizeof(KonStep));
+		track->temporaryLength = track->length;
+
+		for(int j=0;j<track->length;j++){
+			KonStep* step = &track->steps[j];
+			step->note=getc(f);
+			step->instrument=getc(f);
+			step->velocity=getc(f);
+			step->command=getc(f);
+			step->param1=getc(f);
+			step->param2=getc(f);
+			step->param3=getc(f);
+		}
+	}
+
+
+
+
+	fclose(f);
+
+	unlockAudio();
+}
+
+void SaveSong(char* path){
+	FILE *f = fopen(path, "wb");
+
+	if (f == NULL)
+	{
+	    printf("Error opening file when saving song!\n");
+	    return;
+	}
+
+	//just in case
+	lockAudio();
+
+	//saving! yay
+
+	
+	uint32_t arrangeStartOffset = 0;
+	uint32_t trackStartOffset = 0;
+	uint32_t grooveStartOffset = 0;
+	uint32_t instrumentStartOffset = 0;
+
+
+	//number of segments
+	putc(segmentCount,f);
+
+	fseek(f,4*segmentCount,SEEK_CUR);
+
+	//song information
+
+	//arrangements
+	arrangeStartOffset=ftell(f);
+
+	for (int i=0;i<256;i++){
+		KonArrangements* arrangement = &konAudio.arrangements[i];
+		for (int j=0;j<8;j++){
+			putc(arrangement->trackIndexes[j],f);
+		}
+		putc(arrangement->jumpIndex,f);
+	}
+
+	//tracks
+	trackStartOffset=ftell(f);
+
+	for (int i=0;i<255;i++){
+		KonTrack* track = &konAudio.tracks[i];
+		if(konTrackIsEmpty(track))
+			continue;
+		//track header
+		putc(i,f);
+		putc(track->length,f);
+		putc(track->grooveIndex,f);
+
+		for(int j=0;j<track->length;j++){
+			KonStep* step = &track->steps[j];
+			putc(step->note,f);
+			putc(step->instrument,f);
+			putc(step->velocity,f);
+			putc(step->command,f);
+			putc(step->param1,f);
+			putc(step->param2,f);
+			putc(step->param3,f);
+		}
+	}
+
+	grooveStartOffset=ftell(f);
+	instrumentStartOffset=ftell(f);
+
+	for (int i=0;i<255;i++){
+		KonInstrument* instrument = &konAudio.instruments[i];
+		if(instrument->selectedSynth[0] == 0)
+			continue;
+		putc(i,f);
+		for(int j=0;j<sizeof(instrument->name);j++)
+			putc(instrument->name[j],f);
+		for(int j=0;j<sizeof(instrument->selectedSynth);j++)
+			putc(instrument->selectedSynth[j],f);
+		for(int j=0;j<sizeof(instrument->synthEffect);j++)
+			putc(instrument->synthEffect[j],f);
+		putc(instrument->macroCount,f);
+		putc(instrument->effectCount,f);
+
+		//macros
+
+		for (int j=0;j<instrument->macroCount;j++){
+			KonMacro* macro = &instrument->macros[j];
+
+			for(int k=0;k<sizeof(macro->name);k++){
+				putc(macro->name[k],f);
+			}
+			putc(macro->defaultValue,f);
+			putc(macro->speed,f);
+			putc(macro->min,f);		
+			putc(macro->max,f);
+			putc(macro->flags,f);
+			putc(macro->loopStart,f);
+			putc(macro->loopEnd,f);
+			putc(macro->length,f);
+
+			//printf("length %i, isnull %i\n",macro->length,macro->data==NULL);
+
+			for(int k=0;k<macro->length;k++){
+				putc(macro->data[k],f);
+			}
+		}
+
+	}
+
+	//write offsets
+	fseek(f,1,SEEK_SET);
+
+	put32(arrangeStartOffset,f);
+	put32(trackStartOffset,f);
+	put32(grooveStartOffset,f);
+	put32(instrumentStartOffset,f);
+
+	fclose(f);
+
+	unlockAudio();
+}
+
 void SaveConfig(){
 
 	int size = snprintf(NULL,0,format,configSampleRate,configBufferSize,configTheme,configFont);
@@ -150,6 +367,8 @@ void LoadConfig(){
 
 
 void SetScale(KonAudio* konAudio, const char* scalePath){
+	printf("** SCALE LOAD\n\n");
+
 	SDL_RWops* rwops = SDL_RWFromFile(scalePath, "r");
 	if(!rwops){
 		printf("failed to open %s",scalePath);
@@ -281,7 +500,7 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 
 	printf("Reference frequency: %f\n",referenceFrequency);
 	printf("Reference note: %i\n",referenceNote);
-	printf("Loaded scale %s, %i notes read\n",scalePath,scaleSize);
+	printf("Loaded scale %s, %i notes read\n\n",scalePath,scaleSize);
 
 	konAudio->notesInScale=scaleSize;
 	

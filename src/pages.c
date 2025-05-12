@@ -141,7 +141,8 @@ void DrawFont(int xPos, int yPos, bool selected) {
 }
 
 void InitializePages(){
-	//themeList = ListPath("assets/palettes",".PNG",&themeCount);
+	printf("** FILE LISTS\n\n");
+
 	MatchTheme(configTheme);
 	ChangeTheme(themeList[themeIndex]);
 	//fontList = ListPath("assets/fonts",".BMP",&fontCount);
@@ -162,51 +163,42 @@ void InitializePages(){
 		octaveNumber+=notesThisOctave/12;
 		notesThisOctave%=12;
 	}
+	printf("\n");
 }
 
-int noFile[15]={0x2E,0x27,0x27,0x1A,0x26,0x1E,0x1D,0,0x1F,0x22,0x25,0x1E,0x5};
-int fileName[15];
-int lastChar = 0x1A;
+void SetBPM(int xPos, int yPos, UIEvent event){
+	
+}
 
-void SetFile(int xPos, int yPos, UIEvent event){
-	if(event.type == UIDelete){
-		for(int i=xPos; i<15; i++){
-			fileName[i]=0;
-		}
-	}else {
-		if(event.type == UIPlace){
-			if(fileName[xPos] == 0){
-				if(fileName[0]==0){
-					lastChar=0x1A;
-				}
-				fileName[xPos] = lastChar;
-				for(int i=0; i<xPos; i++){
-					if(fileName[i]==0){
-						fileName[i]=4;
-					}
-				}
-			}else{
-				lastChar = fileName[xPos];
-			}
-			fileName[xPos] = positive_modulo(fileName[xPos]-1,0x33)+1;
-		}
+void DrawBPM(int xPos, int yPos, bool selected){
+	DecSelected(255,4,3,selected,2,3,1,0);
+}
 
-		if(event.type == UIChange){
-			fileName[xPos] += event.change;
-			if(fileName[xPos]!=0){
-				lastChar = fileName[xPos];
-			}
-			fileName[xPos] = positive_modulo(fileName[xPos]-1,0x33)+1;
+void SetSave(int xPos, int yPos, UIEvent event){
+	if(event.type == UIPlace){
+		if(xPos==0) {
+			SaveSong("soso.kpt");
+		}else if (xPos==1) {
+			SetContextPage(ContextSaveSong);
+		}else {
+			//SetContextPage(ContextLoadSong);
+			LoadSong("soso.kpt");
 		}
 	}
 }
 
-void DrawFile(int xPos, int yPos, bool selected){
-	int* chr = &fileName[0];
-	if(fileName[0]==0){
-		chr = &noFile[0];
+void DrawSave(int xPos, int yPos, bool selected){
+	if(xPos == 0){
+		PrintSelected("save",1,4,selected,2,3,1,0);
+	}else if (xPos == 1) {
+		if(selected){
+			PrintColor("XXXXXas",1,4,1,0,false);
+		}else{
+			PrintText("as",6,4);
+		}
+	}else{
+		PrintSelected("load",9,4,selected,2,3,1,0);
 	}
-	PokeSelected(65+xPos,chr[xPos],selected,2,3,1,0);
 }
 
 void ScrollGrid(int* scroll, int* yPos, int length, UIEvent event){
@@ -508,49 +500,8 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 
 		strcpy(instrument->selectedSynth,synthList[synthIndex]);
 
-		char path[64]="assets/synths/";
-
-		strcat(path,synthList[synthIndex]);
-
-		LoadLuaFile(path);
-
-		int params = clamp(CountLuaParam(path),0,29);
-
-		params=clamp(params,0,256)+3;
-
-		if(params<instrument->macroCount){
-			for(int i=params;i<instrument->macroCount;i++){
-				if(instrument->macros[i].length){
-					free(instrument->macros[i].data);
-					instrument->macros[i].length=0;
-				}
-			}
-		}
-
-		instrument->macroCount=params;
-
-		strcpy(instrument->macros[0].name,"pitch");
-		strcpy(instrument->macros[1].name,"volume l");
-		strcpy(instrument->macros[2].name,"volume r");
-		instrument->macros[0].defaultValue=64;
-		instrument->macros[1].defaultValue=255;
-		instrument->macros[2].defaultValue=255;
-
-		instrument->macros[0].loopStart=1;
-		instrument->macros[1].loopStart=1;
-		instrument->macros[2].loopStart=1;
-
-		for(int i=3;i<params;i++){
-			int defaultValue = GetLuaParam(path,i-3,instrument->macros[i].name);
-			if(defaultValue>=0){
-				instrument->macros[i].defaultValue = defaultValue;
-				if(instrument->macros[i].length==0){
-					instrument->macros[i].loopStart=1;
-				}
-			}
-		}
-		instrument->selectedMacro=0;
-
+		setInstrument(instrumentIndex,synthList[synthIndex]);
+		
 	}else if(event.type == UIDelete){
 		strcpy(instrument->selectedSynth,"");
 		for(int i=3;i<instrument->macroCount;i++){
@@ -839,10 +790,60 @@ void DrawOpData(int xPos, int yPos, bool selected){
 	}
 }
 
-UIPage projectPage = {0,3,(UIGrid[3]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(15,1,&SetFile,&DrawFile)} };
+void SetFileName(int xPos, int yPos, UIEvent event){
+
+}
+
+void DrawFileName(int xPos, int yPos, bool selected){
+	PrintSelected("testname",0,2,selected,0,3,1,0);
+}
+
+void SetFileConfirm(int xPos, int yPos, UIEvent event){
+	if(event.type == UIPlace){
+		if(xPos == 0){
+
+		}else{
+			QuitContext();
+		}
+	}
+}
+
+void DrawFileConfirm(int xPos, int yPos, bool selected){
+	if(xPos==0){
+		PrintSelected("confirm",1,3,selected,2,3,1,0);
+	}else{
+		PrintSelected("cancel",9,3,selected,2,3,1,0);
+	}
+}
+
+void SetFileCancel(int xPos, int yPos, UIEvent event){
+	if(event.type == UIPlace){
+		QuitContext();
+	}
+}
+
+void DrawFileCancel(int xPos, int yPos, bool selected){
+	PrintSelected("cancel",1,1,selected,2,3,1,0);
+}
+
+
+
+void SetFileBrowse(int xPos, int yPos, UIEvent event){
+
+}
+
+void DrawFileBrowse(int xPos, int yPos, bool selected){
+	
+}
+
+UIPage projectPage = {0,5,(UIGrid[5]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(1,1,&SetBPM,&DrawBPM),CreateGrid(3,1,&SetSave,&DrawSave)} };
 
 UIPage arrangePage = {0,1,(UIGrid[1]){CreateGrid(9,16,&SetArrange,&DrawArrange)}};
 
 UIPage trackPage = {0,2,(UIGrid[2]){CreateGrid(3,1,&SetTrackInfo,&DrawTrackInfo),CreateGrid(7,16,&SetTrackData,&DrawTrackData)}};
 
 UIPage operatorPage = {0,6,(UIGrid[6]){CreateGrid(2,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpEffect,&DrawOpEffect),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(4,1,&SetOpFlags,&DrawOpFlags),CreateGrid(18,1,&SetOpData,&DrawOpData)}};
+
+UIPage saveFilePage = {0,3,(UIGrid[3]){CreateGrid(20,1,&SetFileName,&DrawFileName),CreateGrid(2,1,&SetFileConfirm,&DrawFileConfirm),CreateGrid(1,18,&SetFileBrowse,&DrawFileBrowse)}};
+
+UIPage loadFilePage = {0,2,(UIGrid[2]){CreateGrid(1,1,&SetFileCancel,&DrawFileCancel),CreateGrid(1,18,&SetFileBrowse,&DrawFileBrowse)}};

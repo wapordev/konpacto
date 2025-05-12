@@ -40,6 +40,10 @@ void PokeSelected(int pos, int chr, bool selected, int col0, int col1, int col2,
 
 void PrintHex(int input, int xPos, int yPos, int bg_color, int fg_color);
 
+void PrintDec(int input, int xPos, int yPos, int bg_color, int fg_color);
+
+void DecSelected(int input, int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3);
+
 void HexSelected(int input, int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3);
 
 void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3);

@@ -68,10 +68,6 @@ void InitializeSound(){
 	
 
 	returnedSpec = idealSpec;
-	
-	printf("Frequency: %i\n", returnedSpec.freq);
-	printf("Number of channels: %i\n", returnedSpec.channels);
-	printf("Audio format: %i\n", returnedSpec.format);
 
 	konInit(&konAudio,configSampleRate,sizeof(AUDIO_TYPE),2);
 

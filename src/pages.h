@@ -13,4 +13,8 @@ extern UIPage trackPage;
 
 extern UIPage operatorPage;
 
+extern UIPage saveFilePage;
+
+extern UIPage loadFilePage;
+
 #endif

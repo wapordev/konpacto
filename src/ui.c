@@ -19,7 +19,7 @@
 
 int page=0;
 
-char pageNames[5][15] = {"project 0.0.13","arrange","compose","track edit","operators"};
+char pageNames[6][15] = {"project 0.0.13","arrange","compose","track edit","operators","file select"};
 
 char helpString[21];
 
@@ -80,19 +80,19 @@ void PageProcess(UIPage* page, UIEvent* event) {
 }
 
 void ProjectDraw(UIEvent* event) {
-	PrintColor("theme\nfont\nfile",0,1,2,1,false);
-
+	PrintColor("theme\nfont\nbpm\n-",0,1,2,1,false);
+	
 	//Fox
 	DrawFox(7,9,0,1,2,3);
 
 	char debug[21];
 
-	sprintf(debug, "%llu", konAudio.tickrate);
-	PrintText(debug,0,15);
-	sprintf(debug, "%llu", konAudio.frameAcumulator);
-	PrintText(debug,0,16);
-	sprintf(debug, "%u", konAudio.arrangeIndex);
-	PrintText(debug,0,17);
+	// sprintf(debug, "%llu", konAudio.tickrate);
+	// PrintText(debug,0,15);
+	// sprintf(debug, "%llu", konAudio.frameAcumulator);
+	// PrintText(debug,0,16);
+	// sprintf(debug, "%u", konAudio.arrangeIndex);
+	// PrintText(debug,0,17);
 
 	PrintText("kon,1pacto\n\n,0portable",6,15);
 	PokeScreen(329,0x74,2,0);
@@ -151,6 +151,40 @@ void OperatorsDraw(UIEvent* event) {
 	PageProcess(&operatorPage, event);
 }
 
+FileContext fileContext = ContextSaveSong;
+
+void FileContextDraw(UIEvent* event) {
+
+	// if(doNameEntry){
+	// 	PrintText(",1file name\n;0XXXXXXXXXXXXXXXXXXXX;2-",0,1);
+	// }else{
+	// 	fileContextPage.index=2;
+	// }
+
+	
+
+	switch (fileContext){
+	case ContextSaveSong:
+		PageProcess(&saveFilePage, event);
+		for(int i=6;i<19;i++)
+			PrintText(";0XXXXXXXXXXXXXXXXXXXX",0,i);
+		for(int i=0;i<20;i++)
+			PlaceScreen(i,4,0x55,2,1);
+		PrintText(",1file name\n;0,3XXXXXXXXXXXXXXXXXXXX;2,1-",0,1);
+		break;
+	case ContextLoadSong:
+		PageProcess(&loadFilePage, event);
+		for(int i=4;i<19;i++)
+			PrintText(";0XXXXXXXXXXXXXXXXXXXX",0,i);
+		for(int i=0;i<20;i++)
+			PlaceScreen(i,2,0x55,2,1);
+		PrintText(",1-",0,1);
+		break;
+	}
+
+	
+}
+
 void RenderUI() {
 	clearGrid(2);
 
@@ -178,7 +212,7 @@ void RenderUI() {
 		}
 		if (sPress){
 			event.type = UIPageChange;
-			page=clamp(page+horizontal,0,4);
+			if (page!=5) {page=clamp(page+horizontal,0,4);}
 		}else if(zPress){
 
 		}else if(xPress){
@@ -197,6 +231,7 @@ void RenderUI() {
 	case 2: ComposeDraw(&event); break;
 	case 3: TrackDraw(&event); break;
 	case 4: OperatorsDraw(&event); break;
+	case 5: FileContextDraw(&event); break;
 	}
 
 	if (eJPress){
@@ -210,5 +245,24 @@ void RenderUI() {
 	PrintText(helpString,0,0);
 	PrintText(";3,2XXXXXXXXXXXXXXXXXXXX",0,0);
 	
-	PrintText(";1,0X",15+page,19);
+	if(page==5){
+		PrintColor("!file",15,19,1,0,false);
+	} else {
+		PrintText(";1,0X",15+page,19);
+	}
+}
+
+void SetContextPage(FileContext newContext){
+	fileContext = newContext;
+
+	page=5;
+}
+
+void QuitContext(){
+	switch (fileContext){
+	case ContextSaveSong:
+	case ContextLoadSong:
+		page=0;
+		break;
+	}
 }

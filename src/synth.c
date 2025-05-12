@@ -179,6 +179,103 @@ void konResetChannels(KonAudio* konAudio){
 	}
 }
 
+void setInstrument(int instrumentIndex, char* name){
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+
+	char path[64]="assets/synths/";
+
+	strcat(path,name);
+
+	LoadLuaFile(path);
+
+	int params = clamp(CountLuaParam(path),0,28)+3;
+
+	if(params<instrument->macroCount){
+		for(int i=params;i<instrument->macroCount;i++){
+			if(instrument->macros[i].length){
+				free(instrument->macros[i].data);
+				instrument->macros[i].length=0;
+			}
+		}
+	}
+
+	instrument->macroCount=params;
+
+	strcpy(instrument->macros[0].name,"pitch");
+	strcpy(instrument->macros[1].name,"volume l");
+	strcpy(instrument->macros[2].name,"volume r");
+	instrument->macros[0].defaultValue=64;
+	instrument->macros[1].defaultValue=255;
+	instrument->macros[2].defaultValue=255;
+
+	instrument->macros[0].loopStart=1;
+	instrument->macros[1].loopStart=1;
+	instrument->macros[2].loopStart=1;
+
+	for(int i=3;i<params;i++){
+		int defaultValue = GetLuaParam(path,i-3,instrument->macros[i].name);
+		if(defaultValue>=0){
+			instrument->macros[i].defaultValue = defaultValue;
+			if(instrument->macros[i].length==0){
+				instrument->macros[i].loopStart=1;
+			}
+		}
+	}
+	instrument->selectedMacro=0;
+}
+
+void setEffect(int instrumentIndex, char* name){
+
+}
+
+//im so sorry for the konaudio* inconsistency.
+//i never settled on a standard
+//i wanted it to be instanceable, and whatnot
+//but that just makes the project structure more confusing
+
+//dangerous
+void clearSong(KonAudio* konAudio){
+	konAudio->arrangeIndex = 0;
+	konAudio->looping = 0;
+	konAudio->playing	= 0;
+	konAudio->frameAcumulator = 0;
+	konResetChannels(konAudio);
+	for(int i=0;i<255;i++){
+		KonTrack* track = &konAudio->tracks[i];
+		track->grooveIndex=0;
+		if (track->steps!=NULL) {
+			free(track->steps);
+			track->steps = NULL;
+		}
+		track->length=16;
+		track->temporaryLength=16;
+	}
+	for(int i=0;i<256;i++){
+		KonArrangements* arrangement = &konAudio->arrangements[i];
+		for(int j=0;j<8;j++){
+			arrangement->trackIndexes[j]=0;
+		}
+		arrangement->jumpIndex=0;
+	}
+	for(int i=0;i<255;i++){
+		KonInstrument* instrument = &konAudio->instruments[i];
+		instrument->name[0]='\0';
+		instrument->selectedSynth[0]='\0';
+		instrument->synthEffect[0]='\0';
+		instrument->macroCount = 0;
+		instrument->effectCount = 0;
+		instrument->selectedMacro = 0;
+		for(int j=0;j<64;j++){
+			KonMacro* macro = &instrument->macros[j];
+			macro->name[0]='\0';
+			if (macro->data!=NULL) {
+				free(macro->data);
+				macro->data = NULL;
+			}
+		}
+	}
+}
+
 void konStart(KonAudio* konAudio, uint8_t arrangeIndex){
 	lockAudio();	//ensure no conflicts. future proofing
 
@@ -202,6 +299,24 @@ uint8_t konArrangementIsEmpty(KonArrangements* arrangement){
 			break;
 		}
 
+	}
+
+	return isEmpty;
+}
+
+uint8_t konTrackIsEmpty(KonTrack* track){
+	if (track->steps == NULL)
+		return 1;
+	uint8_t isEmpty = 1;
+	for(int i=0;i<track->length;i++){
+		if(track->steps[i].note ||
+			track->steps[i].instrument ||
+			track->steps[i].velocity ||
+			track->steps[i].command ||
+			track->steps[i].param1 ||
+			track->steps[i].param2 ||
+			track->steps[i].param3)
+			isEmpty = 0;
 	}
 
 	return isEmpty;
@@ -426,5 +541,5 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 	result/=64;
 
-	printf("elapsed time average: %f, true %f\n",result, elapsedMS);
+	//printf("elapsed time average: %f, true %f\n",result, elapsedMS);
 }

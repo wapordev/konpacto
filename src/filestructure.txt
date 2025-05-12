@@ -1,0 +1,41 @@
+0x00 number of fields
+0x01 arrangement start
+0x05 track start
+0x09 groove start
+0x0d instrument start
+0x11 sample start
+0x15+ song info
+TBD
+
+
+--arrangements * 256
+0x0-7 channels 1-8
+0x8 jump
+
+--tracks * number of tracks
+0x0 track number
+0x1 length
+0x2 groove select
+-7*track length
+0x3 note
+0x4 instrument
+0x5 volume
+0x6 command
+0x7+ xyz
+
+--groove * number of groove
+TBD
+
+--instruments
+0x00 inst number
+0x01-40 name
+0x41-80 synth path
+0x81-c0 fx path
+0xc1 macroCount
+effect count
+-ill write this later
+
+
+
+
+--end of 

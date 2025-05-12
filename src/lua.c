@@ -27,7 +27,7 @@ void InitializeLua(){
 	local loadedSynths = {} \
 	local synthHash = {} \
 	local channelSynths = {0,0,0,0,0,0,0,0} \
-	print('hello world') \
+	print('hello world, lua lives!\\n') \
 -- Load a synth from filepath \n\
 	function _kLoad(filePath) \
 		--[[if(loadedSynths[filePath]) then \

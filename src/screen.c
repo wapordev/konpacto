@@ -213,6 +213,26 @@ void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, i
     PrintColor(string, xPos, yPos, bg_color, fg_color, selected);
 }
 
+void PrintDec(int input, int xPos, int yPos, int bg_color, int fg_color){
+    for(int i=100;i>0;i/=10){
+        if(input/i){
+            PlaceScreen(xPos,yPos,input/i+0x10,bg_color,fg_color);
+            xPos+=1;
+            input%=i;
+        }
+    }
+}
+
+void DecSelected(int input, int xPos, int yPos, bool selected, int col0, int col1, int col2, int col3){
+    int bg_color = col0;
+    int fg_color = col1;
+    if(selected){
+        bg_color = col2;
+        fg_color = col3;
+    }
+    PrintDec(input,xPos,yPos,bg_color,fg_color);
+}
+
 void PrintHex(int input, int xPos, int yPos, int bg_color, int fg_color){
     TextmodeCell* cell = &textmodeGrid[xPos+yPos*20];
     cell->bg_color = bg_color;

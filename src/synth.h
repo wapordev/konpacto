@@ -26,7 +26,9 @@ typedef struct KonMacro {		//parameter/modulation data
 }KonMacro;
 
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
+	char name[21];
 	char selectedSynth[64];
+	char synthEffect[64];
 	uint8_t macroCount;
 	uint8_t effectCount;
 	KonMacro macros[64];
@@ -62,8 +64,8 @@ typedef struct KonGroove {			//list of ticks per step.
 }KonGroove;
 
 typedef struct KonTrack {
-	uint8_t grooveIndex;
 	uint8_t length;
+	uint8_t grooveIndex;
 	uint8_t temporaryLength; 	//mid-change, to be confirmed. so track data is not deleted accidentally
 	KonStep* steps;
 }KonTrack;
@@ -89,11 +91,22 @@ typedef struct KonAudio {
 	uint8_t playing;
 	uint8_t looping;
 	uint8_t arrangeIndex;				//currently playing arrangement
+	char* songName;
+	uint8_t beatsPerMinute;
 }KonAudio;
 
 extern KonAudio konAudio;
 
+uint8_t konTrackIsEmpty(KonTrack* track);
+
 double konGet(int index);
+
+void setInstrument(int instrumentIndex, char* name);
+
+void setEffect(int instrumentIndex, char* name);
+
+//dangerous
+void clearSong(KonAudio* konAudio);
 
 void konOut(double left, double right);
 
