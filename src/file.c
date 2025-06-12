@@ -14,6 +14,9 @@
 
 #include "file.h"
 
+const uint32_t FILE_VERSION = 0;
+
+
 int clamp(int d, int min, int max) {
   const int t = d < min ? min : d;
   return t > max ? max : t;
@@ -85,6 +88,9 @@ void LoadSong(char* path){
 	lockAudio();
 
 	clearSong(&konAudio);
+
+	uint32_t version = get32(f);
+	//do version stuff
 
 	uint8_t fileSegments = getc(f);
 
@@ -158,16 +164,12 @@ void LoadSong(char* path){
 		for(int j=0;j<sizeof(instrument->selectedSynth);j++){
 			instrument->selectedSynth[j]=getc(f);
 		}
-		for(int j=0;j<sizeof(instrument->synthEffect);j++){
-			instrument->synthEffect[j]=getc(f);
-		}
+		instrument->route=getc(f);
 
 		int macroCount = getc(f);
-		int effectCount = getc(f);
 
 
 		setInstrument(i,instrument->selectedSynth);
-		setEffect(i,instrument->synthEffect);
 
 		for(int j=0;j<macroCount;j++){
 			KonMacro* macro = &instrument->macros[j];
@@ -224,6 +226,8 @@ void SaveSong(char* path){
 
 	//saving! yay
 
+	put32(FILE_VERSION,f);
+
 	
 	uint32_t arrangeStartOffset = 0;
 	uint32_t trackStartOffset = 0;
@@ -235,7 +239,7 @@ void SaveSong(char* path){
 	//number of segments
 	putc(segmentCount,f);
 
-	fseek(f,4*segmentCount,SEEK_CUR);
+	fseek(f,4*segmentCount+4,SEEK_CUR);
 
 	//song information
 
@@ -286,11 +290,8 @@ void SaveSong(char* path){
 			putc(instrument->name[j],f);
 		for(int j=0;j<sizeof(instrument->selectedSynth);j++)
 			putc(instrument->selectedSynth[j],f);
-		for(int j=0;j<sizeof(instrument->synthEffect);j++)
-			putc(instrument->synthEffect[j],f);
+		putc(instrument->route,f);
 		putc(instrument->macroCount,f);
-		putc(instrument->effectCount,f);
-
 		//macros
 
 		for (int j=0;j<instrument->macroCount;j++){
@@ -320,7 +321,7 @@ void SaveSong(char* path){
 	segmentEnd = ftell(f);
 
 	//write offsets
-	fseek(f,1,SEEK_SET);
+	fseek(f,5,SEEK_SET);
 
 	put32(arrangeStartOffset,f);
 	put32(trackStartOffset,f);

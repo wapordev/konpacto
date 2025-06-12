@@ -1,0 +1,2486 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"KONPA",
+				"KONPACTO_DBG"
+			],
+			[
+				"VER",
+				"FILE_VERSION"
+			],
+			[
+				"uint",
+				"uint32_t"
+			],
+			[
+				"sorc",
+				"source.util.prototypes"
+			],
+			[
+				"macro",
+				"macroCount"
+			],
+			[
+				"segme",
+				"segmentEnd"
+			],
+			[
+				"seg",
+				"segmentEnd"
+			],
+			[
+				"instrument",
+				"instrumentIndex"
+			],
+			[
+				"se",
+				"selectedMacro"
+			],
+			[
+				"chan",
+				"channels"
+			],
+			[
+				"konau",
+				"konAudio"
+			],
+			[
+				"loop",
+				"looping"
+			],
+			[
+				"x",
+				"xCollide"
+			],
+			[
+				"jump",
+				"jumpsLeft"
+			],
+			[
+				"doubl",
+				"doubleJump"
+			],
+			[
+				"flip",
+				"flipX"
+			],
+			[
+				"inpu",
+				"inputState"
+			],
+			[
+				"util",
+				"source.util.ecs"
+			],
+			[
+				"gravi",
+				"gravityConstant"
+			],
+			[
+				"ground",
+				"groundStick"
+			],
+			[
+				"instru",
+				"instrument"
+			],
+			[
+				"groov",
+				"grooveStartOffset"
+			],
+			[
+				"groove",
+				"grooveStartOffset"
+			],
+			[
+				"kontra",
+				"KonTrack"
+			],
+			[
+				"kont",
+				"KonTrack"
+			],
+			[
+				"put",
+				"put32"
+			],
+			[
+				"segm",
+				"segmentEnd"
+			],
+			[
+				"uin",
+				"uint8_t"
+			],
+			[
+				"arra",
+				"arrangement"
+			],
+			[
+				"name",
+				"doNameEntry"
+			],
+			[
+				"Sva",
+				"SaveSong"
+			],
+			[
+				"PLace",
+				"UIPlace"
+			],
+			[
+				"scan",
+				"scancodePressed"
+			],
+			[
+				"play",
+				"playerType"
+			],
+			[
+				"pla",
+				"startPlaying"
+			],
+			[
+				"sy",
+				"source.systems.game.player"
+			],
+			[
+				"mousefl",
+				"mouseFloorY"
+			],
+			[
+				"game",
+				"gameHeight"
+			],
+			[
+				"scane",
+				"scancodePressed"
+			],
+			[
+				"doub",
+				"doubleClickTimer"
+			],
+			[
+				"double",
+				"doubleClickTimer"
+			],
+			[
+				"sys",
+				"source.systems.input"
+			],
+			[
+				"mous",
+				"mouseButtons"
+			],
+			[
+				"edit",
+				"editor"
+			],
+			[
+				"cam",
+				"cameraY"
+			],
+			[
+				"camer",
+				"cameraX"
+			],
+			[
+				"full",
+				"fullscreenToggle"
+			],
+			[
+				"mou",
+				"mouseY"
+			],
+			[
+				"quad",
+				"quadList"
+			],
+			[
+				"sp",
+				"sprites"
+			],
+			[
+				"stri",
+				"string"
+			],
+			[
+				"tabl",
+				"tableDelete"
+			],
+			[
+				"getOu",
+				"getOutSingle"
+			],
+			[
+				"des",
+				"destKey"
+			],
+			[
+				"unrel",
+				"unrelateType"
+			],
+			[
+				"rel",
+				"relation"
+			],
+			[
+				"sourc",
+				"sourceRelation"
+			],
+			[
+				"relat",
+				"relation"
+			],
+			[
+				"rela",
+				"relation"
+			],
+			[
+				"unre",
+				"unrelateAll"
+			],
+			[
+				"relatio",
+				"relationDest"
+			],
+			[
+				"number",
+				"numberKey"
+			],
+			[
+				"inspec",
+				"inspect"
+			],
+			[
+				"pushstyl",
+				"PushStyleVarY"
+			],
+			[
+				"PushStyleVar",
+				"PushStyleVarX"
+			],
+			[
+				"pushstyle",
+				"PushStyleVar_Vec2"
+			],
+			[
+				"PushStyleVaR",
+				"igPushStyleVar_Vec2"
+			],
+			[
+				"insp",
+				"inspectors"
+			],
+			[
+				"string",
+				"stringObject"
+			],
+			[
+				"buf",
+				"stringBuffer"
+			],
+			[
+				"strin",
+				"stringBuffer"
+			],
+			[
+				"inspe",
+				"inspectedKey"
+			],
+			[
+				"inspect",
+				"inspectedObject"
+			],
+			[
+				"selec",
+				"selected"
+			],
+			[
+				"match",
+				"MatchFont"
+			],
+			[
+				"config",
+				"configSampleRate"
+			],
+			[
+				"sample",
+				"configSampleRate"
+			],
+			[
+				"buff",
+				"bufferSize"
+			],
+			[
+				"curren",
+				"currentChar"
+			],
+			[
+				"curre",
+				"currentChar"
+			],
+			[
+				"firs",
+				"firstSpace"
+			],
+			[
+				"cur",
+				"currentChar"
+			],
+			[
+				"volum",
+				"volumeLeft"
+			],
+			[
+				"int",
+				"interp"
+			],
+			[
+				"Freq",
+				"freqB"
+			],
+			[
+				"freq",
+				"freqA"
+			],
+			[
+				"tru",
+				"trueNote"
+			],
+			[
+				"raw",
+				"rawPosition"
+			],
+			[
+				"kon",
+				"konAudio"
+			],
+			[
+				"maco",
+				"macros"
+			],
+			[
+				"Macr",
+				"macroProcess"
+			],
+			[
+				"sele",
+				"selectedStep"
+			],
+			[
+				"ma",
+				"macroCount"
+			],
+			[
+				"op",
+				"opDataScroll"
+			],
+			[
+				"UICH",
+				"UIChange"
+			],
+			[
+				"spee",
+				"speed"
+			],
+			[
+				"real",
+				"realPosition"
+			],
+			[
+				"macr",
+				"macro"
+			],
+			[
+				"sel",
+				"selectedMacro"
+			],
+			[
+				"def",
+				"defaultValue"
+			],
+			[
+				"select",
+				"selectedMacro"
+			],
+			[
+				"syn",
+				"synthIndex"
+			],
+			[
+				"defa",
+				"defaultVal"
+			],
+			[
+				"Draw",
+				"DrawBar"
+			],
+			[
+				"print",
+				"PrintSelected"
+			],
+			[
+				"oper",
+				"operatorPage"
+			],
+			[
+				"channel",
+				"channelSynths"
+			],
+			[
+				"frequ",
+				"frequency"
+			],
+			[
+				"out",
+				"outRight"
+			],
+			[
+				"Ou",
+				"SetOut"
+			],
+			[
+				"fre",
+				"frequency"
+			],
+			[
+				"outle",
+				"outLeft"
+			],
+			[
+				"elap",
+				"elapsedMS"
+			],
+			[
+				"roll",
+				"rollingMS"
+			],
+			[
+				"rolli",
+				"rollingIndex"
+			],
+			[
+				"chane",
+				"channel"
+			],
+			[
+				"lua_push",
+				"lua_pushstring"
+			],
+			[
+				"mix",
+				"mixRight"
+			],
+			[
+				"UINT",
+				"Uint32"
+			],
+			[
+				"volu",
+				"volumeLeft"
+			],
+			[
+				"file",
+				"filePath"
+			],
+			[
+				"Initializ",
+				"InitializeLua"
+			],
+			[
+				"change",
+				"UIChange"
+			],
+			[
+				"inst",
+				"instrumentIndex"
+			],
+			[
+				"synth",
+				"synthList"
+			],
+			[
+				"UI",
+				"UIDelete"
+			],
+			[
+				"Syn",
+				"synthList"
+			],
+			[
+				"Change",
+				"UIChange"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "Package Control Messages\n========================\n\n\nDebugger\n--------\n\n  For setup see https://github.com/daveleroy/sublime_debugger\n  \n  For a full list of changes see https://github.com/daveleroy/sublime_debugger/commits\n  \n  Version 0.11.6 - Dec 22, 2024\n  - python: fixes issue with installing adapter\n  \n  Version 0.11.5 - May 25, 2024\n  - Renamed `ui_scale` to `font_size` to better reflect what it does\n  - Added `internal_width_modifier` to allow adjusting the width of the content if the variables panel is being clipped\n  \n  \n  Version 0.11.3 - May 6, 2024\n  - Support for reverse debugging for adapters that support it (@Phaiax)\n  - Fixes a compatibility issue with LSP 4070-2.0.1\n  \n  - gdb: Added a few extra commands for improved reverse debugging support (@Phaiax)\n  - python: Changed type to `debugpy` to match vscode and updated to use vscode-python-debugger\n  \n  \n  Version 0.11.2 - April 19, 2024\n  - Updated to handle LSP using the 3.8 plugin host (some adapters require LSP)\n  \n  \n  Version 0.11.1 - March 24, 2024\n  - Fixes issue with installing adapters\n  \n  \n  Version 0.11.0 - March 23, 2024\n  - Added `Debugger: Example Projects` for opening example projects for each adapter\n  - Added `internal_font_scale` setting for users who have issues with the font overlapping the ui (#223)\n  - Added `always_keep_visible` setting which attempts to always keep the debugger panel open when there is no other output panel\n  - The callstack panel now shows the tabs at the bottom like the console\n  - Improved the messaging around installing adapters\n  - Hide Debugger33 package from PackageControl listings (@narenkarthicktp)\n  - Fixes an issue where stepping was targeting the wrong thread\n  \n  - sublime: initial support for debugging sublime plugins\n  \n  \n  Version 0.10.1 - April 3, 2023\n  - Fixes an issue with new versions of vscode-js-debug\n  \n  \n  Version 0.10.0 - April 1, 2023\n  - Initial support for viewing and stepping through disassembly (not all adapters support this)\n  - Fixes a few issues with how multiple simultaneous debug sessions are hanled\n  - All adapters are now packaged on github instead of taking some from openvsx since the openvsx api can be really slow\n  - LSP-json schema now issues an error message when an adapter type is not installed\n  - A number of minor layout and color tweaks to make the ui fit better with the default adaptive theme\n  \n  - ruby: Switched to rdbg instead of readapt since that seems like the official dap server\n  - go: Support for `env` configuration option and default `cwd` to `${folder}`\n  \n  \n  Version 0.9.3 - Feb 4, 2023\n  - Minor improvements to the variables/watch display\n  - Show duplicate lines in the console with a counter\n  - Show none stderr/stdout output events as blue\n  - Fixes an issue with the java adapter (@LDAP)\n  \n  \n  Version 0.9.2 - Jan 19, 2023\n  - Fixes issue with Debugger unintentionally stealing command + click\n  \n  \n  Version 0.9.1 - Jan 15, 2023\n  - Fixes issue with latest release\n  \n  \n  Version 0.9.0 - Jan 14, 2023\n  - Add location information to some error messages such as launch errors which point to the configuration being run\n  - Improved validation of configurations\n  \n  - Generate better html for clickable item to reduce unnecessary html elements\n  - Optimize the size of image assets with pngquant\n  - Optimize html and css generation\n  - Delay resizing the ui until the layout stop changing\n  \n  - Fixes a few issues with stderr from the adapter not being logged correctly when a transport ends unexpectedly\n  - Fixes an issue where the debugger output panel was being forced to be too tall (you may need to delete the cached values in your workspace file)\n  - Fixes an issue with setting breakpoints in some adapters\n  \n  \n  Version 0.8.4 - Nov 19, 2022\n  - Changed how debugger console panels deal with extra vertical space\n  - Integrated terminals tab now appear next to the console tab instead of after the callstack tab\n  - Improvements to the protocol logging\n  - If the session ends unexpectedly then log anything from the transports stderr to the console\n  - Add `debugger_configurations` to project data when opening in a project (#189)\n  - Display multiple variables in the same console event better\n  \n  \n  Version 0.8.3 - Oct 16, 2022\n  - line up/down in the debugger console now cycles through previous commands\n  - Fixes issue with debugger console input not activating\n  \n  \n  Version 0.8.3 - Oct 16, 2022\n  - line up/down in the debugger console now cycles through previous commands\n  - Fixes issue with debugger console input not activating\n  \n  \n  Version 0.8.2 - Oct 15, 2022\n  - When copying text from the debugger console remove hidden syntax highlighting characters\n  - Fixes alignment issues on Windows/Linux\n  \n  \n  Version 0.8.1 - Oct 10, 2022\n  - The selected stack frame location indicator now shows a tick mark under the selected column\n  - Add context values for keybindings (debugger, debugger.visible, debugger.active)\n  - Adjusted layout calculations\n  \n  \n  Version 0.8.0 - Oct 8, 2022\n  - Show currently selected configuration in the controls bar instead of step controls when there is no active debug sessions\n  - Support for global debug configurations by adding configurations to `global_debugger_configurations` in the debugger settings\n  - The debugger can now be opened without a project file when there are global configurations\n  - Clicking on a breakpoint now shows the breakpoint menu\n  - Right clicking on a breakpoint removes it\n  - Show preview of configuration snippets when navigating the add configuration menu\n  - A number of improvements to the schema for LSP-json\n  - emulicious: Adds Emulicious Debugger (@Calindro)\n  \n  \n  Version 0.7.2 - Sep 26, 2022\n  - Minor bug fixes\n  \n  \n  Version 0.7.1 - Sep 25, 2022\n  - Refined debugger interface that was redesigned in the last release\n  - Allow inputting commands by typing into the debugger console\n  - The debugger interface now matches the current font-size this can be overridden with the setting `ui-scale`\n  - Fixes issue where breakpoints were not shown until a view was activated\n  - Allow installing older versions of some adapters by holding down command or option when selecting the adapter in the install adapters menu\n  - js: Fixes an issue where breakpoints were not being marked as verified\n  - go: Fixes an issue where the debugger would not automatically select a thread when stopped in some cases\n  - java: Adds Java debugger via LSP-jdtls (@LDAP)\n  - python: Automatically detect virtual environments (@LDAP)\n  \n  \n  Version 0.7.0\n  - Redesigned debugger ui so that the console output can appear in an output panel\n  - The hover expression behavior is smarter and can evaluate simple expressions like `a.b` `a->c` etc\n  - lua: Adds lua debugger via lua-local (@naoufalzerai)\n  - python: support for multiprocess debugging\n  - ruby: allow specifying readapt path via `ruby_readapt` preference\n  - go: updated to use dlv dap\n  \n  Version 0.6.8\n  - python: fixes issue with installing adapter\n  - python: allow specifying the python interpreter with `python`\n  \n  \n  Version 0.6.7\n  - Fixes an issue with the latest version of vscode lldb\n  \n  \n  Version 0.6.6\n  - Allow inputing debugger commands directly into the debugger console\n  - Auto complete for debugger commands (not all adapters support this)\n  - A number of performance/usability improvements for the debugger console\n  \n  \n  Version 0.6.4\n  - Added support for vscode-js-debug for chrome/node/edge adapters\n  - Improved snippet support\n  \n  \n  Version 0.6.3\n  - Adjusted the calculation for determining a good value for ui_rem_width_scale\n  - Added setting ui_rem_width_scale_adjust_automatically for disabling automatic calculation of ui_rem_width_scale\n  \n  \n  Version 0.6.2\n  - Fixes a layout issue on Linux\n  \n  \n  Version 0.6.1\n  - Fixes an issue with the debugger panel not being correctly sized on Windows/Linux #121\n  - Fixes an issue with hover evaluation #152 (@ta946)\n  \n  \n  Version 0.6.0\n  - This update changes how the output is handled. Instead of showing up as a tab in the debugger UI the layout is changed to a split view and the output is created in a standard view. This isn't perfect but it at least allows copy/paste/scrolling etc. The output view now also supports some ansi escape codes. You can customize the layout/placement of the view in the settings.\n  - Adds dissasembly syntax for LLDB\n  - Elixer support (@timfjord)\n  \n  \n  Version 0.5.4\n  - Resolve the`$workspaceFolder` variable to first folder project instead of being an alias of `$project_path`  (@rchl)\n  - Fix layout positioning in latest ST dev builds (@rchl)\n  - lldb: Fixes an issue with the integrated terminal handling\n  \n  \n  Version 0.5.3\n  - Tool tips when hovering over debugger controls\n  - Moved Debugger menu item into tools -> Debugger\n  - Improved json schema support for auto completeing adapter configurations (requires LSP-json)\n  - Fixes node json schema contributions\n  - Fixes issue with installing the php adapter\n  - Fixes issues with localized pacakages and json schema/snippets\n  - Fixes issue with external terminal on mac\n  \n  \n  Version 0.5.2\n  - Disable winpty on Windows (needs to be rebuilt for python 3.8)\n  \n  \n  Version 0.5.1\n  - Fixes 64/32 bit windows importing the wrong winpyty versions\n  \n  \n  Version 0.5.0\n  - python: Allow module launch configurations (@anergictcell)\n  - lldb: fixes issue with toggle disassembly\n  - ruby: added adapter (requires readapt)\n  \n  - The install adapter menu now checks installed adapters for updates (for most adapters)\n  - The install adapter menu now has a link to each adapters documentations\n  \n  - Added 'Debugger: Clear Breakpoints' command that clears all breakpoints\n  \n  - Support for exception breakpoint filter conditions (not all adapters support this)\n  - Support for debug session hierarchies which is going to be required for some complex adapter setups such as vscode-debug-js\n  - Support the \"clipboard\" context when copying a variables value\n  \n  - When expanding a variable display a loading indicator when the variables children are fetched.\n  - Show error message inline when expanding a variable fails\n  - Allow expanding/collapsing a debug session\n  - Improved handling of stack frames that marked as labels\n  - Improved handling of stack frames that are marked as deemphasized or their source is deemphasized\n  - Fixes integrated terminal\n  \n  \n  Version 0.4.1\n  - Adds explicit font setting for debugger panel\n  \n  \n  Version 0.4.0\n  - debugger_configuration replaces debug.configurations and is now defined at the root of the .sublime-project instead of inside settings\n  - Adds support for tasks see https://github.com/daveleroy/sublime_debugger#tasks\n  - Adds support for pre_debug_task and post_debug_task which can be used to build etc\n  - Adds schema support for LSP-json for auto completeing adapter configurations (see https://github.com/sublimelsp/LSP-json)\n  - Improvements to lldb adapter adding toggle disassembly, display options, dereference options\n  - Clicking a terminal panel when already selected now shows an output panel with the entire contents\n  - Renamed a bunch of commands (so if you bound any commands check them)\n  - Node adapter now has snippets\n  - Fixes issues with latest release of lldb adapter\n  - Fixes default ui scale accross platforms\n  \n  \n  Version 0.3.1\n  - Fixes issue with sizing and alignment of panels on windows\n  - Fixes path of go adapter\n  \n  \n  Version 0.3.0\n  - Initial support for multiple debug sessions\n  - Use debugpy instead of ptvsd for python adapter\n  - Right align line numbers in variables/callstack panel\n  - Improved layout of panels\n  \n  \n  Version 0.2.3\n  - Updates path for lldb\n  \n  \n  Version 0.2.3\n  - Updates path for lldb\n  \n  \n  Version 0.2.2\n  - Show dialog with error message when launching fails (to match vscode)\n  - In multi-threaded programs the reason for why a specific thread was stopped is now only displayed on that thread even if all threads were stopped\n  - If running a build with `sublime_build` in the configuration don't start debugging if the build fails with an exit code\n  - Fixes issue with pause not working\n  - Fixes rendering performance regression\n  - Fixes gutter icons on windows\n  \n  \n  Version 0.2.1\n  - Debugging with a single thread now just displays the stack frames without the thread header\n  - When launching a configuration and the adapter is not installed offer to install it\n  - When auto selecting a stack frame prefer the first none subtle stack frame\n  - Fixes call stack layout when encountering long stack frame names\n  - Fixes various issues with multi threaded debugging\n  - Fixes hover providers\n  \n  \n  Version 0.2.0\n  - Support for column breakpoints (requires adapter support)\n  - Support for data breakpoints (requires adapter support, currently only lldb?)\n  - Left-click gutter now toggles breakpoints, right-clicking a breakpoint allows editing/advanced options\n  - Watch expressions\n  - Loaded Modules/Sources panels\n  - Adds Node debug adapter (@appelgriebsch)\n  - External terminal support. Terminal on Mac (Needs support for Windows/Linux) or Sublime's Terminus package.\n  - Integrated terminal now strips ascii control sequences\n  - Settings button\n  - Show currently installed version of an adapter, show download progress when installing an adapter\n  - Fixes issues that sometimes occurred installing/reinstalling adapters\n  - Fixes issues with reloading plugin\n  \n  \n  Version 0.1.8\n  - Fixes core not defined error\n  \n  \n  Version 0.1.7\n  - Allow setting logging options in settings\n  - Updated url for vscode-firefox-debugger (@appelgriebsch)\n  - Fixes issue preventing Debugger: Install Adapters from being run from the command palette\n  - Fixes issue where some debug adapters were failing to be fully unzipped on Windows because of long paths\n  \n  \n  Version 0.1.6\n  - Adds run to cursor command\n  - Fixes issue preventing installing debug adapters\n  \n  \n  Version 0.1.5\n  - Fixes issue that prevented debugging on windows\n  \n  \n  Version 0.1.4\n  - New styling of panels and updated layout to better support temporary panels created for build results/integrated terminal (and in the future allow customizing the layout of the panels)\n  - New console rendering code to support text wrapping and build results/integrated terminal\n  - Support internal terminal requests to allow program input. Requires configuration changes to use this feature which depends on the adapter in question. (LLVM uses \"terminal\": \"integrated\")\n  - Allow defining platform specific configuration settings with a top level object called \"linux\", \"osx\", or \"windows\" in your configuration. Same as vscode\n  - Fixes issue where hover providers/autocomplete/run command was not working for some debug adapters\n  - Fixes issue where using $file and other variables in a configuration had their values expanded when the debugger was opened not when the debugger was started\n  - Fixes some wonkiness that occurred when stepping the debugger that caused it to not update correctly\n  \n  \n  Version 0.1.3\n  - When attempting to open the debugger in a window without a sublime project prompt the user to create one.\n  - Fixes some other minor bugs and configuration issues\n  \n  \n  Version 0.1.0\n  - Adds package control support\n",
+			"settings":
+			{
+				"buffer_size": 15322,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"package_control_message",
+					{
+						"message": "\n\nDebugger\n--------\n\n  For setup see https://github.com/daveleroy/sublime_debugger\n  \n  For a full list of changes see https://github.com/daveleroy/sublime_debugger/commits\n  \n  Version 0.11.6 - Dec 22, 2024\n  - python: fixes issue with installing adapter\n  \n  Version 0.11.5 - May 25, 2024\n  - Renamed `ui_scale` to `font_size` to better reflect what it does\n  - Added `internal_width_modifier` to allow adjusting the width of the content if the variables panel is being clipped\n  \n  \n  Version 0.11.3 - May 6, 2024\n  - Support for reverse debugging for adapters that support it (@Phaiax)\n  - Fixes a compatibility issue with LSP 4070-2.0.1\n  \n  - gdb: Added a few extra commands for improved reverse debugging support (@Phaiax)\n  - python: Changed type to `debugpy` to match vscode and updated to use vscode-python-debugger\n  \n  \n  Version 0.11.2 - April 19, 2024\n  - Updated to handle LSP using the 3.8 plugin host (some adapters require LSP)\n  \n  \n  Version 0.11.1 - March 24, 2024\n  - Fixes issue with installing adapters\n  \n  \n  Version 0.11.0 - March 23, 2024\n  - Added `Debugger: Example Projects` for opening example projects for each adapter\n  - Added `internal_font_scale` setting for users who have issues with the font overlapping the ui (#223)\n  - Added `always_keep_visible` setting which attempts to always keep the debugger panel open when there is no other output panel\n  - The callstack panel now shows the tabs at the bottom like the console\n  - Improved the messaging around installing adapters\n  - Hide Debugger33 package from PackageControl listings (@narenkarthicktp)\n  - Fixes an issue where stepping was targeting the wrong thread\n  \n  - sublime: initial support for debugging sublime plugins\n  \n  \n  Version 0.10.1 - April 3, 2023\n  - Fixes an issue with new versions of vscode-js-debug\n  \n  \n  Version 0.10.0 - April 1, 2023\n  - Initial support for viewing and stepping through disassembly (not all adapters support this)\n  - Fixes a few issues with how multiple simultaneous debug sessions are hanled\n  - All adapters are now packaged on github instead of taking some from openvsx since the openvsx api can be really slow\n  - LSP-json schema now issues an error message when an adapter type is not installed\n  - A number of minor layout and color tweaks to make the ui fit better with the default adaptive theme\n  \n  - ruby: Switched to rdbg instead of readapt since that seems like the official dap server\n  - go: Support for `env` configuration option and default `cwd` to `${folder}`\n  \n  \n  Version 0.9.3 - Feb 4, 2023\n  - Minor improvements to the variables/watch display\n  - Show duplicate lines in the console with a counter\n  - Show none stderr/stdout output events as blue\n  - Fixes an issue with the java adapter (@LDAP)\n  \n  \n  Version 0.9.2 - Jan 19, 2023\n  - Fixes issue with Debugger unintentionally stealing command + click\n  \n  \n  Version 0.9.1 - Jan 15, 2023\n  - Fixes issue with latest release\n  \n  \n  Version 0.9.0 - Jan 14, 2023\n  - Add location information to some error messages such as launch errors which point to the configuration being run\n  - Improved validation of configurations\n  \n  - Generate better html for clickable item to reduce unnecessary html elements\n  - Optimize the size of image assets with pngquant\n  - Optimize html and css generation\n  - Delay resizing the ui until the layout stop changing\n  \n  - Fixes a few issues with stderr from the adapter not being logged correctly when a transport ends unexpectedly\n  - Fixes an issue where the debugger output panel was being forced to be too tall (you may need to delete the cached values in your workspace file)\n  - Fixes an issue with setting breakpoints in some adapters\n  \n  \n  Version 0.8.4 - Nov 19, 2022\n  - Changed how debugger console panels deal with extra vertical space\n  - Integrated terminals tab now appear next to the console tab instead of after the callstack tab\n  - Improvements to the protocol logging\n  - If the session ends unexpectedly then log anything from the transports stderr to the console\n  - Add `debugger_configurations` to project data when opening in a project (#189)\n  - Display multiple variables in the same console event better\n  \n  \n  Version 0.8.3 - Oct 16, 2022\n  - line up/down in the debugger console now cycles through previous commands\n  - Fixes issue with debugger console input not activating\n  \n  \n  Version 0.8.3 - Oct 16, 2022\n  - line up/down in the debugger console now cycles through previous commands\n  - Fixes issue with debugger console input not activating\n  \n  \n  Version 0.8.2 - Oct 15, 2022\n  - When copying text from the debugger console remove hidden syntax highlighting characters\n  - Fixes alignment issues on Windows/Linux\n  \n  \n  Version 0.8.1 - Oct 10, 2022\n  - The selected stack frame location indicator now shows a tick mark under the selected column\n  - Add context values for keybindings (debugger, debugger.visible, debugger.active)\n  - Adjusted layout calculations\n  \n  \n  Version 0.8.0 - Oct 8, 2022\n  - Show currently selected configuration in the controls bar instead of step controls when there is no active debug sessions\n  - Support for global debug configurations by adding configurations to `global_debugger_configurations` in the debugger settings\n  - The debugger can now be opened without a project file when there are global configurations\n  - Clicking on a breakpoint now shows the breakpoint menu\n  - Right clicking on a breakpoint removes it\n  - Show preview of configuration snippets when navigating the add configuration menu\n  - A number of improvements to the schema for LSP-json\n  - emulicious: Adds Emulicious Debugger (@Calindro)\n  \n  \n  Version 0.7.2 - Sep 26, 2022\n  - Minor bug fixes\n  \n  \n  Version 0.7.1 - Sep 25, 2022\n  - Refined debugger interface that was redesigned in the last release\n  - Allow inputting commands by typing into the debugger console\n  - The debugger interface now matches the current font-size this can be overridden with the setting `ui-scale`\n  - Fixes issue where breakpoints were not shown until a view was activated\n  - Allow installing older versions of some adapters by holding down command or option when selecting the adapter in the install adapters menu\n  - js: Fixes an issue where breakpoints were not being marked as verified\n  - go: Fixes an issue where the debugger would not automatically select a thread when stopped in some cases\n  - java: Adds Java debugger via LSP-jdtls (@LDAP)\n  - python: Automatically detect virtual environments (@LDAP)\n  \n  \n  Version 0.7.0\n  - Redesigned debugger ui so that the console output can appear in an output panel\n  - The hover expression behavior is smarter and can evaluate simple expressions like `a.b` `a->c` etc\n  - lua: Adds lua debugger via lua-local (@naoufalzerai)\n  - python: support for multiprocess debugging\n  - ruby: allow specifying readapt path via `ruby_readapt` preference\n  - go: updated to use dlv dap\n  \n  Version 0.6.8\n  - python: fixes issue with installing adapter\n  - python: allow specifying the python interpreter with `python`\n  \n  \n  Version 0.6.7\n  - Fixes an issue with the latest version of vscode lldb\n  \n  \n  Version 0.6.6\n  - Allow inputing debugger commands directly into the debugger console\n  - Auto complete for debugger commands (not all adapters support this)\n  - A number of performance/usability improvements for the debugger console\n  \n  \n  Version 0.6.4\n  - Added support for vscode-js-debug for chrome/node/edge adapters\n  - Improved snippet support\n  \n  \n  Version 0.6.3\n  - Adjusted the calculation for determining a good value for ui_rem_width_scale\n  - Added setting ui_rem_width_scale_adjust_automatically for disabling automatic calculation of ui_rem_width_scale\n  \n  \n  Version 0.6.2\n  - Fixes a layout issue on Linux\n  \n  \n  Version 0.6.1\n  - Fixes an issue with the debugger panel not being correctly sized on Windows/Linux #121\n  - Fixes an issue with hover evaluation #152 (@ta946)\n  \n  \n  Version 0.6.0\n  - This update changes how the output is handled. Instead of showing up as a tab in the debugger UI the layout is changed to a split view and the output is created in a standard view. This isn't perfect but it at least allows copy/paste/scrolling etc. The output view now also supports some ansi escape codes. You can customize the layout/placement of the view in the settings.\n  - Adds dissasembly syntax for LLDB\n  - Elixer support (@timfjord)\n  \n  \n  Version 0.5.4\n  - Resolve the`$workspaceFolder` variable to first folder project instead of being an alias of `$project_path`  (@rchl)\n  - Fix layout positioning in latest ST dev builds (@rchl)\n  - lldb: Fixes an issue with the integrated terminal handling\n  \n  \n  Version 0.5.3\n  - Tool tips when hovering over debugger controls\n  - Moved Debugger menu item into tools -> Debugger\n  - Improved json schema support for auto completeing adapter configurations (requires LSP-json)\n  - Fixes node json schema contributions\n  - Fixes issue with installing the php adapter\n  - Fixes issues with localized pacakages and json schema/snippets\n  - Fixes issue with external terminal on mac\n  \n  \n  Version 0.5.2\n  - Disable winpty on Windows (needs to be rebuilt for python 3.8)\n  \n  \n  Version 0.5.1\n  - Fixes 64/32 bit windows importing the wrong winpyty versions\n  \n  \n  Version 0.5.0\n  - python: Allow module launch configurations (@anergictcell)\n  - lldb: fixes issue with toggle disassembly\n  - ruby: added adapter (requires readapt)\n  \n  - The install adapter menu now checks installed adapters for updates (for most adapters)\n  - The install adapter menu now has a link to each adapters documentations\n  \n  - Added 'Debugger: Clear Breakpoints' command that clears all breakpoints\n  \n  - Support for exception breakpoint filter conditions (not all adapters support this)\n  - Support for debug session hierarchies which is going to be required for some complex adapter setups such as vscode-debug-js\n  - Support the \"clipboard\" context when copying a variables value\n  \n  - When expanding a variable display a loading indicator when the variables children are fetched.\n  - Show error message inline when expanding a variable fails\n  - Allow expanding/collapsing a debug session\n  - Improved handling of stack frames that marked as labels\n  - Improved handling of stack frames that are marked as deemphasized or their source is deemphasized\n  - Fixes integrated terminal\n  \n  \n  Version 0.4.1\n  - Adds explicit font setting for debugger panel\n  \n  \n  Version 0.4.0\n  - debugger_configuration replaces debug.configurations and is now defined at the root of the .sublime-project instead of inside settings\n  - Adds support for tasks see https://github.com/daveleroy/sublime_debugger#tasks\n  - Adds support for pre_debug_task and post_debug_task which can be used to build etc\n  - Adds schema support for LSP-json for auto completeing adapter configurations (see https://github.com/sublimelsp/LSP-json)\n  - Improvements to lldb adapter adding toggle disassembly, display options, dereference options\n  - Clicking a terminal panel when already selected now shows an output panel with the entire contents\n  - Renamed a bunch of commands (so if you bound any commands check them)\n  - Node adapter now has snippets\n  - Fixes issues with latest release of lldb adapter\n  - Fixes default ui scale accross platforms\n  \n  \n  Version 0.3.1\n  - Fixes issue with sizing and alignment of panels on windows\n  - Fixes path of go adapter\n  \n  \n  Version 0.3.0\n  - Initial support for multiple debug sessions\n  - Use debugpy instead of ptvsd for python adapter\n  - Right align line numbers in variables/callstack panel\n  - Improved layout of panels\n  \n  \n  Version 0.2.3\n  - Updates path for lldb\n  \n  \n  Version 0.2.3\n  - Updates path for lldb\n  \n  \n  Version 0.2.2\n  - Show dialog with error message when launching fails (to match vscode)\n  - In multi-threaded programs the reason for why a specific thread was stopped is now only displayed on that thread even if all threads were stopped\n  - If running a build with `sublime_build` in the configuration don't start debugging if the build fails with an exit code\n  - Fixes issue with pause not working\n  - Fixes rendering performance regression\n  - Fixes gutter icons on windows\n  \n  \n  Version 0.2.1\n  - Debugging with a single thread now just displays the stack frames without the thread header\n  - When launching a configuration and the adapter is not installed offer to install it\n  - When auto selecting a stack frame prefer the first none subtle stack frame\n  - Fixes call stack layout when encountering long stack frame names\n  - Fixes various issues with multi threaded debugging\n  - Fixes hover providers\n  \n  \n  Version 0.2.0\n  - Support for column breakpoints (requires adapter support)\n  - Support for data breakpoints (requires adapter support, currently only lldb?)\n  - Left-click gutter now toggles breakpoints, right-clicking a breakpoint allows editing/advanced options\n  - Watch expressions\n  - Loaded Modules/Sources panels\n  - Adds Node debug adapter (@appelgriebsch)\n  - External terminal support. Terminal on Mac (Needs support for Windows/Linux) or Sublime's Terminus package.\n  - Integrated terminal now strips ascii control sequences\n  - Settings button\n  - Show currently installed version of an adapter, show download progress when installing an adapter\n  - Fixes issues that sometimes occurred installing/reinstalling adapters\n  - Fixes issues with reloading plugin\n  \n  \n  Version 0.1.8\n  - Fixes core not defined error\n  \n  \n  Version 0.1.7\n  - Allow setting logging options in settings\n  - Updated url for vscode-firefox-debugger (@appelgriebsch)\n  - Fixes issue preventing Debugger: Install Adapters from being run from the command palette\n  - Fixes issue where some debug adapters were failing to be fully unzipped on Windows because of long paths\n  \n  \n  Version 0.1.6\n  - Adds run to cursor command\n  - Fixes issue preventing installing debug adapters\n  \n  \n  Version 0.1.5\n  - Fixes issue that prevented debugging on windows\n  \n  \n  Version 0.1.4\n  - New styling of panels and updated layout to better support temporary panels created for build results/integrated terminal (and in the future allow customizing the layout of the panels)\n  - New console rendering code to support text wrapping and build results/integrated terminal\n  - Support internal terminal requests to allow program input. Requires configuration changes to use this feature which depends on the adapter in question. (LLVM uses \"terminal\": \"integrated\")\n  - Allow defining platform specific configuration settings with a top level object called \"linux\", \"osx\", or \"windows\" in your configuration. Same as vscode\n  - Fixes issue where hover providers/autocomplete/run command was not working for some debug adapters\n  - Fixes issue where using $file and other variables in a configuration had their values expanded when the debugger was opened not when the debugger was started\n  - Fixes some wonkiness that occurred when stepping the debugger that caused it to not update correctly\n  \n  \n  Version 0.1.3\n  - When attempting to open the debugger in a window without a sublime project prompt the user to create one.\n  - Fixes some other minor bugs and configuration issues\n  \n  \n  Version 0.1.0\n  - Adds package control support\n"
+					},
+					"AQAAAAAAAAAAAAAA2jsAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvw"
+				]
+			]
+		},
+		{
+			"file": "konpacto.sublime-project",
+			"settings":
+			{
+				"buffer_size": 412,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AwAAAEsAAAAAAAAATAAAAAAAAAAAAAAATAAAAAAAAABNAAAAAAAAAAAAAABNAAAAAAAAAE4AAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAEsAAAAAAAAASwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"BAAAAEsAAAAAAAAATAAAAAAAAAAAAAAATAAAAAAAAABNAAAAAAAAAAAAAABNAAAAAAAAAE4AAAAAAAAAAAAAAE8AAAAAAAAATwAAAAAAAAACAAAACQk",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAEsAAAAAAAAASwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					6,
+					1,
+					"insert_snippet",
+					{
+						"contents": "{\n\t\"type\": \"lldb\",\n\t\"request\": \"launch\",\n\t\"name\": \"${2:Launch}\",\n\t\"program\": \"\\${folder}/${1:<program>}\",\n\t\"args\": [],\n\t\"cwd\": \"\\${folder}\"\n},"
+					},
+					"AQAAAE4AAAAAAAAA3gAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAE4AAAAAAAAATgAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					11,
+					1,
+					"insert",
+					{
+						"characters": "build/"
+					},
+					"BwAAAKkAAAAAAAAAqgAAAAAAAAAAAAAAqgAAAAAAAACqAAAAAAAAAAkAAAA8cHJvZ3JhbT6qAAAAAAAAAKsAAAAAAAAAAAAAAKsAAAAAAAAArAAAAAAAAAAAAAAArAAAAAAAAACtAAAAAAAAAAAAAACtAAAAAAAAAK4AAAAAAAAAAAAAAK4AAAAAAAAArwAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAKkAAAAAAAAAsgAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					12,
+					1,
+					"insert",
+					{
+						"characters": "main.exe"
+					},
+					"CAAAAK8AAAAAAAAAsAAAAAAAAAAAAAAAsAAAAAAAAACxAAAAAAAAAAAAAACxAAAAAAAAALIAAAAAAAAAAAAAALIAAAAAAAAAswAAAAAAAAAAAAAAswAAAAAAAAC0AAAAAAAAAAAAAAC0AAAAAAAAALUAAAAAAAAAAAAAALUAAAAAAAAAtgAAAAAAAAAAAAAAtgAAAAAAAAC3AAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAK8AAAAAAAAArwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AwAAAEsAAAAAAAAATAAAAAAAAAAAAAAATAAAAAAAAABNAAAAAAAAAAAAAABNAAAAAAAAAE4AAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABLAAAAAAAAAEsAAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					6,
+					1,
+					"insert_snippet",
+					{
+						"contents": "{\n\t\"type\": \"gdb\",\n\t\"request\": \"launch\",\n\t\"name\": \"${2:Launch Program}\",\n\t\"target\": \"${1:./bin/executable}\",\n\t\"cwd\": \"\\${folder}\",\n\t\"valuesFormatting\": \"parseText\"\n},"
+					},
+					"AQAAAE4AAAAAAAAA9gAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAABOAAAAAAAAAE4AAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					35,
+					1,
+					"insert",
+					{
+						"characters": "/buid"
+					},
+					"BQAAAIgBAAAAAAAAiQEAAAAAAAAAAAAAiQEAAAAAAACKAQAAAAAAAAAAAACKAQAAAAAAAIsBAAAAAAAAAAAAAIsBAAAAAAAAjAEAAAAAAAAAAAAAjAEAAAAAAACNAQAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACIAQAAAAAAAIgBAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					36,
+					1,
+					"left_delete",
+					null,
+					"AQAAAIwBAAAAAAAAjAEAAAAAAAABAAAAZA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACNAQAAAAAAAI0BAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					37,
+					1,
+					"insert",
+					{
+						"characters": "ld"
+					},
+					"AgAAAIwBAAAAAAAAjQEAAAAAAAAAAAAAjQEAAAAAAACOAQAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACMAQAAAAAAAIwBAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"file": "src/synth.h",
+			"redo_stack":
+			[
+				[
+					45,
+					1,
+					"insert",
+					{
+						"characters": ";"
+					},
+					"AQAAAFAMAAAAAAAAUAwAAAAAAAABAAAAOw",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAUQwAAAAAAABRDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					44,
+					1,
+					"paste",
+					null,
+					"AQAAACcMAAAAAAAAJwwAAAAAAAApAAAAdm9pZCBrb25SZXNldENoYW5uZWxzKEtvbkF1ZGlvKiBrb25BdWRpbyk",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAUAwAAAAAAABQDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					43,
+					1,
+					"insert",
+					{
+						"characters": "\n\n"
+					},
+					"AgAAACYMAAAAAAAAJgwAAAAAAAABAAAACiUMAAAAAAAAJQwAAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAJwwAAAAAAAAnDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					42,
+					1,
+					"insert",
+					{
+						"characters": ";"
+					},
+					"AQAAACQMAAAAAAAAJAwAAAAAAAABAAAAOw",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAJQwAAAAAAAAlDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					41,
+					1,
+					"left_delete",
+					null,
+					"AQAAACQMAAAAAAAAJQwAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAJAwAAAAAAAAkDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					40,
+					1,
+					"paste",
+					null,
+					"AQAAAPwLAAAAAAAA/AsAAAAAAAApAAAAdm9pZCBrb25TdG9wSW50ZXJuYWwoS29uQXVkaW8qIGtvbkF1ZGlvKXs",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAJQwAAAAAAAAlDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					39,
+					1,
+					"insert",
+					{
+						"characters": "\n\n"
+					},
+					"AgAAAPsLAAAAAAAA+wsAAAAAAAABAAAACvoLAAAAAAAA+gsAAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA/AsAAAAAAAD8CwAAAAAAAAAAAAAAAPC/"
+				]
+			],
+			"settings":
+			{
+				"buffer_size": 3396,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					3,
+					1,
+					"left_delete",
+					null,
+					"AgAAAHYDAAAAAAAAdgMAAAAAAAAVAAAACXVpbnQ4X3QgZWZmZWN0Q291bnQ7dQMAAAAAAAB1AwAAAAAAAAEAAAAK",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAiwMAAAAAAAB2AwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"paste",
+					null,
+					"AgAAAEsDAAAAAAAAUgMAAAAAAAAAAAAAUgMAAAAAAABSAwAAAAAAAAQAAABjaGFy",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAASwMAAAAAAABPAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": "route"
+					},
+					"BgAAAFMDAAAAAAAAVAMAAAAAAAAAAAAAVAMAAAAAAABUAwAAAAAAAA8AAABzeW50aEVmZmVjdFs2NF1UAwAAAAAAAFUDAAAAAAAAAAAAAFUDAAAAAAAAVgMAAAAAAAAAAAAAVgMAAAAAAABXAwAAAAAAAAAAAABXAwAAAAAAAFgDAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAUwMAAAAAAABiAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					34,
+					1,
+					"left_delete",
+					null,
+					"AwAAAEULAAAAAAAARQsAAAAAAAAwAAAAdm9pZCBzZXRFZmZlY3QoaW50IGluc3RydW1lbnRJbmRleCwgY2hhciogbmFtZSk7RAsAAAAAAABECwAAAAAAAAEAAAAKQwsAAAAAAABDCwAAAAAAAAEAAAAK",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAdQsAAAAAAABFCwAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "src/file.c",
+			"settings":
+			{
+				"buffer_size": 13156,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					16,
+					1,
+					"left_delete",
+					null,
+					"AQAAAMIWAAAAAAAAwhYAAAAAAAAyAAAAZm9yKGludCBqPTA7ajxzaXplb2YoaW5zdHJ1bWVudC0+c3ludGhFZmZlY3QpO2orKyk",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA9BYAAAAAAADCFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"delete_word",
+					{
+						"forward": false
+					},
+					"AQAAAMMWAAAAAAAAwxYAAAAAAAADAAAACQkJ",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAxhYAAAAAAADGFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					20,
+					1,
+					"left_delete",
+					null,
+					"AQAAAMIWAAAAAAAAwhYAAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAwxYAAAAAAADDFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					21,
+					1,
+					"insert",
+					{
+						"characters": "\t"
+					},
+					"AQAAAMIWAAAAAAAAwxYAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAwhYAAAAAAADCFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"left_delete",
+					null,
+					"AQAAAMIWAAAAAAAAwhYAAAAAAAABAAAACQ",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAwxYAAAAAAADDFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					31,
+					1,
+					"left_delete",
+					null,
+					"AQAAANMWAAAAAAAA0xYAAAAAAAALAAAAc3ludGhFZmZlY3Q",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA0xYAAAAAAADeFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					33,
+					3,
+					"left_delete",
+					null,
+					"AwAAANUWAAAAAAAA1RYAAAAAAAABAAAAXdQWAAAAAAAA1BYAAAAAAAABAAAAatMWAAAAAAAA0xYAAAAAAAABAAAAWw",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA1hYAAAAAAADWFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					34,
+					1,
+					"insert",
+					{
+						"characters": "route"
+					},
+					"BQAAANMWAAAAAAAA1BYAAAAAAAAAAAAA1BYAAAAAAADVFgAAAAAAAAAAAADVFgAAAAAAANYWAAAAAAAAAAAAANYWAAAAAAAA1xYAAAAAAAAAAAAA1xYAAAAAAADYFgAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA0xYAAAAAAADTFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					39,
+					4,
+					"left_delete",
+					null,
+					"BAAAAJcNAAAAAAAAlw0AAAAAAAABAAAAfZYNAAAAAAAAlg0AAAAAAAABAAAACZUNAAAAAAAAlQ0AAAAAAAABAAAACZQNAAAAAAAAlA0AAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAmA0AAAAAAACXDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					43,
+					1,
+					"left_delete",
+					null,
+					"AQAAAHANAAAAAAAAcA0AAAAAAAABAAAACQ",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcQ0AAAAAAABxDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					44,
+					10,
+					"delete_word",
+					{
+						"forward": false
+					},
+					"CgAAAG4NAAAAAAAAbg0AAAAAAAACAAAACQltDQAAAAAAAG0NAAAAAAAAAQAAAAppDQAAAAAAAGkNAAAAAAAABAAAACsrKXtoDQAAAAAAAGgNAAAAAAAAAQAAAGpmDQAAAAAAAGYNAAAAAAAAAgAAACk7Ww0AAAAAAABbDQAAAAAAAAsAAABzeW50aEVmZmVjdFkNAAAAAAAAWQ0AAAAAAAACAAAALT5PDQAAAAAAAE8NAAAAAAAACgAAAGluc3RydW1lbnRODQAAAAAAAE4NAAAAAAAAAQAAAChIDQAAAAAAAEgNAAAAAAAABgAAAHNpemVvZg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcA0AAAAAAABwDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					45,
+					9,
+					"delete_word",
+					{
+						"forward": false
+					},
+					"CQAAAEcNAAAAAAAARw0AAAAAAAABAAAAPEYNAAAAAAAARg0AAAAAAAABAAAAakUNAAAAAAAARQ0AAAAAAAABAAAAO0QNAAAAAAAARA0AAAAAAAABAAAAMEMNAAAAAAAAQw0AAAAAAAABAAAAPUINAAAAAAAAQg0AAAAAAAABAAAAaj4NAAAAAAAAPg0AAAAAAAAEAAAAaW50ID0NAAAAAAAAPQ0AAAAAAAABAAAAKDoNAAAAAAAAOg0AAAAAAAADAAAAZm9y",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAASA0AAAAAAABIDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					48,
+					4,
+					"delete_word",
+					{
+						"forward": false
+					},
+					"BAAAAFMNAAAAAAAAUw0AAAAAAAABAAAAXVINAAAAAAAAUg0AAAAAAAABAAAAalENAAAAAAAAUQ0AAAAAAAABAAAAW0YNAAAAAAAARg0AAAAAAAALAAAAc3ludGhFZmZlY3Q",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAVA0AAAAAAABUDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					49,
+					1,
+					"insert",
+					{
+						"characters": "route"
+					},
+					"BQAAAEYNAAAAAAAARw0AAAAAAAAAAAAARw0AAAAAAABIDQAAAAAAAAAAAABIDQAAAAAAAEkNAAAAAAAAAAAAAEkNAAAAAAAASg0AAAAAAAAAAAAASg0AAAAAAABLDQAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAARg0AAAAAAABGDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					113,
+					4,
+					"left_delete",
+					null,
+					"BAAAAMENAAAAAAAAwQ0AAAAAAAAlAAAAc2V0RWZmZWN0KGksaW5zdHJ1bWVudC0+c3ludGhFZmZlY3QpO8ANAAAAAAAAwA0AAAAAAAABAAAACb8NAAAAAAAAvw0AAAAAAAABAAAACb4NAAAAAAAAvg0AAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAwQ0AAAAAAADmDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					131,
+					2,
+					"left_delete",
+					null,
+					"AgAAAJMWAAAAAAAAkxYAAAAAAAAjAAAACQlwdXRjKGluc3RydW1lbnQtPmVmZmVjdENvdW50LGYpOwqSFgAAAAAAAJIWAAAAAAAAAQAAAAo",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAthYAAAAAAACTFgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					135,
+					2,
+					"left_delete",
+					null,
+					"AgAAAHINAAAAAAAAcg0AAAAAAAAcAAAACQlpbnQgZWZmZWN0Q291bnQgPSBnZXRjKGYpO3ENAAAAAAAAcQ0AAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAjg0AAAAAAAByDQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					144,
+					1,
+					"insert",
+					{
+						"characters": "\n\n\n"
+					},
+					"AwAAANcAAAAAAAAA2AAAAAAAAAAAAAAA2AAAAAAAAADZAAAAAAAAAAAAAADZAAAAAAAAANoAAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA1wAAAAAAAADXAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					146,
+					1,
+					"insert",
+					{
+						"characters": "const"
+					},
+					"BQAAANgAAAAAAAAA2QAAAAAAAAAAAAAA2QAAAAAAAADaAAAAAAAAAAAAAADaAAAAAAAAANsAAAAAAAAAAAAAANsAAAAAAAAA3AAAAAAAAAAAAAAA3AAAAAAAAADdAAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA2AAAAAAAAADYAAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					147,
+					1,
+					"insert",
+					{
+						"characters": " FILE"
+					},
+					"BQAAAN0AAAAAAAAA3gAAAAAAAAAAAAAA3gAAAAAAAADfAAAAAAAAAAAAAADfAAAAAAAAAOAAAAAAAAAAAAAAAOAAAAAAAAAA4QAAAAAAAAAAAAAA4QAAAAAAAADiAAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA3QAAAAAAAADdAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					148,
+					1,
+					"insert",
+					{
+						"characters": "_VERSION"
+					},
+					"CAAAAOIAAAAAAAAA4wAAAAAAAAAAAAAA4wAAAAAAAADkAAAAAAAAAAAAAADkAAAAAAAAAOUAAAAAAAAAAAAAAOUAAAAAAAAA5gAAAAAAAAAAAAAA5gAAAAAAAADnAAAAAAAAAAAAAADnAAAAAAAAAOgAAAAAAAAAAAAAAOgAAAAAAAAA6QAAAAAAAAAAAAAA6QAAAAAAAADqAAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA4gAAAAAAAADiAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					149,
+					1,
+					"insert",
+					{
+						"characters": " ="
+					},
+					"AgAAAOoAAAAAAAAA6wAAAAAAAAAAAAAA6wAAAAAAAADsAAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA6gAAAAAAAADqAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					150,
+					1,
+					"insert",
+					{
+						"characters": " 0;"
+					},
+					"AwAAAOwAAAAAAAAA7QAAAAAAAAAAAAAA7QAAAAAAAADuAAAAAAAAAAAAAADuAAAAAAAAAO8AAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA7AAAAAAAAADsAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					162,
+					1,
+					"insert",
+					{
+						"characters": "\n\nput32"
+					},
+					"CgAAAN8QAAAAAAAA4BAAAAAAAAAAAAAA4BAAAAAAAADhEAAAAAAAAAAAAADhEAAAAAAAAOIQAAAAAAAAAAAAAOIQAAAAAAAA4xAAAAAAAAAAAAAA4BAAAAAAAADgEAAAAAAAAAEAAAAJ4hAAAAAAAADjEAAAAAAAAAAAAADjEAAAAAAAAOQQAAAAAAAAAAAAAOQQAAAAAAAA5RAAAAAAAAAAAAAA5RAAAAAAAADmEAAAAAAAAAAAAADmEAAAAAAAAOcQAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA3xAAAAAAAADfEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					163,
+					1,
+					"insert_snippet",
+					{
+						"contents": "($0)"
+					},
+					"AQAAAOcQAAAAAAAA6RAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA5xAAAAAAAADnEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					164,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAOgQAAAAAAAA6RAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA6BAAAAAAAADoEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					165,
+					1,
+					"left_delete",
+					null,
+					"AQAAAOgQAAAAAAAA6BAAAAAAAAABAAAAIA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA6RAAAAAAAADpEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					166,
+					1,
+					"paste",
+					null,
+					"AQAAAOgQAAAAAAAA9BAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA6BAAAAAAAADoEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					168,
+					1,
+					"insert",
+					{
+						"characters": ";"
+					},
+					"AQAAAPUQAAAAAAAA9hAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA9RAAAAAAAAD1EAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					170,
+					1,
+					"insert",
+					{
+						"characters": ",f"
+					},
+					"AgAAAPQQAAAAAAAA9RAAAAAAAAAAAAAA9RAAAAAAAAD2EAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA9BAAAAAAAAD0EAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					173,
+					1,
+					"insert",
+					{
+						"characters": " uint"
+					},
+					"BQAAAN0AAAAAAAAA3gAAAAAAAAAAAAAA3gAAAAAAAADfAAAAAAAAAAAAAADfAAAAAAAAAOAAAAAAAAAAAAAAAOAAAAAAAAAA4QAAAAAAAAAAAAAA4QAAAAAAAADiAAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA3QAAAAAAAADdAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					175,
+					1,
+					"insert_completion",
+					{
+						"completion": "uint32_t",
+						"format": "snippet",
+						"keep_prefix": false,
+						"must_insert": false,
+						"trigger": "uint32_t"
+					},
+					"AgAAAN4AAAAAAAAA3gAAAAAAAAAEAAAAdWludN4AAAAAAAAA5gAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA4gAAAAAAAADiAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					183,
+					1,
+					"insert",
+					{
+						"characters": "\n\n"
+					},
+					"AgAAALMGAAAAAAAAtAYAAAAAAAAAAAAAtAYAAAAAAAC1BgAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAswYAAAAAAACzBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					185,
+					1,
+					"reindent",
+					null,
+					"AQAAALQGAAAAAAAAtQYAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAtAYAAAAAAAC0BgAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					186,
+					1,
+					"paste",
+					null,
+					"AQAAALUGAAAAAAAAvQYAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAtQYAAAAAAAC1BgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					187,
+					1,
+					"insert",
+					{
+						"characters": " version"
+					},
+					"CAAAAL0GAAAAAAAAvgYAAAAAAAAAAAAAvgYAAAAAAAC/BgAAAAAAAAAAAAC/BgAAAAAAAMAGAAAAAAAAAAAAAMAGAAAAAAAAwQYAAAAAAAAAAAAAwQYAAAAAAADCBgAAAAAAAAAAAADCBgAAAAAAAMMGAAAAAAAAAAAAAMMGAAAAAAAAxAYAAAAAAAAAAAAAxAYAAAAAAADFBgAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAvQYAAAAAAAC9BgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					188,
+					1,
+					"insert",
+					{
+						"characters": " ="
+					},
+					"AgAAAMUGAAAAAAAAxgYAAAAAAAAAAAAAxgYAAAAAAADHBgAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAxQYAAAAAAADFBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					189,
+					1,
+					"insert",
+					{
+						"characters": " get32"
+					},
+					"BgAAAMcGAAAAAAAAyAYAAAAAAAAAAAAAyAYAAAAAAADJBgAAAAAAAAAAAADJBgAAAAAAAMoGAAAAAAAAAAAAAMoGAAAAAAAAywYAAAAAAAAAAAAAywYAAAAAAADMBgAAAAAAAAAAAADMBgAAAAAAAM0GAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAxwYAAAAAAADHBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					190,
+					1,
+					"insert_snippet",
+					{
+						"contents": "($0)"
+					},
+					"AQAAAM0GAAAAAAAAzwYAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAzQYAAAAAAADNBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					191,
+					1,
+					"insert",
+					{
+						"characters": "f"
+					},
+					"AQAAAM4GAAAAAAAAzwYAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAzgYAAAAAAADOBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					193,
+					1,
+					"insert",
+					{
+						"characters": ";"
+					},
+					"AQAAANAGAAAAAAAA0QYAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA0AYAAAAAAADQBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					255,
+					1,
+					"insert",
+					{
+						"characters": "\n//do"
+					},
+					"BgAAANEGAAAAAAAA0gYAAAAAAAAAAAAA0gYAAAAAAADTBgAAAAAAAAAAAADTBgAAAAAAANQGAAAAAAAAAAAAANQGAAAAAAAA1QYAAAAAAAAAAAAA1QYAAAAAAADWBgAAAAAAAAAAAADWBgAAAAAAANcGAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA0QYAAAAAAADRBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					256,
+					1,
+					"insert",
+					{
+						"characters": " version"
+					},
+					"CAAAANcGAAAAAAAA2AYAAAAAAAAAAAAA2AYAAAAAAADZBgAAAAAAAAAAAADZBgAAAAAAANoGAAAAAAAAAAAAANoGAAAAAAAA2wYAAAAAAAAAAAAA2wYAAAAAAADcBgAAAAAAAAAAAADcBgAAAAAAAN0GAAAAAAAAAAAAAN0GAAAAAAAA3gYAAAAAAAAAAAAA3gYAAAAAAADfBgAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA1wYAAAAAAADXBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					257,
+					1,
+					"insert",
+					{
+						"characters": " stuff"
+					},
+					"BgAAAN8GAAAAAAAA4AYAAAAAAAAAAAAA4AYAAAAAAADhBgAAAAAAAAAAAADhBgAAAAAAAOIGAAAAAAAAAAAAAOIGAAAAAAAA4wYAAAAAAAAAAAAA4wYAAAAAAADkBgAAAAAAAAAAAADkBgAAAAAAAOUGAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA3wYAAAAAAADfBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					277,
+					1,
+					"insert",
+					{
+						"characters": "128"
+					},
+					"BAAAACQRAAAAAAAAJREAAAAAAAAAAAAAJREAAAAAAAAlEQAAAAAAAAwAAABGSUxFX1ZFUlNJT04lEQAAAAAAACYRAAAAAAAAAAAAACYRAAAAAAAAJxEAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAJBEAAAAAAAAwEQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					280,
+					1,
+					"insert",
+					{
+						"characters": "+4"
+					},
+					"AgAAABgSAAAAAAAAGRIAAAAAAAAAAAAAGRIAAAAAAAAaEgAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAGBIAAAAAAAAYEgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					288,
+					1,
+					"left_delete",
+					null,
+					"AQAAADoZAAAAAAAAOhkAAAAAAAABAAAAMQ",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAOxkAAAAAAAA7GQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					289,
+					1,
+					"insert",
+					{
+						"characters": "5"
+					},
+					"AQAAADoZAAAAAAAAOxkAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAOhkAAAAAAAA6GQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					299,
+					1,
+					"insert",
+					{
+						"characters": "VER"
+					},
+					"BAAAACQRAAAAAAAAJREAAAAAAAAAAAAAJREAAAAAAAAlEQAAAAAAAAMAAAAxMjglEQAAAAAAACYRAAAAAAAAAAAAACYRAAAAAAAAJxEAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAJBEAAAAAAAAnEQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					301,
+					1,
+					"insert_completion",
+					{
+						"completion": "FILE_VERSION",
+						"format": "text",
+						"keep_prefix": false,
+						"must_insert": false,
+						"trigger": "FILE_VERSION"
+					},
+					"AgAAACQRAAAAAAAAJBEAAAAAAAADAAAAVkVSJBEAAAAAAAAwEQAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAJxEAAAAAAAAnEQAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "/C/Users/theco/Documents/PROJECTS/tinydir-1.2.6/tinydir.h",
+			"settings":
+			{
+				"buffer_size": 19231,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main.c",
+			"settings":
+			{
+				"buffer_size": 1265,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "build/soso.kpt",
+			"settings":
+			{
+				"buffer_size": 7612,
+				"encoding": "Hexadecimal",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"revert",
+					null,
+					"AgAAAAAAAAAAAAAAAAAAAAAAAAC+FgAAMDAxOSAwMDAwIDAwMTkgMDkwMCAwMDE5IDA5MDAgMDAxOSAwOTAwCjAwMTkgMDkwMCAwMDAwIDAwMDAgMDAwMCAxOTAwIDAwMDAgMTkwOQowMDAwIDE5MDkgMDAwMCAxOTA5IDAwMDAgMTkwOSAwMDAwIDAwMDAKMDAwMCAwMDE5IDAwMDAgMDAxOSAwOTAwIDAwMTkgMDkwMCAwMDE5CjA5MDAgMDAxOSAwOTAwIDAwMDAgMDAwMCAwMDAwIDE5MDAgMDAwMAoxOTA5IDAwMDAgMTkwOSAwMDAwIDE5MDkgMDAwMCAxOTA5IDAwMDAKMDAwMCAwMDAwIDAwMTkgMDAwMCAwMDE5IDA5MDAgMDAxOSAwOTAwCjAwMTkgMDkwMCAwMDE5IDA5MDAgMDAwMCAwMDAwIDAwMDEgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIGZmMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAAAAAAAAAAAL4WAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					2,
+					1,
+					"revert",
+					null,
+					"AgAAAAAAAAAAAAAAAAAAAAAAAAC+FgAAODAxOSAwMDAwIDAwMTkgMDkwMCAwMDE5IDA5MDAgMDAxOSAwOTAwCjAwMTkgMDkwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAAAAAAAAAAAL4WAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					3,
+					1,
+					"revert",
+					null,
+					"AgAAAAAAAAAAAAAAAAAAAAAAAAC+FgAAODAxOSAwMDAwIDAwMTkgMDkwMCAwMDE5IDA5MDAgMDAxOSAwOTAwCjAwMTkgMDkwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAAAAAAAAAAACMZAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					4,
+					1,
+					"revert",
+					null,
+					"BAAAAAAAAAAAAAAAAAAAAAAAAAAjGQAAODAwMCAwMDAwIDA1MWQgMDAwMCAwMDFkIDA5MDAgMDA5MCAwOTAwCjAwOTAgMDkwMCAwMDBlIDBhMDAgMDAwMCAwMDAwIDAwMDEgMDEwMAowMDAwIDAwMDAgMDAwMSAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMGYwMAo0NjAxIGZmMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgZmYwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDQzMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCBmZjAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDczNzEgNzU2MSA3MjY1IDJlNmMgNzU2MQowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDA0IDQwMDIgMDAwMCAwMTAxIDAwMDIKM2Y0MCBmZjExIDAwMDAgMDEwMSAwMDAyIGZmMDAgZmYwMCAwMDAwCjAwMDEgMDAwMCBmZjAwIDAwMDAgMDAwMSAwMDAyIDdmZmYgAAAAAAAAAAAjGQAAAAAAAAAAAAAAAAAAAAAAACMZAAAAAAAAAAAAAAAAAAAAAAAAIxkAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					1,
+					1,
+					"revert",
+					null,
+					"AgAAAAAAAAAAAAAAAAAAAAAAAAAjGQAAODAwMCAwMDAwIDA1MWQgMDAwMCAwMDFkIDA5MDAgMDA5MCAwOTAwCjAwOTAgMDkwMCAwMDBlIDBhMDAgMDAwMCAwMDAwIDAwMDEgMDEwMAowMDAwIDAwMDAgMDAwMSAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMGYwMAo0NjAxIGZmMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgZmYwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDQzMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCBmZjAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDczNzEgNzU2MSA3MjY1IDJlNmMgNzU2MQowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDA0IDQwMDIgMDAwMCAwMTAxIDAwMDIKM2Y0MCBmZjExIDAwMDAgMDEwMSAwMDAyIGZmMDAgZmYwMCAwMDAwCjAwMDEgMDAwMCBmZjAwIDAwMDAgMDAwMSAwMDAyIDdmZmYgAAAAAAAAAAAUGQAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					2,
+					1,
+					"revert",
+					null,
+					"AwAAAAAAAAAAAAAAAAAAAAAAAAAUGQAAMDAwMCAwMDAwIDA1MWQgMDAwMCAwMDFkIDA5MDAgMDA5MCAwOTAwCjAwOTAgMDkwMCAwMDA4IDBhMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDQgMDAwMCAwMTAyIDAwMDAgMDAwNCAwMDAwIDAwMDAKMDMwMCAwMDAwIDA0MDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwNDAwIDAwMDAgMDAwMSAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMGYwMAo0NjAxIGZmMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDQ2MDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDczNjEgNzcyZSA2Yzc1IDYxMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAKMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwCjAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMAowMDAwIDAwMDAgMDAwMCAwMDA0IDQwMDAgMDAwMCAwMDAxIDAwMDAKZmYwMCAwMDAwIDAwMDEgMDAwMCBmZjAwIDAwMDAgMDAwMSAwMDAwCjMwMDAgMDAwMCAwMDAxIDAwMDAgAAAAAAAAAAC8HQAAAAAAAAAAAAAAAAAAAAAAALwdAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"contents": "Searching 51 files for \"konResetChannels\"\n\nC:\\Users\\theco\\Documents\\PROJECTS\\konpacto\\src\\synth.c:\n  169  }\n  170  \n  171: void konResetChannels(KonAudio* konAudio){\n  172  \tfor(int i=0;i<CHANNELCOUNT;i++){\n  173  \t\tKonChannel* channel = &konAudio->channels[i];\n  ...\n  237  \tkonAudio->playing\t= 0;\n  238  \tkonAudio->frameAcumulator = 0;\n  239: \tkonResetChannels(konAudio);\n  240  \tfor(int i=0;i<255;i++){\n  241  \t\tKonTrack* track = &konAudio->tracks[i];\n  ...\n  278  \tkonAudio->arrangeIndex=arrangeIndex;\n  279  \n  280: \tkonResetChannels(konAudio);\n  281  \n  282  \tkonAudio->frameAcumulator=0;\n  ...\n  402  \t\t\tkonStopInternal(konAudio);\n  403  \t\t}else{\n  404: \t\t\tkonResetChannels(konAudio);\n  405  \t\t\tarrangement = konAudio->arrangements[konAudio->arrangeIndex];\n  406  \t\t\tfor(int i=0;i<CHANNELCOUNT;i++){\n\nC:\\Users\\theco\\Documents\\PROJECTS\\konpacto\\src\\synth.h:\n  114  void konStopInternal(KonAudio* konAudio);\n  115  \n  116: void konResetChannels(KonAudio* konAudio);\n  117  \n  118  void konSetBPM(KonAudio* konAudio, uint64_t bpm, uint64_t beatsPerMeasure, uint64_t targetRate);\n\n5 matches across 2 files\n",
+			"settings":
+			{
+				"buffer_size": 1109,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1441,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					9,
+					1,
+					"insert",
+					{
+						"characters": "\n\nKONPACTO_"
+					},
+					"CwAAAOgDAAAAAAAA6QMAAAAAAAAAAAAA6QMAAAAAAADqAwAAAAAAAAAAAADqAwAAAAAAAOsDAAAAAAAAAAAAAOsDAAAAAAAA7AMAAAAAAAAAAAAA7AMAAAAAAADtAwAAAAAAAAAAAADtAwAAAAAAAO4DAAAAAAAAAAAAAO4DAAAAAAAA7wMAAAAAAAAAAAAA7wMAAAAAAADwAwAAAAAAAAAAAADwAwAAAAAAAPEDAAAAAAAAAAAAAPEDAAAAAAAA8gMAAAAAAAAAAAAA8gMAAAAAAADzAwAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADoAwAAAAAAAOgDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					10,
+					1,
+					"insert",
+					{
+						"characters": "DBG"
+					},
+					"AwAAAPMDAAAAAAAA9AMAAAAAAAAAAAAA9AMAAAAAAAD1AwAAAAAAAAAAAAD1AwAAAAAAAPYDAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADzAwAAAAAAAPMDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					11,
+					1,
+					"insert",
+					{
+						"characters": " ="
+					},
+					"AgAAAPYDAAAAAAAA9wMAAAAAAAAAAAAA9wMAAAAAAAD4AwAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD2AwAAAAAAAPYDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					12,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAPgDAAAAAAAA+QMAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD4AwAAAAAAAPgDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					13,
+					1,
+					"paste",
+					null,
+					"AQAAAPkDAAAAAAAA+wMAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD5AwAAAAAAAPkDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					18,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAANAEAAAAAAAA0QQAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADQBAAAAAAAANAEAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					19,
+					1,
+					"paste",
+					null,
+					"AQAAANEEAAAAAAAA5AQAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADRBAAAAAAAANEEAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					21,
+					1,
+					"delete_word",
+					{
+						"forward": false
+					},
+					"AQAAANMEAAAAAAAA0wQAAAAAAAAQAAAAS09OUEFDVE9fUkVMRUFTRQ",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADjBAAAAAAAAOMEAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": "KONPA"
+					},
+					"BQAAANMEAAAAAAAA1AQAAAAAAAAAAAAA1AQAAAAAAADVBAAAAAAAAAAAAADVBAAAAAAAANYEAAAAAAAAAAAAANYEAAAAAAAA1wQAAAAAAAAAAAAA1wQAAAAAAADYBAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADTBAAAAAAAANMEAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					29,
+					1,
+					"insert_completion",
+					{
+						"completion": "KONPACTO_DBG",
+						"format": "snippet",
+						"keep_prefix": false,
+						"must_insert": false,
+						"trigger": "KONPACTO_DBG"
+					},
+					"AgAAANMEAAAAAAAA0wQAAAAAAAAFAAAAS09OUEHTBAAAAAAAAN8EAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADYBAAAAAAAANgEAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					32,
+					1,
+					"insert",
+					{
+						"characters": "n"
+					},
+					"AgAAALsEAAAAAAAAvAQAAAAAAAAAAAAAvAQAAAAAAAC8BAAAAAAAABUAAABuICQoS09OUEFDVE9fUkVMRUFTRSk",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAC7BAAAAAAAANAEAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					35,
+					1,
+					"insert",
+					{
+						"characters": "gdv"
+					},
+					"AwAAAPsDAAAAAAAA/AMAAAAAAAAAAAAA/AMAAAAAAAD9AwAAAAAAAAAAAAD9AwAAAAAAAP4DAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD7AwAAAAAAAPsDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					36,
+					1,
+					"left_delete",
+					null,
+					"AQAAAP0DAAAAAAAA/QMAAAAAAAABAAAAdg",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD+AwAAAAAAAP4DAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					37,
+					1,
+					"insert",
+					{
+						"characters": "b"
+					},
+					"AQAAAP0DAAAAAAAA/gMAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD9AwAAAAAAAP0DAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					40,
+					3,
+					"left_delete",
+					null,
+					"AwAAAP0DAAAAAAAA/QMAAAAAAAABAAAAYvwDAAAAAAAA/AMAAAAAAAABAAAAZPsDAAAAAAAA+wMAAAAAAAABAAAAZw",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD+AwAAAAAAAP4DAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					41,
+					1,
+					"insert",
+					{
+						"characters": "dr"
+					},
+					"AgAAAPsDAAAAAAAA/AMAAAAAAAAAAAAA/AMAAAAAAAD9AwAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD7AwAAAAAAAPsDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					42,
+					1,
+					"left_delete",
+					null,
+					"AQAAAPwDAAAAAAAA/AMAAAAAAAABAAAAcg",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD9AwAAAAAAAP0DAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					43,
+					1,
+					"insert",
+					{
+						"characters": "warf"
+					},
+					"BAAAAPwDAAAAAAAA/QMAAAAAAAAAAAAA/QMAAAAAAAD+AwAAAAAAAAAAAAD+AwAAAAAAAP8DAAAAAAAAAAAAAP8DAAAAAAAAAAQAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD8AwAAAAAAAPwDAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					53,
+					1,
+					"paste",
+					null,
+					"AgAAAPkDAAAAAAAAAgQAAAAAAAAAAAAAAgQAAAAAAAACBAAAAAAAAAcAAAAtZ2R3YXJm",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAD5AwAAAAAAAAAEAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"file": "src/pages.c",
+			"settings":
+			{
+				"buffer_size": 19634,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					147,
+					1,
+					"left_delete",
+					null,
+					"AQAAANxIAAAAAAAA3EgAAAAAAAABAAAANQ",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADdSAAAAAAAAN1IAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					148,
+					1,
+					"insert",
+					{
+						"characters": "4"
+					},
+					"AQAAANxIAAAAAAAA3UgAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADcSAAAAAAAANxIAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"file": "src/ui.c",
+			"settings":
+			{
+				"buffer_size": 5682,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/file.h",
+			"settings":
+			{
+				"buffer_size": 724,
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "/C/Users/theco/Desktop/script.txt",
+			"settings":
+			{
+				"buffer_size": 1521346,
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Lua/Lua.sublime-build",
+					""
+				],
+				[
+					"Packages/Lua/Lua.sublime-build",
+					"Syntax Check"
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					""
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"LuaJIT Run File"
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"Lua Run File"
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"ldoc: File"
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"ldoc: Project"
+				]
+			],
+			[
+				"Packages/Lua Love/LuaLove.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"debug",
+				"Debugger: Open"
+			],
+			[
+				"debugg",
+				"Debugger: Open"
+			],
+			[
+				"debugger",
+				"Debugger: Open"
+			],
+			[
+				"debuggger",
+				"Debugger: Add Configuration"
+			],
+			[
+				"debugger: instal",
+				"Debugger: Install Adapters"
+			],
+			[
+				"package instal",
+				"Package Control: Install Package"
+			],
+			[
+				"instalpackage",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"View Package File"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pa",
+				"Package Control: List Packages"
+			],
+			[
+				"list packa",
+				"Package Control: List Packages"
+			],
+			[
+				"install pa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/theco/Documents/PROJECTS/konpacto",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src"
+	],
+	"file_history":
+	[
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/synth.c",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/debug.lua",
+		"/C/Users/theco/AppData/Roaming/.minecraft/resourcepacks/Xray_Ultimate_1.20_v4.2.4/assets/minecraft/models/block/diamond_ore.json",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/ui.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/ecs.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/game/player.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/editor.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/prototypes.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/spriter.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/util.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/game/timers.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/game.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/file.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/synth.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/build/soso.kpt",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/file.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/pages.c",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/states/dbgstate.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/game/gravity.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/game/camera.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/collision.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/game/flips.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/main.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/ui.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/ui.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/pages.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/filestructure.txt",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/states/editorstate.lua",
+		"/C/Users/theco/AppData/Roaming/LOVE/Love2D-Game/levels/level1.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/levels/level1.json",
+		"/C/Users/theco/Downloads/ser.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/levels/demo.json",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/state.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/screen.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/input.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/stage.lua",
+		"/C/Users/theco/qmk_firmware/lib/python/qmk/cli/git/submodule.py",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/systems/debug.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/systems/screen.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/levelEditor/editor.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/game/stage.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util/systems/tick.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/state.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/collision.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/player.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/editor.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/ecs.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/input.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/spriter.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/screen.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/conf.lua",
+		"/C/Users/theco/AppData/Roaming/Sublime Text/Packages/Lua Love/LuaLove.sublime-build",
+		"/C/Users/theco/AppData/Roaming/Sublime Text/Packages/Lua Love/LuaLove.sublime-settings",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/prototypes.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/debug.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/util.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/stage.lua",
+		"/C/Users/theco/Downloads/tick.lua",
+		"/C/Users/theco/Downloads/TiledGame/TiledGame/main.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/main.lua",
+		"/C/Users/theco/Downloads/peachy-master/examples/sound.json",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/test.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/source/prototypes",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/scale.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/test.lua",
+		"/C/Users/theco/Documents/PROJECTS/Love2D-Game/game/main.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/screen.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/screen.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/assets/synths/saw.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/assets/synths/square.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/Makefile",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/sound.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/lua.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/lua.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/luatest.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/build/test.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/tracy/public/common/TracyApi.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/tracy/public/tracy/TracyC.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/tracy/public/client/TracyProfiler.cpp",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/Makefile",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/tracy/getopt/getopt.h",
+		"/C/Users/theco/Documents/PROJECTS/moonworks/lagodae/ContentBuilder/ContentSource/Sprites/TP_Sprites/Tileset/data.json",
+		"/C/Users/theco/Documents/PROJECTS/moonworks/lagodae/.git/description",
+		"/C/Users/theco/Documents/PROJECTS/moonworks/lagodae/.git/index",
+		"/C/Users/theco/Documents/PROJECTS/moonworks/lagodae/.git/HEAD",
+		"/C/Users/theco/Documents/PROJECTS/moonworks/lagodae/.git/FETCH_HEAD",
+		"/C/Users/theco/Documents/PROJECTS/moonworks/lagodae/.git/config",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/sdl2/src/audio/mmiyoo/SDL_audio_mmiyoo.c",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/konpacto/luatest.c",
+		"/?192.168.5.18/App/Konpacto/konpacto.log",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/build/assets/synths/saw.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/sound.h",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/konpacto/Makefile",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/assets/synths/saw - Copy.lua",
+		"/C/Users/theco/Documents/PROJECTS/lualove/main.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/build/assets/scales/12tet.scl",
+		"/C/Users/theco/Documents/PROJECTS/luajit/Makefile",
+		"/C/Users/theco/Documents/PROJECTS/luajit/src/Makefile",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/luajit/src/Makefile",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/luajit/Makefile",
+		"/?192.168.5.18/App/TestGame/launch.sh",
+		"/?192.168.5.18/App/TestGame/config.json",
+		"/?192.168.5.18/App/TestGame/test.lua",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/test.lua",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/luajit/src/luajit.c",
+		"/C/Users/theco/Documents/PROJECTS/luajit/src/jit/.gitignore",
+		"/C/Users/theco/Documents/PROJECTS/luajit/src/jit/bcsave.lua",
+		"/C/Users/theco/Documents/PROJECTS/luajit/src/jit/dis_x64.lua",
+		"/C/Users/theco/Documents/PROJECTS/luajit/src/jit/dump.lua",
+		"/C/Users/theco/Documents/PROJECTS/luajit/src/jit/bc.lua",
+		"/C/Users/theco/Downloads/Actor.zig",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/konpacto/build/main",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/sdl2/Makefile",
+		"/?192.168.5.18/App/Konpacto/launch.sh",
+		"/C/Users/theco/qmk_firmware/keyboards/lagodae/keymaps/default/keymap.c",
+		"/C/Users/theco/qmk_firmware/keyboards/lagodae/keyboard.json",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/build/sdl2-config",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/sound_sdl.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/assets/scales/12tet.scl",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/input.c",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/fixed.h",
+		"/C/Users/theco/Documents/PROJECTS/konpacto/src/fixed.c",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/sdl2/src/audio/mmiyoo/mi_aio_datatype.h",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/sdl2/src/audio/SDL_audio.c",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/sdl2/src/audio/android/SDL_androidaudio.c",
+		"/?wsl.localhost/Debian/home/jackeloping/sdl2_miyoo/konpacto/src/file.c",
+		"/C/Users/theco/AppData/Local/Temp/Rar$DIa12044.23503/World.lua",
+		"/C/Users/theco/Downloads/ECS_concat.lua"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 107.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"CLAUS",
+			"claus",
+			"page",
+			"switch",
+			"MatchTheme",
+			"themeCount",
+			"SetTheme",
+			"match",
+			"playing\t= 0",
+			"playing = 0;",
+			"konAudio->playing = 0",
+			"playing = 0",
+			"playing =",
+			"playing=",
+			"playing=0",
+			"->on",
+			"konStopInternal",
+			"konResetChannels",
+			"+4",
+			"version",
+			"put32",
+			"effectcount",
+			"seteffect",
+			"set",
+			"setEffect",
+			"syntheffect"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15322,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15322,
+								15322
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_indent": false,
+							"gutter": false,
+							"lsp_uri": "buffer:48",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"tab_width": 2,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "konpacto.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 412,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								398,
+								398
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/konpacto.sublime-project",
+							"syntax": "Packages/JSON/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/synth.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3396,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3066,
+								3066
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/src/synth.h",
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/file.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13156,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/src/file.c",
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 10928.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/theco/Documents/PROJECTS/tinydir-1.2.6/tinydir.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/tinydir-1.2.6/tinydir.h",
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6699.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1265,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/src/main.c",
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 171.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "build/soso.kpt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7612,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/build/soso.kpt",
+							"syntax": "Packages/Binary/Binary.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1109,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										128,
+										144
+									],
+									[
+										346,
+										362
+									],
+									[
+										522,
+										538
+									],
+									[
+										664,
+										680
+									],
+									[
+										933,
+										949
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								78,
+								78
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"detect_indentation": false,
+							"line_numbers": false,
+							"lsp_uri": "buffer:51",
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1026,
+								1026
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/Makefile",
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/pages.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19634,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18653,
+								18653
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/src/pages.c",
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 15643.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/ui.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5682,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								847,
+								847
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/src/ui.c",
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 706.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/file.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 724,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								35,
+								35
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Documents/PROJECTS/konpacto/src/file.h",
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "/C/Users/theco/Desktop/script.txt",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1521346,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								796417,
+								796422
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/theco/Desktop/script.txt",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 257627.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.Debugger":
+	{
+		"height": 276.0
+	},
+	"output.Debugger Console":
+	{
+		"height": 282.0
+	},
+	"output.Debugger Terminal":
+	{
+		"height": 282.0
+	},
+	"output.LSP Log Panel":
+	{
+		"height": 0.0
+	},
+	"output.diagnostics":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 132.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "konpacto.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 288.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

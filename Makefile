@@ -18,6 +18,8 @@ KONPACTO_LIBRARIES = -lluajit-5.1 -lSDL2 -lSDL2_mixer -lSDL2_image -lportaudio
 
 KONPACTO_PROF = -pg -g -no-pie
 
+KONPACTO_DBG = -gdwarf-2
+
 KONPACTO_HEADLESS = -Wl,--subsystem,windows
 
 KONPACTO_RELEASE = -Ofast
@@ -25,7 +27,7 @@ KONPACTO_RELEASE = -Ofast
 all: run
 
 konpacto:
-	$(CC) $(KONPACTO_FILES) $(KONPACTO_INCLUDES) $(KONPACTO_LINKS) $(KONPACTO_LIBRARIES) -o build/main $(KONPACTO_RELEASE)
+	$(CC) $(KONPACTO_FILES) $(KONPACTO_INCLUDES) $(KONPACTO_LINKS) $(KONPACTO_LIBRARIES) -o build/main $(KONPACTO_DBG) $(KONPACTO_RELEASE)
 
 luatest: lua
 	cd build && test.exe

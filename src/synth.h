@@ -28,9 +28,8 @@ typedef struct KonMacro {		//parameter/modulation data
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
 	char name[21];
 	char selectedSynth[64];
-	char synthEffect[64];
+	uint8_t route;
 	uint8_t macroCount;
-	uint8_t effectCount;
 	KonMacro macros[64];
 	uint8_t selectedMacro;			//editor value
 }KonInstrument;
@@ -102,8 +101,6 @@ uint8_t konTrackIsEmpty(KonTrack* track);
 double konGet(int index);
 
 void setInstrument(int instrumentIndex, char* name);
-
-void setEffect(int instrumentIndex, char* name);
 
 //dangerous
 void clearSong(KonAudio* konAudio);

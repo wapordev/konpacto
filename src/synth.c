@@ -224,9 +224,6 @@ void setInstrument(int instrumentIndex, char* name){
 	instrument->selectedMacro=0;
 }
 
-void setEffect(int instrumentIndex, char* name){
-
-}
 
 //im so sorry for the konaudio* inconsistency.
 //i never settled on a standard
@@ -237,7 +234,7 @@ void setEffect(int instrumentIndex, char* name){
 void clearSong(KonAudio* konAudio){
 	konAudio->arrangeIndex = 0;
 	konAudio->looping = 0;
-	konAudio->playing	= 0;
+	konStopInternal(konAudio);
 	konAudio->frameAcumulator = 0;
 	konResetChannels(konAudio);
 	for(int i=0;i<255;i++){
@@ -261,9 +258,8 @@ void clearSong(KonAudio* konAudio){
 		KonInstrument* instrument = &konAudio->instruments[i];
 		instrument->name[0]='\0';
 		instrument->selectedSynth[0]='\0';
-		instrument->synthEffect[0]='\0';
+		instrument->route=0;
 		instrument->macroCount = 0;
-		instrument->effectCount = 0;
 		instrument->selectedMacro = 0;
 		for(int j=0;j<64;j++){
 			KonMacro* macro = &instrument->macros[j];

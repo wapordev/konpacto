@@ -836,7 +836,7 @@ void DrawFileBrowse(int xPos, int yPos, bool selected){
 	
 }
 
-UIPage projectPage = {0,5,(UIGrid[5]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(1,1,&SetBPM,&DrawBPM),CreateGrid(3,1,&SetSave,&DrawSave)} };
+UIPage projectPage = {0,4,(UIGrid[5]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(1,1,&SetBPM,&DrawBPM),CreateGrid(3,1,&SetSave,&DrawSave)} };
 
 UIPage arrangePage = {0,1,(UIGrid[1]){CreateGrid(9,16,&SetArrange,&DrawArrange)}};
 

@@ -1,0 +1,28 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+		}
+	],
+	"debugger_configurations":
+	[
+		{
+			"type": "gdb",
+			"request": "launch",
+			"name": "Launch Program",
+			"target": "./bin/executable",
+			"cwd": "${folder}",
+			"valuesFormatting": "parseText"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Launch",
+			"program": "${folder}/build/main.exe",
+			"args": [],
+			"cwd": "${folder}/build"
+		},
+
+	],
+}
