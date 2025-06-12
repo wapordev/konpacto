@@ -1,21 +1,22 @@
 _defaultParams = {
 	{"pulse width",255},
+	{"junk",235},
 }
 
 function _init()
 	return{0}
 end
 
+local phase = 0
+
 function _audioFrame(synthData)
-	local synthData = synthData
-	local phase = synthData[1]
+
+	
 
 	local note = C.konGet(0)/sampleRate
 
 	phase=phase+note
 	phase=phase%1
-
-	synthData[1] = phase
 
 	local out=phase
 

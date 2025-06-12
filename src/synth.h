@@ -100,7 +100,7 @@ uint8_t konTrackIsEmpty(KonTrack* track);
 
 double konGet(int index);
 
-void setInstrument(int instrumentIndex, char* name);
+void setupInstrument(int instrumentIndex);
 
 //dangerous
 void clearSong(KonAudio* konAudio);

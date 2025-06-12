@@ -169,7 +169,7 @@ void LoadSong(char* path){
 		int macroCount = getc(f);
 
 
-		setInstrument(i,instrument->selectedSynth);
+		setupInstrument(i);
 
 		for(int j=0;j<macroCount;j++){
 			KonMacro* macro = &instrument->macros[j];

@@ -6,7 +6,7 @@ void InitializeLua();
 
 void StopLua();
 
-void LoadLuaFile(char* filePath);
+void LuaConfigInstrument(KonInstrument* konInstrument, char* filePath);
 
 void SetLuaInstrument(char* path, int index);
 
