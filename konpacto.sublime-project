@@ -8,14 +8,7 @@
 	"debugger_configurations":
 	[
 		{
-			"type": "gdb",
-			"request": "launch",
-			"name": "Launch Program",
-			"target": "./bin/executable",
-			"cwd": "${folder}",
-			"valuesFormatting": "parseText"
-		},
-		{
+			"pre_debug_task": "Build Konpacto",
 			"type": "lldb",
 			"request": "launch",
 			"name": "Launch",
@@ -25,4 +18,10 @@
 		},
 
 	],
+	"debugger_tasks" : [
+	    {
+	        "name" : "Build Konpacto",
+	        "cmd" : ["make","debug"],
+	    }
+	]
 }

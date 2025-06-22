@@ -611,7 +611,7 @@ void SetOpFlags(int xPos, int yPos, UIEvent event){
 		strcpy(helpString,"loop end");
 		break;
 	case 3:
-		if(macro->flags){
+		if(macro->interpolationMode){
 			strcpy(helpString,"linear interpolation");
 		}else{
 			strcpy(helpString,"nearest neighbor");
@@ -628,7 +628,7 @@ void SetOpFlags(int xPos, int yPos, UIEvent event){
 		}else if(xPos==2){
 			macro->loopEnd=clamp(event.change+macro->loopEnd,0,macro->length);
 		}else{
-			macro->flags=clamp(event.change+macro->flags,0,1);
+			macro->interpolationMode=clamp(event.change+macro->interpolationMode,0,1);
 		}
 	}
 }
@@ -658,7 +658,7 @@ void DrawOpFlags(int xPos, int yPos, bool selected){
 		HexSelected(num,3+xPos*5,7,selected,2,3,1,0);
 	}else{
 		char* str = "n";
-		if(macro->flags){
+		if(macro->interpolationMode){
 			str = "l";
 		}
 		PrintSelected(str,3+xPos*5,7,selected,2,3,1,0);

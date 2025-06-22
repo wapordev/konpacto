@@ -38,5 +38,8 @@ lua:
 run: konpacto
 	cd build && main.exe
 
-.PHONY: all run konpacto luatest lua
+debug: konpacto
+	cd build
+
+.PHONY: all run konpacto luatest lua debug
 

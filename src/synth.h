@@ -11,13 +11,20 @@ typedef struct KonAudioFormat {
 	uint8_t channelCount;		//1 mono, 2 stereo (output channels, regardless of mix)
 }KonAudioFormat;
 
+typedef enum {
+    IntOff,
+    IntLinear,
+    IntSmoothStep,
+} InterpolationModes;
+
+
 typedef struct KonMacro {		//parameter/modulation data
 	char name[16];
 	uint8_t defaultValue;
 	uint8_t speed;				//0 to 127 tick speed+1, -1 to -128, ms? maybe?
 	uint8_t min;				
 	uint8_t max;				//data output range.
-	uint8_t flags;				//bit 0 = loops, bit 1,2 = interpolation mode 
+	InterpolationModes interpolationMode;				//bit 0 = loops, bit 1,2 = interpolation mode
 	uint8_t loopStart;
 	uint8_t loopEnd;
 	uint8_t length;
@@ -56,6 +63,7 @@ typedef struct KonChannel {
 	uint64_t tickCounter;			//info for the macros!
 	int32_t on;
 	KonStep synthData;				//synth instance created from instrument index
+	KonMacro synthMacros[32];
 }KonChannel;
 
 typedef struct KonGroove {			//list of ticks per step.

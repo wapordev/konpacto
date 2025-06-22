@@ -178,7 +178,7 @@ void LoadSong(char* path){
 			macro->speed = getc(f);
 			macro->min = getc(f);
 			macro->max = getc(f);
-			macro->flags = getc(f);
+			macro->interpolationMode = getc(f);
 			macro->loopStart = getc(f);
 			macro->loopEnd = getc(f);
 			macro->length = getc(f);
@@ -304,7 +304,7 @@ void SaveSong(char* path){
 			putc(macro->speed,f);
 			putc(macro->min,f);		
 			putc(macro->max,f);
-			putc(macro->flags,f);
+			putc(macro->interpolationMode,f);
 			putc(macro->loopStart,f);
 			putc(macro->loopEnd,f);
 			putc(macro->length,f);
