@@ -122,10 +122,8 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 			channel->tickCounter=0;
 
 			//TO DO, SYNTH INIT
-			char path[256]="assets/synths/";
 
-			strcat(path,konAudio->instruments[currentStep.instrument-1].selectedSynth);
-			SetLuaInstrument(path,channelIndex);
+			SetLuaInstrument(konAudio->instruments[currentStep.instrument-1].selectedSynth,channelIndex);
 		}
 
 		if(currentStep.velocity){
@@ -181,14 +179,27 @@ void konResetChannels(KonAudio* konAudio){
 	}
 }
 
-void setupInstrument(int instrumentIndex){
+void setInstrument(int instrumentIndex, char* name){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
 
-	char path[256]="assets/synths/";
+	char path[64]="assets/synths/";
 
-	strcat(path,instrument->selectedSynth);
+	strcat(path,name);
 
-	LuaConfigInstrument(instrument,path);
+	LoadLuaFile(path);
+
+	int params = clamp(CountLuaParam(path),0,28)+3;
+
+	if(params<instrument->macroCount){
+		for(int i=params;i<instrument->macroCount;i++){
+			if(instrument->macros[i].length){
+				free(instrument->macros[i].data);
+				instrument->macros[i].length=0;
+			}
+		}
+	}
+
+	instrument->macroCount=params;
 
 	strcpy(instrument->macros[0].name,"pitch");
 	strcpy(instrument->macros[1].name,"volume l");
@@ -201,7 +212,16 @@ void setupInstrument(int instrumentIndex){
 	instrument->macros[1].loopStart=1;
 	instrument->macros[2].loopStart=1;
 
-	instrument->selectedMacro=clamp(instrument->selectedMacro,0,instrument->macroCount-1);
+	for(int i=3;i<params;i++){
+		int defaultValue = GetLuaParam(path,i-3,instrument->macros[i].name);
+		if(defaultValue>=0){
+			instrument->macros[i].defaultValue = defaultValue;
+			if(instrument->macros[i].length==0){
+				instrument->macros[i].loopStart=1;
+			}
+		}
+	}
+	instrument->selectedMacro=0;
 }
 
 
@@ -526,5 +546,5 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 	result/=64;
 
-	printf("elapsed time average: %f, true %f\n",result, elapsedMS);
+	//printf("elapsed time average: %f, true %f\n",result, elapsedMS);
 }

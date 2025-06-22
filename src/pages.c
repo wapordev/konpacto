@@ -500,7 +500,7 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 
 		strcpy(instrument->selectedSynth,synthList[synthIndex]);
 
-		setupInstrument(instrumentIndex);
+		setInstrument(instrumentIndex,synthList[synthIndex]);
 		
 	}else if(event.type == UIDelete){
 		strcpy(instrument->selectedSynth,"");
