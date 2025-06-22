@@ -82,7 +82,7 @@ void konInit(KonAudio* konAudio, int frequency, int packetSize, int channelCount
 
 //0, 1 if track ended
 static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8_t trackIndex, uint8_t channelIndex){
-	if(trackIndex==0){return channelIndex==0;}
+	if(trackIndex==0){return 1;}
 
 	KonTrack currentTrack = konAudio->tracks[trackIndex-1];
 		
@@ -93,17 +93,16 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 
 	channel->tickCounter+=1;
 
+	int ending = 0;
+
 	if(channel->stepAccumulator == channel->stepLength){
 
 
 
 		//first track continues, others loop
 		if(channel->stepIndex>currentTrack.length){
-			if(channelIndex==0){
-				return 1;
-			}else{
-				channel->stepIndex=0;
-			}
+			ending = 1;
+			channel->stepIndex=0;
 		}
 
 		KonStep currentStep = currentTrack.steps[channel->stepIndex];
@@ -152,7 +151,7 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 		channel->stepAccumulator++;
 	}
 
-	return 0;
+	return ending;
 }
 
 void konStopInternal(KonAudio* konAudio){
@@ -174,6 +173,7 @@ void konResetChannels(KonAudio* konAudio){
 	for(int i=0;i<CHANNELCOUNT;i++){
 		KonChannel* channel = &konAudio->channels[i];
 
+		channel->on=0;
 		channel->stepIndex=0;
 		channel->stepAccumulator=0;
 		channel->stepLength=0;
@@ -322,7 +322,7 @@ static inline double macroProcess(KonAudio* konAudio, KonChannel* channel, KonIn
 
 			out=macroDataGet(macro,rawPosition/speed);
 
-			if(macro->flags&1){
+			if(macro->interpolationMode==IntLinear){
 				double positionOffset =  ((double)konAudio->frameAcumulator/konAudio->tickrate + (double)(rawPosition%speed)) /speed;
 
 				if(positionOffset>0){
@@ -350,11 +350,22 @@ static inline void sequenceProcess(KonAudio* konAudio){
 
 	uint8_t arrangementEnded = 0;
 
+	uint8_t firstRealTrack=0;
+
 	for(int i=0;i<CHANNELCOUNT;i++){
 		uint8_t trackIndex = arrangement.trackIndexes[i];
 		KonChannel* channel = &konAudio->channels[i];
 
-		arrangementEnded = channelTick(konAudio, channel, trackIndex, i);
+		int ended = channelTick(konAudio, channel, trackIndex, i);
+
+		if (trackIndex==0 && i==firstRealTrack){
+			firstRealTrack++;
+			if(firstRealTrack==CHANNELCOUNT)
+				arrangementEnded=1;
+		}
+		if(i==firstRealTrack)
+			arrangementEnded=ended;
+
 		if(arrangementEnded){break;}
 	}
 
@@ -366,16 +377,14 @@ static inline void sequenceProcess(KonAudio* konAudio){
 
 		if(jump){
 			konAudio->arrangeIndex=jump-1;
-			arrangement = konAudio->arrangements[konAudio->arrangeIndex];
-			if( konArrangementIsEmpty(&arrangement) ){
-				stopping=1;
-			}
+			
 		}else{
-			if(konAudio->arrangeIndex==255){
-				stopping=1;
-			}else{
-				konAudio->arrangeIndex+=1;
-			}
+			konAudio->arrangeIndex+=1;
+		}
+
+		arrangement = konAudio->arrangements[konAudio->arrangeIndex];
+		if( konArrangementIsEmpty(&arrangement) ){
+			stopping=1;
 		}
 
 		if(stopping){
