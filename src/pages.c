@@ -4,12 +4,18 @@
 #include <string.h>
 #include <stdint.h>
 
+#ifdef _WIN32
+#define realpath(N,R) _fullpath((R),(N),_MAX_PATH)
+#endif
+
 #include "ui.h"
 #include "file.h"
 #include "pages.h"
 #include "screen.h"
 
 #include "synth.h"
+
+
 
 #include "lua.h"
 
@@ -18,31 +24,18 @@
 uint8_t noteSymbols[12]={28,53,29,54,30,31,55,32,56,26,52,27};
 uint8_t noteNames[254][2];
 
-int themeCount=0;
 int themeIndex=0;
-char** themeList;
+FileResults themeList;
 
-int fontCount=0;
 int fontIndex=0;
-char** fontList;
+FileResults fontList;
 
-int synthCount=0;
-char** synthList;
-
-void GetThemes(){
-	if(themeList!=NULL){
-		for(int i=0; i<themeCount; i++){
-			free(themeList[i]);
-		}
-		free(themeList);
-	}
-	themeList = ListPath("assets/palettes",".PNG",&themeCount);
-}
+FileResults synthList;
 
 void MatchTheme(char* themeName){
-	GetThemes();
-	for(int i=0;i<themeCount;i++){
-		if(strcmp(themeList[i],themeName)==0){
+	ListPath("assets/palettes",".PNG",&themeList,0);
+	for(int i=0;i<themeList.count;i++){
+		if(strcmp(themeList.files[i].name,themeName)==0){
 			themeIndex=i;
 			return;
 		}
@@ -56,22 +49,22 @@ void SetTheme(int xPos, int yPos, UIEvent event) {
 
 	MatchTheme(configTheme);
 
-	themeIndex=positive_modulo(themeIndex+change,themeCount);
-	ChangeTheme(themeList[themeIndex]);
+	themeIndex=positive_modulo(themeIndex+change,themeList.count);
+	ChangeTheme(themeList.files[themeIndex].name);
 
 	free(configTheme);
-	int length=strlen(themeList[themeIndex]);
+	int length=strlen(themeList.files[themeIndex].name);
 	configTheme = malloc(length+1);
-	strcpy(configTheme,themeList[themeIndex]);
+	strcpy(configTheme,themeList.files[themeIndex].name);
 	configTheme[length]='\0';
 
 	SaveConfig();
 }
 
 void DrawTheme(int xPos, int yPos, bool selected) {
-	PrintSelected(themeList[themeIndex],6,1,selected,2,3,1,0);
+	PrintSelected(themeList.files[themeIndex].name,6,1,selected,2,3,1,0);
 
-	if(strcmp(themeList[themeIndex],"Kleahpacto.png")==0){
+	if(strcmp(themeList.files[themeIndex].name,"Kleahpacto.png")==0){
 		PokeScreen(187,0x46,2,1);
 		PokeScreen(188,0x5A,1,2);
 
@@ -97,20 +90,10 @@ void DrawTheme(int xPos, int yPos, bool selected) {
 	}
 }
 
-void GetFonts(){
-	if(fontList!=NULL){
-		for(int i=0; i<fontCount; i++){
-			free(fontList[i]);
-		}
-		free(fontList);
-	}
-	fontList = ListPath("assets/fonts",".BMP",&fontCount);
-}
-
 void MatchFont(char* fontName){
-	GetFonts();
-	for(int i=0;i<fontCount;i++){
-		if(strcmp(fontList[i],fontName)==0){
+	ListPath("assets/fonts",".BMP",&fontList,0);
+	for(int i=0;i<fontList.count;i++){
+		if(strcmp(fontList.files[i].name,fontName)==0){
 			fontIndex=i;
 			return;
 		}
@@ -124,32 +107,32 @@ void SetFont(int xPos, int yPos, UIEvent event) {
 
 	MatchFont(configFont);
 
-	fontIndex=positive_modulo(fontIndex+change,fontCount);
-	ChangeFont(fontList[fontIndex]);
+	fontIndex=positive_modulo(fontIndex+change,fontList.count);
+	ChangeFont(fontList.files[fontIndex].name);
 
 	free(configFont);
-	int length=strlen(fontList[fontIndex]);
+	int length=strlen(fontList.files[fontIndex].name);
 	configFont = malloc(length+1);
-	strcpy(configFont,fontList[fontIndex]);
+	strcpy(configFont,fontList.files[fontIndex].name);
 	configFont[length]='\0';
 
 	SaveConfig();
 }
 
 void DrawFont(int xPos, int yPos, bool selected) {
-	PrintSelected(fontList[fontIndex],5,2,selected,2,3,1,0);
+	PrintSelected(fontList.files[fontIndex].name,5,2,selected,2,3,1,0);
 }
 
 void InitializePages(){
 	printf("** FILE LISTS\n\n");
 
 	MatchTheme(configTheme);
-	ChangeTheme(themeList[themeIndex]);
+	ChangeTheme(themeList.files[themeIndex].name);
 	//fontList = ListPath("assets/fonts",".BMP",&fontCount);
 	MatchFont(configFont);
-	ChangeFont(fontList[fontIndex]);
+	ChangeFont(fontList.files[fontIndex].name);
 	
-	synthList = ListPath("assets/synths",".LUA",&synthCount);
+	ListPath("assets/synths",".LUA",&synthList,0);
 
 	uint8_t octaveNumber = 0;
 	uint8_t notesThisOctave=0;
@@ -177,12 +160,11 @@ void DrawBPM(int xPos, int yPos, bool selected){
 void SetSave(int xPos, int yPos, UIEvent event){
 	if(event.type == UIPlace){
 		if(xPos==0) {
-			SaveSong("soso.kpt");
+			SaveSong(currentSongPath);
 		}else if (xPos==1) {
 			SetContextPage(ContextSaveSong);
 		}else {
-			//SetContextPage(ContextLoadSong);
-			LoadSong("soso.kpt");
+			SetContextPage(ContextLoadSong);
 		}
 	}
 }
@@ -484,8 +466,7 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
 	if(event.type == UIChange || event.type == UIPlace ){
 		if(event.change){
-			free(synthList);
-			synthList = ListPath("assets/synths",".LUA",&synthCount);
+			ListPath("assets/synths",".LUA",&synthList,0);
 		}
 
 		char* name = instrument->selectedSynth;
@@ -493,14 +474,14 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 
 		unsigned int synthIndex=0;
 		if(!empty){
-			synthIndex = FindStringInList(synthList,synthCount,name);
+			synthIndex = FindStringInList(&synthList,name);
 		}
 
-		synthIndex=positive_modulo(synthIndex-event.change,synthCount);
+		synthIndex=positive_modulo(synthIndex-event.change,synthList.count);
 
-		strcpy(instrument->selectedSynth,synthList[synthIndex]);
+		strcpy(instrument->selectedSynth,synthList.files[synthIndex].name);
 
-		setInstrument(instrumentIndex,synthList[synthIndex]);
+		setInstrument(instrumentIndex,synthList.files[synthIndex].name);
 		
 	}else if(event.type == UIDelete){
 		strcpy(instrument->selectedSynth,"");
@@ -791,19 +772,43 @@ void DrawOpData(int xPos, int yPos, bool selected){
 }
 
 void SetFileName(int xPos, int yPos, UIEvent event){
-
+	HandleTextInput(currentSongName,xPos,event);
 }
 
 void DrawFileName(int xPos, int yPos, bool selected){
-	PrintSelected("testname",0,2,selected,0,3,1,0);
+	
 }
 
 void SetFileConfirm(int xPos, int yPos, UIEvent event){
 	if(event.type == UIPlace){
 		if(xPos == 0){
+			
+			int len = strlen(fileBrowserPath);
+			if(len<PATH_MAX-32){
+				strcpy(selectedFile,fileBrowserPath);
+				selectedFile[len]='\\';
+				strncpy_s(selectedFile+len+1,PATH_MAX-len-1,currentSongName,PATH_MAX);
 
+				char* lastSlash = strchr(selectedFile,'/');
+				char* lastBackslash = strchr(selectedFile,'\\');
+				if (lastBackslash > lastSlash)
+					lastSlash = lastBackslash;
+				char* lastDot = strchr(selectedFile,'.');
+				if(lastDot< lastBackslash){
+					len+=strlen(currentSongName)+1;
+					strncpy_s(selectedFile+len,PATH_MAX-len,".kpt",PATH_MAX);
+				}
+
+				printf("Targetting %s to save.\n",selectedFile);
+
+				strcpy(selectedFileName,currentSongName);
+				
+
+				QuitContext(1);
+			}
+			
 		}else{
-			QuitContext();
+			QuitContext(0);
 		}
 	}
 }
@@ -818,7 +823,7 @@ void DrawFileConfirm(int xPos, int yPos, bool selected){
 
 void SetFileCancel(int xPos, int yPos, UIEvent event){
 	if(event.type == UIPlace){
-		QuitContext();
+		QuitContext(0);
 	}
 }
 
@@ -827,13 +832,69 @@ void DrawFileCancel(int xPos, int yPos, bool selected){
 }
 
 
+//stupid, rework later possibly. see next comment
+int fileBrowserOffset=0;
+char fileBrowserPath[PATH_MAX] = "assets/songs";
+char selectedFile[PATH_MAX] = "";
+char selectedFileName[PATH_MAX] = "";
+char fileBrowserExtension[5] = ".KPT";
+FileResults fileBrowserEntries;
+int fileBrowserScroll = 0;
+
+void ReloadFileBrowse(int offset){
+	ListPath(fileBrowserPath,fileBrowserExtension,&fileBrowserEntries,1);
+	strcpy(fileBrowserExtension,".KPT");
+	fileBrowserOffset = offset;
+}
 
 void SetFileBrowse(int xPos, int yPos, UIEvent event){
+	ScrollGrid(&fileBrowserScroll,&saveFilePage.grids[2].yPos,fileBrowserEntries.count,event);
+	if (saveFilePage.grids[2].yPos >= fileBrowserEntries.count && fileBrowserEntries.count > 0){
+		saveFilePage.grids[2].yPos = fileBrowserEntries.count-1;
+	}
+	//ok this is really stupid, but i had never considered before using an element for 2 pages.
+	//there is not really the structure for this now
+	ScrollGrid(&fileBrowserScroll,&loadFilePage.grids[1].yPos,fileBrowserEntries.count,event);
+	if (loadFilePage.grids[1].yPos >= fileBrowserEntries.count && fileBrowserEntries.count > 0){
+		loadFilePage.grids[1].yPos = fileBrowserEntries.count-1;
+	}
 
+
+	if(event.type != UIPlace)
+		return;
+	
+	int realY = yPos+fileBrowserScroll;
+
+	if(realY < fileBrowserEntries.count){
+		if(fileBrowserEntries.files[realY].isDir){
+			char newPath[PATH_MAX];
+			realpath(fileBrowserEntries.files[realY].path,newPath);
+			ListPath(newPath,fileBrowserExtension,&fileBrowserEntries,1);
+			if(fileBrowserEntries.count==0){
+				ListPath(fileBrowserPath,fileBrowserExtension,&fileBrowserEntries,1);
+			}else{
+				strcpy(fileBrowserPath,newPath);
+				fileBrowserScroll=0;
+			}
+		}else{
+			strcpy(selectedFile,fileBrowserEntries.files[realY].path);
+			strcpy(selectedFileName,fileBrowserEntries.files[realY].name);
+			QuitContext(1);
+		}
+	}
+
+	if(fileBrowserEntries.files == NULL){
+		ListPath(fileBrowserPath,fileBrowserExtension,&fileBrowserEntries,1);
+	}
 }
 
 void DrawFileBrowse(int xPos, int yPos, bool selected){
+
 	
+
+	if(yPos+fileBrowserScroll < fileBrowserEntries.count){
+		PrintSelected(fileBrowserEntries.files[yPos+fileBrowserScroll].name,0,4+yPos+fileBrowserOffset,selected,0,3,1,0);
+	}
 }
 
 UIPage projectPage = {0,4,(UIGrid[5]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(1,1,&SetBPM,&DrawBPM),CreateGrid(3,1,&SetSave,&DrawSave)} };
@@ -844,6 +905,6 @@ UIPage trackPage = {0,2,(UIGrid[2]){CreateGrid(3,1,&SetTrackInfo,&DrawTrackInfo)
 
 UIPage operatorPage = {0,6,(UIGrid[6]){CreateGrid(2,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpEffect,&DrawOpEffect),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(4,1,&SetOpFlags,&DrawOpFlags),CreateGrid(18,1,&SetOpData,&DrawOpData)}};
 
-UIPage saveFilePage = {0,3,(UIGrid[3]){CreateGrid(20,1,&SetFileName,&DrawFileName),CreateGrid(2,1,&SetFileConfirm,&DrawFileConfirm),CreateGrid(1,18,&SetFileBrowse,&DrawFileBrowse)}};
+UIPage saveFilePage = {0,3,(UIGrid[3]){CreateGrid(20,1,&SetFileName,&DrawFileName),CreateGrid(2,1,&SetFileConfirm,&DrawFileConfirm),CreateGrid(1,13,&SetFileBrowse,&DrawFileBrowse)}};
 
-UIPage loadFilePage = {0,2,(UIGrid[2]){CreateGrid(1,1,&SetFileCancel,&DrawFileCancel),CreateGrid(1,18,&SetFileBrowse,&DrawFileBrowse)}};
+UIPage loadFilePage = {0,2,(UIGrid[2]){CreateGrid(1,1,&SetFileCancel,&DrawFileCancel),CreateGrid(1,15,&SetFileBrowse,&DrawFileBrowse)}};

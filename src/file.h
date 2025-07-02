@@ -5,6 +5,17 @@
 
 #include <stdbool.h>
 
+typedef struct FileStructure {
+	char* path;
+	char* name;
+	int isDir;
+}FileStructure;
+
+typedef struct FileResults {
+	FileStructure* files;
+	int count;
+}FileResults;
+
 void SaveSong(char* path);
 
 void LoadSong(char* path);
@@ -23,13 +34,18 @@ char* IntToChar(int BMPstring[], char* out, int length);
 
 char* CharToBMP(char* string, bool filter);
 
-char** ListPath(char* path, char* filter, int* outLength);
+void ListPath(char* path, char* filter, FileResults* result, int includeDirectories);
 
-int FindStringInList(char** list, int count, char* string);
+int FindStringInList(FileResults* list, char* string);
 
 void SetScale(KonAudio* konAudio, const char* scalePath);
 
 void FreePath();
+
+
+extern char defaultSongPath[PATH_MAX];
+extern char currentSongPath[PATH_MAX];
+extern char currentSongName[PATH_MAX];
 
 extern int configSampleRate;
 extern int configBufferSize;

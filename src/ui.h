@@ -15,18 +15,6 @@ typedef enum {
     ContextSample,
 } FileContext;
 
-extern FileContext fileContext;
-
-void SetContextPage(FileContext newContext);
-
-void QuitContext();
-
-void RenderUI();
-
-void InitializePages();
-
-int positive_modulo(int i, int n);
-
 typedef enum {
     UINothing,
     UIPlace,
@@ -61,5 +49,21 @@ typedef struct UIPage {
 	int length;
 	UIGrid* grids;
 }UIPage;
+
+extern FileContext fileContext;
+
+void SetContextPage(FileContext newContext);
+
+void QuitContext(int succeeded);
+
+void HandleTextInput(char* text, int xPos, UIEvent event);
+
+void RenderUI();
+
+void InitializePages();
+
+int positive_modulo(int i, int n);
+
+
 
 #endif

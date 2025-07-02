@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <stdbool.h>
 #include <math.h>
+#include <ctype.h>
 
 #include "input.h"
 
@@ -11,11 +12,16 @@
 #include "tinydir.h"
 #include "sound.h"
 #include "synth.h"
+#include "ui.h"
 
 #include "file.h"
 
 const uint32_t FILE_VERSION = 0;
 
+
+char defaultSongPath[PATH_MAX] = "assets/songs";
+char currentSongPath[PATH_MAX] = "";
+char currentSongName[PATH_MAX] = "";
 
 int clamp(int d, int min, int max) {
   const int t = d < min ? min : d;
@@ -213,6 +219,11 @@ void LoadSong(char* path){
 }
 
 void SaveSong(char* path){
+	if (path[0]=='\0'){
+		SetContextPage(ContextSaveSong);
+		return;
+	}
+
 	FILE *f = fopen(path, "wb");
 
 	if (f == NULL)
@@ -577,59 +588,70 @@ void SetScale(KonAudio* konAudio, const char* scalePath){
 	
 }
 
-int FindStringInList(char** list, int count, char* string){
-	for(int i=0;i<count;i++){
-		if(strcmp(list[i],string)==0){return i;}
+int FindStringInList(FileResults* list, char* string){
+	for(int i=0;i<list->count;i++){
+		if(strcmp(list->files[i].name,string)==0){return i;}
 	}
 	return 0;
 }
 
-//
-char** ListPath(char* path, char* filter, int* outLength){
+void ListPath(char* path, char* filter, FileResults* result, int includeDirectories){
 
+	if(result->files != NULL){
+		for(int i=0; i<result->count; i++){
+			free(result->files[i].name);
+			free(result->files[i].path);
+		}
+		free(result->files);
+		result->files=NULL;
+	}
+	result->count=0;
 
-
-	//PrintText(CharToBMP(fontNames[0],true),0,5);
 	tinydir_dir dir;
   	if (tinydir_open_sorted(&dir, path) == -1)
 	{
 		goto bail;
 	}
 	
-	char** nameListPtr;
-  	nameListPtr = (char**) malloc(dir.n_files * sizeof(int*));
-
-  	int y=0;
+  	result->files = (FileStructure*) calloc(dir.n_files,sizeof(FileStructure));
 
   	for(int i=0;i<dir.n_files;i++){
   		tinydir_file file;
 		if (tinydir_readfile_n(&dir, &file, i) == -1)
 		{
-			for (int j=0;j<dir.n_files;j++){
-				if(nameListPtr[j] != NULL){
-					free(nameListPtr[j]);
-				}
-			}
-			free(nameListPtr);
 			goto bail;
 		}
-		if(EndsWith(file.name,filter)){
-			nameListPtr[y] = malloc( (strlen(file.name)+1) * sizeof(char) );
+		if((includeDirectories && file.is_dir) || EndsWith(file.name,filter)){
+			if (file.is_dir) {
+				if (i==0) {
+					continue;
+				}
+			}
 
-			strcpy(nameListPtr[y],file.name);
+			result->files[result->count].name = malloc( (strlen(file.name)+1) * sizeof(char) );
+			strcpy(result->files[result->count].name,file.name);
+
+			if (file.is_dir) {
+				char* p = result->files[result->count].name;
+				for ( ; *p; ++p) *p = tolower(*p);
+			}
+
+			result->files[result->count].path = malloc( (strlen(file.path)+1) * sizeof(char) );
+			strcpy(result->files[result->count].path,file.path);
 
 			
-			y++;
+			result->files[result->count].isDir = file.is_dir;
+
+			result->count++;
 		}
 	}
 	tinydir_close(&dir);
-	*outLength = y;
-	printf("Listing %s for %s, found %i entries\n",path,filter,y);
-	return nameListPtr;
+	printf("Listing %s for %s, found %i entries\n",path,filter,result->count);
+	return;
 
 	bail:
 	printf("failed to load: %s\nEnsure that the path < 260 characters, and includes only ASCII.\n",path);
-	return NULL;
+	return;
 }
 
 char* IntToChar(int BMPstring[], char* out, int length){

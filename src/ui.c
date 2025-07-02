@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 //TEMP!!
 #include <SDL.h>
@@ -72,7 +73,7 @@ void PageProcess(UIPage* page, UIEvent* event) {
 	}
 	//arrangePage.grids[0].yPos = 7;
 	for(int x=0;x<curGrid->width;x++){
-		for(int y=0;y<curGrid->height;y++){
+		for(int y=curGrid->height-1;y>=0;y--){
 			curGrid->drawPtr(x, y, (x==curGrid->xPos && y==curGrid->yPos));
 		}
 	}
@@ -153,6 +154,8 @@ void OperatorsDraw(UIEvent* event) {
 
 FileContext fileContext = ContextSaveSong;
 
+char lowerCasePath[PATH_MAX] = "";
+
 void FileContextDraw(UIEvent* event) {
 
 	// if(doNameEntry){
@@ -161,24 +164,35 @@ void FileContextDraw(UIEvent* event) {
 	// 	fileContextPage.index=2;
 	// }
 
+	strcpy(lowerCasePath,fileBrowserPath);
+	char* p = lowerCasePath;
+	for ( ; *p; ++p) *p = tolower(*p);
+	int pathLength=strlen(lowerCasePath);
+	int pathoffset = 0;
+	if(pathLength>20)
+		pathoffset = pathLength-20;
 	
 
 	switch (fileContext){
 	case ContextSaveSong:
-		PageProcess(&saveFilePage, event);
 		for(int i=6;i<19;i++)
 			PrintText(";0XXXXXXXXXXXXXXXXXXXX",0,i);
 		for(int i=0;i<20;i++)
 			PlaceScreen(i,4,0x55,2,1);
 		PrintText(",1file name\n;0,3XXXXXXXXXXXXXXXXXXXX;2,1-",0,1);
+		PrintColor(lowerCasePath+pathoffset,0,5,2,1,0);
+		PrintColor(currentSongName,0,2,0,3,0);
+		PageProcess(&saveFilePage, event);
 		break;
 	case ContextLoadSong:
-		PageProcess(&loadFilePage, event);
 		for(int i=4;i<19;i++)
 			PrintText(";0XXXXXXXXXXXXXXXXXXXX",0,i);
 		for(int i=0;i<20;i++)
 			PlaceScreen(i,2,0x55,2,1);
 		PrintText(",1-",0,1);
+
+		PrintColor(lowerCasePath+pathoffset,0,3,2,1,0);
+		PageProcess(&loadFilePage, event);
 		break;
 	}
 
@@ -255,14 +269,105 @@ void RenderUI() {
 void SetContextPage(FileContext newContext){
 	fileContext = newContext;
 
+	switch (newContext){
+	case ContextSaveSong:
+		strcpy(fileBrowserPath,defaultSongPath);
+		ReloadFileBrowse(2);
+		break;
+	case ContextLoadSong:
+		strcpy(fileBrowserPath,defaultSongPath);
+		ReloadFileBrowse(0);
+		break;
+	default:
+		break;
+	}
+
 	page=5;
 }
 
-void QuitContext(){
+void QuitContext(int succeeded){
 	switch (fileContext){
 	case ContextSaveSong:
-	case ContextLoadSong:
+		if(succeeded){
+			strcpy(currentSongPath,selectedFile);
+			strcpy(currentSongName,selectedFileName);
+			SaveSong(currentSongPath);
+			strcpy(defaultSongPath,fileBrowserPath);
+		}
 		page=0;
 		break;
+	case ContextLoadSong:
+		if(succeeded){
+			strcpy(currentSongPath,selectedFile);
+			strcpy(currentSongName,selectedFileName);
+			LoadSong(selectedFile);
+			strcpy(defaultSongPath,fileBrowserPath);
+		}
+		page=0;
+		break;
+	default:
+		break;
+	}
+}
+
+
+
+char MapChar(char c){
+	char mappedChar = 0;
+	if(c == '.'){
+		mappedChar = 5;
+	}else if(c >= 65 && c <= 79){
+		mappedChar = c-64;
+	}else if (c >= 48 && c <= 57){
+		mappedChar = c-32;
+	}else if (c >= 97 && c <= 122){
+		mappedChar = c-71;
+	}
+
+	return mappedChar;
+}
+
+char UnmapChar(char c){
+	char unmappedChar = 40;
+	if(c == 5){
+		unmappedChar = '.';
+	}else if(c >= 0 && c <= 15){
+		unmappedChar = c+64;
+	}else if (c >= 16 && c <= 25){
+		unmappedChar = c+32;
+	}else if (c >= 26 && c <= 56){
+		unmappedChar = c+71;
+	}
+
+	return unmappedChar;
+}
+
+char lastUsedChar='a';
+
+void HandleTextInput(char* text, int xPos, UIEvent event){
+	PrintColor("X",xPos,2,1,0,0);
+
+	if(event.type==UIPlace){
+		int len = strlen(text);
+		if(xPos>=len){
+			text[xPos] = lastUsedChar;
+			text[xPos+1] = '\0';
+			for (int i=0; i<xPos; i++){
+				if(i >= len || MapChar(text[i])==0){
+					text[i]='D';
+				}
+			}
+		}else{
+			lastUsedChar = text[xPos];
+		}
+
+		
+
+	}else if(event.type==UIChange){
+		char mappedChar = MapChar(text[xPos]);
+		
+		text[xPos] = UnmapChar(positive_modulo(((int)mappedChar)+event.change,56));
+	}else if(event.type==UIDelete){
+		text[xPos]='\0';
 	}
 }

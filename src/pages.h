@@ -17,4 +17,10 @@ extern UIPage saveFilePage;
 
 extern UIPage loadFilePage;
 
+extern char selectedFile[PATH_MAX];
+extern char selectedFileName[PATH_MAX];
+extern char fileBrowserPath[PATH_MAX];
+
+void ReloadFileBrowse(int offset);
+
 #endif
