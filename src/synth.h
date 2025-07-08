@@ -17,6 +17,10 @@ typedef enum {
     IntSmoothStep,
 } InterpolationModes;
 
+typedef struct KonGroove {
+	int length;					//
+	uint8_t data[256];
+}KonGroove;
 
 typedef struct KonMacro {		//parameter/modulation data
 	char name[16];
@@ -33,7 +37,7 @@ typedef struct KonMacro {		//parameter/modulation data
 }KonMacro;
 
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
-	char name[21];
+	char name[8];
 	char selectedSynth[64];
 	uint8_t route;
 	uint8_t macroCount;
@@ -66,10 +70,6 @@ typedef struct KonChannel {
 	KonMacro synthMacros[32];
 }KonChannel;
 
-typedef struct KonGroove {			//list of ticks per step.
-	uint8_t loops;
-}KonGroove;
-
 typedef struct KonTrack {
 	uint8_t length;
 	uint8_t grooveIndex;
@@ -86,12 +86,14 @@ typedef struct KonAudio {
 	KonAudioFormat format;
 	int notesInScale;
 	double frequencies[254];
-	KonGroove grooves[255];
+	KonGroove grooves[254];
 	KonTrack tracks[255];				//	
 	KonInstrument instruments[255];
 	KonArrangements arrangements[256];	//
 	KonChannel channels[CHANNELCOUNT];	//channel data
 	double luaData[66];
+	int bpm; //convenience
+	int ticksPerStep;
 	uint64_t tickrate;					//Unsigned Fixed24_40 calculated by some method, number of frames (including decimal) per tick
 	uint64_t frameAcumulator; 			//Unsigned Fixed24_40 rolling error from tickrate
 	uint8_t forceMono;					//0 off, 1 both left, 2 both right, 3 mix
@@ -119,7 +121,7 @@ void konStart(KonAudio* konAudio, uint8_t arrangeIndex);
 
 void konStop(KonAudio* konAudio);
 
-void konSetBPM(KonAudio* konAudio, uint64_t bpm, uint64_t beatsPerMeasure, uint64_t targetRate);
+void konSetBPM(KonAudio* konAudio);
 
 void konInit(KonAudio* konAudio, int frequency, int packetSize, int channelCount);
 

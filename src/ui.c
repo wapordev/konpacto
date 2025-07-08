@@ -81,7 +81,12 @@ void PageProcess(UIPage* page, UIEvent* event) {
 }
 
 void ProjectDraw(UIEvent* event) {
-	PrintColor("theme\nfont\nbpm\n-",0,1,2,1,false);
+	if(currentSongName[0]=='\0'){
+		PrintColor("not saved",0,2,2,1,false);
+	}else{
+		PrintColor(currentSongName,0,2,2,1,false);
+	}
+	PrintColor("bpm\n\n>\n\ntheme\nfont",0,1,2,1,false);
 	
 	//Fox
 	DrawFox(7,9,0,1,2,3);
@@ -149,7 +154,10 @@ void OperatorsDraw(UIEvent* event) {
 	PlaceScreen(1,9,0x6a,2,0); 
 	PlaceScreen(18,9,0x6b,2,0); 
 
+	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+	PrintColor(instrument->name,13,1,2,3,false);
 	PageProcess(&operatorPage, event);
+	
 }
 
 FileContext fileContext = ContextSaveSong;
@@ -179,7 +187,7 @@ void FileContextDraw(UIEvent* event) {
 			PrintText(";0XXXXXXXXXXXXXXXXXXXX",0,i);
 		for(int i=0;i<20;i++)
 			PlaceScreen(i,4,0x55,2,1);
-		PrintText(",1file name\n;0,3XXXXXXXXXXXXXXXXXXXX;2,1-",0,1);
+		PrintText(",1file name\n;0,3XXXXXXXXXXXXXXXXXXXX;2,1>",0,1);
 		PrintColor(lowerCasePath+pathoffset,0,5,2,1,0);
 		PrintColor(currentSongName,0,2,0,3,0);
 		PageProcess(&saveFilePage, event);
@@ -189,7 +197,7 @@ void FileContextDraw(UIEvent* event) {
 			PrintText(";0XXXXXXXXXXXXXXXXXXXX",0,i);
 		for(int i=0;i<20;i++)
 			PlaceScreen(i,2,0x55,2,1);
-		PrintText(",1-",0,1);
+		PrintText(",1>",0,1);
 
 		PrintColor(lowerCasePath+pathoffset,0,3,2,1,0);
 		PageProcess(&loadFilePage, event);
@@ -344,8 +352,8 @@ char UnmapChar(char c){
 
 char lastUsedChar='a';
 
-void HandleTextInput(char* text, int xPos, UIEvent event){
-	PrintColor("X",xPos,2,1,0,0);
+void HandleTextInput(char* text, int xPos, UIEvent event, int sx, int sy){
+	PrintColor("X",xPos+sx,sy,1,0,0);
 
 	if(event.type==UIPlace){
 		int len = strlen(text);
@@ -367,6 +375,7 @@ void HandleTextInput(char* text, int xPos, UIEvent event){
 		char mappedChar = MapChar(text[xPos]);
 		
 		text[xPos] = UnmapChar(positive_modulo(((int)mappedChar)+event.change,56));
+		lastUsedChar = text[xPos];
 	}else if(event.type==UIDelete){
 		text[xPos]='\0';
 	}

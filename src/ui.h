@@ -56,7 +56,7 @@ void SetContextPage(FileContext newContext);
 
 void QuitContext(int succeeded);
 
-void HandleTextInput(char* text, int xPos, UIEvent event);
+void HandleTextInput(char* text, int xPos, UIEvent event, int sx, int sy);
 
 void RenderUI();
 

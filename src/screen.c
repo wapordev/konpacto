@@ -151,6 +151,8 @@ void PrintColor(char string[], int xPos, int yPos, int bg_color, int fg_color, b
             yPos += 1;
         }else if (op == 'X'){
             colorOnly=true;
+        }else if (op == 'Z'){
+            out=0x3f;
         }else if (op == '='){
             print=false;
         }else if (op >= 'A' && op <= 'O'){
@@ -215,7 +217,7 @@ void PrintSelected(char string[], int xPos, int yPos, bool selected, int col0, i
 
 void PrintDec(int input, int xPos, int yPos, int bg_color, int fg_color){
     for(int i=100;i>0;i/=10){
-        if(input/i){
+        if(1){
             PlaceScreen(xPos,yPos,input/i+0x10,bg_color,fg_color);
             xPos+=1;
             input%=i;

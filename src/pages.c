@@ -12,6 +12,7 @@
 #include "file.h"
 #include "pages.h"
 #include "screen.h"
+#include "sound.h"
 
 #include "synth.h"
 
@@ -62,7 +63,7 @@ void SetTheme(int xPos, int yPos, UIEvent event) {
 }
 
 void DrawTheme(int xPos, int yPos, bool selected) {
-	PrintSelected(themeList.files[themeIndex].name,6,1,selected,2,3,1,0);
+	PrintSelected(themeList.files[themeIndex].name,6,5,selected,2,3,1,0);
 
 	if(strcmp(themeList.files[themeIndex].name,"Kleahpacto.png")==0){
 		PokeScreen(187,0x46,2,1);
@@ -120,7 +121,7 @@ void SetFont(int xPos, int yPos, UIEvent event) {
 }
 
 void DrawFont(int xPos, int yPos, bool selected) {
-	PrintSelected(fontList.files[fontIndex].name,5,2,selected,2,3,1,0);
+	PrintSelected(fontList.files[fontIndex].name,5,6,selected,2,3,1,0);
 }
 
 void InitializePages(){
@@ -150,36 +151,57 @@ void InitializePages(){
 }
 
 void SetBPM(int xPos, int yPos, UIEvent event){
-	
+	if (xPos == 0 ){
+		strcpy(helpString,"beats per minute");
+		if (event.type == UIChange)
+			konAudio.bpm = clamp(konAudio.bpm+event.horizontal+(event.vertical*10),1,999);
+	}else{
+		strcpy(helpString,"ticks per step");
+		if (event.type == UIChange)
+			konAudio.ticksPerStep = clamp(konAudio.ticksPerStep+event.change,1,100);
+	}
+	if (event.type == UIChange)
+		konSetBPM(&konAudio);
 }
 
 void DrawBPM(int xPos, int yPos, bool selected){
-	DecSelected(255,4,3,selected,2,3,1,0);
+	if(xPos==0){
+		DecSelected(konAudio.bpm,4,1,selected,2,3,1,0);
+	}else{
+		DecSelected(konAudio.ticksPerStep,8,1,selected,2,3,1,0);
+	}
+	
 }
 
 void SetSave(int xPos, int yPos, UIEvent event){
-	if(event.type == UIPlace){
-		if(xPos==0) {
+	
+	if(xPos==0) {
+		strcpy(helpString,"save song");
+		if(event.type == UIPlace)
 			SaveSong(currentSongPath);
-		}else if (xPos==1) {
+	}else if (xPos==1) {
+		strcpy(helpString,"save to new file");
+		if(event.type == UIPlace)
 			SetContextPage(ContextSaveSong);
-		}else {
+	}else {
+		strcpy(helpString,"load or clear song");
+		if(event.type == UIPlace)
 			SetContextPage(ContextLoadSong);
-		}
 	}
+
 }
 
 void DrawSave(int xPos, int yPos, bool selected){
 	if(xPos == 0){
-		PrintSelected("save",1,4,selected,2,3,1,0);
+		PrintSelected("save",1,3,selected,2,3,1,0);
 	}else if (xPos == 1) {
 		if(selected){
-			PrintColor("XXXXXas",1,4,1,0,false);
+			PrintColor("XXXXXas",1,3,1,0,false);
 		}else{
-			PrintText("as",6,4);
+			PrintText("as",6,3);
 		}
 	}else{
-		PrintSelected("load",9,4,selected,2,3,1,0);
+		PrintSelected("load",9,3,selected,2,3,1,0);
 	}
 }
 
@@ -251,6 +273,7 @@ void DrawArrange(int xPos, int yPos, bool selected){
 }
 
 uint8_t selectedTrack = 0;
+
 void SetTrackInfo(int xPos, int yPos, UIEvent event){
 	switch(xPos){
 	case 0:
@@ -268,6 +291,14 @@ void SetTrackInfo(int xPos, int yPos, UIEvent event){
 		break;
 	case 2:
 		strcpy(helpString,"groove");
+		KonTrack* track = &konAudio.tracks[selectedTrack];
+
+		if(event.type == UIChange){
+			track->grooveIndex=clamp(track->grooveIndex+event.change,0,254);
+		}
+
+		
+
 		break;
 	}
 	KonTrack* track = &konAudio.tracks[selectedTrack];
@@ -283,7 +314,7 @@ void DrawTrackInfo(int xPos, int yPos, bool selected){
 	KonTrack* track = &konAudio.tracks[selectedTrack];
 
 	if(xPos==2){
-
+		num=track->grooveIndex;
 	}else if (xPos){
 		num=track->temporaryLength;
 	}else{
@@ -298,6 +329,9 @@ uint8_t lastInstrument=1;
 uint8_t lastVolume=255;
 uint8_t lastCommand=1;
 uint8_t lastParam=0;
+
+uint8_t lastGroove=6;
+
 void SetTrackData(int xPos, int yPos, UIEvent event){
 	KonTrack* track = &konAudio.tracks[selectedTrack];
 	uint8_t scrollPosition=yPos+trackScroll;
@@ -307,77 +341,106 @@ void SetTrackData(int xPos, int yPos, UIEvent event){
 
 	uint8_t* step = (uint8_t*)&track->steps[scrollPosition];
 
-	if(event.type == UIChange && event.change){
-		int new = step[xPos];
-		if(xPos==0){
+	//messy
+	if(xPos == 7){
+		if(track->grooveIndex){
+			KonGroove* currentGroove = &konAudio.grooves[track->grooveIndex-1];
 
-			if(step[xPos]==0 && event.change<0){
-				new = 255;
-			}else if(step[xPos]==255){
-				if(event.change>0){
-					new = 0+event.change;
-				}else if(event.change<0){
-					new = 255+event.change;
+			if(event.type == UIPlace){
+				if(scrollPosition >= currentGroove->length){
+					currentGroove->length = scrollPosition+1;
+					for(int i=0;i<scrollPosition;i++){
+						if(currentGroove->data[i]==0)
+							currentGroove->data[i]=konAudio.ticksPerStep;
+					}
 				}
-			}else{
-				new=clamp(new+event.horizontal+event.vertical*konAudio.notesInScale,1,254);
+				if(currentGroove->data[scrollPosition]==0){
+					currentGroove->data[scrollPosition]=lastGroove;
+				}else{
+					lastGroove=currentGroove->data[scrollPosition];
+				}
+			}else if(event.type == UIChange){
+				currentGroove->data[scrollPosition]=clamp(currentGroove->data[scrollPosition]+event.change,0,255);
+			}else if(event.type == UIDelete){
+				if(scrollPosition < currentGroove->length)
+					currentGroove->length=scrollPosition;
 			}
-			//printf("freq: %f\n",konAudio.frequencies[new-1]);
-		}else if (xPos==2){
-			new=clamp(new+event.horizontal,(new/16)*16,(new/16+1)*16);
-			new+=event.vertical*16;
 		}else{
-			new+=event.change;
+			trackPage.grids[1].xPos=6;
 		}
-		uint8_t clamped = clamp(new,0,255);
-		step[xPos] = clamped;
-
-		if(xPos==0){
-			if(clamped!=0 && clamped != 255){
-				lastNote = clamped;
-			}
-		}else if(xPos==1){
-			lastInstrument=clamp(new,1,255);
-		}else if(xPos==2){
-			lastVolume=clamp(new,1,255);
-		}else if(xPos==3){
-			lastCommand=clamp(new,1,255);
-		}else {
-			lastParam=clamped;
-		}
-
-	}else if(event.type == UIDelete){
-		uint8_t new=0;
-		if(xPos==0 && step[xPos]==0){
-			new=255;
-		}
-		step[xPos] = new;
-	}else if(event.type == UIPlace){
-		uint8_t new=step[xPos];
-		if(step[xPos]==0){
+	}else{
+		if(event.type == UIChange && event.change){
+			int new = step[xPos];
 			if(xPos==0){
-				new = lastNote;
+
+				if(step[xPos]==0 && event.change<0){
+					new = 255;
+				}else if(step[xPos]==255){
+					if(event.change>0){
+						new = 0+event.change;
+					}else if(event.change<0){
+						new = 255+event.change;
+					}
+				}else{
+					new=clamp(new+event.horizontal+event.vertical*konAudio.notesInScale,1,254);
+				}
+				//printf("freq: %f\n",konAudio.frequencies[new-1]);
+			}else if (xPos==2){
+				new=clamp(new+event.horizontal,(new/16)*16,(new/16+1)*16);
+				new+=event.vertical*16;
+			}else{
+				new+=event.change;
+			}
+			uint8_t clamped = clamp(new,0,255);
+			step[xPos] = clamped;
+
+			if(xPos==0){
+				if(clamped!=0 && clamped != 255){
+					lastNote = clamped;
+				}
 			}else if(xPos==1){
-				new=lastInstrument;
+				lastInstrument=clamp(new,1,255);
 			}else if(xPos==2){
-				new=lastVolume;
+				lastVolume=clamp(new,1,255);
 			}else if(xPos==3){
-				new=lastCommand;
+				lastCommand=clamp(new,1,255);
 			}else {
-				new=lastParam;
+				lastParam=clamped;
+			}
+
+		}else if(event.type == UIDelete){
+			uint8_t new=0;
+			if(xPos==0 && step[xPos]==0){
+				new=255;
 			}
 			step[xPos] = new;
-		}else{
-			if(xPos==0){
-				if(new!=255){lastNote = new;}
-			}else if(xPos==1){
-				lastInstrument = new;
-			}else if(xPos==2){
-				lastVolume = new;
-			}else if(xPos==3){
-				lastCommand = new;
-			}else {
-				lastParam = new;
+		}else if(event.type == UIPlace){
+			uint8_t new=step[xPos];
+			if(step[xPos]==0){
+				if(xPos==0){
+					new = lastNote;
+				}else if(xPos==1){
+					new=lastInstrument;
+				}else if(xPos==2){
+					new=lastVolume;
+				}else if(xPos==3){
+					new=lastCommand;
+				}else {
+					new=lastParam;
+				}
+				step[xPos] = new;
+			}else{
+				if(xPos==0){
+					if(new!=255){lastNote = new;}
+				}else if(xPos==1){
+					lastInstrument = new;
+				}else if(xPos==2){
+					lastVolume = new;
+				}else if(xPos==3){
+					lastCommand = new;
+				}else {
+					lastParam = new;
+				}
 			}
 		}
 	}
@@ -387,7 +450,12 @@ void SetTrackData(int xPos, int yPos, UIEvent event){
 		strcpy(helpString,"note");
 		break;
 	case 1:
-		strcpy(helpString,"instrument");
+		strcpy(helpString,"instrument ");
+		int i = step[xPos];
+		if (i){
+			char* instrumentName = konAudio.instruments[i-1].name;
+			strcpy(helpString+11,instrumentName);
+		}
 		break;
 	case 2:
 		strcpy(helpString,"volume");
@@ -404,11 +472,14 @@ void SetTrackData(int xPos, int yPos, UIEvent event){
 	case 6:
 		strcpy(helpString,"parameter 3");
 		break;
+	case 7:
+		strcpy(helpString,"groove");
+		break;
 	}
 	ScrollGrid(&trackScroll,&trackPage.grids[1].yPos,track->length+1,event);
 }
 
-int trackDataWidths[7] = {0,3,6,9,11,13,15};
+int trackDataWidths[8] = {0,3,6,9,11,13,15,16};
 void DrawTrackData(int xPos, int yPos, bool selected){
 	char out[3] = ". ";
 
@@ -439,9 +510,9 @@ void DrawTrackData(int xPos, int yPos, bool selected){
 		}
 	}
 
-	if(num==0 && !(commandSet && xPos>3)){
+	if(num==0 && !(commandSet && xPos>3) && (xPos != 7)){
 		PrintSelected(out,trackDataWidths[xPos]+2,yPos+3,selected,2,3,1,0);
-	}else{
+	}else if (xPos != 7){
 		if(xPos==1){num--;}
 
 		int oddColumn = 1;
@@ -452,6 +523,23 @@ void DrawTrackData(int xPos, int yPos, bool selected){
 
 
 		HexSelected(num,trackDataWidths[xPos]+2,yPos+3,selected,3-oddColumn,2+oddColumn,1,0);
+	}else if (trackPage.grids[1].xPos == 7) {
+		if(track->grooveIndex){
+			KonGroove* currentGroove = &konAudio.grooves[track->grooveIndex-1];
+
+
+			if(yPos==0){
+				PrintColor("!!",18,2,2,0,false);
+				if(track->length<currentGroove->length)
+					PrintColor("..",18,4+track->length,2,0,false);
+			}
+
+			if(scrollPosition<currentGroove->length){
+				HexSelected(currentGroove->data[scrollPosition],18,3+yPos,selected,0,3,1,0);
+			}else{
+				PrintSelected("  ",18,3+yPos,selected,0,2,1,2);
+			}
+		}
 	}
 	
 }
@@ -517,19 +605,16 @@ void DrawOpEffect(int xPos, int yPos, bool selected){
 }
 
 void SetOpName(int xPos, int yPos, UIEvent event){
-	switch(xPos){
-	case 0:
+	if(xPos==0){
 		strcpy(helpString,"instrument index");
-		break;
-	case 1:
-		strcpy(helpString,"instrument name");
-		break;
-	}
-	if(event.type == UIChange){
-		if(xPos==0){
+		if(event.type == UIChange)
 			instrumentIndex=clamp(instrumentIndex+event.change,0,254);
-		}
+	}else{
+		strcpy(helpString,"instrument name");
+		KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+		HandleTextInput(instrument->name,xPos-1,event,13,1);
 	}
+
 }
 
 void DrawOpName(int xPos, int yPos, bool selected){
@@ -772,7 +857,7 @@ void DrawOpData(int xPos, int yPos, bool selected){
 }
 
 void SetFileName(int xPos, int yPos, UIEvent event){
-	HandleTextInput(currentSongName,xPos,event);
+	HandleTextInput(currentSongName,xPos,event,0,2);
 }
 
 void DrawFileName(int xPos, int yPos, bool selected){
@@ -822,13 +907,25 @@ void DrawFileConfirm(int xPos, int yPos, bool selected){
 }
 
 void SetFileCancel(int xPos, int yPos, UIEvent event){
-	if(event.type == UIPlace){
+	if(event.type != UIPlace)
+		return;
+	if(xPos==0){
+		lockAudio();
+		clearSong(&konAudio);
+		unlockAudio();
+		QuitContext(0);
+	}else{
 		QuitContext(0);
 	}
+	
 }
 
 void DrawFileCancel(int xPos, int yPos, bool selected){
-	PrintSelected("cancel",1,1,selected,2,3,1,0);
+	if(xPos==0){
+		PrintSelected("new",1,1,selected,2,3,1,0);
+	}else{
+		PrintSelected("cancel",5,1,selected,2,3,1,0);
+	}
 }
 
 
@@ -897,14 +994,14 @@ void DrawFileBrowse(int xPos, int yPos, bool selected){
 	}
 }
 
-UIPage projectPage = {0,4,(UIGrid[5]){CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont),CreateGrid(1,1,&SetBPM,&DrawBPM),CreateGrid(3,1,&SetSave,&DrawSave)} };
+UIPage projectPage = {0,4,(UIGrid[5]){CreateGrid(2,1,&SetBPM,&DrawBPM),CreateGrid(3,1,&SetSave,&DrawSave),CreateGrid(1,1,&SetTheme,&DrawTheme),CreateGrid(1,1,&SetFont,&DrawFont)} };
 
 UIPage arrangePage = {0,1,(UIGrid[1]){CreateGrid(9,16,&SetArrange,&DrawArrange)}};
 
-UIPage trackPage = {0,2,(UIGrid[2]){CreateGrid(3,1,&SetTrackInfo,&DrawTrackInfo),CreateGrid(7,16,&SetTrackData,&DrawTrackData)}};
+UIPage trackPage = {0,2,(UIGrid[2]){CreateGrid(3,1,&SetTrackInfo,&DrawTrackInfo),CreateGrid(8,16,&SetTrackData,&DrawTrackData)}};
 
-UIPage operatorPage = {0,6,(UIGrid[6]){CreateGrid(2,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpEffect,&DrawOpEffect),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(4,1,&SetOpFlags,&DrawOpFlags),CreateGrid(18,1,&SetOpData,&DrawOpData)}};
+UIPage operatorPage = {0,6,(UIGrid[6]){CreateGrid(8,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpEffect,&DrawOpEffect),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(4,1,&SetOpFlags,&DrawOpFlags),CreateGrid(18,1,&SetOpData,&DrawOpData)}};
 
 UIPage saveFilePage = {0,3,(UIGrid[3]){CreateGrid(20,1,&SetFileName,&DrawFileName),CreateGrid(2,1,&SetFileConfirm,&DrawFileConfirm),CreateGrid(1,13,&SetFileBrowse,&DrawFileBrowse)}};
 
-UIPage loadFilePage = {0,2,(UIGrid[2]){CreateGrid(1,1,&SetFileCancel,&DrawFileCancel),CreateGrid(1,15,&SetFileBrowse,&DrawFileBrowse)}};
+UIPage loadFilePage = {0,2,(UIGrid[2]){CreateGrid(2,1,&SetFileCancel,&DrawFileCancel),CreateGrid(1,15,&SetFileBrowse,&DrawFileBrowse)}};

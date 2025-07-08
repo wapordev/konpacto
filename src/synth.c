@@ -63,11 +63,11 @@ void ChangeTrackLength(KonTrack* track){
 	track->length=track->temporaryLength;
 }
 
-void konSetBPM(KonAudio* konAudio, uint64_t bpm, uint64_t beatsPerMeasure, uint64_t targetRate){
+void konSetBPM(KonAudio* konAudio){
 
 	uint64_t freq = konAudio->format.frequency;
 
-	uint64_t tickrate = (((freq*ERRORSTEP*60)/120)/beatsPerMeasure)/targetRate;
+	uint64_t tickrate = ((freq*ERRORSTEP*15)/konAudio->bpm)/konAudio->ticksPerStep;
 
 	konAudio->tickrate=tickrate;
 }
@@ -77,7 +77,9 @@ void konInit(KonAudio* konAudio, int frequency, int packetSize, int channelCount
 	konAudio->format.frequency = frequency;
 	konAudio->format.packetSize = packetSize;
 	konAudio->format.channelCount = channelCount;
-	konSetBPM(konAudio,120,4,6);
+	konAudio->bpm=120;
+	konAudio->ticksPerStep=6;
+	konSetBPM(konAudio);
 }
 
 //0, 1 if track ended
