@@ -113,7 +113,14 @@ void ArrangeDraw(UIEvent* event) {
 
 	for(int i=0;i<16;i++){
 		int idx = i+arrangeScroll;
-		PrintHex(idx,0,3+i,(idx/4+1)%2,(idx/4)%2);
+
+		int bg = (idx/4)%2;
+		int fg = 1-bg;
+
+		if(konAudio.playing && idx == konAudio.arrangeIndex)
+			bg = 2;
+
+		PrintHex(idx,0,3+i,bg,fg);
 	}
 
 	PageProcess(&arrangePage, event);
@@ -125,9 +132,29 @@ void ComposeDraw(UIEvent* event) {
 int trackScroll = 0;
 void TrackDraw(UIEvent* event) {
 	PrintText(",1trk    len    grv",0,1);
+
+	int playedStep = 0;
+	int thisPlaying = 0;
+	
+	for(int j=0; j<8; j++){
+		int playedTrack = konAudio.arrangements[konAudio.arrangeIndex].trackIndexes[j];
+		if(playedTrack == selectedTrack+1){
+			thisPlaying = 1;
+			playedStep = konAudio.channels[j].stepIndex-1;
+			break;
+		}
+	}
+
 	for(int i=0;i<16;i++){
 		int idx = i+trackScroll;
-		PrintHex(idx,0,3+i,(idx/4+1)%2,(idx/4)%2);
+
+		int bg = (idx/4)%2;
+		int fg = 1-bg;
+
+		if(konAudio.playing && thisPlaying && idx == playedStep)
+			bg = 2;
+
+		PrintHex(idx,0,3+i,bg,fg);
 	}
 
 	PageProcess(&trackPage, event);

@@ -19,6 +19,8 @@ extern UIPage loadFilePage;
 
 extern uint8_t instrumentIndex;
 
+extern uint8_t selectedTrack;
+
 extern char selectedFile[PATH_MAX];
 extern char selectedFileName[PATH_MAX];
 extern char fileBrowserPath[PATH_MAX];
