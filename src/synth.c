@@ -559,5 +559,5 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 	result/=64;
 
-	//printf("elapsed time average: %f, true %f\n",result, elapsedMS);
+	printf("elapsed time average: %f, true %f\n",result, elapsedMS);
 }

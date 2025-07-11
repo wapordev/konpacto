@@ -13,111 +13,117 @@
 
 lua_State* lua;
 
+int test = 0;
+
 void InitializeLua(){
 	lua = luaL_newstate();
 	luaL_openlibs(lua);
-
-	luaL_dostring(lua,
-	"\
-	sampleRate = 44100 \
-	local ffi = require('ffi') \
-	ffi.cdef'double konGet(int index);' \
-	ffi.cdef'void konOut(double left, double right);' \
-	local channelData = {} \
-	local loadedSynths = {} \
-	local synthHash = {} \
-	local channelSynths = {0,0,0,0,0,0,0,0} \
-	print('hello world, lua lives!\\n') \
+	
+	int result = luaL_dostring(lua,
+	"\n\
+	sampleRate = 44100 \n\
+	local ffi = require('ffi') \n\
+	ffi.cdef'double konGet(int index);' \n\
+	ffi.cdef'void konOut(double left, double right);' \n\
+	local channelData = {} \n\
+	local loadedSynths = {} \n\
+	local synthHash = {} \n\
+	local channelSynths = {0,0,0,0,0,0,0,0} \n\
+	print('hello world, lua lives!\\n') \n\
 -- Load a synth from filepath \n\
-	function _kLoad(filePath) \
-		--[[if(loadedSynths[filePath]) then \
-			return \
-		end ]] \
-		print('trying to load: '..filePath..' ...') \
-		local untrusted, message = loadfile(filePath,'t') \
-		if (not untrusted) then \
-			print('failed to load! '..message) \
-			return \
-		end \
+	function _kLoad(filePath) \n\
+		--[[if(loadedSynths[filePath]) then \n\
+			return \n\
+		end ]] \n\
+		print('trying to load: '..filePath..' ...') \n\
+		local untrusted, message = loadfile(filePath,'t') \n\
+		if (not untrusted) then \n\
+			print('failed to load! '..message) \n\
+			return \n\
+		end \n\
 -- Allowed API \n\
-		local env = { \
-			print = print, \
-			clamp = math.clamp, \
-			sin = math.sin, \
-			pi = math.pi, \
-			C = ffi.C, \
-			sampleRate = sampleRate \
-		} \
-		setfenv(untrusted,env) \
-		local result, message = pcall(untrusted) \
-		if (not result) then \
-			print('failed to run! '..message) \
-			return \
-		end \
+		local env = { \n\
+			print = print, \n\
+			clamp = math.clamp, \n\
+			sin = math.sin, \n\
+			pi = math.pi, \n\
+			C = ffi.C, \n\
+			sampleRate = sampleRate \n\
+		} \n\
+		setfenv(untrusted,env) \n\
+		local result, message = pcall(untrusted) \n\
+		if (not result) then \n\
+			print('failed to run! '..message) \n\
+			return \n\
+		end \n\
 -- Check if properly formatted \n\
-		if(not env._defaultParams or type(env._defaultParams)~='table') then \
-			print('failed to load! missing _defaultParams.') return \
-		end \
-		if(#env._defaultParams>0)then \
-			for i=1,#env._defaultParams do \
-				if(type(env._defaultParams[i])~='table' or #env._defaultParams[i]<2)then \
-					print('failed to load! all in _defaultParams must be a table of PARAMNAME, DEFAULTVAL') return \
-				end \
-				if(type(env._defaultParams[i][1])~='string' or type(env._defaultParams[i][2])~='number') then \
-					print('failed to load! PARAMNAME must be a string, and DEFAULTVAL must be a number') return \
-				end \
-			end \
-		else \
-			print('failed to load! _defaultParams empty') return \
-		end \
-		if(not env._audioFrame or type(env._audioFrame)~='function') then \
-			print('failed to load! missing _audioFrame.') return \
-		end \
-		local index = synthHash[filePath] or #loadedSynths+1 \
-		synthHash[filePath] = index \
-		loadedSynths[index]=env \
-		for i=1,8 do \
-			if(channelSynths[i]==index)then \
-				channelData[i]=env._init() \
-			end \
-		end \
-	end \
+		if(not env._defaultParams or type(env._defaultParams)~='table') then \n\
+			print('failed to load! missing _defaultParams.') return \n\
+		end \n\
+		if(#env._defaultParams>0)then \n\
+			for i=1,#env._defaultParams do \n\
+				if(type(env._defaultParams[i])~='table' or #env._defaultParams[i]<2)then \n\
+					print('failed to load! all in _defaultParams must be a table of PARAMNAME, DEFAULTVAL') return \n\
+				end \n\
+				if(type(env._defaultParams[i][1])~='string' or type(env._defaultParams[i][2])~='number') then \n\
+					print('failed to load! PARAMNAME must be a string, and DEFAULTVAL must be a number') return \n\
+				end \n\
+			end \n\
+		else \n\
+			print('failed to load! _defaultParams empty') return \n\
+		end \n\
+		if(not env._audioFrame or type(env._audioFrame)~='function') then \n\
+			print('failed to load! missing _audioFrame.') return \n\
+		end \n\
+		local index = synthHash[filePath] or #loadedSynths+1 \n\
+		synthHash[filePath] = index \n\
+		loadedSynths[index]=env \n\
+		for i=1,8 do \n\
+			if(channelSynths[i]==index)then \n\
+				channelData[i]=env._init() \n\
+			end \n\
+		end \n\
+	end \n\
 -- Tick Channel \n\
-	function _kTick(index) \
-		local synth = loadedSynths[channelSynths[index]] \
-		if(not synth)then return 0,0 end \
-		synth._audioFrame(channelData[index]) \
-	end \
+	function _kTick(index) \n\
+		local bees = index \n\
+		local synth = loadedSynths[1] \n\
+		synth._audioFrame(channelData[index]) \n\
+	end \n\
+	function _kProf() \n\
+		require('jit.p').start('l-3vfsi4m0')\n\
+	end \n\
 -- Initialize Synth \n\
-	function _kInit(path,index) \
-		path='assets/synths/'..path \
-		local synthIndex = synthHash[path] \
-		if(not synthIndex)then return end \
-		local synth = loadedSynths[synthIndex] \
-		if(not synth)then return end \
-		channelSynths[index] = synthIndex \
-		channelData[index] = synth._init() \
-	end \
+	function _kInit(path,index) \n\
+		path='assets/synths/'..path \n\
+		local synthIndex = synthHash[path] \n\
+		if(not synthIndex)then return end \n\
+		local synth = loadedSynths[synthIndex] \n\
+		if(not synth)then return end \n\
+		channelSynths[index] = synthIndex \n\
+		channelData[index] = synth._init() \n\
+	end \n\
 -- Get Param Count \n\
-	function _kParamCount(path) \
-		local synthIndex = synthHash[path] \
-		if(not synthIndex)then return 0 end \
-		local synth = loadedSynths[synthIndex] \
-		if(not synth)then return 0 end \
-		return #synth._defaultParams \
-	end \
+	function _kParamCount(path) \n\
+		local synthIndex = synthHash[path] \n\
+		if(not synthIndex)then return 0 end \n\
+		local synth = loadedSynths[synthIndex] \n\
+		if(not synth)then return 0 end \n\
+		return #synth._defaultParams \n\
+	end \n\
 -- Get Param Details \n\
-	function _kParamGet(path,paramIndex) \
-		local synthIndex = synthHash[path] \
-		if(not synthIndex)then return 'error',1 end \
-		local synth = loadedSynths[synthIndex] \
-		if(not synth)then return 'error',2 end \
-		if(not synth._defaultParams[paramIndex])then return 'error',3 end \
-		return synth._defaultParams[paramIndex][1], synth._defaultParams[paramIndex][2] \
-	end \
+	function _kParamGet(path,paramIndex) \n\
+		local synthIndex = synthHash[path] \n\
+		if(not synthIndex)then return 'error',1 end \n\
+		local synth = loadedSynths[synthIndex] \n\
+		if(not synth)then return 'error',2 end \n\
+		if(not synth._defaultParams[paramIndex])then return 'error',3 end \n\
+		return synth._defaultParams[paramIndex][1], synth._defaultParams[paramIndex][2] \n\
+	end \n\
 	"
 	);
 
+	CheckLuaError(result*2,0,"hi");
 
 	lua_pushinteger(lua,configSampleRate);
 
@@ -177,6 +183,12 @@ void SetLuaInstrument(char* path, int index){
 }
 
 void TickLuaChannel(int index){
+	if(test==0){
+		lua_getglobal(lua,"_kProf");
+		lua_call(lua,0,0);
+		test=1;
+	}
+
 	lua_getglobal(lua,"_kTick");
 
 	lua_pushnumber(lua,index+1);
@@ -232,7 +244,8 @@ void LoadLuaFile(char* filePath){
 
 	lua_getglobal(lua,"_kLoad");
 	lua_pushstring(lua,filePath);
-	lua_call(lua,1,0);
+	int result = lua_pcall(lua,1,0,0);
+	CheckLuaError(result,0,filePath);
 
 	luaJIT_setmode(lua, 0, LUAJIT_MODE_ENGINE|LUAJIT_MODE_FLUSH);
 
