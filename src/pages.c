@@ -577,6 +577,7 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 			if(instrument->macros[i].length){
 				free(instrument->macros[i].data);
 				instrument->macros[i].length=0;
+				instrument->macros[i].data=NULL;
 			}
 		}
 		instrument->macroCount=0;

@@ -143,9 +143,20 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 			channel->tickCounter=0;
 		}
 
+		//groove
+		channel->stepLength=konAudio->ticksPerStep;
+		if (currentTrack.grooveIndex)
+		{
+			KonGroove* groove = &konAudio->grooves[currentTrack.grooveIndex-1];
+
+			if (groove->length)
+				channel->stepLength= groove->data[channel->stepIndex%groove->length];
+		}
+
 		channel->stepIndex++;
 		channel->stepAccumulator=1;
-		channel->stepLength=6; //replace with groove later
+
+		
 
 	}else{
 		channel->stepAccumulator++;
@@ -266,7 +277,7 @@ void clearSong(KonAudio* konAudio){
 		for(int j=0;j<64;j++){
 			KonMacro* macro = &instrument->macros[j];
 			macro->name[0]='\0';
-			if (macro->data!=NULL) {
+			if (macro->length) {
 				free(macro->data);
 				macro->data = NULL;
 			}
