@@ -138,7 +138,19 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 
 			//TO DO, SYNTH INIT
 
-			SetLuaInstrument(konAudio->instruments[currentStep.instrument-1].selectedSynth,channelIndex);
+			KonInstrument* instrument = &konAudio->instruments[currentStep.instrument-1];
+
+			SetLuaInstrument(instrument->selectedSynth,channelIndex);
+
+			for(int i=0;i<instrument->macroCount;i++){
+				channel->synthMacros[i]=instrument->macros[i];
+			}
+			if(instrument->route){
+				KonInstrument* routeInstrument = &konAudio->instruments[instrument->route-1];
+				for(int i=0;i<routeInstrument->macroCount;i++){
+					channel->routeMacros[i]=routeInstrument->macros[i];
+				}
+			}
 		}
 
 		if(currentStep.velocity){
@@ -353,7 +365,12 @@ static inline double macroDataGet(KonMacro* macro, int step){
 	return (double)macro->data[clamp(step,0,macro->length-1)];
 }
 
-static inline double macroProcess(KonAudio* konAudio, KonChannel* channel, KonInstrument* instrument, KonMacro* macro){
+static inline double lerp(double a, double b, double f) 
+{
+    return (a * (1.0 - f)) + (b * f);
+}
+
+static inline double macroProcess(KonAudio* konAudio, KonChannel* channel, KonMacro* macro){
 	double out=0;
 
 	if(macro->length){
@@ -448,6 +465,35 @@ static inline void sequenceProcess(KonAudio* konAudio){
 	}
 }
 
+static inline double noteProcess(KonAudio* konAudio, double note,int referenceNote){
+	if(note>=128){
+		note-=128;
+	}else{
+		note=-64+note;
+		note+=referenceNote;
+	}
+	
+	double freq=konAudio->frequencies[clamp((int)note,0,254)];
+
+	double noteFloor=floorf(note);
+
+	if((int)note<254 && noteFloor!=note){
+		
+
+		double freqB=konAudio->frequencies[(int)note+1];
+
+		double interp=note-noteFloor;
+
+		//pow is slow :3
+		//powf(freqA,1-interp)*powf(freqB,interp);
+		freq=lerp(freq,freqB,interp);
+
+		//note lerp
+	}
+
+	return freq;
+}
+
 void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	if ( len == 0 )
     return;
@@ -468,84 +514,80 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 		if(konAudio->playing){
 			sequenceProcess(konAudio);
 		}
+		
+		konAudio->luaData.bankSelect=0;
 
+		for(int j=0;j<CHANNELCOUNT;j++){
+			KonChannel* channel = &konAudio->channels[j];
+			
+			if(!channel->on || !channel->synthData.instrument || !channel->synthData.note)
+				continue;
+
+			KonInstrument* instrument = &konAudio->instruments[channel->synthData.instrument-1];
+			LuaDatabank* synthBank = &konAudio->luaData.banks[j*2];
+			
+			
+			int referenceNote = channel->synthData.note-1;
+
+			for(int k=0;k<instrument->macroCount;k++)
+				synthBank->data[k]=macroProcess(konAudio,channel,&channel->synthMacros[k]);
+
+			synthBank->data[0] = noteProcess(konAudio,synthBank->data[0],referenceNote);
+
+			if(!instrument->route)
+				continue;
+			LuaDatabank* routeBank = &konAudio->luaData.banks[j*2+1];
+
+			KonInstrument* routeInstrument = &konAudio->instruments[instrument->route-1];
+
+			for(int k=0;k<routeInstrument->macroCount;k++)
+				routeBank->data[k]=macroProcess(konAudio,channel,&channel->routeMacros[k]);
+
+			routeBank->data[0] = noteProcess(konAudio,routeBank->data[0],referenceNote);
+		}
+
+		TickLuaChannels();
 
 		double mixLeft = 0;
 		double mixRight = 0;
 
-		
-		// konAudio.luaData.bankSelect=0;
+		for (int j=0;j<8;j++){
+			KonChannel* channel = &konAudio->channels[j];
 
-		// for(int j=0;j<CHANNELCOUNT;j++){
-		// 	KonChannel* channel = &konAudio->channels[j];
-			
-		// 	if(!channel->on || !channel->synthData.instrument || !channel->synthData.note)
-		// 		continue;
+			if(!channel->on || !channel->synthData.instrument || !channel->synthData.note)
+				continue;
 
-		// 	KonInstrument* instrument = &konAudio->instruments[channel->synthData.instrument-1];
+			KonInstrument* instrument = &konAudio->instruments[channel->synthData.instrument-1];
+			LuaDatabank* synthBank = &konAudio->luaData.banks[j*2];
 
-		// 	for(int k=0;k<instrument->macroCount;k++){
-		// 		if(k==2 && !instrument->macros[k].length){
-		// 			luaData[k]=luaData[1];
-		// 			continue;
-		// 		}
-		// 		luaData[k]=macroProcess(konAudio,channel,instrument,&instrument->macros[k]);
-		// 	}
-
-		// 	//note processing!
-
-		// 	double trueNote=luaData[0];
-		// 	if(trueNote>=128){
-		// 		trueNote-=128;
-		// 	}else{
-		// 		trueNote=-64+trueNote;
-		// 		trueNote+=channel->synthData.note-1;
-		// 	}
-			
-		// 	luaData[0]=konAudio->frequencies[clamp((int)trueNote,0,254)];
-
-		// 	double noteFloor=floorf(trueNote);
-
-		// 	if((int)trueNote<254 && noteFloor!=trueNote){
-				
-
-		// 		double freqA=luaData[0];
-
-		// 		double freqB=konAudio->frequencies[(int)trueNote+1];
-
-		// 		double interp=trueNote-noteFloor;
-
-		// 		//pow is slow :3
-		// 		//powf(freqA,1-interp)*powf(freqB,interp);
-		// 		luaData[0]=lerp(freqA,freqB,interp);
-
-		// 		//note lerp
-		// 	}
-			
-			
-			
+			double velocity=(channel->synthData.velocity/16)/15.0;
+			double synthVolume = synthBank->data[1]/255;
 			
 
-		// 	double outLeft=luaData[64];
-		// 	double outRight=luaData[65];
+			//double panning=(channel->synthData.velocity%16)/15.0;
 
-		// 	double volumeLeft=(channel->synthData.velocity/16)/15.0;
-		// 	double volumeRight=(channel->synthData.velocity%16)/15.0;
+			double synthOutLeft = synthBank->outLeft*synthVolume*velocity;
+			double synthOutRight = synthBank->outRight*synthVolume*velocity;
 
-		// 	volumeLeft*=luaData[1]/255;
-		// 	volumeRight*=luaData[2]/255;
+			double outLeft = synthOutLeft;
+			double outRight = synthOutRight;
 
-		// 	if(isfinite(outLeft) && isfinite(outRight)){
-		// 		mixLeft+=fclamp(outLeft*volumeLeft,-1.,1.);
-		// 		mixRight+=fclamp(outRight*volumeRight,-1.,1.);
-		// 	}
-		// }
+			if(instrument->route){
+				LuaDatabank* routeBank = &konAudio->luaData.banks[j*2+1];
+				double routeVolume = routeBank->data[1]/255;
 
-		//TickLuaChannels();
+				double routeOutLeft = routeBank->outLeft*routeVolume*velocity;
+				double routeOutRight = routeBank->outRight*routeVolume*velocity;
 
+				double outLeft = lerp(routeOutLeft,synthOutLeft,((double)instrument->wetDryMix)/255.0);
+				double outRight = lerp(routeOutRight,synthOutRight,((double)instrument->wetDryMix)/255.0);
+			}
 
-
-
+			if(isfinite(outLeft) && isfinite(outRight)){
+				mixLeft+=fclamp(outLeft,-1.,1.);
+				mixRight+=fclamp(outRight,-1.,1.);
+			}
+		}
 		
 		int32_t sampleLeft = (int32_t)fclamp((mixLeft*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;
 		int32_t sampleRight = (int32_t)fclamp((mixRight*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;

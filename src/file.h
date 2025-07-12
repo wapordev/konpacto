@@ -26,8 +26,6 @@ void SaveConfig();
 
 int clamp(int d, int min, int max);
 
-double lerp(double a, double b, double f);
-
 double fclamp(double d, double min, double max);
 
 char* IntToChar(int BMPstring[], char* out, int length);

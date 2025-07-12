@@ -56,6 +56,7 @@ void InitializeLua(){
 	local ffi = require('ffi') \n\
 	ffi.cdef'double konGet(int index);' \n\
 	ffi.cdef'void konOut(double left, double right);' \n\
+	ffi.cdef'void bankSwitch();' \n\
 	local channelData = {} \n\
 	local loadedSynths = {} \n\
 	local synthHash = {} \n\
@@ -116,10 +117,13 @@ void InitializeLua(){
 		end \n\
 	end \n\
 -- Tick Channel \n\
-	function _kTick(index) \n\
-		local bees = index \n\
-		local synth = loadedSynths[1] \n\
-		synth._audioFrame(channelData[index]) \n\
+	function _kTick() \n\
+		for i=1,8 do \n\
+			local synth = loadedSynths[channelSynths[i]] \n\
+			if synth then synth._audioFrame(channelData[i]) end \n\
+			ffi.C.bankSwitch() \n\
+			ffi.C.bankSwitch() \n\
+		end \n\
 	end \n\
 	function _kProf() \n\
 		require('jit.p').start('l-3vfsi4m0')\n\
@@ -182,20 +186,20 @@ void SetLuaInstrument(char* path, int index){
 	CheckLuaError(result,index,NULL);
 }
 
-void TickLuaChannel(int index){
+void TickLuaChannels(){
+	//temp
 	if(test==0){
 		lua_getglobal(lua,"_kProf");
-		lua_call(lua,0,0);
+		int result = lua_pcall(lua,0,0,0);
+		CheckLuaError(result,0,NULL);
 		test=1;
 	}
 
 	lua_getglobal(lua,"_kTick");
 
-	lua_pushnumber(lua,index+1);
+	int result = lua_pcall(lua,0,0,0);
 
-	int result = lua_pcall(lua,1,0,0);
-
-	CheckLuaError(result,index,NULL);
+	CheckLuaError(result,0,NULL);
 }
 
 int CountLuaParam(char* filePath){

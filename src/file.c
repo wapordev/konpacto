@@ -28,10 +28,7 @@ int clamp(int d, int min, int max) {
   return t > max ? max : t;
 }
 
-double lerp(double a, double b, double f) 
-{
-    return (a * (1.0 - f)) + (b * f);
-}
+
 
 double fclamp(double d, double min, double max) {
   const double t = d < min ? min : d;
