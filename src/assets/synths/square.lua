@@ -10,7 +10,7 @@ function _audioFrame(synthData)
 	local synthData = synthData
 	local phase = synthData[1]
 
-	local note = 440/sampleRate
+	local note = C.konGet(0)/sampleRate
 
 	phase=phase+note
 	phase=phase%1

@@ -303,8 +303,9 @@ void clearSong(KonAudio* konAudio){
 			KonMacro* macro = &instrument->macros[j];
 			macro->name[0]='\0';
 			if (macro->length) {
-				free(macro->data);
+				macro->length=0;
 				macro->data = NULL;
+				free(macro->data);
 			}
 		}
 	}
@@ -579,8 +580,8 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 				double routeOutLeft = routeBank->outLeft*routeVolume*velocity;
 				double routeOutRight = routeBank->outRight*routeVolume*velocity;
 
-				double outLeft = lerp(routeOutLeft,synthOutLeft,((double)instrument->wetDryMix)/255.0);
-				double outRight = lerp(routeOutRight,synthOutRight,((double)instrument->wetDryMix)/255.0);
+				outLeft = lerp(routeOutLeft,synthOutLeft,((double)instrument->wetDryMix)/255.0);
+				outRight = lerp(routeOutRight,synthOutRight,((double)instrument->wetDryMix)/255.0);
 			}
 
 			if(isfinite(outLeft) && isfinite(outRight)){

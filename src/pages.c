@@ -575,9 +575,9 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 		strcpy(instrument->selectedSynth,"");
 		for(int i=3;i<instrument->macroCount;i++){
 			if(instrument->macros[i].length){
-				free(instrument->macros[i].data);
 				instrument->macros[i].length=0;
 				instrument->macros[i].data=NULL;
+				free(instrument->macros[i].data);
 			}
 		}
 		instrument->macroCount=0;
@@ -826,8 +826,8 @@ void SetOpData(int xPos, int yPos, UIEvent event){
 			return;
 		if(realPosition<macro->length){
 			if(realPosition==0){
-				free(macro->data);
 				macro->length=0;
+				free(macro->data);
 				return;
 			}
 			macro->data = realloc(macro->data, sizeof(uint8_t)*(realPosition));
