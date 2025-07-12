@@ -28,6 +28,7 @@ typedef struct KonMacro {		//parameter/modulation data
 	uint8_t speed;				//0 to 127 tick speed+1, -1 to -128, ms? maybe?
 	uint8_t min;				
 	uint8_t max;				//data output range.
+	uint8_t oscillates;
 	InterpolationModes interpolationMode;				//bit 0 = loops, bit 1,2 = interpolation mode
 	uint8_t loopStart;
 	uint8_t loopEnd;
@@ -40,6 +41,7 @@ typedef struct KonInstrument {		//storing synth identifier and macro list. (pitc
 	char name[8];
 	char selectedSynth[64];
 	uint8_t route;
+	uint8_t wetDryMix;
 	uint8_t macroCount;
 	KonMacro macros[64];
 	uint8_t selectedMacro;			//editor value
@@ -68,6 +70,7 @@ typedef struct KonChannel {
 	int32_t on;
 	KonStep synthData;				//synth instance created from instrument index
 	KonMacro synthMacros[32];
+	KonMacro routeMacros[32];
 }KonChannel;
 
 typedef struct KonTrack {
@@ -82,18 +85,31 @@ typedef struct KonArrangements {
 	uint8_t jumpIndex;					//jump to index
 }KonArrangements;
 
+typedef struct LuaDatabank {
+	double data[32];
+	double outLeft;
+	double outRight;
+}LuaDatabank;
+
+typedef struct LuaData {
+	LuaDatabank banks[16];
+	int bankSelect;
+	double carryLeft;
+	double carryRight;
+}LuaData;
+
 typedef struct KonAudio {
 	KonAudioFormat format;
 	int notesInScale;
 	double frequencies[254];
-	KonGroove grooves[254];
+	KonGroove grooves[255];
 	KonTrack tracks[255];				//	
 	KonInstrument instruments[255];
 	KonArrangements arrangements[256];	//
 	KonChannel channels[CHANNELCOUNT];	//channel data
-	double luaData[66];
-	int bpm; //convenience
-	int ticksPerStep;
+	LuaData luaData;
+	uint32_t bpm;
+	uint8_t ticksPerStep;
 	uint64_t tickrate;					//Unsigned Fixed24_40 calculated by some method, number of frames (including decimal) per tick
 	uint64_t frameAcumulator; 			//Unsigned Fixed24_40 rolling error from tickrate
 	uint8_t forceMono;					//0 off, 1 both left, 2 both right, 3 mix

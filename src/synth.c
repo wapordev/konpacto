@@ -34,15 +34,28 @@ const uint64_t ERRORSTEP = (uint64_t)1<<40;
 //which requires more typing for the end user, or a lua wrapper which is an unnecesary function call
 //and possibly having the danger of accessing bad memory through lua?
 DLL_PUBLIC double konGet(int index){
-	if(index<0 || index > 63){
+	if(index<0 || index > 33){
 		return 0;
 	}
-	return konAudio.luaData[index];
+	if(index==32)
+		return konAudio.luaData.carryLeft;
+	if(index==33)
+		return konAudio.luaData.carryRight;
+	return konAudio.luaData.banks[konAudio.luaData.bankSelect].data[index];
 }
 
 DLL_PUBLIC void konOut(double left, double right){
-	konAudio.luaData[64] = left;
-	konAudio.luaData[65] = right;
+	konAudio.luaData.banks[konAudio.luaData.bankSelect].outLeft = left;
+	konAudio.luaData.banks[konAudio.luaData.bankSelect].outRight = right;
+}
+
+DLL_PUBLIC void bankSwitch(){
+	if(konAudio.luaData.bankSelect%2==1){
+		konAudio.luaData.carryLeft = konAudio.luaData.banks[konAudio.luaData.bankSelect].outLeft;
+		konAudio.luaData.carryRight = konAudio.luaData.banks[konAudio.luaData.bankSelect].outRight;
+	}
+	if (konAudio.luaData.bankSelect < 15)
+		konAudio.luaData.bankSelect++;
 }
 
 void VerifyTrack(KonTrack* track){
@@ -448,7 +461,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	int16_t* pointer16 = (int16_t*)stream;
 
 	double freqMultiplier = ((double)UINT32_MAX/(double)konAudio->format.frequency);	
-	double* luaData = konAudio->luaData;
+	LuaData* luaData = &konAudio->luaData;
 
 	for(int i=0; i<len/packetSize; i+=channelCount){
 
@@ -461,70 +474,76 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 		double mixRight = 0;
 
 		
-		for(int j=0;j<CHANNELCOUNT;j++){
-			KonChannel* channel = &konAudio->channels[j];
+		// konAudio.luaData.bankSelect=0;
+
+		// for(int j=0;j<CHANNELCOUNT;j++){
+		// 	KonChannel* channel = &konAudio->channels[j];
 			
-			if(!channel->on || !channel->synthData.instrument || !channel->synthData.note)
-				continue;
+		// 	if(!channel->on || !channel->synthData.instrument || !channel->synthData.note)
+		// 		continue;
 
-			KonInstrument* instrument = &konAudio->instruments[channel->synthData.instrument-1];
+		// 	KonInstrument* instrument = &konAudio->instruments[channel->synthData.instrument-1];
 
-			for(int k=0;k<instrument->macroCount;k++){
-				if(k==2 && !instrument->macros[k].length){
-					luaData[k]=luaData[1];
-					continue;
-				}
-				luaData[k]=macroProcess(konAudio,channel,instrument,&instrument->macros[k]);
-			}
+		// 	for(int k=0;k<instrument->macroCount;k++){
+		// 		if(k==2 && !instrument->macros[k].length){
+		// 			luaData[k]=luaData[1];
+		// 			continue;
+		// 		}
+		// 		luaData[k]=macroProcess(konAudio,channel,instrument,&instrument->macros[k]);
+		// 	}
 
-			//note processing!
+		// 	//note processing!
 
-			double trueNote=luaData[0];
-			if(trueNote>=128){
-				trueNote-=128;
-			}else{
-				trueNote=-64+trueNote;
-				trueNote+=channel->synthData.note-1;
-			}
+		// 	double trueNote=luaData[0];
+		// 	if(trueNote>=128){
+		// 		trueNote-=128;
+		// 	}else{
+		// 		trueNote=-64+trueNote;
+		// 		trueNote+=channel->synthData.note-1;
+		// 	}
 			
-			luaData[0]=konAudio->frequencies[clamp((int)trueNote,0,254)];
+		// 	luaData[0]=konAudio->frequencies[clamp((int)trueNote,0,254)];
 
-			double noteFloor=floorf(trueNote);
+		// 	double noteFloor=floorf(trueNote);
 
-			if((int)trueNote<254 && noteFloor!=trueNote){
+		// 	if((int)trueNote<254 && noteFloor!=trueNote){
 				
 
-				double freqA=luaData[0];
+		// 		double freqA=luaData[0];
 
-				double freqB=konAudio->frequencies[(int)trueNote+1];
+		// 		double freqB=konAudio->frequencies[(int)trueNote+1];
 
-				double interp=trueNote-noteFloor;
+		// 		double interp=trueNote-noteFloor;
 
-				//pow is slow :3
-				//powf(freqA,1-interp)*powf(freqB,interp);
-				luaData[0]=lerp(freqA,freqB,interp);
+		// 		//pow is slow :3
+		// 		//powf(freqA,1-interp)*powf(freqB,interp);
+		// 		luaData[0]=lerp(freqA,freqB,interp);
 
-				//note lerp
-			}
+		// 		//note lerp
+		// 	}
 			
 			
 			
-			TickLuaChannel(j);
+			
 
-			double outLeft=luaData[64];
-			double outRight=luaData[65];
+		// 	double outLeft=luaData[64];
+		// 	double outRight=luaData[65];
 
-			double volumeLeft=(channel->synthData.velocity/16)/15.0;
-			double volumeRight=(channel->synthData.velocity%16)/15.0;
+		// 	double volumeLeft=(channel->synthData.velocity/16)/15.0;
+		// 	double volumeRight=(channel->synthData.velocity%16)/15.0;
 
-			volumeLeft*=luaData[1]/255;
-			volumeRight*=luaData[2]/255;
+		// 	volumeLeft*=luaData[1]/255;
+		// 	volumeRight*=luaData[2]/255;
 
-			if(isfinite(outLeft) && isfinite(outRight)){
-				mixLeft+=fclamp(outLeft*volumeLeft,-1.,1.);
-				mixRight+=fclamp(outRight*volumeRight,-1.,1.);
-			}
-		}
+		// 	if(isfinite(outLeft) && isfinite(outRight)){
+		// 		mixLeft+=fclamp(outLeft*volumeLeft,-1.,1.);
+		// 		mixRight+=fclamp(outRight*volumeRight,-1.,1.);
+		// 	}
+		// }
+
+		//TickLuaChannels();
+
+
 
 
 		

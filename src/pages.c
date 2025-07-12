@@ -611,16 +611,41 @@ void SetOpName(int xPos, int yPos, UIEvent event){
 		if(event.type == UIChange)
 			instrumentIndex=clamp(instrumentIndex+event.change,0,254);
 	}else{
-		strcpy(helpString,"instrument name");
 		KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-		HandleTextInput(instrument->name,xPos-1,event,13,1);
+		if(xPos==1){
+			strcpy(helpString,"route to ");
+			if (instrument->route){
+				char* instrumentName = konAudio.instruments[instrument->route-1].name;
+				strcpy(helpString+9,instrumentName);
+			}
+			if(event.type == UIChange)
+				instrument->route=clamp(instrument->route+event.change,0,255);
+		}else if(xPos==2){
+			strcpy(helpString,"wet/dry");
+			if(event.type == UIChange)
+				instrument->wetDryMix=clamp(instrument->wetDryMix+event.change,0,255);
+		}else{
+			strcpy(helpString,"instrument name");
+			HandleTextInput(instrument->name,xPos-3,event,13,1);
+		}
 	}
-
 }
 
 void DrawOpName(int xPos, int yPos, bool selected){
 	if(xPos==0){
-		HexSelected(instrumentIndex,5,1,selected,2,3,1,0);
+		HexSelected(instrumentIndex,2,1,selected,2,3,1,0);
+	}else{
+		KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
+		if(xPos==1){
+			if(instrument->route==0){
+				PrintSelected("no",5,1,selected,2,3,1,0);
+			}else{
+				HexSelected(instrument->route-1,5,1,selected,2,3,1,0);
+			}
+			
+		}else if(xPos==2){
+			HexSelected(instrument->wetDryMix,8,1,selected,2,3,1,0);
+		}
 	}
 }
 
@@ -642,24 +667,27 @@ void DrawOpMacro(int xPos, int yPos, bool selected){
 		int max = instrument->macroCount-1;
 		int len = strlen(macro->name);
 		int x = clamp(instrument->selectedMacro,0,(instrument->selectedMacro==max ? 16 : 15)-len);
-		PrintSelected(macro->name,2+x,5,selected,2,3,1,0);
+		PrintSelected(macro->name,2+x,4,selected,2,3,1,0);
 		//HexSelected(macro->defaultValue,3,5,selected,2,3,1,0);
 		if(x)
-			PrintSelected("<",x,5,selected,0,3,0,1);
+			PrintSelected("<",x,4,selected,0,3,0,1);
 		if(instrument->selectedMacro!=max)
-			PrintSelected(">",3+x+len,5,selected,0,3,0,1);
-		PlaceSelected(0x4e,1+x,5,selected,0,2,0,1);
-		PlaceSelected(0x7f,2+x+len,5,selected,0,2,0,1);
+			PrintSelected(">",3+x+len,4,selected,0,3,0,1);
+		PlaceSelected(0x4e,1+x,4,selected,0,2,0,1);
+		PlaceSelected(0x7f,2+x+len,4,selected,0,2,0,1);
 	}else{
-		PrintSelected("no synth selected!",1,5,selected,2,3,1,0);
-		PlaceSelected(0x4e,0,5,selected,0,2,0,1);
-		PlaceSelected(0x7f,19,5,selected,0,2,0,1);
+		PrintSelected("no synth selected!",1,4,selected,2,3,1,0);
+		PlaceSelected(0x4e,0,4,selected,0,2,0,1);
+		PlaceSelected(0x7f,19,4,selected,0,2,0,1);
 	}
 	
 
 	
 }
 
+//this one especially highlights the flaws of the UI system.
+//sidenote; people say just use switch case instead of if chains, but its more of a structural issue?
+//switch case is just a line longer for compiling to the same thing
 void SetOpFlags(int xPos, int yPos, UIEvent event){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
 	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
@@ -667,39 +695,63 @@ void SetOpFlags(int xPos, int yPos, UIEvent event){
 	if(!instrument->macroCount)
 		return;
 
-	switch(xPos){
-	case 0:
-		strcpy(helpString,"speed (in ticks)");
-		break;
-	case 1:
-		strcpy(helpString,"loop start");
-		break;
-	case 2:
-		strcpy(helpString,"loop end");
-		break;
-	case 3:
-		if(macro->interpolationMode){
-			strcpy(helpString,"linear interpolation");
-		}else{
-			strcpy(helpString,"nearest neighbor");
+	if(yPos==0){
+		if(xPos==0){
+			strcpy(helpString,"speed (in ticks)");
+		}else if(xPos==1){
+			strcpy(helpString,"loop begin point");
+		}else if(xPos==2){
+			strcpy(helpString,"loop end point");
+		}else if(xPos==3){
+			if(macro->interpolationMode){
+				strcpy(helpString,"linear interpolation");
+			}else{
+				strcpy(helpString,"nearest neighbor");
+			}
 		}
-		
-		break;
+	}else{
+		if(xPos==0){
+			strcpy(helpString,"not implemented");
+		}else if(xPos==1){
+			strcpy(helpString,"macro range minimum");
+		}else if(xPos==2){
+			strcpy(helpString,"macro range maximum");
+		}else if(xPos==3){
+			if(macro->oscillates==0){
+				strcpy(helpString,"reset on note");
+			}else{
+				strcpy(helpString,"persist/oscillate");
+			}
+		}
 	}
 
 	if(event.type==UIChange){
-		if(xPos==0){
-			macro->speed=clamp(event.change+macro->speed,0,255);
-		}else if(xPos==1){
-			macro->loopStart=clamp(event.change+macro->loopStart,0,macro->length);
-		}else if(xPos==2){
-			macro->loopEnd=clamp(event.change+macro->loopEnd,0,macro->length);
+		if(yPos==0){
+			if(xPos==0){
+				macro->speed=clamp(event.change+macro->speed,0,255);
+			}else if(xPos==1){
+				macro->loopStart=clamp(event.change+macro->loopStart,0,macro->length);
+			}else if(xPos==2){
+				macro->loopEnd=clamp(event.change+macro->loopEnd,0,macro->length);
+			}else{
+				macro->interpolationMode=clamp(event.change+macro->interpolationMode,0,1);
+			}
 		}else{
-			macro->interpolationMode=clamp(event.change+macro->interpolationMode,0,1);
+			if(xPos==0){
+				
+			}else if(xPos==1){
+				macro->min=clamp(event.change+macro->min,0,255);
+			}else if(xPos==2){
+				macro->max=clamp(event.change+macro->max,0,255);
+			}else{
+				macro->oscillates=clamp(event.change+macro->oscillates,0,1);
+			}
 		}
 	}
 }
 
+//ditto. would want more complex structure next time/in the future
+//more modular with properties and code sharing per tile
 void DrawOpFlags(int xPos, int yPos, bool selected){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
 	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
@@ -707,31 +759,34 @@ void DrawOpFlags(int xPos, int yPos, bool selected){
 	if(!instrument->macroCount)
 		return;
 
-	if(xPos==0){
-		PrintText(",1s    n    x    m",1,7);
-	}
-
-	int num=0;
-
-	if(xPos==0){
-		num=macro->speed;
-	}else if(xPos==1){
-		num=macro->loopStart;
-	}else{
-		num=macro->loopEnd;
-	}
-
-	if(xPos<3){
-		HexSelected(num,3+xPos*5,7,selected,2,3,1,0);
-	}else{
-		char* str = "n";
-		if(macro->interpolationMode){
-			str = "l";
+	if(yPos==0){
+		if(xPos==0){
+			HexSelected(macro->speed,3,6,selected,2,3,1,0);
+		}else if(xPos==1){
+			HexSelected(macro->loopStart,8,6,selected,2,3,1,0);
+		}else if(xPos==2){
+			HexSelected(macro->loopEnd,13,6,selected,2,3,1,0);
+		}else{
+			char* str = "n";
+			if(macro->interpolationMode)
+				str = "l";
+			PrintSelected(str,18,6,selected,2,3,1,0);
 		}
-		PrintSelected(str,3+xPos*5,7,selected,2,3,1,0);
+	}else{
+		if(xPos==0){
+			PrintText(",1s    b    e    i\n     m    x    o",1,6);
+			PrintSelected("temp",1,7,selected,2,3,1,0);
+		}else if(xPos==1){
+			HexSelected(macro->min,8,7,selected,2,3,1,0);
+		}else if (xPos==2){
+			HexSelected(macro->max,13,7,selected,2,3,1,0);
+		}else if (xPos==3){
+			char* str = "x";
+			if(macro->oscillates)
+				str = "O";
+			PrintSelected(str,18,7,selected,2,3,1,0);
+		}
 	}
-	
-
 }
 
 void SetOpData(int xPos, int yPos, UIEvent event){
@@ -1001,7 +1056,7 @@ UIPage arrangePage = {0,1,(UIGrid[1]){CreateGrid(9,16,&SetArrange,&DrawArrange)}
 
 UIPage trackPage = {0,2,(UIGrid[2]){CreateGrid(3,1,&SetTrackInfo,&DrawTrackInfo),CreateGrid(8,16,&SetTrackData,&DrawTrackData)}};
 
-UIPage operatorPage = {0,6,(UIGrid[6]){CreateGrid(8,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpEffect,&DrawOpEffect),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(4,1,&SetOpFlags,&DrawOpFlags),CreateGrid(18,1,&SetOpData,&DrawOpData)}};
+UIPage operatorPage = {0,5,(UIGrid[5]){CreateGrid(10,1,&SetOpName,&DrawOpName),CreateGrid(1,1,&SetOpSynth,&DrawOpSynth),CreateGrid(1,1,&SetOpMacro,&DrawOpMacro),CreateGrid(4,2,&SetOpFlags,&DrawOpFlags),CreateGrid(18,1,&SetOpData,&DrawOpData)}};
 
 UIPage saveFilePage = {0,3,(UIGrid[3]){CreateGrid(20,1,&SetFileName,&DrawFileName),CreateGrid(2,1,&SetFileConfirm,&DrawFileConfirm),CreateGrid(1,13,&SetFileBrowse,&DrawFileBrowse)}};
 

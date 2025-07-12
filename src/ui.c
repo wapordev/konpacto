@@ -63,21 +63,13 @@ void PageProcess(UIPage* page, UIEvent* event) {
 	curGrid->setPtr(curGrid->xPos, curGrid->yPos,*event);
 
 	for(int i = 0; i < page->length; i++) {
-		if(i==page->index){continue;}
 		UIGrid g = page->grids[i];
 		for(int x=0;x<g.width;x++){
-			for(int y=0;y<g.height;y++){
-				g.drawPtr(x, y, false);
+			for(int y=g.height-1;y>=0;y--){
+				g.drawPtr(x, y, (i==page->index && x==curGrid->xPos && y==curGrid->yPos));
 			}
 		}
 	}
-	//arrangePage.grids[0].yPos = 7;
-	for(int x=0;x<curGrid->width;x++){
-		for(int y=curGrid->height-1;y>=0;y--){
-			curGrid->drawPtr(x, y, (x==curGrid->xPos && y==curGrid->yPos));
-		}
-	}
-	
 }
 
 void ProjectDraw(UIEvent* event) {
@@ -161,17 +153,18 @@ void TrackDraw(UIEvent* event) {
 }
 
 void OperatorsDraw(UIEvent* event) {
-	PrintText(",1inst    name\nsynth\nfx",0,1);
+	PrintText(",1i   -  :   n\nsynth",0,1);
+	PlaceScreen(12,1,0x4f,0,2);
 
 	for(int i=0;i<21;i++){
-		PlaceScreen(i,5,0,0,1);
+		PlaceScreen(i,4,0,0,1);
 	}
 
 	for(int i=1;i<20;i++){
-		PlaceScreen(i,6,0x45,0,2);
+		PlaceScreen(i,5,0x45,0,2);
 	}
-	PlaceScreen(0,6,0x4a,0,2);
-	PlaceScreen(19,6,0x4d,0,2);
+	PlaceScreen(0,5,0x4a,0,2);
+	PlaceScreen(19,5,0x4d,0,2);
 
 	for(int x=1;x<19;x++){
 		for(int y=9;y<17;y++){
@@ -182,7 +175,8 @@ void OperatorsDraw(UIEvent* event) {
 	PlaceScreen(18,9,0x6b,2,0); 
 
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-	PrintColor(instrument->name,13,1,2,3,false);
+	PrintColor("       ",13,1,0,3,false);
+	PrintColor(instrument->name,13,1,0,3,false);
 	PageProcess(&operatorPage, event);
 	
 }

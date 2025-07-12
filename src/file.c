@@ -123,7 +123,10 @@ void LoadSong(char* path){
 	}
 
 	//read project info
+	konAudio.bpm = get32(f);
+	konAudio.ticksPerStep = getc(f);
 
+	konSetBPM(&konAudio);
 
 	//arrangements
 	fseek(f,arrangeStartOffset,SEEK_SET);
@@ -156,13 +159,22 @@ void LoadSong(char* path){
 	}
 
 	//groove
-	while(ftell(f)<instrumentStartOffset){
-
+	{
+		int i = 0;
+		while(ftell(f)<instrumentStartOffset){
+			konAudio.grooves[i].length=getc(f);
+			for(int j=0;j<konAudio.grooves[i].length;j++)
+				konAudio.grooves[i].data[j]=getc(f);
+			i++;
+		}
 	}
 
 	while(ftell(f)<segmentEnd){
 		int i = getc(f);
 		KonInstrument* instrument = &konAudio.instruments[i];
+
+		instrument->route=getc(f);
+		instrument->wetDryMix=getc(f);
 
 		for(int j=0;j<sizeof(instrument->name);j++){
 			instrument->name[j]=getc(f);
@@ -170,7 +182,7 @@ void LoadSong(char* path){
 		for(int j=0;j<sizeof(instrument->selectedSynth);j++){
 			instrument->selectedSynth[j]=getc(f);
 		}
-		instrument->route=getc(f);
+		
 
 		int macroCount = getc(f);
 
@@ -180,13 +192,18 @@ void LoadSong(char* path){
 		for(int j=0;j<macroCount;j++){
 			KonMacro* macro = &instrument->macros[j];
 
-			macro->defaultValue = getc(f);
+			
 			macro->speed = getc(f);
-			macro->min = getc(f);
-			macro->max = getc(f);
-			macro->interpolationMode = getc(f);
 			macro->loopStart = getc(f);
 			macro->loopEnd = getc(f);
+			macro->interpolationMode = getc(f);
+
+			macro->min = getc(f);
+			macro->max = getc(f);
+			macro->oscillates = getc(f);
+			
+
+			macro->defaultValue = getc(f);
 			macro->length = getc(f);
 
 			macro->data = malloc(sizeof(uint8_t)*macro->length);
@@ -250,9 +267,11 @@ void SaveSong(char* path){
 	//number of segments
 	putc(segmentCount,f);
 
-	fseek(f,4*segmentCount+4,SEEK_CUR);
+	fseek(f,4*segmentCount,SEEK_CUR);
 
 	//song information
+	put32(konAudio.bpm,f);
+	putc(konAudio.ticksPerStep,f);
 
 	//arrangements
 	arrangeStartOffset=ftell(f);
@@ -289,7 +308,17 @@ void SaveSong(char* path){
 		}
 	}
 
+	//grooves
 	grooveStartOffset=ftell(f);
+
+	for(int i=0;i<255;i++){
+		int len = konAudio.grooves[i].length;
+		putc(len,f);
+		for(int j=0;j<len;i++)
+			putc(konAudio.grooves[i].data[j],f);
+	}
+
+	//instruments
 	instrumentStartOffset=ftell(f);
 
 	for (int i=0;i<255;i++){
@@ -297,30 +326,29 @@ void SaveSong(char* path){
 		if(instrument->selectedSynth[0] == 0)
 			continue;
 		putc(i,f);
+		putc(instrument->route,f);
+		putc(instrument->wetDryMix,f);
 		for(int j=0;j<sizeof(instrument->name);j++)
 			putc(instrument->name[j],f);
 		for(int j=0;j<sizeof(instrument->selectedSynth);j++)
 			putc(instrument->selectedSynth[j],f);
-		putc(instrument->route,f);
 		putc(instrument->macroCount,f);
 		//macros
 
 		for (int j=0;j<instrument->macroCount;j++){
 			KonMacro* macro = &instrument->macros[j];
-
-			// for(int k=0;k<sizeof(macro->name);k++){
-			// 	putc(macro->name[k],f);
-			// }
-			putc(macro->defaultValue,f);
+			
 			putc(macro->speed,f);
-			putc(macro->min,f);		
-			putc(macro->max,f);
-			putc(macro->interpolationMode,f);
 			putc(macro->loopStart,f);
 			putc(macro->loopEnd,f);
-			putc(macro->length,f);
+			putc(macro->interpolationMode,f);
+			
+			putc(macro->min,f);		
+			putc(macro->max,f);
+			putc(macro->oscillates,f);
 
-			//printf("length %i, isnull %i\n",macro->length,macro->data==NULL);
+			putc(macro->defaultValue,f);
+			putc(macro->length,f);
 
 			for(int k=0;k<macro->length;k++){
 				putc(macro->data[k],f);

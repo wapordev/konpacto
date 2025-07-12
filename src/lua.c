@@ -15,10 +15,41 @@ lua_State* lua;
 
 int test = 0;
 
+int CheckLuaError(int result, int index, char* synthPath){
+
+	if (result == LUA_ERRRUN) {
+	    // get the error object (message)
+	    const char *err = lua_tostring(lua,-1); // "Nil argument"
+
+	    char* name;
+	    if(synthPath=NULL){
+	    	KonChannel channel = konAudio.channels[index];
+	    	name = konAudio.instruments[channel.synthData.instrument-1].selectedSynth;
+	    }else{
+	    	name=synthPath;
+	    }
+	  
+	    printf("lua error in %s: %s\n",name,err);
+	    // pop the error object
+	    lua_pop(lua,1);
+	    return 0;
+	}
+	else if (result == LUA_ERRMEM) {
+	    printf("lua out of memory!!!\n");
+	    lua_pop(lua,1);
+	    return 0;
+	}else if (result != 0){
+		printf("catastrophic lua error!\n");
+		lua_pop(lua,1);
+		return 0;
+	}
+	return 1;
+}
+
 void InitializeLua(){
 	lua = luaL_newstate();
 	luaL_openlibs(lua);
-	
+
 	int result = luaL_dostring(lua,
 	"\n\
 	sampleRate = 44100 \n\
@@ -128,37 +159,6 @@ void InitializeLua(){
 	lua_pushinteger(lua,configSampleRate);
 
 	lua_setglobal(lua,"sampleRate");
-}
-
-int CheckLuaError(int result, int index, char* synthPath){
-
-	if (result == LUA_ERRRUN) {
-	    // get the error object (message)
-	    const char *err = lua_tostring(lua,-1); // "Nil argument"
-
-	    char* name;
-	    if(synthPath=NULL){
-	    	KonChannel channel = konAudio.channels[index];
-	    	name = konAudio.instruments[channel.synthData.instrument-1].selectedSynth;
-	    }else{
-	    	name=synthPath;
-	    }
-	  
-	    printf("lua error in %s: %s\n",name,err);
-	    // pop the error object
-	    lua_pop(lua,1);
-	    return 0;
-	}
-	else if (result == LUA_ERRMEM) {
-	    printf("lua out of memory!!!\n");
-	    lua_pop(lua,1);
-	    return 0;
-	}else if (result != 0){
-		printf("catastrophic lua error!\n");
-		lua_pop(lua,1);
-		return 0;
-	}
-	return 1;
 }
 
 void StopLua(){
