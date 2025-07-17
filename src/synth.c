@@ -95,6 +95,24 @@ void konInit(KonAudio* konAudio, int frequency, int packetSize, int channelCount
 	konSetBPM(konAudio);
 }
 
+static inline void resetChannelMacros(KonChannel* channel, int force){
+	for (int i=0; i<32; i++){
+			KonMacroProcess* macro = &channel->synthMacros[i];
+			if(!macro->macro.oscillates || force){
+				macro->stepIndex=0;
+				macro->nextStep=0;
+				macro->percentage=1;
+			}
+
+			macro = &channel->routeMacros[i];
+			if(!macro->macro.oscillates || force){
+				macro->stepIndex=0;
+				macro->nextStep=0;
+				macro->percentage=1;
+			}
+		}
+}
+
 //0, 1 if track ended
 static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8_t trackIndex, uint8_t channelIndex){
 	if(trackIndex==0){return 1;}
@@ -102,11 +120,9 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 	KonTrack currentTrack = konAudio->tracks[trackIndex-1];
 		
 	if(currentTrack.steps==NULL){
-		channel->on=0;
+		channel->on=ChOff;
 		return channelIndex==0;
 	}
-
-	channel->tickCounter+=1;
 
 	int ending = 0;
 
@@ -134,8 +150,6 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 		if(currentStep.instrument){
 			channel->synthData.instrument = currentStep.instrument;
 
-			channel->tickCounter=0;
-
 			//TO DO, SYNTH INIT
 
 			KonInstrument* instrument = &konAudio->instruments[currentStep.instrument-1];
@@ -143,12 +157,12 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 			SetLuaInstrument(instrument->selectedSynth,channelIndex);
 
 			for(int i=0;i<instrument->macroCount;i++){
-				channel->synthMacros[i]=instrument->macros[i];
+				channel->synthMacros[i].macro=instrument->macros[i].macro;
 			}
 			if(instrument->route){
 				KonInstrument* routeInstrument = &konAudio->instruments[instrument->route-1];
 				for(int i=0;i<routeInstrument->macroCount;i++){
-					channel->routeMacros[i]=routeInstrument->macros[i];
+					channel->routeMacros[i].macro=routeInstrument->macros[i].macro;
 				}
 			}
 		}
@@ -160,12 +174,12 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 		if(currentStep.note!=0){
 			if(currentStep.note == 255){
 				//macro loop off
-				//channel->on =  0;
+				channel->on =  ChRel;
 			}else{
-				channel->on =  3;
+				channel->on =  ChJust;
 				channel->synthData.note = currentStep.note;
+				resetChannelMacros(channel,0);
 			}
-			channel->tickCounter=0;
 		}
 
 		//groove
@@ -195,7 +209,7 @@ void konStopInternal(KonAudio* konAudio){
 	for(int i=0;i<CHANNELCOUNT;i++){
 		KonChannel* channel = &konAudio->channels[i];
 
-		channel->on=0;
+		channel->on=ChOff;
 	}
 }
 
@@ -205,15 +219,17 @@ void konStop(KonAudio* konAudio){
 	unlockAudio();
 }
 
-void konResetChannels(KonAudio* konAudio){
+void konResetChannels(KonAudio* konAudio, int force){
 	for(int i=0;i<CHANNELCOUNT;i++){
 		KonChannel* channel = &konAudio->channels[i];
 
-		channel->on=0;
+		channel->on=ChOff;
 		channel->stepIndex=0;
 		channel->stepAccumulator=0;
 		channel->stepLength=0;
-		channel->tickCounter=0;
+
+		resetChannelMacros(channel,force);
+
 	}
 }
 
@@ -230,9 +246,11 @@ void setInstrument(int instrumentIndex, char* name){
 
 	if(params<instrument->macroCount){
 		for(int i=params;i<instrument->macroCount;i++){
-			if(instrument->macros[i].length){
-				free(instrument->macros[i].data);
-				instrument->macros[i].length=0;
+			KonMacro* macro = &instrument->macros[i].macro;
+			if(macro->length){
+				macro->length=0;
+				free(macro->data);
+				macro->data=NULL;
 			}
 		}
 	}
@@ -242,20 +260,20 @@ void setInstrument(int instrumentIndex, char* name){
 	strcpy(instrument->macros[0].name,"pitch");
 	strcpy(instrument->macros[1].name,"volume l");
 	strcpy(instrument->macros[2].name,"volume r");
-	instrument->macros[0].defaultValue=64;
-	instrument->macros[1].defaultValue=255;
-	instrument->macros[2].defaultValue=255;
+	instrument->macros[0].macro.defaultValue=64;
+	instrument->macros[1].macro.defaultValue=255;
+	instrument->macros[2].macro.defaultValue=255;
 
-	instrument->macros[0].loopStart=1;
-	instrument->macros[1].loopStart=1;
-	instrument->macros[2].loopStart=1;
+	instrument->macros[0].macro.loopStart=1;
+	instrument->macros[1].macro.loopStart=1;
+	instrument->macros[2].macro.loopStart=1;
 
 	for(int i=3;i<params;i++){
 		int defaultValue = GetLuaParam(path,i-3,instrument->macros[i].name);
 		if(defaultValue>=0){
-			instrument->macros[i].defaultValue = defaultValue;
-			if(instrument->macros[i].length==0){
-				instrument->macros[i].loopStart=1;
+			instrument->macros[i].macro.defaultValue = defaultValue;
+			if(instrument->macros[i].macro.length==0){
+				instrument->macros[i].macro.loopStart=1;
 			}
 		}
 	}
@@ -274,7 +292,7 @@ void clearSong(KonAudio* konAudio){
 	konAudio->looping = 0;
 	konStopInternal(konAudio);
 	konAudio->frameAcumulator = 0;
-	konResetChannels(konAudio);
+	konResetChannels(konAudio,1);
 	for(int i=0;i<255;i++){
 		KonTrack* track = &konAudio->tracks[i];
 		track->grooveIndex=0;
@@ -300,12 +318,13 @@ void clearSong(KonAudio* konAudio){
 		instrument->macroCount = 0;
 		instrument->selectedMacro = 0;
 		for(int j=0;j<64;j++){
-			KonMacro* macro = &instrument->macros[j];
-			macro->name[0]='\0';
+			KonMacroUI* macroShell = &instrument->macros[j];
+			KonMacro* macro = &macroShell->macro;
+			macroShell->name[0]='\0';
 			if (macro->length) {
 				macro->length=0;
-				macro->data = NULL;
 				free(macro->data);
+				macro->data = NULL;
 			}
 		}
 	}
@@ -316,7 +335,7 @@ void konStart(KonAudio* konAudio, uint8_t arrangeIndex){
 
 	konAudio->arrangeIndex=arrangeIndex;
 
-	konResetChannels(konAudio);
+	konResetChannels(konAudio,1);
 
 	konAudio->frameAcumulator=0;
 	konAudio->playing=1;
@@ -358,10 +377,10 @@ uint8_t konTrackIsEmpty(KonTrack* track){
 }
 
 static inline double macroDataGet(KonMacro* macro, int step){
-
-	if(macro->loopEnd>=macro->loopStart){
-
-	}
+	if(!macro->length)
+		return (double)macro->defaultValue;
+	if(macro->length==1)
+		return (double)macro->data[0];
 
 	return (double)macro->data[clamp(step,0,macro->length-1)];
 }
@@ -371,36 +390,58 @@ static inline double lerp(double a, double b, double f)
     return (a * (1.0 - f)) + (b * f);
 }
 
-static inline double macroProcess(KonAudio* konAudio, KonChannel* channel, KonMacro* macro){
-	double out=0;
+static inline int macroNextStep(KonChannel* channel, KonMacroProcess* macroShell, KonMacro* macro){
+	int step = macroShell->stepIndex;
+	int next = step+1;
 
-	if(macro->length){
-		if(macro->length==1){
-			out=macro->data[0];
-		}else{
-			int speed = macro->speed;
-			if(!speed)
-				speed=1;
-
-			int rawPosition = channel->tickCounter;
-
-			out=macroDataGet(macro,rawPosition/speed);
-
-			if(macro->interpolationMode==IntLinear){
-				double positionOffset =  ((double)konAudio->frameAcumulator/konAudio->tickrate + (double)(rawPosition%speed)) /speed;
-
-				if(positionOffset>0){
-					double nextStep = macroDataGet(macro,rawPosition/speed+1);
-
-					out=lerp(out,nextStep,positionOffset);
-				}
-			}
-
-		}
-	}else{
-		out=macro->defaultValue;
+	if((channel->on != ChRel || macro->loopEnd == macro->length-1) && macro->loopEnd >= macro->loopStart && next > macro->loopEnd){
+		next=macro->loopStart;
 	}
 
+	if(macro->length && next>macro->length-1){
+		next=macro->length-1;
+	}
+
+	return next;
+} 
+
+static inline double macroProcess(KonAudio* konAudio, KonChannel* channel, KonMacroProcess* macroShell){
+	KonMacro* macro = &macroShell->macro;
+	
+	if(macroShell->percentage>=1.0){
+		macroShell->percentage-=1.0;
+		macroShell->stepIndex=macroShell->nextStep;
+		macroShell->nextStep=macroNextStep(channel,macroShell,macro);
+		macroShell->currentValue=macroDataGet(macro,macroShell->stepIndex);
+	}
+
+	int speed = macro->speed;
+	if(!speed)
+		speed=1;
+	double stepRate=((double)ERRORSTEP)/konAudio->tickrate/speed;
+
+	double out=macroShell->currentValue;
+
+	if(macro->interpolationMode==IntLinear){
+		double nextValue = macroDataGet(macro,macroShell->nextStep);
+
+		double diff = nextValue - macroShell->currentValue;
+		
+		double stepsLeft = (1-macroShell->percentage)/stepRate;
+
+		macroShell->currentValue += diff/stepsLeft;
+	}
+
+	macroShell->percentage += stepRate;
+
+	if(macro->max!=0 || macro->min!=255){
+		if(macro->max==macro->min){
+			out=macro->max;
+		}else{
+			out*=(double)(macro->max-macro->min)/255;
+			out+=macro->min;
+		}
+	}
 	return out;
 }
 
@@ -454,7 +495,7 @@ static inline void sequenceProcess(KonAudio* konAudio){
 		if(stopping){
 			konStopInternal(konAudio);
 		}else{
-			konResetChannels(konAudio);
+			konResetChannels(konAudio,0);
 			arrangement = konAudio->arrangements[konAudio->arrangeIndex];
 			for(int i=0;i<CHANNELCOUNT;i++){
 				uint8_t trackIndex = arrangement.trackIndexes[i];
@@ -530,8 +571,12 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			
 			int referenceNote = channel->synthData.note-1;
 
-			for(int k=0;k<instrument->macroCount;k++)
-				synthBank->data[k]=macroProcess(konAudio,channel,&channel->synthMacros[k]);
+			for(int k=0;k<instrument->macroCount;k++){
+				double macroOutput = macroProcess(konAudio,channel,&channel->synthMacros[k]);
+				if(k)
+					macroOutput/=255;
+				synthBank->data[k]=macroOutput;
+			}
 
 			synthBank->data[0] = noteProcess(konAudio,synthBank->data[0],referenceNote);
 
@@ -541,8 +586,12 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 			KonInstrument* routeInstrument = &konAudio->instruments[instrument->route-1];
 
-			for(int k=0;k<routeInstrument->macroCount;k++)
-				routeBank->data[k]=macroProcess(konAudio,channel,&channel->routeMacros[k]);
+			for(int k=0;k<routeInstrument->macroCount;k++){
+				double macroOutput = macroProcess(konAudio,channel,&channel->routeMacros[k]);
+				if(k)
+					macroOutput/=255;
+				routeBank->data[k]=macroOutput;
+			}
 
 			routeBank->data[0] = noteProcess(konAudio,routeBank->data[0],referenceNote);
 		}
@@ -562,7 +611,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			LuaDatabank* synthBank = &konAudio->luaData.banks[j*2];
 
 			double velocity=(channel->synthData.velocity/16)/15.0;
-			double synthVolume = synthBank->data[1]/255;
+			double synthVolume = synthBank->data[1];
 			
 
 			//double panning=(channel->synthData.velocity%16)/15.0;
@@ -575,7 +624,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 			if(instrument->route){
 				LuaDatabank* routeBank = &konAudio->luaData.banks[j*2+1];
-				double routeVolume = routeBank->data[1]/255;
+				double routeVolume = routeBank->data[1];
 
 				double routeOutLeft = routeBank->outLeft*routeVolume*velocity;
 				double routeOutRight = routeBank->outRight*routeVolume*velocity;

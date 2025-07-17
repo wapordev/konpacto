@@ -17,13 +17,19 @@ typedef enum {
     IntSmoothStep,
 } InterpolationModes;
 
+typedef enum {
+    ChOff,
+    ChRel,
+    ChOn,
+    ChJust,
+} ChannelStatus;
+
 typedef struct KonGroove {
 	int length;					//
 	uint8_t data[256];
 }KonGroove;
 
 typedef struct KonMacro {		//parameter/modulation data
-	char name[16];
 	uint8_t defaultValue;
 	uint8_t speed;				//0 to 127 tick speed+1, -1 to -128, ms? maybe?
 	uint8_t min;				
@@ -33,9 +39,22 @@ typedef struct KonMacro {		//parameter/modulation data
 	uint8_t loopStart;
 	uint8_t loopEnd;
 	uint8_t length;
-	uint8_t selectedStep;		//editor value
 	uint8_t* data;
 }KonMacro;
+
+typedef struct KonMacroUI {		//parameter/modulation data
+	char name[16];				//editor values
+	uint8_t selectedStep;		
+	KonMacro macro;
+}KonMacroUI;
+
+typedef struct KonMacroProcess {
+	uint8_t stepIndex;
+	uint8_t nextStep;
+	double percentage;
+	double currentValue;
+	KonMacro macro;
+}KonMacroProcess;
 
 typedef struct KonInstrument {		//storing synth identifier and macro list. (pitch offset, volume, etc) 
 	char name[8];
@@ -43,7 +62,7 @@ typedef struct KonInstrument {		//storing synth identifier and macro list. (pitc
 	uint8_t route;
 	uint8_t wetDryMix;
 	uint8_t macroCount;
-	KonMacro macros[64];
+	KonMacroUI macros[64];
 	uint8_t selectedMacro;			//editor value
 }KonInstrument;
 
@@ -66,11 +85,10 @@ typedef struct KonChannel {
 	uint8_t stepIndex;
 	uint8_t stepAccumulator;		//if accum == length, play next step
 	uint8_t stepLength;				//set by groove after current step played
-	uint64_t tickCounter;			//info for the macros!
 	int32_t on;
 	KonStep synthData;				//synth instance created from instrument index
-	KonMacro synthMacros[32];
-	KonMacro routeMacros[32];
+	KonMacroProcess synthMacros[32];
+	KonMacroProcess routeMacros[32];
 }KonChannel;
 
 typedef struct KonTrack {

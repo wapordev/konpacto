@@ -11,7 +11,15 @@
 			"pre_debug_task": "Build Konpacto",
 			"type": "lldb",
 			"request": "launch",
-			"name": "Launch",
+			"name": "Make and run",
+			"program": "${folder}/build/main.exe",
+			"args": [],
+			"cwd": "${folder}/build"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Run",
 			"program": "${folder}/build/main.exe",
 			"args": [],
 			"cwd": "${folder}/build"

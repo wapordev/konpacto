@@ -395,7 +395,7 @@ void HandleTextInput(char* text, int xPos, UIEvent event, int sx, int sy){
 	}else if(event.type==UIChange){
 		char mappedChar = MapChar(text[xPos]);
 		
-		text[xPos] = UnmapChar(positive_modulo(((int)mappedChar)+event.change,56));
+		text[xPos] = UnmapChar(positive_modulo(((int)mappedChar)+event.change-1,51)+1);
 		lastUsedChar = text[xPos];
 	}else if(event.type==UIDelete){
 		text[xPos]='\0';

@@ -19,7 +19,7 @@ function _audioFrame(synthData)
 
 	local out=phase
 
-	if(out > C.konGet(3)/510)then
+	if(out > C.konGet(3)/2)then
 		out=1
 	else
 		out=-1

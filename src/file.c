@@ -187,7 +187,7 @@ void LoadSong(char* path){
 		setInstrument(i,instrument->selectedSynth);
 
 		for(int j=0;j<macroCount;j++){
-			KonMacro* macro = &instrument->macros[j];
+			KonMacro* macro = &instrument->macros[j].macro;
 
 			
 			macro->speed = getc(f);
@@ -311,7 +311,7 @@ void SaveSong(char* path){
 	for(int i=0;i<255;i++){
 		int len = konAudio.grooves[i].length;
 		putc(len,f);
-		for(int j=0;j<len;i++)
+		for(int j=0;j<len;j++)
 			putc(konAudio.grooves[i].data[j],f);
 	}
 
@@ -333,7 +333,7 @@ void SaveSong(char* path){
 		//macros
 
 		for (int j=0;j<instrument->macroCount;j++){
-			KonMacro* macro = &instrument->macros[j];
+			KonMacro* macro = &instrument->macros[j].macro;
 			
 			putc(macro->speed,f);
 			putc(macro->loopStart,f);

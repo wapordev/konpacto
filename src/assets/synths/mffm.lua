@@ -14,7 +14,7 @@ function _audioFrame(synthData)
 	local phase,o1,o2 = synthData[1],synthData[2],synthData[3]
 
 	local note = C.konGet(0)/sampleRate
-	local selfmod,feedback1,volume2,feedback2 = C.konGet(3)/32,C.konGet(4)/255,C.konGet(5)/255,C.konGet(6)/255
+	local selfmod,feedback1,volume2,feedback2 = C.konGet(3)*8,C.konGet(4),C.konGet(5),C.konGet(6)
 
 	phase=phase+note
 

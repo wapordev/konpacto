@@ -334,10 +334,16 @@ uint8_t lastGroove=6;
 
 void SetTrackData(int xPos, int yPos, UIEvent event){
 	KonTrack* track = &konAudio.tracks[selectedTrack];
-	uint8_t scrollPosition=yPos+trackScroll;
 
 	VerifyTrack(track);
 	ChangeTrackLength(track);
+
+    trackScroll = clamp(trackScroll,0,clamp(track->length-15,0,255));
+
+	uint8_t scrollPosition=yPos+trackScroll;
+
+	
+
 
 	uint8_t* step = (uint8_t*)&track->steps[scrollPosition];
 
@@ -530,8 +536,8 @@ void DrawTrackData(int xPos, int yPos, bool selected){
 
 			if(yPos==0){
 				PrintColor("!!",18,2,2,0,false);
-				if(track->length<currentGroove->length)
-					PrintColor("..",18,4+track->length,2,0,false);
+				if(track->length<currentGroove->length-1 && track->length<15 )
+					PrintColor("..",18,clamp(4+track->length,0,18),2,0,false);
 			}
 
 			if(scrollPosition<currentGroove->length){
@@ -574,10 +580,11 @@ void SetOpSynth(int xPos, int yPos, UIEvent event){
 	}else if(event.type == UIDelete){
 		strcpy(instrument->selectedSynth,"");
 		for(int i=3;i<instrument->macroCount;i++){
-			if(instrument->macros[i].length){
-				instrument->macros[i].length=0;
-				instrument->macros[i].data=NULL;
-				free(instrument->macros[i].data);
+			KonMacro* macro = &instrument->macros[i].macro;
+			if(macro->length){
+				macro->length=0;
+				free(macro->data);
+				macro->data=NULL;
 			}
 		}
 		instrument->macroCount=0;
@@ -661,13 +668,13 @@ void SetOpMacro(int xPos, int yPos, UIEvent event){
 
 void DrawOpMacro(int xPos, int yPos, bool selected){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+	KonMacroUI* macroShell = &instrument->macros[instrument->selectedMacro];
 
 	if(instrument->macroCount){
 		int max = instrument->macroCount-1;
-		int len = strlen(macro->name);
+		int len = strlen(macroShell->name);
 		int x = clamp(instrument->selectedMacro,0,(instrument->selectedMacro==max ? 16 : 15)-len);
-		PrintSelected(macro->name,2+x,4,selected,2,3,1,0);
+		PrintSelected(macroShell->name,2+x,4,selected,2,3,1,0);
 		//HexSelected(macro->defaultValue,3,5,selected,2,3,1,0);
 		if(x)
 			PrintSelected("<",x,4,selected,0,3,0,1);
@@ -690,7 +697,7 @@ void DrawOpMacro(int xPos, int yPos, bool selected){
 //switch case is just a line longer for compiling to the same thing
 void SetOpFlags(int xPos, int yPos, UIEvent event){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+	KonMacro* macro = &instrument->macros[instrument->selectedMacro].macro;
 
 	if(!instrument->macroCount)
 		return;
@@ -754,7 +761,7 @@ void SetOpFlags(int xPos, int yPos, UIEvent event){
 //more modular with properties and code sharing per tile
 void DrawOpFlags(int xPos, int yPos, bool selected){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+	KonMacro* macro = &instrument->macros[instrument->selectedMacro].macro;
 
 	if(!instrument->macroCount)
 		return;
@@ -791,7 +798,8 @@ void DrawOpFlags(int xPos, int yPos, bool selected){
 
 void SetOpData(int xPos, int yPos, UIEvent event){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+	KonMacroUI* macroShell = &instrument->macros[instrument->selectedMacro];
+	KonMacro* macro = &macroShell->macro;
 
 	if(!instrument->macroCount)
 		return;
@@ -800,10 +808,10 @@ void SetOpData(int xPos, int yPos, UIEvent event){
 
 
 	if(event.type==UIMove || event.type==UIMoveRepeat){
-		macro->selectedStep=clamp(macro->selectedStep+event.horizontal,0,255);
+		macroShell->selectedStep=clamp(macroShell->selectedStep+event.horizontal,0,255);
 	}
 
-	int realPosition = macro->selectedStep;
+	int realPosition = macroShell->selectedStep;
 
 	if(event.type == UIPlace){
 		if(macro->length==0){
@@ -828,6 +836,7 @@ void SetOpData(int xPos, int yPos, UIEvent event){
 			if(realPosition==0){
 				macro->length=0;
 				free(macro->data);
+				macro->data=NULL;
 				return;
 			}
 			macro->data = realloc(macro->data, sizeof(uint8_t)*(realPosition));
@@ -850,14 +859,15 @@ void SetOpData(int xPos, int yPos, UIEvent event){
 
 void DrawOpData(int xPos, int yPos, bool selected){
 	KonInstrument* instrument = &konAudio.instruments[instrumentIndex];
-	KonMacro* macro = &instrument->macros[instrument->selectedMacro];
+	KonMacroUI* macroShell = &instrument->macros[instrument->selectedMacro];
+	KonMacro* macro = &macroShell->macro;
 
 	if(!instrument->macroCount)
 		return;
 
-	int opDataScroll=clamp(macro->selectedStep-8,0,238);
+	int opDataScroll=clamp(macroShell->selectedStep-8,0,238);
 	int selectedStep = opDataScroll+xPos;
-	selected=selectedStep==macro->selectedStep;
+	selected=selectedStep==macroShell->selectedStep;
 
 	int len=macro->length;
 
@@ -901,7 +911,7 @@ void DrawOpData(int xPos, int yPos, bool selected){
 	}
 
 	if( selected ){
-		int x=macro->selectedStep-opDataScroll;
+		int x=macroShell->selectedStep-opDataScroll;
 
 		if(data){
 			HexSelected(dataRaw,clamp(x,0,16)+1,17,selected,3,0,1,0);
@@ -967,6 +977,7 @@ void SetFileCancel(int xPos, int yPos, UIEvent event){
 		return;
 	if(xPos==0){
 		lockAudio();
+		currentSongName[0]=0;
 		clearSong(&konAudio);
 		unlockAudio();
 		QuitContext(0);
