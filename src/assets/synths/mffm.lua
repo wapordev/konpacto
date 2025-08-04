@@ -9,12 +9,12 @@ function _init()
 	return{0,0,0}
 end
 
-function _audioFrame(synthData)
+function _audioFrame(synthData,data)
 	local synthData = synthData
 	local phase,o1,o2 = synthData[1],synthData[2],synthData[3]
 
-	local note = C.konGet(0)/sampleRate
-	local selfmod,feedback1,volume2,feedback2 = C.konGet(3)*8,C.konGet(4),C.konGet(5),C.konGet(6)
+	local note = data[0]/sampleRate
+	local selfmod,feedback1,volume2,feedback2 = data[3]*8,data[4],data[5],data[6]
 
 	phase=phase+note
 
@@ -32,5 +32,5 @@ function _audioFrame(synthData)
 
 	synthData[1],synthData[2],synthData[3] = phase,o1,o2
 
-	C.konOut(out,out)
+	return out,out
 end

@@ -255,6 +255,13 @@ void setInstrument(int instrumentIndex, char* name){
 		}
 	}
 
+	if(params>instrument->macroCount){
+		for(int i=instrument->macroCount;i<params;i++){
+			KonMacro* macro = &instrument->macros[i].macro;
+			macro->max = 255;
+		}
+	}
+
 	instrument->macroCount=params;
 
 	strcpy(instrument->macros[0].name,"pitch");
@@ -549,7 +556,6 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	int16_t* pointer16 = (int16_t*)stream;
 
 	double freqMultiplier = ((double)UINT32_MAX/(double)konAudio->format.frequency);	
-	LuaData* luaData = &konAudio->luaData;
 
 	for(int i=0; i<len/packetSize; i+=channelCount){
 
@@ -600,7 +606,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 		double mixLeft = 0;
 		double mixRight = 0;
-
+		
 		for (int j=0;j<8;j++){
 			KonChannel* channel = &konAudio->channels[j];
 
@@ -638,6 +644,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 				mixRight+=fclamp(outRight,-1.,1.);
 			}
 		}
+		
 		
 		int32_t sampleLeft = (int32_t)fclamp((mixLeft*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;
 		int32_t sampleRight = (int32_t)fclamp((mixRight*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;
