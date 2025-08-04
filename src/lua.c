@@ -52,6 +52,7 @@ void InitializeLua(){
 
 	int result = luaL_dostring(lua,
 	"\n\
+	--jit.opt.start('maxtrace=8000', 'maxrecord=16000', 'minstitch=3', 'maxmcode=40960') \n\
 	sampleRate = 44100 \n\
 	local ffi = require('ffi') \n\
 	ffi.cdef'double konGet(int index);' \n\
