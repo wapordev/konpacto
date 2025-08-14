@@ -52,138 +52,17 @@ void InitializeLua(){
 
 	int result = luaL_dostring(lua,
 	"\n\
-	local ffi = require('ffi') \n\
-	ffi.cdef[[ \n\
-		typedef struct KonAudioFormat { \n\
-			uint32_t frequency; \n\
-			uint32_t packetSize; \n\
-			uint8_t channelCount; \n\
-		}KonAudioFormat; \n\
-		typedef enum { \n\
-		    IntOff, \n\
-		    IntLinear, \n\
-		    IntSmoothStep, \n\
-		} InterpolationModes; \n\
-		typedef enum { \n\
-		    ChOff, \n\
-		    ChRel, \n\
-		    ChOn, \n\
-		    ChJust, \n\
-		} ChannelStatus; \n\
-		typedef struct KonGroove { \n\
-			int length; \n\
-			uint8_t data[256]; \n\
-		}KonGroove; \n\
-		typedef struct KonMacro { \n\
-			uint8_t defaultValue; \n\
-			uint8_t speed; \n\
-			uint8_t min; \n\
-			uint8_t max; \n\
-			uint8_t oscillates; \n\
-			InterpolationModes interpolationMode; \n\
-			uint8_t loopStart; \n\
-			uint8_t loopEnd; \n\
-			uint8_t length; \n\
-			uint8_t* data; \n\
-		}KonMacro; \n\
-		typedef struct KonMacroUI { \n\
-			char name[16]; \n\
-			uint8_t selectedStep; \n\
-			KonMacro macro; \n\
-		}KonMacroUI; \n\
-		typedef struct KonMacroProcess { \n\
-			uint8_t stepIndex; \n\
-			uint8_t nextStep; \n\
-			double percentage; \n\
-			double currentValue; \n\
-			KonMacro macro; \n\
-		}KonMacroProcess; \n\
-		typedef struct KonInstrument { \n\
-			char name[8]; \n\
-			char selectedSynth[64]; \n\
-			uint8_t route; \n\
-			uint8_t wetDryMix; \n\
-			uint8_t macroCount; \n\
-			KonMacroUI macros[64]; \n\
-			uint8_t selectedMacro; \n\
-		}KonInstrument; \n\
-		typedef struct KonStep { \n\
-			uint8_t note; \n\
-			uint8_t instrument; \n\
-			uint8_t velocity; \n\
-			uint8_t command; \n\
-			uint8_t param1; \n\
-			uint8_t param2; \n\
-			uint8_t param3; \n\
-		}KonStep; \n\
-		typedef struct KonChannel { \n\
-			uint8_t stepIndex; \n\
-			uint8_t stepAccumulator; \n\
-			uint8_t stepLength; \n\
-			int32_t on; \n\
-			KonStep synthData; \n\
-			KonMacroProcess synthMacros[32]; \n\
-			KonMacroProcess routeMacros[32]; \n\
-		}KonChannel; \n\
-		typedef struct KonTrack { \n\
-			uint8_t length; \n\
-			uint8_t grooveIndex; \n\
-			uint8_t temporaryLength; \n\
-			KonStep* steps; \n\
-		}KonTrack; \n\
-		typedef struct KonArrangements { \n\
-			uint8_t trackIndexes[8]; \n\
-			uint8_t jumpIndex; \n\
-		}KonArrangements; \n\
-		typedef struct LuaDatabank { \n\
-			double data[32]; \n\
-			double outLeft; \n\
-			double outRight; \n\
-		}LuaDatabank; \n\
-		typedef struct LuaData { \n\
-			LuaDatabank banks[16]; \n\
-			int bankSelect; \n\
-			double carryLeft; \n\
-			double carryRight; \n\
-		}LuaData; \n\
-		typedef struct KonAudio { \n\
-			KonAudioFormat format; \n\
-			int notesInScale; \n\
-			double frequencies[254]; \n\
-			KonGroove grooves[255]; \n\
-			KonTrack tracks[255]; \n\
-			KonInstrument instruments[255]; \n\
-			KonArrangements arrangements[256]; \n\
-			KonChannel channels[8]; \n\
-			LuaData luaData; \n\
-			uint32_t bpm; \n\
-			uint8_t ticksPerStep; \n\
-			uint64_t tickrate; \n\
-			uint64_t frameAcumulator; \n\
-			uint8_t forceMono; \n\
-			uint8_t playing; \n\
-			uint8_t looping; \n\
-			uint8_t arrangeIndex; \n\
-			char* songName; \n\
-			uint8_t beatsPerMinute; \n\
-		}KonAudio; \n\
-	]] \n\
+	--jit.opt.start('maxtrace=8000', 'maxrecord=16000', 'minstitch=3', 'maxmcode=40960') \n\
 	sampleRate = 44100 \n\
+	local ffi = require('ffi') \n\
+	ffi.cdef'double konGet(int index);' \n\
+	ffi.cdef'void konOut(double left, double right);' \n\
+	ffi.cdef'void bankSwitch();' \n\
 	local channelData = {} \n\
 	local loadedSynths = {} \n\
 	local synthHash = {} \n\
 	local channelSynths = {0,0,0,0,0,0,0,0} \n\
 	print('hello world, lua lives!\\n') \n\
--- bank switch \n\
-	local function bankSelect(konAudio) \n\
-		if konAudio.luaData.bankSelect % 2 == 1 then \n\
-			konAudio.luaData.carryLeft = konAudio.luaData.banks[konAudio.luaData.bankSelect].outLeft \n\
-			konAudio.luaData.carryRight = konAudio.luaData.banks[konAudio.luaData.bankSelect].outRight \n\
-		end \n\
-		if konAudio.luaData.bankSelect < 15 then \n\
-			konAudio.luaData.bankSelect = konAudio.luaData.bankSelect + 1 \n\
-		end \n\
-	end \n\
 -- Load a synth from filepath \n\
 	function _kLoad(filePath) \n\
 		--[[if(loadedSynths[filePath]) then \n\
@@ -201,6 +80,7 @@ void InitializeLua(){
 			clamp = math.clamp, \n\
 			sin = math.sin, \n\
 			pi = math.pi, \n\
+			C = ffi.C, \n\
 			sampleRate = sampleRate \n\
 		} \n\
 		setfenv(untrusted,env) \n\
@@ -238,17 +118,12 @@ void InitializeLua(){
 		end \n\
 	end \n\
 -- Tick Channel \n\
-	function _kTick(konAudio) \n\
-		konAudio = ffi.cast('KonAudio*', konAudio) \n\
+	function _kTick() \n\
 		for i=1,8 do \n\
 			local synth = loadedSynths[channelSynths[i]] \n\
-			if synth then \n\
-				local left, right = synth._audioFrame(channelData[i], konAudio.luaData.banks[konAudio.luaData.bankSelect].data, konAudio.luaData.carryLeft, konAudio.luaData.carryRight) \n\
-				konAudio.luaData.banks[konAudio.luaData.bankSelect].outLeft = left \n\
-				konAudio.luaData.banks[konAudio.luaData.bankSelect].outRight = right \n\
-			end \n\
-			bankSelect(konAudio) \n\
-			bankSelect(konAudio) \n\
+			if synth then synth._audioFrame(channelData[i]) end \n\
+			ffi.C.bankSwitch() \n\
+			ffi.C.bankSwitch() \n\
 		end \n\
 	end \n\
 	function _kProf() \n\
@@ -322,9 +197,8 @@ void TickLuaChannels(){
 	}
 
 	lua_getglobal(lua,"_kTick");
-	lua_pushlightuserdata(lua,&konAudio);
 
-	int result = lua_pcall(lua,1,0,0);
+	int result = lua_pcall(lua,0,0,0);
 
 	CheckLuaError(result,0,NULL);
 }

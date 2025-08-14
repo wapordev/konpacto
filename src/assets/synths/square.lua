@@ -6,11 +6,11 @@ function _init()
 	return{0}
 end
 
-function _audioFrame(synthData,data)
+function _audioFrame(synthData)
 	local synthData = synthData
 	local phase = synthData[1]
 
-	local note = data[0]/sampleRate
+	local note = C.konGet(0)/sampleRate
 
 	phase=phase+note
 	phase=phase%1
@@ -19,11 +19,11 @@ function _audioFrame(synthData,data)
 
 	local out=phase
 
-	if(out > data[3]/2)then
+	if(out > C.konGet(3)/2)then
 		out=1
 	else
 		out=-1
 	end
 
-	return out,out
+	C.konOut(out,out)
 end
