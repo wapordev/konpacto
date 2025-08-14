@@ -255,6 +255,13 @@ void setInstrument(int instrumentIndex, char* name){
 		}
 	}
 
+	if (params>instrument->macroCount){
+		for(int i=0;i<params;i++){
+			KonMacro* macro = &instrument->macros[i].macro;
+			macro->max = 255;
+		}
+	}
+
 	instrument->macroCount=params;
 
 	strcpy(instrument->macros[0].name,"pitch");
