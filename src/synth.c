@@ -258,7 +258,11 @@ void setInstrument(int instrumentIndex, char* name){
 	if (params>instrument->macroCount){
 		for(int i=0;i<params;i++){
 			KonMacro* macro = &instrument->macros[i].macro;
-			macro->max = 255;
+			if (i==1) {
+				macro->max = 64;
+			}else {
+				macro->max = 255;
+			}
 		}
 	}
 
@@ -646,8 +650,8 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			}
 		}
 		
-		int32_t sampleLeft = (int32_t)fclamp((mixLeft*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;
-		int32_t sampleRight = (int32_t)fclamp((mixRight*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX)*.0625;
+		int32_t sampleLeft = (int32_t)fclamp((mixLeft*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX);
+		int32_t sampleRight = (int32_t)fclamp((mixRight*((double)INT32_MAX/CHANNELCOUNT)),INT32_MIN,INT32_MAX);
 
 		//printf("%i\n",sampleLeft);
 
