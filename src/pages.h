@@ -2,8 +2,7 @@
 #define WWPAGE_H_
 /* ^^ these are the include guards */
 
-/* Prototypes for the functions */
-/* Sums two ints */
+#include <stdint.h>
 
 extern UIPage projectPage;
 

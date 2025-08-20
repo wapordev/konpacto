@@ -20,7 +20,7 @@
 
 int page=0;
 
-char pageNames[6][15] = {"project 0.0.13","arrange","compose","track edit","operators","file select"};
+char pageNames[6][15] = {"project 0.1.0","arrange","compose","track edit","operators","file select"};
 
 char helpString[21];
 
