@@ -287,11 +287,11 @@ void setInstrument(int instrumentIndex, char* name){
 	instrument->macroCount=params;
 
 	strcpy(instrument->macros[0].name,"pitch");
-	strcpy(instrument->macros[1].name,"volume l");
-	strcpy(instrument->macros[2].name,"volume r");
+	strcpy(instrument->macros[1].name,"volume");
+	strcpy(instrument->macros[2].name,"panning");
 	instrument->macros[0].macro.defaultValue=64;
 	instrument->macros[1].macro.defaultValue=255;
-	instrument->macros[2].macro.defaultValue=255;
+	instrument->macros[2].macro.defaultValue=128;
 
 	instrument->macros[0].macro.loopStart=1;
 	instrument->macros[1].macro.loopStart=1;
@@ -565,6 +565,9 @@ static inline double noteProcess(KonAudio* konAudio, double note,int referenceNo
 	return freq;
 }
 
+const double root2d2 = sqrt(2)/2;
+const double pid4 = M_PI/4;
+
 void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 	if ( len == 0 )
     return;
@@ -602,7 +605,7 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 			for(int k=0;k<instrument->macroCount;k++){
 				double macroOutput = macroProcess(konAudio,channel,&channel->synthMacros[k]);
-				if(k)
+				if(k && k!=2)
 					macroOutput/=255;
 				synthBank->data[k]=macroOutput;
 			}
@@ -640,13 +643,27 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 			LuaDatabank* synthBank = &konAudio->luaData.banks[j*2];
 
 			double velocity=(channel->synthData.velocity/16)/15.0;
-			double synthVolume = synthBank->data[1];
-			
+			double panVelocity=(channel->synthData.velocity%16);
+			if(panVelocity)panVelocity--;
+			panVelocity = panVelocity/14.0-.5;
 
+			double synthVolume = synthBank->data[1];
+			double synthPan = synthBank->data[2];
+			if(synthPan)synthPan--;
+			synthPan = synthPan/127-1;
+
+			double panning = fclamp(synthPan+panVelocity,-1,1);
+
+			double panAng = panning*pid4;
+			double panCos = cos(panAng);
+			double panSin = sin(panAng);
+			double leftVolume = root2d2*(panCos - panSin);
+			double rightVolume = root2d2*(panCos + panSin);
+			
 			//double panning=(channel->synthData.velocity%16)/15.0;
 
-			double synthOutLeft = synthBank->outLeft*synthVolume;
-			double synthOutRight = synthBank->outRight*synthVolume;
+			double synthOutLeft = fclamp(synthBank->outLeft,-1,1)*synthVolume;
+			double synthOutRight = fclamp(synthBank->outRight,-1,1)*synthVolume;
 
 			double outLeft = synthOutLeft;
 			double outRight = synthOutRight;
@@ -655,19 +672,19 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 				LuaDatabank* routeBank = &konAudio->luaData.banks[j*2+1];
 				double routeVolume = routeBank->data[1];
 
-				double routeOutLeft = routeBank->outLeft*routeVolume;
-				double routeOutRight = routeBank->outRight*routeVolume;
+				double routeOutLeft = fclamp(routeBank->outLeft,-1,1)*routeVolume;
+				double routeOutRight = fclamp(routeBank->outRight,-1,1)*routeVolume;
 
 				outLeft = lerp(routeOutLeft,synthOutLeft,((double)instrument->wetDryMix)/255.0);
 				outRight = lerp(routeOutRight,synthOutRight,((double)instrument->wetDryMix)/255.0);
 			}
 
-			outLeft*=velocity;
-			outRight*=velocity;
+			outLeft*=velocity*leftVolume;
+			outRight*=velocity*rightVolume;
 
 			if(isfinite(outLeft) && isfinite(outRight)){
-				mixLeft+=fclamp(outLeft,-1.,1.);
-				mixRight+=fclamp(outRight,-1.,1.);
+				mixLeft+=outLeft;
+				mixRight+=outRight;
 			}
 		}
 		

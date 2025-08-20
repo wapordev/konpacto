@@ -326,7 +326,7 @@ void DrawTrackInfo(int xPos, int yPos, bool selected){
 
 uint8_t lastNote=70;
 uint8_t lastInstrument=1;
-uint8_t lastVolume=255;
+uint8_t lastVolume=0xf8;
 uint8_t lastCommand=1;
 uint8_t lastParam=0;
 
@@ -392,8 +392,9 @@ void SetTrackData(int xPos, int yPos, UIEvent event){
 				}
 				//printf("freq: %f\n",konAudio.frequencies[new-1]);
 			}else if (xPos==2){
-				new=clamp(new+event.horizontal,(new/16)*16,(new/16+1)*16);
-				new+=event.vertical*16;
+				//real crappy code lol
+				new=clamp(new+event.horizontal,(new/16)*16+1,(new/16+1)*16-1);
+				if(new+event.vertical*16>=0 && new+event.vertical*16<=255)new+=event.vertical*16;
 			}else{
 				new+=event.change;
 			}
