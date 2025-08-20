@@ -344,6 +344,7 @@ void clearSong(KonAudio* konAudio){
 		instrument->name[0]='\0';
 		instrument->selectedSynth[0]='\0';
 		instrument->route=0;
+		instrument->wetDryMix=0;
 		instrument->macroCount = 0;
 		instrument->selectedMacro = 0;
 		for(int j=0;j<64;j++){
