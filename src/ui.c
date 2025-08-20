@@ -4,11 +4,6 @@
 #include <string.h>
 #include <ctype.h>
 
-//TEMP!!
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-
 #include "input.h"
 #include "ui.h"
 #include "screen.h"
