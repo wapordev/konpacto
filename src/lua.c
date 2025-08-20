@@ -58,10 +58,10 @@ void InitializeLua(){
 	ffi.cdef'double konGet(int index);' \n\
 	ffi.cdef'void konOut(double left, double right);' \n\
 	ffi.cdef'void bankSwitch();' \n\
-	local channelData = {} \n\
+	local channelData = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} \n\
 	local loadedSynths = {} \n\
 	local synthHash = {} \n\
-	local channelSynths = {0,0,0,0,0,0,0,0} \n\
+	local channelSynths = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} \n\
 	print('hello world, lua lives!\\n') \n\
 -- Load a synth from filepath \n\
 	function _kLoad(filePath) \n\
@@ -78,6 +78,7 @@ void InitializeLua(){
 		local env = { \n\
 			print = print, \n\
 			clamp = math.clamp, \n\
+			floor = math.floor, \n\
 			sin = math.sin, \n\
 			pi = math.pi, \n\
 			C = ffi.C, \n\
@@ -111,7 +112,7 @@ void InitializeLua(){
 		local index = synthHash[filePath] or #loadedSynths+1 \n\
 		synthHash[filePath] = index \n\
 		loadedSynths[index]=env \n\
-		for i=1,8 do \n\
+		for i=1,16 do \n\
 			if(channelSynths[i]==index)then \n\
 				channelData[i]=env._init() \n\
 			end \n\
@@ -119,10 +120,9 @@ void InitializeLua(){
 	end \n\
 -- Tick Channel \n\
 	function _kTick() \n\
-		for i=1,8 do \n\
+		for i=1,16 do \n\
 			local synth = loadedSynths[channelSynths[i]] \n\
 			if synth then synth._audioFrame(channelData[i]) end \n\
-			ffi.C.bankSwitch() \n\
 			ffi.C.bankSwitch() \n\
 		end \n\
 	end \n\
@@ -130,14 +130,24 @@ void InitializeLua(){
 		require('jit.p').start('l-3vfsi4m0')\n\
 	end \n\
 -- Initialize Synth \n\
-	function _kInit(path,index) \n\
-		path='assets/synths/'..path \n\
-		local synthIndex = synthHash[path] \n\
+	function _kInit(index,iPath,ePath) \n\
+		index = (index-1)*2+1 \n\
+		iPath='assets/synths/'..iPath \n\
+		local synthIndex = synthHash[iPath] \n\
 		if(not synthIndex)then return end \n\
 		local synth = loadedSynths[synthIndex] \n\
 		if(not synth)then return end \n\
 		channelSynths[index] = synthIndex \n\
 		channelData[index] = synth._init() \n\
+		if ePath then \n\
+			ePath='assets/synths/'..ePath \n\
+			synthIndex = synthHash[ePath] \n\
+			if(not synthIndex)then return end \n\
+			synth = loadedSynths[synthIndex] \n\
+			if(not synth)then return end \n\
+			channelSynths[index+1] = synthIndex \n\
+			channelData[index+1] = synth._init() \n\
+		end \n\
 	end \n\
 -- Get Param Count \n\
 	function _kParamCount(path) \n\
@@ -170,19 +180,23 @@ void StopLua(){
 	lua_close(lua);
 }
 
-void SetLuaInstrument(char* path, int index){
-	if(path==NULL || path[0]=='\0'){
+void SetLuaInstrument(char* iPath, char* ePath, int index){
+	if(iPath==NULL || iPath[0]=='\0'){
 		return;
 	}
+	int effectExists = !(ePath==NULL || ePath[0]=='\0');
 
 	lua_getglobal(lua,"_kInit");
 
-	lua_pushstring(lua,path);
-
 	lua_pushnumber(lua,index+1);
 
+	lua_pushstring(lua,iPath);
 
-	int result = lua_pcall(lua,2,0,0);
+	if(effectExists)
+		lua_pushstring(lua,ePath);
+
+
+	int result = lua_pcall(lua,2+effectExists,0,0);
 
 	CheckLuaError(result,index,NULL);
 }

@@ -34,12 +34,24 @@ const uint64_t ERRORSTEP = (uint64_t)1<<40;
 //which requires more typing for the end user, or a lua wrapper which is an unnecesary function call
 //and possibly having the danger of accessing bad memory through lua?
 DLL_PUBLIC double konGet(int index){
-	if(index<0 || index > 33){
+	if(index<0 || index > 35){
 		return 0;
 	}
 	if(index==32)
-		return konAudio.luaData.carryLeft;
+		if(konAudio.luaData.bankSelect-1>=0)
+		{
+			LuaDatabank* bank = &konAudio.luaData.banks[konAudio.luaData.bankSelect-1];
+			return bank->outLeft * bank->data[1];
+		}
 	if(index==33)
+		if(konAudio.luaData.bankSelect-1>=0)
+		{
+			LuaDatabank* bank = &konAudio.luaData.banks[konAudio.luaData.bankSelect-1];
+			return bank->outRight * bank->data[1];
+		}
+	if(index==34)
+		return konAudio.luaData.carryLeft;
+	if(index==35)
 		return konAudio.luaData.carryRight;
 	return konAudio.luaData.banks[konAudio.luaData.bankSelect].data[index];
 }
@@ -154,7 +166,13 @@ static inline uint8_t channelTick(KonAudio* konAudio, KonChannel* channel, uint8
 
 			KonInstrument* instrument = &konAudio->instruments[currentStep.instrument-1];
 
-			SetLuaInstrument(instrument->selectedSynth,channelIndex);
+			char* effectName = NULL;
+
+			if(instrument->route){
+				effectName = konAudio->instruments[instrument->route-1].selectedSynth;
+			} 
+
+			SetLuaInstrument(instrument->selectedSynth,effectName,channelIndex);
 
 			for(int i=0;i<instrument->macroCount;i++){
 				channel->synthMacros[i].macro=instrument->macros[i].macro;
@@ -627,8 +645,8 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 
 			//double panning=(channel->synthData.velocity%16)/15.0;
 
-			double synthOutLeft = synthBank->outLeft*synthVolume*velocity;
-			double synthOutRight = synthBank->outRight*synthVolume*velocity;
+			double synthOutLeft = synthBank->outLeft*synthVolume;
+			double synthOutRight = synthBank->outRight*synthVolume;
 
 			double outLeft = synthOutLeft;
 			double outRight = synthOutRight;
@@ -637,12 +655,15 @@ void konFill(KonAudio* konAudio, uint8_t* stream, int len){
 				LuaDatabank* routeBank = &konAudio->luaData.banks[j*2+1];
 				double routeVolume = routeBank->data[1];
 
-				double routeOutLeft = routeBank->outLeft*routeVolume*velocity;
-				double routeOutRight = routeBank->outRight*routeVolume*velocity;
+				double routeOutLeft = routeBank->outLeft*routeVolume;
+				double routeOutRight = routeBank->outRight*routeVolume;
 
 				outLeft = lerp(routeOutLeft,synthOutLeft,((double)instrument->wetDryMix)/255.0);
 				outRight = lerp(routeOutRight,synthOutRight,((double)instrument->wetDryMix)/255.0);
 			}
+
+			outLeft*=velocity;
+			outRight*=velocity;
 
 			if(isfinite(outLeft) && isfinite(outRight)){
 				mixLeft+=fclamp(outLeft,-1.,1.);
