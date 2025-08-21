@@ -55,6 +55,7 @@ void InitializeLua(){
 	--jit.opt.start('maxtrace=8000', 'maxrecord=16000', 'minstitch=3', 'maxmcode=40960') \n\
 	sampleRate = 44100 \n\
 	local ffi = require('ffi') \n\
+	local bit = require('bit') \n\
 	ffi.cdef'double konGet(int index);' \n\
 	ffi.cdef'void konOut(double left, double right);' \n\
 	ffi.cdef'void bankSwitch();' \n\
@@ -77,6 +78,7 @@ void InitializeLua(){
 -- Allowed API \n\
 		local env = { \n\
 			print = print, \n\
+			bit = bit, \n\
 			clamp = math.clamp, \n\
 			floor = math.floor, \n\
 			sin = math.sin, \n\

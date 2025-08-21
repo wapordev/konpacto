@@ -8,8 +8,6 @@ function _init()
 end
 
 function _audioFrame(synthData)
-	local synthData = synthData
-
 	local length = floor(C.konGet(3)*100000)
 
 	local buffer = synthData[1]

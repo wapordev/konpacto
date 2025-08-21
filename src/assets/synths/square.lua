@@ -7,7 +7,6 @@ function _init()
 end
 
 function _audioFrame(synthData)
-	local synthData = synthData
 	local phase = synthData[1]
 
 	local note = C.konGet(0)/sampleRate

@@ -10,16 +10,12 @@ function _init()
 end
 
 function _audioFrame(synthData)
-	local synthData = synthData
 	local phase,o1,o2 = synthData[1],synthData[2],synthData[3]
 
 	local note = C.konGet(0)/sampleRate
 	local selfmod,feedback1,volume2,feedback2 = C.konGet(3)*8,C.konGet(4),C.konGet(5),C.konGet(6)
 
 	phase=phase+note
-
-	
-
 
 	o2 = sin((phase+o2*feedback2)*pi*2)*volume2
 
