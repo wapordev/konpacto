@@ -19,9 +19,9 @@ function _audioFrame(synthData)
 	local out=phase
 
 	if(out > C.konGet(3)/2)then
-		out=10000000
+		out=1
 	else
-		out=-10000000
+		out=-1
 	end
 
 	C.konOut(out,out)
