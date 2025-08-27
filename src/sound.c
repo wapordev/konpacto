@@ -47,7 +47,7 @@ void InitializeSound(){
 	{
 		configSampleRate,  				//44.1khz
 		AUDIO_FORMAT,   			//32 S int
-		2,
+		1,
 		0,
 		configBufferSize, 					//buffer size 512 for miyoo!
 		0,
