@@ -69,7 +69,7 @@ void InitializeSound(){
 
 	returnedSpec = idealSpec;
 
-	konInit(&konAudio,configSampleRate,sizeof(AUDIO_TYPE),1);
+	konInit(&konAudio,configSampleRate,sizeof(AUDIO_TYPE),2);
 
 	SetScale(&konAudio,"assets/scales/12tet.scl");
 	SDL_PauseAudioDevice(deviceId,0);
