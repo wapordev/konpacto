@@ -8,6 +8,8 @@
 #define realpath(N,R) _fullpath((R),(N),_MAX_PATH)
 #endif
 
+#define MIN(a,b) (((a)<(b))?(a):(b))
+
 #include "ui.h"
 #include "file.h"
 #include "pages.h"
@@ -939,7 +941,7 @@ void SetFileConfirm(int xPos, int yPos, UIEvent event){
 			if(len<PATH_MAX-32){
 				strcpy(selectedFile,fileBrowserPath);
 				selectedFile[len]='\\';
-				strncpy_s(selectedFile+len+1,PATH_MAX-len-1,currentSongName,PATH_MAX);
+				strncpy(selectedFile+len+1,currentSongName,MIN(PATH_MAX,PATH_MAX-len-1));
 
 				char* lastSlash = strchr(selectedFile,'/');
 				char* lastBackslash = strchr(selectedFile,'\\');
@@ -948,7 +950,7 @@ void SetFileConfirm(int xPos, int yPos, UIEvent event){
 				char* lastDot = strchr(selectedFile,'.');
 				if(lastDot< lastBackslash){
 					len+=strlen(currentSongName)+1;
-					strncpy_s(selectedFile+len,PATH_MAX-len,".kpt",PATH_MAX);
+					strncpy(selectedFile+len,".kpt",MIN(PATH_MAX,PATH_MAX-len));
 				}
 
 				printf("Targetting %s to save.\n",selectedFile);

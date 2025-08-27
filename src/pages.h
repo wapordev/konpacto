@@ -2,6 +2,10 @@
 #define WWPAGE_H_
 /* ^^ these are the include guards */
 
+#ifndef PATH_MAX
+#include <linux/limits.h>
+#endif
+
 #include <stdint.h>
 
 extern UIPage projectPage;

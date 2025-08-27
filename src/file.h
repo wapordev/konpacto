@@ -3,6 +3,10 @@
 
 #include "synth.h"
 
+#ifndef PATH_MAX
+#include <linux/limits.h>
+#endif
+
 #include <stdbool.h>
 
 typedef struct FileStructure {
