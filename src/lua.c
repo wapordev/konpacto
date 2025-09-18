@@ -83,6 +83,8 @@ void InitializeLua(){
 			floor = math.floor, \n\
 			sin = math.sin, \n\
 			pi = math.pi, \n\
+			rnd = math.random, \n\
+			abs = math.abs, \n\
 			C = ffi.C, \n\
 			sampleRate = sampleRate \n\
 		} \n\
